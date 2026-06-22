@@ -526,7 +526,7 @@ strong { color:var(--white); font-weight:500; }
 /* Motion: teal numbers glow when slide is visible */
 .slide.visible .metric-num.teal,
 .slide.visible .stat-num .t,
-.slide.visible .ask-big { animation: glow-pulse 3s ease-in-out infinite 0.8s; }
+.slide.visible .ask-big { animation: glow-pulse 3s ease-in-out 1 0.8s; }
 
 /* Cinematic slide transition */
 .slide { transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1); transform:translateY(6px); }
@@ -548,11 +548,11 @@ strong { color:var(--white); font-weight:500; }
 .slide.visible .count-shimmer { animation:shimmer 1.2s ease 0.3s 1; }
 
 /* Floating CTA on closing */
-.slide.visible .float-anim { animation:float-y 4s ease-in-out 1s infinite; }
+.slide.visible .float-anim { animation:float-y 4s ease-in-out 1s 2; }
 
 /* Ask big number glow */
 .slide.visible .ask-big {
-  animation:glow-pulse 2.5s ease-in-out 0.5s infinite !important;
+  animation:glow-pulse 2.5s ease-in-out 0.5s 1 !important;
 }
 
 /* Cover title reveal */
@@ -740,7 +740,7 @@ strong { color:var(--white); font-weight:500; }
   70%  { box-shadow:0 0 48px rgba(0,200,215,0.15), 0 0 0 22px rgba(0,200,215,0); }
   100% { box-shadow:0 0 48px rgba(0,200,215,0.15), 0 0 0 0 rgba(0,200,215,0); }
 }
-.slide.visible .oc-center { animation:hub-pulse 2.5s ease-out 0.8s infinite; }
+.slide.visible .oc-center { animation:hub-pulse 2.5s ease-out 0.8s 2; }
 .evo-track {
   display:grid; grid-template-columns:repeat(5,1fr); gap:2px; margin-top:36px;
 }
@@ -1005,7 +1005,7 @@ strong { color:var(--white); font-weight:500; }
   width:14px; height:14px; border-radius:50%; background:var(--teal);
   border:2px solid var(--teal); flex-shrink:0; margin-top:16px;
   box-shadow:0 0 12px rgba(0,200,215,0.5);
-  animation:hub-pulse 2s ease-in-out infinite;
+  animation:hub-pulse 2s ease-in-out 2;
 }
 .tl-date { font-size:13px; font-weight:700; color:var(--white); }
 .tl-label { font-size:12px; color:var(--white-60); line-height:1.4; }
@@ -1211,55 +1211,6 @@ strong { color:var(--white); font-weight:500; }
 <!-- ══════════════════════════════════════════════
      SLIDE 2 · EXECUTIVE SUMMARY
 ═══════════════════════════════════════════════ -->
-<section class="slide" id="s2">
-  <div class="slide-dentsu rev-fade">dentsu</div>
-  <!-- Section watermark -->
-  <div class="slide-watermark">$</div>
-  <div class="s-full" style="position:relative;z-index:1;">
-    <span class="eyebrow rev d1">The Case at a Glance · dentsu India</span>
-
-    <!-- Rule of One: dominant hero + 3 supporting -->
-    <div style="display:grid;grid-template-columns:1fr 420px;gap:2px;margin-top:18px;align-items:stretch;">
-
-      <!-- HERO: $275M — the account scale -->
-      <div class="rev d2" style="background:var(--bg-card);border:1px solid var(--border);border-top:2px solid var(--teal);padding:52px 60px;display:flex;flex-direction:column;justify-content:space-between;">
-        <div>
-          <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:24px;">The Account · Meijer RMN · 2025</div>
-          <div class="hero-anchor" style="font-size:130px;">$<span data-count="275" data-suffix="M" class="count-shimmer">275M</span></div>
-          <div style="font-size:18px;color:var(--white);font-weight:600;margin-top:16px;">Annual budget under Bharat's sole ownership</div>
-          <div style="font-size:14px;color:var(--white-60);margin-top:8px;">Top-5 US Retail Media account — no backup, no handover</div>
-        </div>
-        <div style="display:flex;gap:24px;margin-top:32px;padding-top:24px;border-top:1px solid var(--border);">
-          <div><div style="font-family:var(--serif);font-size:28px;font-weight:800;color:var(--teal);">+134%</div><div style="font-size:12px;color:var(--white-60);">ROAS YoY</div></div>
-          <div><div style="font-family:var(--serif);font-size:28px;font-weight:800;color:var(--teal);">+107%</div><div style="font-size:12px;color:var(--white-60);">CVR YoY</div></div>
-          <div><div style="font-family:var(--serif);font-size:28px;font-weight:800;color:var(--white);">&gt;98%</div><div style="font-size:12px;color:var(--white-60);">DIF floor</div></div>
-          <div><div style="font-family:var(--serif);font-size:28px;font-weight:800;color:var(--white);">171</div><div style="font-size:12px;color:var(--white-60);">Campaigns May'26</div></div>
-        </div>
-      </div>
-
-      <!-- 3 supporting stats stacked -->
-      <div style="display:flex;flex-direction:column;gap:2px;" class="rev d3">
-        <div style="background:var(--bg-card);border:1px solid var(--border);padding:28px 32px;flex:1;display:flex;flex-direction:column;justify-content:center;">
-          <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--white-35);font-weight:600;margin-bottom:10px;">On the Account Since</div>
-          <div style="font-family:var(--serif);font-size:52px;font-weight:800;color:var(--white);line-height:1;">H2 <span style="color:var(--teal);">2024</span></div>
-          <div style="font-size:13px;color:var(--white-60);margin-top:8px;">Sole pacing owner within weeks of joining</div>
-        </div>
-        <div style="background:var(--danger-20);border:1px solid var(--danger-border);padding:28px 32px;flex:1;display:flex;flex-direction:column;justify-content:center;">
-          <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--danger);font-weight:600;margin-bottom:10px;">Gap to Market</div>
-          <div style="font-family:var(--serif);font-size:52px;font-weight:800;color:var(--danger);line-height:1;">₹14.9L</div>
-          <div style="font-size:13px;color:var(--white-60);margin-top:8px;">Below Senior Manager median for this scope</div>
-        </div>
-        <div style="background:rgba(0,200,215,0.06);border:1px solid var(--border-t);padding:28px 32px;flex:1;display:flex;flex-direction:column;justify-content:center;">
-          <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:10px;">The Ask</div>
-          <div style="font-family:var(--serif);font-size:52px;font-weight:800;color:var(--teal);line-height:1;">₹28L</div>
-          <div style="font-size:13px;color:var(--white-60);margin-top:8px;">Senior Manager title + base + bonus · at market</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
 <!-- ══════════════════════════════════════════════
      SLIDE 3 · THE PROBLEM
 ═══════════════════════════════════════════════ -->
@@ -1386,12 +1337,9 @@ strong { color:var(--white); font-weight:500; }
 <!-- ══════════════════════════════════════════════
      SLIDE 5B · SCALE OF GOVERNANCE — WEEKLY SPEND
 ═══════════════════════════════════════════════ -->
-<section class="slide" id="s5b">
-  <div class="slide-dentsu rev-fade">dentsu</div>
-  <div class="s-full" style="padding-bottom:36px;">
-    <span class="eyebrow rev d1">Scale &amp; Growth · Weekly Media Spend Log</span>
-    <h2 class="rev d2">The scale I govern — ~$275M a year.</h2>
-    <div class="gov-layout">
+<!-- s5b removed: weekly spend chart slide dropped to tighten pacing -->
+<section class="slide" id="s5b" data-skip="true" style="display:none!important">
+  <div class="gov-layout">
       <div class="gov-metrics rev d3">
         <div class="gov-row">
           <div class="gov-val">$5.3<span style="font-size:32px">M</span></div>
@@ -2863,7 +2811,7 @@ class Starfield {
 ═══════════════════════════════════════════════ */
 class SlidePresentation {
   constructor() {
-    this.slides  = Array.from(document.querySelectorAll('.slide'));
+    this.slides  = Array.from(document.querySelectorAll('.slide')).filter(s => !s.dataset.skip);
     this.stage   = document.getElementById('deckStage');
     this.navEl   = document.getElementById('progressNav');
     this.countEl = document.getElementById('slideCount');
