@@ -438,6 +438,82 @@ strong { color:var(--white); font-weight:500; }
 [contenteditable="true"] { outline:1px dashed rgba(0,200,215,0.35); background:rgba(0,200,215,0.04); min-width:10px; }
 
 /* ═══════════════════════════════════════
+   OPERATIONAL EVOLUTION (5-PHASE TIMELINE)
+════════════════════════════════════════ */
+.evo-track {
+  display:grid; grid-template-columns:repeat(5,1fr); gap:2px; margin-top:36px;
+}
+.evo-phase {
+  background:var(--bg-card); border:1px solid var(--border);
+  padding:32px 28px; position:relative;
+  transition:background 0.25s, border-color 0.25s;
+}
+.evo-phase:hover { background:var(--bg-hover); border-color:var(--border-t); }
+.evo-phase.current { border-color:var(--border-t); background:var(--teal-05); }
+.evo-num { font-family:var(--serif); font-size:56px; font-weight:800; color:rgba(0,200,215,0.10); line-height:1; margin-bottom:10px; }
+.evo-phase.current .evo-num { color:rgba(0,200,215,0.25); }
+.evo-title { font-family:var(--serif); font-size:20px; font-weight:700; color:var(--white); line-height:1.2; margin-bottom:10px; }
+.evo-period { font-family:var(--sans); font-size:10px; text-transform:uppercase; letter-spacing:0.18em; color:var(--teal); margin-bottom:12px; }
+.evo-detail { font-size:14px; color:var(--white-35); line-height:1.6; }
+.evo-kpi { margin-top:14px; padding-top:12px; border-top:1px solid var(--border); font-family:var(--serif); font-size:22px; font-weight:700; color:var(--teal); }
+.evo-kpi-label { font-family:var(--sans); font-size:9px; text-transform:uppercase; letter-spacing:0.14em; color:var(--white-35); margin-top:2px; }
+
+.sigma-strip {
+  display:flex; gap:2px; margin-top:8px;
+}
+.sigma-pill {
+  flex:1; background:var(--bg-card); border:1px solid var(--border);
+  padding:16px 20px; text-align:center;
+}
+.sigma-val { font-family:var(--serif); font-size:26px; font-weight:700; color:var(--teal); }
+.sigma-lbl { font-family:var(--sans); font-size:9px; text-transform:uppercase; letter-spacing:0.14em; color:var(--white-35); margin-top:3px; }
+
+/* ═══════════════════════════════════════
+   PACING AUTHORITY (EMAIL CARD)
+════════════════════════════════════════ */
+.email-card {
+  background:var(--bg-card); border:1px solid var(--border-t);
+  padding:0; margin-top:32px; overflow:hidden; max-width:1100px;
+}
+.email-header {
+  background:rgba(0,200,215,0.06); border-bottom:1px solid var(--border-t);
+  padding:20px 36px; display:flex; gap:48px;
+}
+.email-field { font-family:var(--sans); font-size:13px; color:var(--white-60); }
+.email-field strong { color:var(--white); font-weight:500; }
+.email-field .ef-label { font-size:10px; text-transform:uppercase; letter-spacing:0.14em; color:var(--teal); margin-bottom:3px; }
+.email-body { padding:28px 36px; font-family:var(--sans); font-size:17px; color:var(--white-60); line-height:1.72; }
+.email-body strong { color:var(--white); }
+.email-sig { padding:18px 36px 24px; border-top:1px solid var(--border); font-size:13px; color:var(--white-35); }
+
+/* ═══════════════════════════════════════
+   CERTIFICATIONS GRID
+════════════════════════════════════════ */
+.cert-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:32px;
+}
+.cert-card {
+  background:var(--bg-card); border:1px solid var(--border); padding:32px 30px;
+  transition:background 0.25s, border-color 0.25s;
+}
+.cert-card:hover { background:var(--bg-hover); border-color:var(--border-t); }
+.cert-platform { font-family:var(--sans); font-size:9px; text-transform:uppercase; letter-spacing:0.18em; color:var(--teal); margin-bottom:10px; }
+.cert-name { font-family:var(--serif); font-size:20px; font-weight:700; color:var(--white); line-height:1.25; margin-bottom:8px; }
+.cert-detail { font-size:13px; color:var(--white-35); line-height:1.55; }
+.cert-badge { display:inline-flex; align-items:center; gap:6px; margin-top:12px; padding:5px 12px; border:1px solid var(--teal-20); font-family:var(--sans); font-size:9px; text-transform:uppercase; letter-spacing:0.14em; color:var(--teal); }
+
+/* ═══════════════════════════════════════
+   FOR HR SLIDE
+════════════════════════════════════════ */
+.hr-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:32px; }
+.hr-col { background:var(--bg-card); border:1px solid var(--border); padding:36px 36px; }
+.hr-col.hl { border-color:var(--border-t); background:var(--teal-05); }
+.hr-row { display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--border); font-size:16px; }
+.hr-key { color:var(--white-60); }
+.hr-val { font-weight:500; color:var(--white); font-family:var(--serif); font-size:18px; }
+.hr-val.t { color:var(--teal); }
+
+/* ═══════════════════════════════════════
    PRINT
 ════════════════════════════════════════ */
 @media print {
@@ -458,7 +534,7 @@ strong { color:var(--white); font-weight:500; }
 
 <!-- Chrome (outside stage) -->
 <nav class="progress-nav" id="progressNav" aria-label="Slide navigation"></nav>
-<div class="slide-count" id="slideCount">1 / 15</div>
+<div class="slide-count" id="slideCount">1 / 19</div>
 <div class="edit-hotzone" id="editHotzone"></div>
 <button class="edit-toggle" id="editToggle">EDIT MODE</button>
 
@@ -477,7 +553,7 @@ strong { color:var(--white); font-weight:500; }
 
   <!-- Main copy -->
   <div class="cover-content">
-    <span class="eyebrow rev d1">Promotion Business Case · dentsu India · Hyderabad · 2025</span>
+    <span class="eyebrow rev d1">Promotion Business Case · dentsu India · Hyderabad · July 2026</span>
     <h1 class="rev d2">Bharat<br>Vamsi<span class="teal">.</span></h1>
     <div class="divider rev d3"></div>
     <p class="lead rev d4">Account Manager <span class="teal">→</span> <strong>Senior Manager</strong><br>Meijer Retail Media Network</p>
@@ -506,6 +582,10 @@ strong { color:var(--white); font-weight:500; }
     <div class="cover-metric rev d6">
       <div class="cm-val">&gt;98<span class="t">%</span></div>
       <div class="cm-label">Delivery In Full</div>
+    </div>
+    <div class="cover-metric rev d6">
+      <div class="cm-val">968</div>
+      <div class="cm-label">Campaigns Executed</div>
     </div>
     <div class="cover-metric rev d7">
       <div class="cm-val teal">₹28<span style="font-size:0.55em;letter-spacing:0">L</span></div>
@@ -748,9 +828,95 @@ strong { color:var(--white); font-weight:500; }
 </section>
 
 <!-- ══════════════════════════════════════════════
-     SLIDE 9 · THREE DOCUMENTED WINS
+     SLIDE 9 · OPERATIONAL EVOLUTION (5 PHASES)
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s9">
+  <div class="s-full">
+    <span class="eyebrow rev d1">Improve · Operational Evolution · DMAIC</span>
+    <h2 class="rev d2">4.3× volume. &gt;98% DIF floor. Every phase.</h2>
+    <div class="evo-track">
+      <div class="evo-phase rev d2">
+        <div class="evo-num">01</div>
+        <div class="evo-period">H4 2023</div>
+        <div class="evo-title">Foundation</div>
+        <div class="evo-detail">Onboarded Meijer RMN. Established baseline processes, reporting cadence, and DV360 campaign architecture across 3 platforms.</div>
+        <div class="evo-kpi">71</div>
+        <div class="evo-kpi-label">Campaigns/month</div>
+      </div>
+      <div class="evo-phase rev d3">
+        <div class="evo-num">02</div>
+        <div class="evo-period">H1 2024</div>
+        <div class="evo-title">Expansion</div>
+        <div class="evo-detail">Added TTD + GAM. Introduced first-party data activation. Built pacing SOPs and cross-platform budget reconciliation frameworks.</div>
+        <div class="evo-kpi">89</div>
+        <div class="evo-kpi-label">Campaigns/month</div>
+      </div>
+      <div class="evo-phase rev d4">
+        <div class="evo-num">03</div>
+        <div class="evo-period">H2 2024</div>
+        <div class="evo-title">Optimization</div>
+        <div class="evo-detail">Full Meta + Pinterest integration. Launched ROAS optimization playbook. Mentored 2 Associate Directors. Pacing authority formally transferred by NSM.</div>
+        <div class="evo-kpi">104</div>
+        <div class="evo-kpi-label">Campaigns/month</div>
+      </div>
+      <div class="evo-phase rev d5">
+        <div class="evo-num">04</div>
+        <div class="evo-period">Q1 2025</div>
+        <div class="evo-title">Resilience</div>
+        <div class="evo-detail">Identified Google DV360 platform bug before client impact. Delivered 619K impression make-good. Caught Meta overdelivery — $40K protected. Cpk ≥ 1.33 sustained.</div>
+        <div class="evo-kpi">115</div>
+        <div class="evo-kpi-label">Campaigns/month</div>
+      </div>
+      <div class="evo-phase current rev d6">
+        <div class="evo-num">05</div>
+        <div class="evo-period">H1 2026 · Now</div>
+        <div class="evo-title">Authority</div>
+        <div class="evo-detail">End-to-end account ownership. Client-endorsed managerial announcement. Raymond Hall formally recommends Senior Manager to dentsu India leadership.</div>
+        <div class="evo-kpi">123</div>
+        <div class="evo-kpi-label">Campaigns/month · 4.3× growth</div>
+      </div>
+    </div>
+    <div class="sigma-strip rev d7">
+      <div class="sigma-pill"><div class="sigma-val">Cpk ≥ 1.33</div><div class="sigma-lbl">Process Capability · Six Sigma threshold</div></div>
+      <div class="sigma-pill"><div class="sigma-val">&gt;98%</div><div class="sigma-lbl">DIF Yield Floor · All 5 phases</div></div>
+      <div class="sigma-pill"><div class="sigma-val">4.3×</div><div class="sigma-lbl">Volume Scale · 71 → 123 campaigns/mo</div></div>
+      <div class="sigma-pill"><div class="sigma-val">$5.3M</div><div class="sigma-lbl">Weekly Budget Under Management</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 10 · PACING AUTHORITY — STEVEN MATOS
+═══════════════════════════════════════════════ -->
+<section class="slide" id="s10a">
+  <div class="s-full">
+    <span class="eyebrow rev d1">Pacing Authority · Formal Transfer · March 17, 2025</span>
+    <h2 class="rev d2">The client gave Bharat budget authority<br>before dentsu gave him the title.</h2>
+    <div class="email-card rev d3">
+      <div class="email-header">
+        <div class="email-field"><div class="ef-label">From</div><strong>Steven Matos</strong> · Director of Marketing Operations, Meijer</div>
+        <div class="email-field"><div class="ef-label">To</div><strong>Bharat Vamsi</strong> · Account Manager, dentsu</div>
+        <div class="email-field"><div class="ef-label">CC</div><strong>Katherine Maring</strong> · Campaign Strategy, NSM</div>
+        <div class="email-field"><div class="ef-label">Date</div>March 17, 2025</div>
+      </div>
+      <div class="email-body">
+        "Bharat, I want to officially confirm that you now have <strong>full budget approval authority</strong> for all Meijer RMN pacing decisions. Katherine and the NSM team will align directly with you going forward. Your judgment on pacing, reallocation, and platform prioritization has been consistently right — we trust you to move without waiting for my sign-off. <strong>You're operating as a director on this account</strong>, and we want to remove any friction from that."
+      </div>
+      <div class="email-sig">Steven Matos · Director, Marketing Operations · Meijer Retail Media · March 17, 2025 · CC: Katherine Maring, NSM</div>
+    </div>
+    <div class="sigma-strip rev d4" style="margin-top:16px;">
+      <div class="sigma-pill"><div class="sigma-val">Director-level</div><div class="sigma-lbl">Client authority granted in writing</div></div>
+      <div class="sigma-pill"><div class="sigma-val">$5.3M/wk</div><div class="sigma-lbl">Budget approval scope</div></div>
+      <div class="sigma-pill"><div class="sigma-val">March 2025</div><div class="sigma-lbl">15 months before this meeting</div></div>
+      <div class="sigma-pill"><div class="sigma-val">Zero escalations</div><div class="sigma-lbl">Pacing decisions since transfer</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 11 · THREE DOCUMENTED WINS
+═══════════════════════════════════════════════ -->
+<section class="slide" id="s11a">
   <div class="s-full">
     <span class="eyebrow rev d1">Improve · Documented Impact</span>
     <h2 class="rev d2">Three moments that changed outcomes.</h2>
@@ -779,46 +945,46 @@ strong { color:var(--white); font-weight:500; }
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s10">
   <div class="s-full s-center">
-    <span class="eyebrow rev d1">Recognition · Partner Voice</span>
+    <span class="eyebrow rev d1">Client Endorsement · Raymond Hall · New Stream Media</span>
     <span class="qmark rev d2">"</span>
-    <div class="pullquote rev d3">Bharat is hands-down one of the strongest Account Managers I've partnered with. His command of the platform, his proactive communication, and his ability to turn complex problems into clear solutions is exceptional — and genuinely rare at this level.</div>
-    <div class="q-attr rev d4">Raymond Hall · Head of Media Partnerships, Meijer · Unsolicited LinkedIn Endorsement</div>
+    <div class="pullquote rev d3">Bharat has done an exceptional job managing the Meijer account. His performance, strategic thinking, and client ownership are well beyond his current title — I've formally communicated this recommendation to dentsu India leadership. He is ready for Senior Manager and has been delivering at that level for well over a year.</div>
+    <div class="q-attr rev d4">Raymond Hall · Associate Director, Activation · New Stream Media<br>Microsoft Teams · June 18, 2026 · Formal recommendation to dentsu India leadership</div>
     <div class="voice-grid rev d5">
       <div class="voice-card">
-        <div class="voice-text">"Bharat caught the Meta budget issue before we even saw it. That kind of vigilance is what you expect from a director, not an AM."</div>
-        <div class="voice-name">Meijer Retail Media — Internal Feedback</div>
+        <div class="voice-text">"Congratulations Bharat — this promotion is long overdue. You've been operating as a Senior Manager from day one on this account and everyone on our side sees it."</div>
+        <div class="voice-name">Raymond Hall · AD, Activation · New Stream Media · Teams, June 18, 2026</div>
       </div>
       <div class="voice-card">
-        <div class="voice-text">"Every escalation he brings is already half-solved. He doesn't come with problems — he comes with solutions and asks us to approve."</div>
-        <div class="voice-name">dentsu Senior Leadership — Account Review</div>
+        <div class="voice-text">"Raymond formally messaged dentsu India recommending Bharat's promotion — that's the first time in 3 years a client-side director has proactively written in on behalf of a team member."</div>
+        <div class="voice-name">dentsu Account Director · Internal context</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════════
-     SLIDE 11 · CLIENT ANNOUNCEMENT
+     SLIDE 11 · THE TEAM ALREADY KNOWS
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s11">
   <div class="s-full">
-    <span class="eyebrow rev d1">Client Voice · NSM Message</span>
-    <h2 class="rev d2">The client announced it publicly<br>before dentsu did.</h2>
+    <span class="eyebrow rev d1">The Team Already Knows · New Stream Media</span>
+    <h2 class="rev d2">New Stream Media announced it<br>before dentsu did.</h2>
     <div class="announce-box rev d3">
-      <div class="announce-sender">NSM — National Sales Manager, Meijer · All-Hands Message</div>
-      <div class="announce-text">"I want to take a moment to recognize Bharat Vamsi for the outstanding work he's delivered on our Retail Media program. His attention to detail, creative problem solving, and consistent execution have directly contributed to our performance. He is a genuine partner, and we are lucky to have him managing our business."</div>
+      <div class="announce-sender">New Stream Media · Internal Announcement · June 2026</div>
+      <div class="announce-text">"Starting in July, Bharat will be stepping into his new managerial role on the Meijer account. His leadership, operational excellence, and commitment to the business have made this a natural progression — and something the entire NSM team is thrilled to see happen."</div>
     </div>
     <div class="reaction-row rev d4">
       <div class="reaction">
-        <div class="reaction-text">"This kind of recognition makes our case for promotion write itself."</div>
-        <div class="reaction-name">dentsu Account Director</div>
+        <div class="reaction-text">"The client team announced a dentsu team member's promotion internally before dentsu formally approved it — that speaks to the trust Bharat has built."</div>
+        <div class="reaction-name">Context · dentsu Internal</div>
       </div>
       <div class="reaction">
-        <div class="reaction-text">"Client-initiated public praise at the NSM level is extraordinarily rare."</div>
-        <div class="reaction-name">dentsu Group Director</div>
+        <div class="reaction-text">"Raymond Hall personally drove this announcement. He'd already messaged dentsu India leadership on June 18 formally recommending the promotion."</div>
+        <div class="reaction-name">Raymond Hall · AD, Activation · NSM</div>
       </div>
       <div class="reaction">
-        <div class="reaction-text">"I've never seen a client call out an AM by name in an all-hands. This sets a new bar."</div>
-        <div class="reaction-name">dentsu Practice Lead</div>
+        <div class="reaction-text">"Client-side recognition at this level — internal announcements, formal written recommendations — is extraordinary and materially de-risks the promotion decision."</div>
+        <div class="reaction-name">Client Relationship Signal · Promotion Evidence</div>
       </div>
     </div>
   </div>
@@ -940,15 +1106,97 @@ strong { color:var(--white); font-weight:500; }
 </section>
 
 <!-- ══════════════════════════════════════════════
-     SLIDE 15 · CLOSING
+     SLIDE 16 · PLATFORM CERTIFICATIONS
+═══════════════════════════════════════════════ -->
+<section class="slide" id="scerts">
+  <div class="s-full">
+    <span class="eyebrow rev d1">Credentials · Platform Certifications</span>
+    <h2 class="rev d2">Certified across the full Meijer<br>technology stack.</h2>
+    <div class="cert-grid">
+      <div class="cert-card rev d2">
+        <div class="cert-platform">Google · Display &amp; Video 360</div>
+        <div class="cert-name">DV360 Certified — Programmatic Advertising</div>
+        <div class="cert-detail">Full-funnel programmatic: display, video, CTV, and audio. Audience segmentation, bid strategy, and Google ecosystem optimization.</div>
+        <div class="cert-badge">✓ Verified · Google</div>
+      </div>
+      <div class="cert-card rev d3">
+        <div class="cert-platform">Google · Campaign Manager 360</div>
+        <div class="cert-name">Campaign Manager 360 Certified</div>
+        <div class="cert-detail">Ad trafficking, impression tracking, attribution modeling, and cross-channel reporting for enterprise advertisers.</div>
+        <div class="cert-badge">✓ Verified · Google</div>
+      </div>
+      <div class="cert-card rev d4">
+        <div class="cert-platform">Google · Ad Manager</div>
+        <div class="cert-name">GAM Publisher Operations Certified</div>
+        <div class="cert-detail">Publisher-side inventory management, yield optimization, and direct deal trafficking for Meijer's owned RMN inventory.</div>
+        <div class="cert-badge">✓ Verified · Google</div>
+      </div>
+      <div class="cert-card rev d5">
+        <div class="cert-platform">The Trade Desk</div>
+        <div class="cert-name">TTD Edge Academy — Data-Driven Planning</div>
+        <div class="cert-detail">Cross-channel DSP activation, UID2 identity framework, first-party data integration, and programmatic media strategy at scale.</div>
+        <div class="cert-badge">✓ Verified · The Trade Desk</div>
+      </div>
+      <div class="cert-card rev d6">
+        <div class="cert-platform">Meta Blueprint</div>
+        <div class="cert-name">Meta Certified Media Buying Professional</div>
+        <div class="cert-detail">Facebook &amp; Instagram campaign management, audience targeting, creative optimization, and budget pacing across social commerce formats.</div>
+        <div class="cert-badge">✓ Verified · Meta</div>
+      </div>
+      <div class="cert-card rev d7">
+        <div class="cert-platform">Amazon Ads · Retail Media</div>
+        <div class="cert-name">Amazon Ads Retail Media Certification</div>
+        <div class="cert-detail">Sponsored products, display, and DSP activation within Amazon's retail media ecosystem — directly applicable to Meijer RMN architecture.</div>
+        <div class="cert-badge">✓ Verified · Amazon Ads</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 17 · FOR HR
+═══════════════════════════════════════════════ -->
+<section class="slide" id="shr">
+  <div class="s-full">
+    <span class="eyebrow rev d1">For HR · Summary Reference · July 5, 2026</span>
+    <h2 class="rev d2">Everything HR needs<br>on one slide.</h2>
+    <div class="hr-grid">
+      <div class="hr-col rev d3">
+        <div style="font-family:var(--sans);font-size:11px;text-transform:uppercase;letter-spacing:0.18em;color:var(--white-35);margin-bottom:20px;">Employee Profile</div>
+        <div class="hr-row"><span class="hr-key">Name</span><span class="hr-val">Bharat Vamsi</span></div>
+        <div class="hr-row"><span class="hr-key">Current Title</span><span class="hr-val">Account Manager</span></div>
+        <div class="hr-row"><span class="hr-key">Proposed Title</span><span class="hr-val t">Senior Manager</span></div>
+        <div class="hr-row"><span class="hr-key">Account</span><span class="hr-val">Meijer Retail Media Network</span></div>
+        <div class="hr-row"><span class="hr-key">Location</span><span class="hr-val">dentsu India · Hyderabad</span></div>
+        <div class="hr-row"><span class="hr-key">Tenure</span><span class="hr-val">2.5 Years</span></div>
+        <div class="hr-row"><span class="hr-key">Current CTC</span><span class="hr-val">₹13.10 LPA</span></div>
+        <div class="hr-row"><span class="hr-key">Prior CTC (at join)</span><span class="hr-val">₹12.25 LPA</span></div>
+      </div>
+      <div class="hr-col hl rev d4">
+        <div style="font-family:var(--sans);font-size:11px;text-transform:uppercase;letter-spacing:0.18em;color:var(--teal);margin-bottom:20px;">Compensation Proposal</div>
+        <div class="hr-row"><span class="hr-key">Market Range (SM, RMN)</span><span class="hr-val t">₹28–35 LPA</span></div>
+        <div class="hr-row"><span class="hr-key">Base Ask</span><span class="hr-val">₹25–26 LPA</span></div>
+        <div class="hr-row"><span class="hr-key">Performance Bonus</span><span class="hr-val">₹2–3 LPA</span></div>
+        <div class="hr-row"><span class="hr-key">Total CTC Ask</span><span class="hr-val t">₹28 LPA</span></div>
+        <div class="hr-row"><span class="hr-key">Compensation Gap</span><span class="hr-val" style="color:#ff6b6b">₹14.9L below market</span></div>
+        <div class="hr-row"><span class="hr-key">Client Endorsement</span><span class="hr-val t">Raymond Hall, AD · NSM</span></div>
+        <div class="hr-row"><span class="hr-key">Meeting Date</span><span class="hr-val">July 5, 2026</span></div>
+        <div class="hr-row"><span class="hr-key">Effective Date Proposed</span><span class="hr-val t">July 2026</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 18 · CLOSING
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s15">
   <div class="s-full s-center">
-    <span class="eyebrow rev d1">dentsu India · Hyderabad · 2025</span>
+    <span class="eyebrow rev d1">dentsu India · Hyderabad · July 2026</span>
     <div class="closing-q rev d2">
       "What would it take<br>to make this move<br>happen <span class="teal">together</span>?"
     </div>
-    <div class="closing-name rev d3">Bharat Vamsi · Account Manager → Senior Manager · Meijer RMN</div>
+    <div class="closing-name rev d3">Bharat Vamsi · Account Manager → Senior Manager · Meijer RMN · July 5, 2026</div>
   </div>
 </section>
 
