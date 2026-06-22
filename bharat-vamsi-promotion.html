@@ -808,6 +808,75 @@ strong { color:var(--white); font-weight:500; }
 .scope-title { font-family:var(--serif); font-size:18px; font-weight:700; color:var(--white); margin-bottom:8px; line-height:1.2; }
 .scope-body { font-family:var(--sans); font-size:14px; color:var(--white-35); line-height:1.6; }
 
+/* ══════════════════════════════════════════════
+   VISUAL IDENTITY SYSTEM — v2
+   Color convention (strict):
+     --teal   = growth / wins / positive delta
+     --danger = risk / gap / negative
+     --white  = operational volume (neutral facts)
+     --white-60 = supporting context
+══════════════════════════════════════════════ */
+:root {
+  --danger: rgba(255, 60, 80, 0.9);
+  --danger-20: rgba(255, 60, 80, 0.15);
+  --danger-border: rgba(255, 60, 80, 0.25);
+  --gold: rgba(255, 190, 80, 0.9);
+  --gold-10: rgba(255, 190, 80, 0.08);
+}
+
+/* Slide background watermark letter / number */
+.slide-watermark {
+  position:absolute; right:-40px; bottom:-60px; z-index:0; pointer-events:none;
+  font-family:var(--serif); font-size:420px; font-weight:800; line-height:1;
+  color:rgba(239,242,247,0.018); user-select:none; letter-spacing:-0.05em;
+}
+/* Slide left accent bar — color coded per section */
+.slide-accent-bar {
+  position:absolute; left:0; top:0; bottom:0; width:3px; z-index:10;
+}
+
+/* Rule of One — hero anchor element */
+.hero-anchor {
+  font-family:var(--serif); font-size:clamp(80px,9vw,140px); font-weight:800;
+  line-height:0.9; letter-spacing:-0.03em; color:var(--teal);
+  text-shadow:0 0 80px rgba(0,200,215,0.15);
+}
+.hero-anchor.danger { color:var(--danger); text-shadow:0 0 80px rgba(255,60,80,0.15); }
+.hero-anchor.white  { color:var(--white); }
+
+/* Phase progress bar (DMAIC) */
+.phase-bar { height:3px; border-radius:2px; margin-top:8px; transition:width 1s var(--ease) 0.6s; width:0; }
+.slide.visible .phase-bar { width:100% !important; }
+.pb-define  { background:rgba(140,100,255,0.6); width:22% !important; }
+.pb-measure { background:rgba(0,180,255,0.6);   width:45% !important; }
+.pb-analyze { background:rgba(255,180,0,0.6);   width:62% !important; }
+.pb-improve { background:rgba(0,220,130,0.6);   width:82% !important; }
+.pb-control { background:var(--teal);            width:100% !important; }
+
+/* Section eyebrow color coding */
+.eyebrow-define  { color:rgba(140,100,255,0.8); }
+.eyebrow-measure { color:rgba(0,180,255,0.8); }
+.eyebrow-analyze { color:rgba(255,180,0,0.8); }
+.eyebrow-improve { color:rgba(0,220,130,0.8); }
+.eyebrow-control { color:var(--teal); }
+
+/* Metric hierarchy: growth = teal, volume = white, risk = danger */
+.num-growth { color:var(--teal)  !important; }
+.num-volume { color:var(--white) !important; }
+.num-risk   { color:var(--danger) !important; }
+.num-ask    { color:var(--teal)  !important; }
+
+/* Supporting stat (smaller, secondary) */
+.stat-support {
+  display:flex; align-items:center; gap:14px;
+  padding:16px 20px; border-left:2px solid var(--border);
+}
+.stat-support-num {
+  font-family:var(--serif); font-size:36px; font-weight:800; line-height:1;
+  color:var(--teal); white-space:nowrap;
+}
+.stat-support-lbl { font-size:12px; color:var(--white-60); line-height:1.4; }
+
 /* ── Global hover micro-interactions ── */
 .hov-lift {
   transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease), border-color 0.22s;
@@ -1107,30 +1176,49 @@ strong { color:var(--white); font-weight:500; }
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s2">
   <div class="slide-dentsu rev-fade">dentsu</div>
-  <div class="s-full">
-    <span class="eyebrow rev d1">The Case at a Glance</span>
-    <h2 class="rev d2">Four numbers that define this decision.</h2>
-    <div class="stat-grid">
-      <div class="stat-tile rev d3">
-        <div class="stat-num"><span data-count="2.5" data-decimals="1" class="t count-shimmer">2.5</span></div>
-        <div class="stat-label">Years of Sustained Excellence</div>
-        <div class="stat-sub">Consistent top performance since joining</div>
+  <!-- Section watermark -->
+  <div class="slide-watermark">$</div>
+  <div class="s-full" style="position:relative;z-index:1;">
+    <span class="eyebrow rev d1">The Case at a Glance · dentsu India</span>
+
+    <!-- Rule of One: dominant hero + 3 supporting -->
+    <div style="display:grid;grid-template-columns:1fr 420px;gap:2px;margin-top:18px;align-items:stretch;">
+
+      <!-- HERO: $275M — the account scale -->
+      <div class="rev d2" style="background:var(--bg-card);border:1px solid var(--border);border-top:2px solid var(--teal);padding:52px 60px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:24px;">The Account · Meijer RMN · 2025</div>
+          <div class="hero-anchor" style="font-size:130px;">$<span data-count="275" data-suffix="M" class="count-shimmer">275M</span></div>
+          <div style="font-size:18px;color:var(--white);font-weight:600;margin-top:16px;">Annual budget under Bharat's sole ownership</div>
+          <div style="font-size:14px;color:var(--white-60);margin-top:8px;">Top-5 US Retail Media account — no backup, no handover</div>
+        </div>
+        <div style="display:flex;gap:24px;margin-top:32px;padding-top:24px;border-top:1px solid var(--border);">
+          <div><div style="font-family:var(--serif);font-size:28px;font-weight:800;color:var(--teal);">+134%</div><div style="font-size:12px;color:var(--white-60);">ROAS YoY</div></div>
+          <div><div style="font-family:var(--serif);font-size:28px;font-weight:800;color:var(--teal);">+107%</div><div style="font-size:12px;color:var(--white-60);">CVR YoY</div></div>
+          <div><div style="font-family:var(--serif);font-size:28px;font-weight:800;color:var(--white);">&gt;98%</div><div style="font-size:12px;color:var(--white-60);">DIF floor</div></div>
+          <div><div style="font-family:var(--serif);font-size:28px;font-weight:800;color:var(--white);">171</div><div style="font-size:12px;color:var(--white-60);">Campaigns May'26</div></div>
+        </div>
       </div>
-      <div class="stat-tile rev d4">
-        <div class="stat-num">$<span data-count="275" data-suffix="M" class="t count-shimmer">275M</span></div>
-        <div class="stat-label">Total Budget Managed</div>
-        <div class="stat-sub">Across Meijer RMN campaigns</div>
+
+      <!-- 3 supporting stats stacked -->
+      <div style="display:flex;flex-direction:column;gap:2px;" class="rev d3">
+        <div style="background:var(--bg-card);border:1px solid var(--border);padding:28px 32px;flex:1;display:flex;flex-direction:column;justify-content:center;">
+          <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--white-35);font-weight:600;margin-bottom:10px;">On the Account Since</div>
+          <div style="font-family:var(--serif);font-size:52px;font-weight:800;color:var(--white);line-height:1;">H2 <span style="color:var(--teal);">2024</span></div>
+          <div style="font-size:13px;color:var(--white-60);margin-top:8px;">Sole pacing owner within weeks of joining</div>
+        </div>
+        <div style="background:var(--danger-20);border:1px solid var(--danger-border);padding:28px 32px;flex:1;display:flex;flex-direction:column;justify-content:center;">
+          <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--danger);font-weight:600;margin-bottom:10px;">Gap to Market</div>
+          <div style="font-family:var(--serif);font-size:52px;font-weight:800;color:var(--danger);line-height:1;">₹14.9L</div>
+          <div style="font-size:13px;color:var(--white-60);margin-top:8px;">Below Senior Manager median for this scope</div>
+        </div>
+        <div style="background:rgba(0,200,215,0.06);border:1px solid var(--border-t);padding:28px 32px;flex:1;display:flex;flex-direction:column;justify-content:center;">
+          <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:10px;">The Ask</div>
+          <div style="font-family:var(--serif);font-size:52px;font-weight:800;color:var(--teal);line-height:1;">₹28L</div>
+          <div style="font-size:13px;color:var(--white-60);margin-top:8px;">Senior Manager title + base + bonus · at market</div>
+        </div>
       </div>
-      <div class="stat-tile rev d5">
-        <div class="stat-num">₹<span data-count="14.9" data-decimals="1" data-suffix="L" class="t count-shimmer">14.9L</span></div>
-        <div class="stat-label">Gap to Market Median</div>
-        <div class="stat-sub">Current comp vs Senior Manager rate</div>
-      </div>
-      <div class="stat-tile rev d6">
-        <div class="stat-num">₹<span data-count="28" data-suffix="L" class="t count-shimmer">28L</span></div>
-        <div class="stat-label">Total Compensation Ask</div>
-        <div class="stat-sub">Title + base salary + performance bonus</div>
-      </div>
+
     </div>
   </div>
 </section>
@@ -1165,29 +1253,49 @@ strong { color:var(--white); font-weight:500; }
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s4">
   <div class="slide-dentsu rev-fade">dentsu</div>
-  <div class="s-full">
-    <span class="eyebrow rev d1">Measure · Performance Record</span>
-    <h2 class="rev d2">The numbers don't lie.</h2>
-    <div class="metric-row">
-      <div class="metric-card rev d3">
-        <div class="metric-num teal">+<span data-count="134" data-suffix="%" class="count-shimmer">134%</span></div>
-        <div class="metric-label">ROAS Improvement</div>
-        <div class="metric-detail">Return on ad spend lifted from baseline through optimization and audience strategy · QBR-validated March 23, 2026</div>
+  <div class="slide-watermark">%</div>
+  <div class="s-full" style="position:relative;z-index:1;">
+    <span class="eyebrow eyebrow-measure rev d1">Measure · Performance Record · Meijer QBR — dentsu India</span>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:16px;height:580px;">
+
+      <!-- LEFT: hero +134% ROAS — Rule of One -->
+      <div class="rev d2" style="background:var(--bg-card);border:1px solid var(--border);border-top:2px solid var(--teal);padding:52px 56px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:20px;">Growth · Program ROAS · Year-on-Year</div>
+          <div class="hero-anchor" style="font-size:148px;">+<span data-count="134" data-suffix="%" class="count-shimmer">134%</span></div>
+          <div style="font-size:16px;color:var(--white);font-weight:500;margin-top:20px;line-height:1.5;">Return on ad spend lifted through precision optimization and first-party audience strategy</div>
+        </div>
+        <div style="font-size:12px;color:var(--white-35);font-style:italic;padding-top:16px;border-top:1px solid var(--border);">QBR-validated · March 23, 2026 · Meijer Retail Media Network</div>
       </div>
-      <div class="metric-card rev d4">
-        <div class="metric-num teal">+<span data-count="107" data-suffix="%" class="count-shimmer">107%</span></div>
-        <div class="metric-label">CVR Uplift</div>
-        <div class="metric-detail">Conversion rate doubled across Meijer's digital retail media campaigns · QBR-validated March 23, 2026</div>
-      </div>
-      <div class="metric-card rev d5">
-        <div class="metric-num" style="color:var(--white)">&gt;<span data-count="98" data-suffix="%" class="teal count-shimmer" style="font-size:72px">98%</span></div>
-        <div class="metric-label">Delivery In Full</div>
-        <div class="metric-detail">Highest reliability benchmark on the account — maintained through every campaign cycle · Cpk ≥ 1.33</div>
-      </div>
-      <div class="metric-card rev d6">
-        <div class="metric-num" style="color:var(--white)"><span data-count="968" class="count-shimmer">968</span></div>
-        <div class="metric-label">Campaigns Executed</div>
-        <div class="metric-detail">End-to-end ownership from brief to reporting across all active campaign types</div>
+
+      <!-- RIGHT: 3 supporting metrics stacked -->
+      <div style="display:flex;flex-direction:column;gap:2px;" class="rev d3">
+
+        <div style="background:var(--bg-card);border:1px solid var(--border);padding:28px 36px;flex:1;display:flex;align-items:center;gap:28px;" class="hov-lift">
+          <div>
+            <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:6px;">Growth · CVR</div>
+            <div style="font-family:var(--serif);font-size:72px;font-weight:800;color:var(--teal);line-height:1;">+<span data-count="107" data-suffix="%" class="count-shimmer">107%</span></div>
+            <div style="font-size:13px;color:var(--white-60);margin-top:6px;">Conversion rate · year-on-year · QBR-validated</div>
+          </div>
+        </div>
+
+        <div style="background:var(--bg-card);border:1px solid var(--border);padding:28px 36px;flex:1;display:flex;align-items:center;gap:28px;" class="hov-lift">
+          <div>
+            <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--white-35);font-weight:600;margin-bottom:6px;">Volume · Delivery In Full</div>
+            <div style="font-family:var(--serif);font-size:72px;font-weight:800;color:var(--white);line-height:1;">&gt;<span data-count="98" data-suffix="%" class="count-shimmer">98%</span></div>
+            <div style="font-size:13px;color:var(--white-60);margin-top:6px;">DIF floor maintained every cycle · Cpk ≥ 1.33 · Six Sigma threshold</div>
+          </div>
+        </div>
+
+        <div style="background:var(--bg-card);border:1px solid var(--border);padding:28px 36px;flex:1;display:flex;align-items:center;gap:28px;" class="hov-lift">
+          <div>
+            <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--white-35);font-weight:600;margin-bottom:6px;">Volume · Campaigns Executed</div>
+            <div style="font-family:var(--serif);font-size:72px;font-weight:800;color:var(--white);line-height:1;"><span data-count="968" class="count-shimmer">968</span></div>
+            <div style="font-size:13px;color:var(--white-60);margin-top:6px;">End-to-end ownership · brief to reporting · all campaign types</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -1199,7 +1307,7 @@ strong { color:var(--white); font-weight:500; }
 <section class="slide" id="s5">
   <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-full" style="padding-bottom:40px;">
-    <span class="eyebrow rev d1">Account Growth · From the Client QBRs</span>
+    <span class="eyebrow eyebrow-improve rev d1">Account Growth · From the Client QBRs · dentsu India</span>
     <h2 class="rev d2">The account I run has compounded.</h2>
     <div class="growth-hero rev d3">
       <div class="growth-box">
@@ -1469,9 +1577,15 @@ strong { color:var(--white); font-weight:500; }
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s8">
   <div class="slide-dentsu rev-fade">dentsu</div>
-  <div class="s-full">
-    <span class="eyebrow rev d1">Accountability Gap · Role Variance</span>
-    <h2 class="rev d2">What the job spec says vs. what the job actually is.</h2>
+  <div class="slide-watermark" style="font-size:300px;right:60px;bottom:-40px;color:rgba(255,60,80,0.025);">≠</div>
+  <div class="s-full" style="position:relative;z-index:1;">
+    <span class="eyebrow rev d1" style="color:var(--danger);">Accountability Gap · Role Variance · dentsu India</span>
+    <h2 class="rev d2">What the job spec says<br>vs. what the job actually is.</h2>
+    <!-- Rule of One anchor: the gap -->
+    <div class="rev d2" style="display:inline-flex;align-items:center;gap:20px;margin:12px 0 16px;padding:14px 28px;background:var(--danger-20);border:1px solid var(--danger-border);border-radius:2px;">
+      <div style="font-family:var(--serif);font-size:48px;font-weight:800;color:var(--danger);line-height:1;">₹14.9L</div>
+      <div style="font-size:14px;color:var(--white-60);line-height:1.5;">gap between AM title delivered<br>and Senior Manager scope performed</div>
+    </div>
     <div class="compare-grid">
       <div class="compare-col rev d3">
         <div class="compare-title">Account Manager — Job Spec</div>
@@ -1515,7 +1629,7 @@ strong { color:var(--white); font-weight:500; }
       <div class="dmaic-letter control active-phase"><span class="dl">C</span><span class="dw">ontrol</span><div class="dmaic-now">NOW</div></div>
     </div>
 
-    <!-- 5-phase DMAIC track -->
+    <!-- 5-phase DMAIC track — reduced text, visual progress bars, Rule of One per phase = KPI number -->
     <div class="evo-track" style="margin-top:10px;gap:3px;">
 
       <!-- D — Define -->
@@ -1523,9 +1637,9 @@ strong { color:var(--white); font-weight:500; }
         <div class="evo-num" style="color:rgba(140,100,255,0.6);">D</div>
         <div class="evo-period">H2 2024</div>
         <div class="evo-title">Define</div>
-        <div class="evo-detail">Joined Meijer RMN. Sole pacing owner within weeks across DV360, TTD, GAM, Meta, Pinterest. Defined scope, baseline SOPs and campaign architecture.</div>
-        <div class="evo-kpi">39</div>
-        <div class="evo-kpi-label">Campaigns · baseline</div>
+        <div class="evo-detail" style="font-size:12px;">Joined Meijer. Sole pacing owner within weeks. Defined scope + SOPs across 5 platforms.</div>
+        <div class="phase-bar pb-define"></div>
+        <div style="margin-top:10px;"><div class="evo-kpi">39</div><div class="evo-kpi-label">Campaigns · baseline</div></div>
       </div>
 
       <!-- M — Measure -->
@@ -1533,9 +1647,9 @@ strong { color:var(--white); font-weight:500; }
         <div class="evo-num" style="color:rgba(0,180,255,0.6);">M</div>
         <div class="evo-period">Q4 2024</div>
         <div class="evo-title">Measure</div>
-        <div class="evo-detail">Established pacing KPI baselines. Built ROAS optimization playbook. Pacing authority formally transferred by NSM. Co-built screenshot automation.</div>
-        <div class="evo-kpi">89</div>
-        <div class="evo-kpi-label">Campaigns/month</div>
+        <div class="evo-detail" style="font-size:12px;">KPI baselines set. ROAS playbook built. Pacing authority transferred. Screenshot automation launched.</div>
+        <div class="phase-bar pb-measure"></div>
+        <div style="margin-top:10px;"><div class="evo-kpi">89</div><div class="evo-kpi-label">Campaigns/month</div></div>
       </div>
 
       <!-- A — Analyze -->
@@ -1543,9 +1657,9 @@ strong { color:var(--white); font-weight:500; }
         <div class="evo-num" style="color:rgba(255,180,0,0.6);">A</div>
         <div class="evo-period">Q1 2025</div>
         <div class="evo-title">Analyze</div>
-        <div class="evo-detail">Diagnosed Google DV360 platform bug — root cause confirmed by Google. Isolated 619,636-impression shortfall. Identified Meta duplicate &amp; $15.3K mis-set. Cpk ≥ 1.33 sustained.</div>
-        <div class="evo-kpi">104</div>
-        <div class="evo-kpi-label">Campaigns/month</div>
+        <div class="evo-detail" style="font-size:12px;">Google DV360 bug diagnosed before client impact. 619K impressions recovered. Meta mis-set caught. Cpk ≥ 1.33.</div>
+        <div class="phase-bar pb-analyze"></div>
+        <div style="margin-top:10px;"><div class="evo-kpi">104</div><div class="evo-kpi-label">Campaigns/month</div></div>
       </div>
 
       <!-- I — Improve -->
@@ -1553,33 +1667,23 @@ strong { color:var(--white); font-weight:500; }
         <div class="evo-num" style="color:rgba(0,220,130,0.6);">I</div>
         <div class="evo-period">H1 2025</div>
         <div class="evo-title">Improve</div>
-        <div class="evo-detail">Account budget +74% YoY ($10.7M → $18.7M H1). Volume +73% (71 → 123/mo). $5.3M avg weekly. DIF &gt;98% floor maintained through the entire growth period.</div>
-        <div class="evo-kpi">123</div>
-        <div class="evo-kpi-label">Campaigns/month</div>
+        <div class="evo-detail" style="font-size:12px;">Budget +74% YoY. Volume +73%. $5.3M avg weekly. DIF &gt;98% floor held through full growth period.</div>
+        <div class="phase-bar pb-improve"></div>
+        <div style="margin-top:10px;"><div class="evo-kpi">123</div><div class="evo-kpi-label">Campaigns/month</div></div>
       </div>
 
-      <!-- C — Control -->
-      <div class="evo-phase current dmaic-control rev d6">
+      <!-- C — Control (dominant — Rule of One for this slide) -->
+      <div class="evo-phase current dmaic-control rev d6" style="background:rgba(0,200,215,0.04);">
         <div class="evo-num" style="color:var(--teal);">C</div>
-        <div class="evo-period">H1 2026 · Now</div>
+        <div class="evo-period" style="color:var(--teal);">H1 2026 · Now</div>
         <div class="evo-title" style="color:var(--teal);">Control</div>
-        <!-- 3 control mechanisms -->
-        <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
-          <div class="ctrl-item">
-            <div class="ctrl-dot"></div>
-            <div class="ctrl-text"><strong>Automation:</strong> screenshot delivery tool — 70+ decks/week, ~70% cycle-time reduction, zero manual errors. Standardised across the business.</div>
-          </div>
-          <div class="ctrl-item">
-            <div class="ctrl-dot"></div>
-            <div class="ctrl-text"><strong>Capability model:</strong> cross-functional pacing framework — upskilled 1 AD + 3 Managers + 1 SM, reducing team-wide optimisation defects.</div>
-          </div>
-          <div class="ctrl-item">
-            <div class="ctrl-dot"></div>
-            <div class="ctrl-text"><strong>FMEA SOP:</strong> after Meta error catch, permanently engineered budget-duplication class of waste out of weekly team SOPs.</div>
-          </div>
+        <div class="phase-bar pb-control"></div>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:10px;">
+          <div class="ctrl-item"><div class="ctrl-dot"></div><div class="ctrl-text"><strong>Automation</strong> — 70+ decks/wk, ~70% cycle-time cut</div></div>
+          <div class="ctrl-item"><div class="ctrl-dot"></div><div class="ctrl-text"><strong>Capability model</strong> — 1 AD + 3 Mgrs + 1 SM upskilled</div></div>
+          <div class="ctrl-item"><div class="ctrl-dot"></div><div class="ctrl-text"><strong>FMEA SOP</strong> — Meta error class engineered out permanently</div></div>
         </div>
-        <div class="evo-kpi" style="color:var(--teal);">171</div>
-        <div class="evo-kpi-label">Campaigns · May 2026 · 4.4× growth</div>
+        <div style="margin-top:12px;"><div class="evo-kpi" style="color:var(--teal);font-size:52px;">171</div><div class="evo-kpi-label" style="color:var(--teal);">Campaigns · May 2026 · 4.4×</div></div>
       </div>
 
     </div>
