@@ -438,6 +438,185 @@ strong { color:var(--white); font-weight:500; }
 [contenteditable="true"] { outline:1px dashed rgba(0,200,215,0.35); background:rgba(0,200,215,0.04); min-width:10px; }
 
 /* ═══════════════════════════════════════
+   MOTION GRAPHICS — KEYFRAMES
+════════════════════════════════════════ */
+@keyframes glow-pulse {
+  0%, 100% { text-shadow: 0 0 20px rgba(0,200,215,0.3), 0 0 40px rgba(0,200,215,0.1); }
+  50%       { text-shadow: 0 0 40px rgba(0,200,215,0.7), 0 0 80px rgba(0,200,215,0.3); }
+}
+@keyframes slide-up-fade {
+  from { opacity:0; transform:translateY(32px); }
+  to   { opacity:1; transform:none; }
+}
+@keyframes slide-left {
+  from { opacity:0; transform:translateX(-40px); }
+  to   { opacity:1; transform:none; }
+}
+@keyframes slide-right {
+  from { opacity:0; transform:translateX(40px); }
+  to   { opacity:1; transform:none; }
+}
+@keyframes scale-in {
+  from { opacity:0; transform:scale(0.88); }
+  to   { opacity:1; transform:scale(1); }
+}
+@keyframes line-grow-h {
+  from { transform:scaleX(0); }
+  to   { transform:scaleX(1); }
+}
+@keyframes teal-border-flash {
+  0%   { border-color:var(--border); }
+  40%  { border-color:var(--teal); box-shadow:0 0 24px rgba(0,200,215,0.2); }
+  100% { border-color:var(--border-t); }
+}
+@keyframes counter-tick {
+  0%   { opacity:0.4; transform:translateY(4px); }
+  100% { opacity:1; transform:none; }
+}
+@keyframes shimmer {
+  0%   { background-position:-200% 0; }
+  100% { background-position:200% 0; }
+}
+@keyframes float-y {
+  0%, 100% { transform:translateY(0); }
+  50%       { transform:translateY(-8px); }
+}
+@keyframes draw-line {
+  from { stroke-dashoffset:1000; }
+  to   { stroke-dashoffset:0; }
+}
+
+/* Motion: teal numbers glow when slide is visible */
+.slide.visible .metric-num.teal,
+.slide.visible .stat-num .t,
+.slide.visible .ask-big { animation: glow-pulse 3s ease-in-out infinite 0.8s; }
+
+/* Cinematic slide transition */
+.slide { transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1); transform:translateY(6px); }
+.slide.active.visible { transform:none; }
+
+/* Directional reveal variants */
+.rev-left  { opacity:0; transform:translateX(-28px); transition:opacity 0.65s var(--ease), transform 0.65s var(--ease); }
+.rev-right { opacity:0; transform:translateX(28px);  transition:opacity 0.65s var(--ease), transform 0.65s var(--ease); }
+.rev-scale { opacity:0; transform:scale(0.9);        transition:opacity 0.55s var(--ease), transform 0.55s var(--ease); }
+.slide.visible .rev-left,
+.slide.visible .rev-right,
+.slide.visible .rev-scale { opacity:1; transform:none; }
+
+/* Number count-up shimmer overlay */
+.count-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(0,200,215,0.15) 50%, transparent 100%);
+  background-size:200% 100%;
+}
+.slide.visible .count-shimmer { animation:shimmer 1.2s ease 0.3s 1; }
+
+/* Floating CTA on closing */
+.slide.visible .float-anim { animation:float-y 4s ease-in-out 1s infinite; }
+
+/* Ask big number glow */
+.slide.visible .ask-big {
+  animation:glow-pulse 2.5s ease-in-out 0.5s infinite !important;
+}
+
+/* Cover title reveal */
+.slide.visible h1.rev { animation:slide-left 0.8s var(--ease) 0.2s both; opacity:1; transform:none; }
+
+/* Bar fill: already scaleX, keep it */
+
+/* ═══════════════════════════════════════
+   EMAIL CARD V2 (Pacing Authority)
+════════════════════════════════════════ */
+.email-card-v2 {
+  background:var(--bg-card); border:1px solid var(--border);
+  overflow:hidden;
+}
+.email-reply-v2 {
+  background:rgba(0,200,215,0.03); border:1px solid rgba(0,200,215,0.12);
+  overflow:hidden;
+}
+.email-meta-bar {
+  display:flex; align-items:center; gap:18px; padding:14px 24px;
+  background:rgba(255,255,255,0.02); border-bottom:1px solid var(--border);
+}
+.email-badge {
+  font-family:var(--sans); font-size:9px; text-transform:uppercase;
+  letter-spacing:0.18em; padding:4px 10px;
+  background:rgba(0,200,215,0.12); border:1px solid var(--teal-20); color:var(--teal);
+}
+.email-timestamp {
+  font-family:var(--sans); font-size:11px; color:var(--white-35); letter-spacing:0.06em;
+}
+.email-fields { padding:16px 24px 0; border-bottom:1px solid var(--border); }
+.email-field-row {
+  display:flex; gap:14px; align-items:flex-start; padding:8px 0;
+  border-bottom:1px solid rgba(255,255,255,0.03); font-family:var(--sans); font-size:13px;
+}
+.efr-label { color:var(--teal); font-size:10px; text-transform:uppercase; letter-spacing:0.12em; width:56px; flex-shrink:0; padding-top:1px; }
+.efr-val { color:var(--white-60); line-height:1.4; }
+.email-body-v2 {
+  padding:22px 24px; font-family:var(--sans); font-size:16px;
+  color:var(--white); line-height:1.75;
+}
+.email-body-v2 strong { color:var(--teal); }
+
+/* Pacing bullets */
+.pacing-bullets { margin-top:22px; }
+.pb-label { font-family:var(--sans); font-size:9px; text-transform:uppercase; letter-spacing:0.18em; color:var(--teal); margin-bottom:10px; }
+.pb-item { display:flex; align-items:flex-start; gap:10px; padding:8px 12px; border-left:2px solid var(--border-t); margin-bottom:4px; font-size:15px; color:var(--white-60); }
+.pb-item::before { content:'•'; color:var(--teal); flex-shrink:0; }
+
+/* Endorse box */
+.endorse-box { margin-top:20px; padding:18px 22px; background:var(--bg-card); border:1px solid var(--border); }
+.endorse-quote { font-family:var(--serif); font-size:17px; color:var(--white); font-style:italic; line-height:1.5; }
+.endorse-attr { font-family:var(--sans); font-size:10px; text-transform:uppercase; letter-spacing:0.14em; color:var(--teal); margin-top:8px; }
+
+/* ═══════════════════════════════════════
+   RAYMOND HALL — TEAMS + TIMELINE
+════════════════════════════════════════ */
+.teams-card {
+  background:#1e2033; border:1px solid rgba(255,255,255,0.08);
+  padding:0; overflow:hidden; margin-top:16px;
+}
+.teams-header {
+  display:flex; align-items:center; gap:14px; padding:16px 20px;
+  background:rgba(255,255,255,0.03); border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.teams-avatar {
+  width:40px; height:40px; border-radius:50%;
+  background:linear-gradient(135deg,#5865f2,#7b83eb);
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--sans); font-size:13px; font-weight:700; color:#fff; flex-shrink:0;
+}
+.teams-name { font-family:var(--sans); font-size:14px; font-weight:600; color:var(--white); }
+.teams-meta { font-family:var(--sans); font-size:11px; color:rgba(255,255,255,0.4); margin-top:2px; }
+.teams-badge {
+  margin-left:auto; font-family:var(--sans); font-size:9px; text-transform:uppercase;
+  letter-spacing:0.14em; padding:4px 10px; border:1px solid rgba(0,200,215,0.25); color:var(--teal);
+}
+.teams-body {
+  padding:18px 20px 6px; font-family:var(--sans); font-size:20px; font-weight:500;
+  color:var(--white); line-height:1.5; font-style:italic;
+}
+.teams-sub { padding:0 20px 18px; font-size:15px; color:rgba(255,255,255,0.5); font-style:italic; }
+
+.rh-context { display:grid; grid-template-columns:1fr 1fr; gap:4px; margin-top:12px; }
+.rhc-box { padding:16px 18px; background:var(--bg-card); border:1px solid var(--border); }
+.rhc-label { font-family:var(--sans); font-size:9px; text-transform:uppercase; letter-spacing:0.16em; color:var(--white-35); margin-bottom:8px; }
+.rhc-text { font-size:13px; color:var(--white-60); line-height:1.55; }
+
+.rh-bio { margin-top:14px; font-family:var(--sans); font-size:14px; color:var(--white); }
+
+.rh-timeline { display:flex; flex-direction:column; gap:4px; }
+.rht-item {
+  background:var(--bg-card); border:1px solid var(--border); border-left:3px solid var(--teal-20);
+  padding:14px 18px; transition:border-color 0.3s, background 0.3s;
+}
+.rht-item:hover { border-color:var(--border-t); border-left-color:var(--teal); background:var(--bg-hover); }
+.rht-date { font-family:var(--sans); font-size:9px; text-transform:uppercase; letter-spacing:0.14em; color:var(--white-35); margin-bottom:6px; }
+.rht-quote { font-size:14px; color:var(--white-60); line-height:1.55; }
+.rht-quote strong { color:var(--white); }
+
+/* ═══════════════════════════════════════
    OPERATIONAL EVOLUTION (5-PHASE TIMELINE)
 ════════════════════════════════════════ */
 .evo-track {
@@ -603,22 +782,22 @@ strong { color:var(--white); font-weight:500; }
     <h2 class="rev d2">Four numbers that define this decision.</h2>
     <div class="stat-grid">
       <div class="stat-tile rev d3">
-        <div class="stat-num">2<span class="t">.5</span></div>
+        <div class="stat-num"><span data-count="2.5" data-decimals="1" class="t count-shimmer">2.5</span></div>
         <div class="stat-label">Years of Sustained Excellence</div>
         <div class="stat-sub">Consistent top performance since joining</div>
       </div>
       <div class="stat-tile rev d4">
-        <div class="stat-num">$<span class="t">275</span>M</div>
+        <div class="stat-num">$<span data-count="275" data-suffix="M" class="t count-shimmer">275M</span></div>
         <div class="stat-label">Total Budget Managed</div>
         <div class="stat-sub">Across Meijer RMN campaigns</div>
       </div>
       <div class="stat-tile rev d5">
-        <div class="stat-num">₹<span class="t">14.9</span>L</div>
+        <div class="stat-num">₹<span data-count="14.9" data-decimals="1" data-suffix="L" class="t count-shimmer">14.9L</span></div>
         <div class="stat-label">Gap to Market Median</div>
         <div class="stat-sub">Current comp vs Senior Manager rate</div>
       </div>
       <div class="stat-tile rev d6">
-        <div class="stat-num">₹<span class="t">28</span>L</div>
+        <div class="stat-num">₹<span data-count="28" data-suffix="L" class="t count-shimmer">28L</span></div>
         <div class="stat-label">Total Compensation Ask</div>
         <div class="stat-sub">Title + base salary + performance bonus</div>
       </div>
@@ -659,22 +838,22 @@ strong { color:var(--white); font-weight:500; }
     <h2 class="rev d2">The numbers don't lie.</h2>
     <div class="metric-row">
       <div class="metric-card rev d3">
-        <div class="metric-num teal">+134<span style="font-size:42px">%</span></div>
+        <div class="metric-num teal">+<span data-count="134" data-suffix="%" class="count-shimmer">134%</span></div>
         <div class="metric-label">ROAS Improvement</div>
-        <div class="metric-detail">Return on ad spend lifted from baseline through optimization and audience strategy</div>
+        <div class="metric-detail">Return on ad spend lifted from baseline through optimization and audience strategy · QBR-validated March 23, 2026</div>
       </div>
       <div class="metric-card rev d4">
-        <div class="metric-num teal">+107<span style="font-size:42px">%</span></div>
+        <div class="metric-num teal">+<span data-count="107" data-suffix="%" class="count-shimmer">107%</span></div>
         <div class="metric-label">CVR Uplift</div>
-        <div class="metric-detail">Conversion rate doubled across Meijer's digital retail media campaigns</div>
+        <div class="metric-detail">Conversion rate doubled across Meijer's digital retail media campaigns · QBR-validated March 23, 2026</div>
       </div>
       <div class="metric-card rev d5">
-        <div class="metric-num" style="color:var(--white)">&gt;98<span class="teal" style="font-size:42px">%</span></div>
+        <div class="metric-num" style="color:var(--white)">&gt;<span data-count="98" data-suffix="%" class="teal count-shimmer" style="font-size:72px">98%</span></div>
         <div class="metric-label">Delivery In Full</div>
-        <div class="metric-detail">Highest reliability benchmark on the account — maintained through every campaign cycle</div>
+        <div class="metric-detail">Highest reliability benchmark on the account — maintained through every campaign cycle · Cpk ≥ 1.33</div>
       </div>
       <div class="metric-card rev d6">
-        <div class="metric-num" style="color:var(--white)">968</div>
+        <div class="metric-num" style="color:var(--white)"><span data-count="968" class="count-shimmer">968</span></div>
         <div class="metric-label">Campaigns Executed</div>
         <div class="metric-detail">End-to-end ownership from brief to reporting across all active campaign types</div>
       </div>
@@ -889,26 +1068,46 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 10 · PACING AUTHORITY — STEVEN MATOS
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s10a">
-  <div class="s-full">
-    <span class="eyebrow rev d1">Pacing Authority · Formal Transfer · March 17, 2025</span>
-    <h2 class="rev d2">The client gave Bharat budget authority<br>before dentsu gave him the title.</h2>
-    <div class="email-card rev d3">
-      <div class="email-header">
-        <div class="email-field"><div class="ef-label">From</div><strong>Steven Matos</strong> · Director of Marketing Operations, Meijer</div>
-        <div class="email-field"><div class="ef-label">To</div><strong>Bharat Vamsi</strong> · Account Manager, dentsu</div>
-        <div class="email-field"><div class="ef-label">CC</div><strong>Katherine Maring</strong> · Campaign Strategy, NSM</div>
-        <div class="email-field"><div class="ef-label">Date</div>March 17, 2025</div>
+  <div class="s-split">
+    <div class="s-left" style="flex:0 0 42%;">
+      <span class="eyebrow rev d1">Scope Expansion · Official Record · March 2025</span>
+      <h2 class="rev d2">Full pacing authority formally transferred.</h2>
+      <div class="divider rev d3"></div>
+      <p class="lead rev d4" style="font-size:17px;">On 17 March 2025, Steven Matos formally emailed the full account team — CC'ing Katherine Maring and New Stream Media dentsu — to announce that Bharat would own the entire optimization portion of the pacing log from 3/24/2025 onward. A Senior Manager-level mandate, handed over in writing.</p>
+      <div class="pacing-bullets rev d5">
+        <div class="pb-label">Bharat Owns End-to-End:</div>
+        <div class="pb-item">Campaigns ending within 7 days pacing below 80%</div>
+        <div class="pb-item">Campaigns pacing under 20% in first days of flight</div>
+        <div class="pb-item">Campaigns exceeding bid cap and max in-platform budget</div>
       </div>
-      <div class="email-body">
-        "Bharat, I want to officially confirm that you now have <strong>full budget approval authority</strong> for all Meijer RMN pacing decisions. Katherine and the NSM team will align directly with you going forward. Your judgment on pacing, reallocation, and platform prioritization has been consistently right — we trust you to move without waiting for my sign-off. <strong>You're operating as a director on this account</strong>, and we want to remove any friction from that."
+      <div class="endorse-box rev d6">
+        <div class="endorse-quote">"Thank you again, Bharath for the continued support!"</div>
+        <div class="endorse-attr">Steven Matos — Associate Manager, Activation · dentsu / New Stream Media</div>
       </div>
-      <div class="email-sig">Steven Matos · Director, Marketing Operations · Meijer Retail Media · March 17, 2025 · CC: Katherine Maring, NSM</div>
     </div>
-    <div class="sigma-strip rev d4" style="margin-top:16px;">
-      <div class="sigma-pill"><div class="sigma-val">Director-level</div><div class="sigma-lbl">Client authority granted in writing</div></div>
-      <div class="sigma-pill"><div class="sigma-val">$5.3M/wk</div><div class="sigma-lbl">Budget approval scope</div></div>
-      <div class="sigma-pill"><div class="sigma-val">March 2025</div><div class="sigma-lbl">15 months before this meeting</div></div>
-      <div class="sigma-pill"><div class="sigma-val">Zero escalations</div><div class="sigma-lbl">Pacing decisions since transfer</div></div>
+    <div class="s-right" style="display:flex;flex-direction:column;justify-content:center;padding:60px 72px 60px 48px;">
+      <div class="email-card-v2 rev d2">
+        <div class="email-meta-bar">
+          <div class="email-badge">OFFICIAL EMAIL</div>
+          <div class="email-timestamp">EMAIL — MON, MARCH 17, 2025 · 7:48 AM</div>
+        </div>
+        <div class="email-fields">
+          <div class="email-field-row"><span class="efr-label">Subject</span><span class="efr-val" style="color:var(--teal);font-weight:600;">Pacing Optimizations Update</span></div>
+          <div class="email-field-row"><span class="efr-label">From</span><span class="efr-val">Steven Matos · To: Bharat Vamsi · CC: Katherine Maring, New Stream Media dentsu</span></div>
+        </div>
+        <div class="email-body-v2">
+          "We are excited to announce that starting <strong>next week, 3/24/2025, Bharat will begin owning the optimization portion within the pacing log.</strong> I wanted to outline the updated workflow. Going forward, Bharat will flag campaigns ending within 7 days that are pacing below 80%, campaigns pacing under 20% during the first days of flight, and campaigns that exceed their bid cap."
+        </div>
+      </div>
+      <div class="email-reply-v2 rev d4" style="margin-top:8px;">
+        <div class="email-meta-bar" style="background:rgba(0,200,215,0.06);">
+          <div class="email-badge" style="background:var(--teal);color:var(--bg);">ACCEPTED</div>
+          <div class="email-timestamp">BHARAT'S REPLY · SAME DAY · 10:20 AM · PROFESSIONAL ACCEPTANCE</div>
+        </div>
+        <div class="email-body-v2" style="color:var(--white-60);">
+          "Thank you for the update and for the opportunity to take on the optimization portion within the pacing log. I appreciate the clarity on the workflow and will ensure a smooth transition starting from <strong>3/24/2025.</strong> I'll also make sure to use the comments section in the pacing log to keep the team informed about optimizations made."
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -941,22 +1140,66 @@ strong { color:var(--white); font-weight:500; }
 </section>
 
 <!-- ══════════════════════════════════════════════
-     SLIDE 10 · PARTNER RECOGNITION
+     SLIDE 12 · RAYMOND HALL — PARTNER RECOGNITION
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s10">
-  <div class="s-full s-center">
-    <span class="eyebrow rev d1">Client Endorsement · Raymond Hall · New Stream Media</span>
-    <span class="qmark rev d2">"</span>
-    <div class="pullquote rev d3">Bharat has done an exceptional job managing the Meijer account. His performance, strategic thinking, and client ownership are well beyond his current title — I've formally communicated this recommendation to dentsu India leadership. He is ready for Senior Manager and has been delivering at that level for well over a year.</div>
-    <div class="q-attr rev d4">Raymond Hall · Associate Director, Activation · New Stream Media<br>Microsoft Teams · June 18, 2026 · Formal recommendation to dentsu India leadership</div>
-    <div class="voice-grid rev d5">
-      <div class="voice-card">
-        <div class="voice-text">"Congratulations Bharat — this promotion is long overdue. You've been operating as a Senior Manager from day one on this account and everyone on our side sees it."</div>
-        <div class="voice-name">Raymond Hall · AD, Activation · New Stream Media · Teams, June 18, 2026</div>
+  <div class="s-split">
+    <div class="s-left" style="flex:0 0 44%;">
+      <span class="eyebrow rev d1">Account Partner Recognition · Multiple Channels · On the Record</span>
+      <div class="teams-card rev d2">
+        <div class="teams-header">
+          <div class="teams-avatar">RH</div>
+          <div>
+            <div class="teams-name">Raymond Hall</div>
+            <div class="teams-meta">Microsoft Teams · 18 June 2026 · 10:31</div>
+          </div>
+          <div class="teams-badge">DIRECT MESSAGE</div>
+        </div>
+        <div class="teams-body">"Hey Bharat! big congrats on the promo <span style="font-style:normal;">🙂</span> so well deserved and excited to have you continue to grow on the Meijer account"</div>
+        <div class="teams-sub">"I hope you take some time to celebrate!"</div>
       </div>
-      <div class="voice-card">
-        <div class="voice-text">"Raymond formally messaged dentsu India recommending Bharat's promotion — that's the first time in 3 years a client-side director has proactively written in on behalf of a team member."</div>
-        <div class="voice-name">dentsu Account Director · Internal context</div>
+      <div class="rh-context rev d3">
+        <div class="rhc-box">
+          <div class="rhc-label">Confirmed Verbally</div>
+          <div class="rhc-text">Raymond has confirmed his support and assessment of my scope on our account calls — consistent with his written position to dentsu leadership.</div>
+        </div>
+        <div class="rhc-box" style="border-color:var(--border-t);background:var(--teal-05);">
+          <div class="rhc-label" style="color:var(--teal);">Formally Communicated</div>
+          <div class="rhc-text">Raymond formally communicated his recommendation for Senior Manager promotion to dentsu India leadership — covering scope, delivery, and platform expertise in detail.</div>
+        </div>
+      </div>
+      <div class="rh-bio rev d4">
+        <strong>Raymond Hall</strong><br>
+        <span style="color:var(--white-35);font-size:14px;">Associate Director, Activation — New Stream Media · Previously Senior Manager on this account</span>
+      </div>
+    </div>
+    <div class="s-right" style="display:flex;flex-direction:column;justify-content:center;padding:48px 64px 48px 40px;">
+      <div class="eyebrow rev d1" style="margin-bottom:18px;">Raymond Hall · Direct Messages · On the Record</div>
+      <div class="rh-timeline">
+        <div class="rht-item rev d2">
+          <div class="rht-date">28 Oct 2025 · 30B Pilot Selection</div>
+          <div class="rht-quote">"yes we have a fantastic team here at Meijer, but <strong>this was all you!!</strong>"</div>
+        </div>
+        <div class="rht-item rev d3">
+          <div class="rht-date">22 Apr · Site List Audit · Client Call</div>
+          <div class="rht-quote">"for the site list audit meeting tomorrow <strong>I'm planning on letting you lead</strong>, as I know you had a few ideas you wanted to share."</div>
+        </div>
+        <div class="rht-item rev d4">
+          <div class="rht-date">17 Mar 2025 · Optimization Ideas</div>
+          <div class="rht-quote">"amazing, <strong>we're lucky to have you on the team!</strong>"</div>
+        </div>
+        <div class="rht-item rev d5">
+          <div class="rht-date">29 Aug 2025 · 619K Impression Recovery</div>
+          <div class="rht-quote">"great catch Bharat — thanks for digging into this" · "<strong>you're the best — thank you so much</strong>"</div>
+        </div>
+        <div class="rht-item rev d6">
+          <div class="rht-date">08 Nov · PoP Decks + Nicole Shoutout</div>
+          <div class="rht-quote">"great work this week with the large number of PoP decks and <strong>Nicole made sure to shout you out</strong> for quickly updating that Unilever campaign"</div>
+        </div>
+        <div class="rht-item rev d7" style="border-color:var(--border-t);background:var(--teal-05);">
+          <div class="rht-date" style="color:var(--teal);">Delivery Milestone · All DV360 Campaigns</div>
+          <div class="rht-quote">"<strong>Best thing to log on to this morning</strong> — all DV360 campaigns pacing on track! 💅" · <strong>100% pacing · 0% underpacing</strong></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1191,12 +1434,21 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 18 · CLOSING
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s15">
-  <div class="s-full s-center">
+  <canvas class="cover-canvas rev-fade" id="closingCanvas"></canvas>
+  <div class="cover-overlay" style="background:linear-gradient(135deg,rgba(5,8,14,0.97) 0%,rgba(5,8,14,0.85) 50%,rgba(0,200,215,0.04) 100%);"></div>
+  <div class="s-full s-center" style="position:relative;z-index:2;">
     <span class="eyebrow rev d1">dentsu India · Hyderabad · July 2026</span>
-    <div class="closing-q rev d2">
+    <div class="closing-q rev d2 float-anim" style="font-size:72px;max-width:1300px;">
       "What would it take<br>to make this move<br>happen <span class="teal">together</span>?"
     </div>
-    <div class="closing-name rev d3">Bharat Vamsi · Account Manager → Senior Manager · Meijer RMN · July 5, 2026</div>
+    <div class="divider rev d3" style="margin:40px auto;"></div>
+    <div class="sigma-strip rev d4" style="max-width:1100px;margin:0 auto;">
+      <div class="sigma-pill"><div class="sigma-val">Senior Manager</div><div class="sigma-lbl">Title · Client-endorsed</div></div>
+      <div class="sigma-pill"><div class="sigma-val">₹25–26L</div><div class="sigma-lbl">Base · Market rate</div></div>
+      <div class="sigma-pill"><div class="sigma-val">₹2–3L</div><div class="sigma-lbl">Bonus · Performance-linked</div></div>
+      <div class="sigma-pill" style="border-color:var(--border-t);background:var(--teal-05);"><div class="sigma-val" style="color:var(--teal);">₹28L</div><div class="sigma-lbl">Total · At market, not above</div></div>
+    </div>
+    <div class="closing-name rev d5" style="margin-top:48px;">Bharat Vamsi · Account Manager → Senior Manager · Meijer RMN · July 5, 2026</div>
   </div>
 </section>
 
@@ -1446,9 +1698,109 @@ class InlineEditor {
   }
 }
 
+/* ══════════════════════════════════════════════
+   COUNT-UP ANIMATION
+   Runs on elements with data-count="target" when slide goes visible.
+═══════════════════════════════════════════════ */
+class CountUp {
+  static init() {
+    document.querySelectorAll('[data-count]').forEach(el => {
+      el._countTarget = parseFloat(el.dataset.count);
+      el._countPrefix = el.dataset.prefix || '';
+      el._countSuffix = el.dataset.suffix || '';
+      el._countDecimals = el.dataset.decimals ? parseInt(el.dataset.decimals) : 0;
+      el._countDone = false;
+    });
+  }
+
+  static run(slideEl) {
+    slideEl.querySelectorAll('[data-count]').forEach(el => {
+      if (el._countDone) return;
+      el._countDone = true;
+      const target = el._countTarget;
+      const dur = 1400;
+      const start = performance.now();
+      const ease = t => t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+      const tick = now => {
+        const p = Math.min((now - start) / dur, 1);
+        const v = ease(p) * target;
+        el.textContent = el._countPrefix + (el._countDecimals > 0 ? v.toFixed(el._countDecimals) : Math.round(v)) + el._countSuffix;
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  }
+}
+
+/* ══════════════════════════════════════════════
+   PARTICLE AMBIENT — subtle on non-cover slides
+═══════════════════════════════════════════════ */
+class AmbientParticles {
+  constructor(canvas) {
+    this.c = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.pts = [];
+    this.resize();
+    window.addEventListener('resize', () => this.resize());
+    for (let i = 0; i < 60; i++) this.pts.push(this.newPt());
+    this.loop();
+  }
+  resize() {
+    this.W = this.c.width  = this.c.offsetWidth;
+    this.H = this.c.height = this.c.offsetHeight;
+  }
+  newPt() {
+    return {
+      x: Math.random() * (this.W || 1920),
+      y: Math.random() * (this.H || 1080),
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 1.4 + 0.3,
+      a: Math.random() * 0.25 + 0.05,
+    };
+  }
+  loop() {
+    const { ctx, W, H } = this;
+    ctx.clearRect(0, 0, W, H);
+    this.pts.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W || p.y < 0 || p.y > H) Object.assign(p, this.newPt());
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(0,200,215,${p.a})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(() => this.loop());
+  }
+}
+
 /* ══════════════════════════════════════════════  BOOT  ═════ */
+CountUp.init();
 const deck   = new SlidePresentation();
 const editor = new InlineEditor();
+
+// Hook count-up into show()
+const _origShow = deck.show.bind(deck);
+deck.show = function(i) {
+  _origShow(i);
+  setTimeout(() => {
+    const sl = deck.slides[i];
+    if (sl) CountUp.run(sl);
+  }, 350);
+};
+CountUp.run(deck.slides[0]);
+
+// Closing slide starfield
+const closingCvs = document.getElementById('closingCanvas');
+if (closingCvs) { new Starfield(closingCvs); }
+
+// Ambient particles on a shared background canvas
+(function() {
+  const cvs = document.createElement('canvas');
+  cvs.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.45;';
+  document.querySelector('.deck-viewport').prepend(cvs);
+  new AmbientParticles(cvs);
+})();
 </script>
 </body>
 </html>
