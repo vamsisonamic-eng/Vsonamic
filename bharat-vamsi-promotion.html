@@ -808,6 +808,43 @@ strong { color:var(--white); font-weight:500; }
 .scope-title { font-family:var(--serif); font-size:18px; font-weight:700; color:var(--white); margin-bottom:8px; line-height:1.2; }
 .scope-body { font-family:var(--sans); font-size:14px; color:var(--white-35); line-height:1.6; }
 
+/* DMAIC visual strip */
+.dmaic-strip {
+  display:flex; align-items:center; gap:0; margin-bottom:6px;
+  background:var(--bg-card); border:1px solid var(--border); padding:10px 20px;
+}
+.dmaic-letter {
+  display:flex; align-items:baseline; gap:3px; padding:6px 14px;
+  position:relative;
+}
+.dmaic-letter .dl { font-family:var(--serif); font-size:22px; font-weight:800; }
+.dmaic-letter .dw { font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--white-35); }
+.dmaic-letter.define .dl   { color:rgba(140,100,255,0.8); }
+.dmaic-letter.measure .dl  { color:rgba(0,180,255,0.8); }
+.dmaic-letter.analyze .dl  { color:rgba(255,180,0,0.8); }
+.dmaic-letter.improve .dl  { color:rgba(0,220,130,0.8); }
+.dmaic-letter.control .dl  { color:var(--teal); }
+.dmaic-letter.active-phase { background:rgba(0,200,215,0.07); border-radius:4px; }
+.dmaic-letter.active-phase .dw { color:var(--teal); }
+.dmaic-now {
+  position:absolute; top:-8px; right:4px;
+  font-size:9px; font-weight:700; letter-spacing:0.12em;
+  color:var(--teal); background:rgba(0,200,215,0.12); border:1px solid rgba(0,200,215,0.3);
+  padding:2px 5px; border-radius:3px;
+}
+.dmaic-arrow { color:var(--white-35); font-size:16px; padding:0 4px; }
+.dmaic-define  { border-top:2px solid rgba(140,100,255,0.4); }
+.dmaic-measure { border-top:2px solid rgba(0,180,255,0.4); }
+.dmaic-analyze { border-top:2px solid rgba(255,180,0,0.4); }
+.dmaic-improve { border-top:2px solid rgba(0,220,130,0.4); }
+.dmaic-control { border-top:2px solid var(--teal); }
+
+/* Control phase items */
+.ctrl-item { display:flex; gap:8px; align-items:flex-start; }
+.ctrl-dot { width:5px; height:5px; background:var(--teal); border-radius:50%; flex-shrink:0; margin-top:5px; }
+.ctrl-text { font-size:11px; color:var(--white-60); line-height:1.5; }
+.ctrl-text strong { color:var(--teal); font-weight:600; }
+
 /* Case study slides */
 .case-accent-line {
   position:absolute; top:0; left:0; right:0; height:2px;
@@ -1333,7 +1370,7 @@ strong { color:var(--white); font-weight:500; }
         <div class="compare-item"><span class="dot-t"></span>Operates across 5 platforms without backup</div>
         <div class="compare-item"><span class="dot-t"></span>Builds new processes and escalation frameworks</div>
         <div class="compare-item"><span class="dot-t"></span>Primary decision-maker on all pacing and budget issues</div>
-        <div class="compare-item"><span class="dot-t"></span>Trained 1 AD, 3 Managers &amp; 1 Senior Manager on pacing — cross-level knowledge transfer</div>
+        <div class="compare-item"><span class="dot-t"></span>Established cross-functional pacing capability model — upskilled 1 AD, 3 Managers &amp; 1 SM, reducing team-wide optimisation defects</div>
       </div>
     </div>
   </div>
@@ -1344,56 +1381,98 @@ strong { color:var(--white); font-weight:500; }
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s9">
   <div class="slide-dentsu rev-fade">dentsu</div>
-  <div class="s-full" style="padding-bottom:24px;">
-    <span class="eyebrow rev d1">Improve · Operational Evolution · DMAIC — dentsu India</span>
-    <h2 class="rev d2" style="font-size:44px;margin-bottom:8px;">H2 2024 → Now. Consistent delivery at every scale.</h2>
-    <div class="evo-track" style="margin-top:22px;gap:3px;">
-      <div class="evo-phase rev d2">
-        <div class="evo-num">01</div>
+  <div class="s-full" style="padding-bottom:16px;">
+    <span class="eyebrow rev d1">DMAIC · Operational Evolution · dentsu India · Meijer RMN</span>
+    <h2 class="rev d2" style="font-size:40px;margin-bottom:12px;">H2 2024 → Now. Consistent delivery at every scale.</h2>
+
+    <!-- DMAIC header strip -->
+    <div class="dmaic-strip rev d2">
+      <div class="dmaic-letter define"><span class="dl">D</span><span class="dw">efine</span></div>
+      <div class="dmaic-arrow">→</div>
+      <div class="dmaic-letter measure"><span class="dl">M</span><span class="dw">easure</span></div>
+      <div class="dmaic-arrow">→</div>
+      <div class="dmaic-letter analyze"><span class="dl">A</span><span class="dw">nalyze</span></div>
+      <div class="dmaic-arrow">→</div>
+      <div class="dmaic-letter improve"><span class="dl">I</span><span class="dw">mprove</span></div>
+      <div class="dmaic-arrow">→</div>
+      <div class="dmaic-letter control active-phase"><span class="dl">C</span><span class="dw">ontrol</span><div class="dmaic-now">NOW</div></div>
+    </div>
+
+    <!-- 5-phase DMAIC track -->
+    <div class="evo-track" style="margin-top:10px;gap:3px;">
+
+      <!-- D — Define -->
+      <div class="evo-phase dmaic-define rev d2">
+        <div class="evo-num" style="color:rgba(140,100,255,0.6);">D</div>
         <div class="evo-period">H2 2024</div>
-        <div class="evo-title">Onboarding &amp; Command</div>
-        <div class="evo-detail">Joined Meijer RMN. Within weeks, sole owner of pacing across DV360, TTD, GAM, Meta and Pinterest. Established baseline SOPs and campaign architecture.</div>
+        <div class="evo-title">Define</div>
+        <div class="evo-detail">Joined Meijer RMN. Sole pacing owner within weeks across DV360, TTD, GAM, Meta, Pinterest. Defined scope, baseline SOPs and campaign architecture.</div>
         <div class="evo-kpi">39</div>
-        <div class="evo-kpi-label">Campaigns Q3 2023 baseline</div>
+        <div class="evo-kpi-label">Campaigns · baseline</div>
       </div>
-      <div class="evo-phase rev d3">
-        <div class="evo-num">02</div>
+
+      <!-- M — Measure -->
+      <div class="evo-phase dmaic-measure rev d3">
+        <div class="evo-num" style="color:rgba(0,180,255,0.6);">M</div>
         <div class="evo-period">Q4 2024</div>
-        <div class="evo-title">Optimization</div>
-        <div class="evo-detail">Built ROAS optimization playbook. Trained 1 AD, 3 Managers &amp; 1 SM on pacing. Pacing authority formally transferred by NSM. Screenshot delivery automation co-built.</div>
+        <div class="evo-title">Measure</div>
+        <div class="evo-detail">Established pacing KPI baselines. Built ROAS optimization playbook. Pacing authority formally transferred by NSM. Co-built screenshot automation.</div>
         <div class="evo-kpi">89</div>
         <div class="evo-kpi-label">Campaigns/month</div>
       </div>
-      <div class="evo-phase rev d4">
-        <div class="evo-num">03</div>
+
+      <!-- A — Analyze -->
+      <div class="evo-phase dmaic-analyze rev d4">
+        <div class="evo-num" style="color:rgba(255,180,0,0.6);">A</div>
         <div class="evo-period">Q1 2025</div>
-        <div class="evo-title">Resilience</div>
-        <div class="evo-detail">Diagnosed Google DV360 platform bug before client impact. Recovered 619,636 under-delivered impressions. Caught Meta duplicate + $15.3K budget mis-set. Cpk ≥ 1.33 sustained.</div>
+        <div class="evo-title">Analyze</div>
+        <div class="evo-detail">Diagnosed Google DV360 platform bug — root cause confirmed by Google. Isolated 619,636-impression shortfall. Identified Meta duplicate &amp; $15.3K mis-set. Cpk ≥ 1.33 sustained.</div>
         <div class="evo-kpi">104</div>
         <div class="evo-kpi-label">Campaigns/month</div>
       </div>
-      <div class="evo-phase rev d5">
-        <div class="evo-num">04</div>
+
+      <!-- I — Improve -->
+      <div class="evo-phase dmaic-improve rev d5">
+        <div class="evo-num" style="color:rgba(0,220,130,0.6);">I</div>
         <div class="evo-period">H1 2025</div>
-        <div class="evo-title">Scale</div>
-        <div class="evo-detail">Account budget grew +74% YoY ($10.7M → $18.7M H1). Campaign volume +73% (71 → 123/mo). $5.3M avg weekly spend. DIF &gt;98% maintained throughout.</div>
+        <div class="evo-title">Improve</div>
+        <div class="evo-detail">Account budget +74% YoY ($10.7M → $18.7M H1). Volume +73% (71 → 123/mo). $5.3M avg weekly. DIF &gt;98% floor maintained through the entire growth period.</div>
         <div class="evo-kpi">123</div>
-        <div class="evo-kpi-label">Campaigns/month avg</div>
+        <div class="evo-kpi-label">Campaigns/month</div>
       </div>
-      <div class="evo-phase current rev d6">
-        <div class="evo-num">05</div>
+
+      <!-- C — Control -->
+      <div class="evo-phase current dmaic-control rev d6">
+        <div class="evo-num" style="color:var(--teal);">C</div>
         <div class="evo-period">H1 2026 · Now</div>
-        <div class="evo-title">Authority</div>
-        <div class="evo-detail">171 campaigns in May 2026. $275M annual budget. $7.24M record week. Raymond Hall formally recommends Senior Manager to dentsu India leadership.</div>
-        <div class="evo-kpi">171</div>
-        <div class="evo-kpi-label">Campaigns · May 2026</div>
+        <div class="evo-title" style="color:var(--teal);">Control</div>
+        <!-- 3 control mechanisms -->
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
+          <div class="ctrl-item">
+            <div class="ctrl-dot"></div>
+            <div class="ctrl-text"><strong>Automation:</strong> screenshot delivery tool — 70+ decks/week, ~70% cycle-time reduction, zero manual errors. Standardised across the business.</div>
+          </div>
+          <div class="ctrl-item">
+            <div class="ctrl-dot"></div>
+            <div class="ctrl-text"><strong>Capability model:</strong> cross-functional pacing framework — upskilled 1 AD + 3 Managers + 1 SM, reducing team-wide optimisation defects.</div>
+          </div>
+          <div class="ctrl-item">
+            <div class="ctrl-dot"></div>
+            <div class="ctrl-text"><strong>FMEA SOP:</strong> after Meta error catch, permanently engineered budget-duplication class of waste out of weekly team SOPs.</div>
+          </div>
+        </div>
+        <div class="evo-kpi" style="color:var(--teal);">171</div>
+        <div class="evo-kpi-label">Campaigns · May 2026 · 4.4× growth</div>
       </div>
+
     </div>
-    <div class="sigma-strip rev d7">
+
+    <!-- Bottom sigma strip -->
+    <div class="sigma-strip rev d7" style="margin-top:8px;">
       <div class="sigma-pill"><div class="sigma-val">Cpk ≥ 1.33</div><div class="sigma-lbl">Process Capability · Six Sigma threshold</div></div>
-      <div class="sigma-pill"><div class="sigma-val">&gt;98%</div><div class="sigma-lbl">DIF Floor · Every phase</div></div>
+      <div class="sigma-pill"><div class="sigma-val">&gt;98%</div><div class="sigma-lbl">DIF Yield Floor · Every phase</div></div>
       <div class="sigma-pill"><div class="sigma-val">4.4×</div><div class="sigma-lbl">Volume Scale · 39 → 171 campaigns</div></div>
-      <div class="sigma-pill"><div class="sigma-val">$275M</div><div class="sigma-lbl">Annual Budget · 2025</div></div>
+      <div class="sigma-pill" style="border-color:var(--border-t);background:var(--teal-05);"><div class="sigma-val" style="color:var(--teal);">Control</div><div class="sigma-lbl">Phase — Automation + FMEA SOPs active</div></div>
     </div>
   </div>
 </section>
@@ -1586,7 +1665,17 @@ strong { color:var(--white); font-weight:500; }
         <div style="font-size:14px;color:var(--white);line-height:1.65;font-style:italic;border-left:2px solid var(--teal);padding-left:14px;">"You are correct in your assessment regarding some of the blocked paths in the website — that is causing creatives to be flagged and blocked, since Google cannot crawl the page."</div>
       </div>
     </div>
-    <div style="font-size:11px;color:var(--white-35);font-style:italic;margin-top:10px;" class="rev d5">Verbatim from Microsoft Teams and email records, Sep 2025 (originals on file). Case referenced in the Meijer client QBR.</div>
+    <!-- FMEA / control outcome -->
+    <div style="display:flex;align-items:center;gap:16px;margin-top:12px;background:rgba(0,200,215,0.05);border:1px solid rgba(0,200,215,0.2);padding:14px 20px;" class="rev d6">
+      <div style="width:36px;height:36px;border-radius:50%;background:rgba(0,200,215,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div>
+        <span style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);">Control · DMAIC Outcome</span>
+        <span style="font-size:13px;color:var(--white-60);margin-left:12px;">Root cause analysis result entered the team's pre-launch QA SOP. Creative-destination crawlability is now a standard trafficking checklist item — failure mode <em style="color:var(--white);">permanently designed out</em>.</span>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--white-35);font-style:italic;margin-top:8px;" class="rev d7">Verbatim from Microsoft Teams and email records, Sep 2025 (originals on file). Case referenced in the Meijer client QBR.</div>
   </div>
 </section>
 
@@ -1671,7 +1760,17 @@ strong { color:var(--white); font-weight:500; }
         <div style="font-size:12px;color:var(--white-35);margin-top:10px;">Raymond Hall — Assoc. Director, NSM · on the duplicate catch</div>
       </div>
     </div>
-    <div style="font-size:11px;color:var(--white-35);font-style:italic;margin-top:10px;" class="rev d6">Verbatim from Microsoft Teams, Aug 2025 &amp; Mar 2026 (originals on file). Meijer Meta campaigns.</div>
+    <!-- FMEA control outcome -->
+    <div style="display:flex;align-items:center;gap:16px;margin-top:14px;background:rgba(0,200,215,0.05);border:1px solid rgba(0,200,215,0.2);padding:14px 20px;" class="rev d6">
+      <div style="width:36px;height:36px;border-radius:50%;background:rgba(0,200,215,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div>
+        <span style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);">Control · FMEA Outcome</span>
+        <span style="font-size:13px;color:var(--white-60);margin-left:12px;">After this catch, I built a permanent FMEA-based check into the team's weekly SOPs — budget-duplication and mis-set errors are now <em style="color:var(--white);">fully engineered out</em> of the ecosystem. The class of waste does not recur.</span>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--white-35);font-style:italic;margin-top:8px;" class="rev d7">Verbatim from Microsoft Teams, Aug 2025 &amp; Mar 2026 (originals on file). Meijer Meta campaigns.</div>
   </div>
 </section>
 
