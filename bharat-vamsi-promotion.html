@@ -44,9 +44,11 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--bg); }
 }
 
 .deck-stage {
-  position:absolute; top:0; left:0;
+  position:absolute;
+  top:50%; left:50%;
+  margin-left:-960px; margin-top:-540px;
   width:1920px; height:1080px;
-  overflow:hidden; transform-origin:top left;
+  overflow:hidden; transform-origin:center center;
   background:var(--bg);
 }
 
@@ -278,7 +280,6 @@ strong { color:var(--white); font-weight:500; }
 }
 .cs-card::before {
   content:''; position:absolute; top:0; left:0; right:0; height:2px;
-  background:linear-height:linear-gradient(90deg,var(--teal),transparent);
   background:linear-gradient(90deg,var(--teal),transparent);
   transform:scaleX(0); transform-origin:left; transition:transform 0.35s var(--ease);
 }
@@ -984,7 +985,7 @@ strong { color:var(--white); font-weight:500; }
 
 /* Rule of One — hero anchor element */
 .hero-anchor {
-  font-family:var(--serif); font-size:clamp(80px,9vw,140px); font-weight:800;
+  font-family:var(--serif); font-size:140px; font-weight:800;
   line-height:0.9; letter-spacing:-0.03em; color:var(--teal);
   text-shadow:0 0 80px rgba(0,200,215,0.15);
 }
@@ -3199,9 +3200,7 @@ class SlidePresentation {
 
   _scale() {
     const f = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
-    const x = (window.innerWidth  - 1920 * f) / 2;
-    const y = (window.innerHeight - 1080 * f) / 2;
-    this.stage.style.transform = `translate(${x}px, ${y}px) scale(${f})`;
+    this.stage.style.transform = `scale(${f})`;
     if (this.field) {
       // Canvas is inside a fixed-scale stage; resize relative to CSS layout
       const cvs = document.getElementById('starCanvas');
@@ -3425,18 +3424,25 @@ function initOperationalCore() {
   const nodes  = Array.from(document.querySelectorAll('#s7 .oc-node'));
   if (!center || nodes.length === 0) return;
 
-  const wRect = wrap.getBoundingClientRect();
-  const cRect = center.getBoundingClientRect();
+  // Use offsetLeft/offsetTop (stage-space, unaffected by CSS scale transform)
+  function stageRect(el, ancestor) {
+    let x = 0, y = 0, node = el;
+    while (node && node !== ancestor) { x += node.offsetLeft; y += node.offsetTop; node = node.offsetParent; }
+    return { left: x, top: y, width: el.offsetWidth, height: el.offsetHeight };
+  }
+
+  const wRect = stageRect(wrap, wrap.offsetParent);
+  const cRect = stageRect(center, wrap.offsetParent);
   const cx = cRect.left - wRect.left + cRect.width / 2;
   const cy = cRect.top  - wRect.top  + cRect.height / 2;
 
-  // SVG viewBox matches wrap pixel size
-  const vW = wRect.width, vH = wRect.height;
+  // SVG viewBox matches wrap's unscaled layout size
+  const vW = wrap.offsetWidth, vH = wrap.offsetHeight;
   svg.setAttribute('viewBox', `0 0 ${vW} ${vH}`);
 
   svg.innerHTML = '';
   nodes.forEach((node, i) => {
-    const nRect = node.getBoundingClientRect();
+    const nRect = stageRect(node, wrap.offsetParent);
     const nx = nRect.left - wRect.left + nRect.width / 2;
     const ny = nRect.top  - wRect.top  + nRect.height / 2;
 
@@ -3541,17 +3547,6 @@ CountUp.init();
 const deck   = new SlidePresentation();
 const editor = new InlineEditor();
 
-// Hook count-up into show()
-const _origShow = deck.show.bind(deck);
-deck.show = function(i) {
-  _origShow(i);
-  setTimeout(() => {
-    const sl = deck.slides[i];
-    if (sl) CountUp.run(sl);
-  }, 350);
-};
-CountUp.run(deck.slides[0]);
-
 // Closing slide starfield
 const closingCvs = document.getElementById('closingCanvas');
 if (closingCvs) { new Starfield(closingCvs); }
@@ -3560,15 +3555,18 @@ if (closingCvs) { new Starfield(closingCvs); }
 const globeCvs = document.getElementById('globeCanvas');
 if (globeCvs) { new DentsuGlobe(globeCvs); }
 
-// Operational core lines — draw when slide 7 becomes visible
-const _origShow2 = deck.show.bind(deck);
+// Single clean show() override: CountUp + OperationalCore
+const _origShow = deck.show.bind(deck);
 deck.show = function(i) {
-  _origShow2(i);
-  // Slide index 6 = s7 (0-based)
-  if (i === 6) {
-    setTimeout(initOperationalCore, 300);
-  }
+  _origShow(i);
+  setTimeout(() => {
+    const sl = deck.slides[i];
+    if (sl) CountUp.run(sl);
+    // Slide index 6 = s7 (0-based, after data-skip filtering)
+    if (i === 6) setTimeout(initOperationalCore, 300);
+  }, 350);
 };
+CountUp.run(deck.slides[0]);
 
 /* ══════════════════════════════════════════════
    CASE STUDY MODAL
