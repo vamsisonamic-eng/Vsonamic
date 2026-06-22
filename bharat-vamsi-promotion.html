@@ -751,8 +751,62 @@ strong { color:var(--white); font-weight:500; }
 .email-sig { padding:18px 36px 24px; border-top:1px solid var(--border); font-size:13px; color:var(--white-35); }
 
 /* ═══════════════════════════════════════
-   CERTIFICATIONS GRID
+   ACCOUNT GROWTH / SCALE SLIDES
 ════════════════════════════════════════ */
+.growth-hero { display:grid; grid-template-columns:1fr auto 1fr; gap:0; align-items:center; margin-top:32px; }
+.growth-box {
+  background:var(--bg-card); border:1px solid var(--border); padding:44px 48px;
+  transition:background 0.25s;
+}
+.growth-box.hl { background:rgba(0,200,215,0.06); border-color:var(--border-t); }
+.growth-period { font-family:var(--sans); font-size:10px; text-transform:uppercase; letter-spacing:0.22em; color:var(--teal); margin-bottom:16px; }
+.growth-big { font-family:var(--serif); font-size:88px; font-weight:800; line-height:1; letter-spacing:-0.04em; color:var(--white); }
+.growth-sub { font-family:var(--sans); font-size:14px; color:var(--white-35); margin-top:10px; }
+.growth-arrow { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 40px; }
+.growth-pct { font-family:var(--serif); font-size:72px; font-weight:800; color:var(--teal); line-height:1; letter-spacing:-0.03em; }
+.growth-pct-label { font-family:var(--sans); font-size:11px; text-transform:uppercase; letter-spacing:0.18em; color:var(--white-35); margin-top:8px; text-align:center; }
+.growth-kpis { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:2px; }
+.growth-kpi { background:var(--bg-card); border:1px solid var(--border); padding:26px 32px; display:flex; align-items:center; gap:24px; }
+.gkpi-val { font-family:var(--serif); font-size:48px; font-weight:800; color:var(--teal); line-height:1; letter-spacing:-0.02em; flex-shrink:0; }
+.gkpi-label { font-family:var(--sans); font-size:13px; color:var(--white-35); line-height:1.5; }
+.source-note { font-family:var(--sans); font-size:11px; color:rgba(239,242,247,0.25); margin-top:18px; font-style:italic; }
+
+/* Governance / line chart slide */
+.gov-layout { display:grid; grid-template-columns:1fr 1.1fr; gap:2px; margin-top:28px; height:620px; }
+.gov-metrics { display:flex; flex-direction:column; justify-content:center; gap:2px; }
+.gov-row { background:var(--bg-card); border:1px solid var(--border); padding:28px 36px; display:flex; align-items:baseline; gap:24px; transition:background 0.25s; }
+.gov-row:hover { background:var(--bg-hover); border-color:var(--border-t); }
+.gov-val { font-family:var(--serif); font-size:60px; font-weight:800; line-height:1; letter-spacing:-0.03em; color:var(--teal); flex-shrink:0; }
+.gov-desc { font-family:var(--sans); font-size:15px; color:var(--white-60); line-height:1.5; }
+.gov-chart { background:var(--bg-card); border:1px solid var(--border); padding:32px 36px; display:flex; flex-direction:column; }
+.gov-chart-title { font-family:var(--sans); font-size:11px; text-transform:uppercase; letter-spacing:0.18em; color:var(--teal); margin-bottom:20px; }
+.chart-svg { flex:1; width:100%; overflow:visible; }
+.chart-line { fill:none; stroke:var(--teal); stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:1000; stroke-dashoffset:1000; transition:stroke-dashoffset 1.6s cubic-bezier(0.22,1,0.36,1) 0.4s; }
+.slide.visible .chart-line { stroke-dashoffset:0; }
+.chart-dot { fill:var(--teal); opacity:0; transition:opacity 0.3s var(--ease); }
+.slide.visible .chart-dot { opacity:1; }
+.chart-label { font-family:var(--sans); font-size:10px; fill:rgba(239,242,247,0.35); }
+.chart-value { font-family:var(--serif); font-size:11px; fill:var(--teal); font-weight:700; }
+.chart-axis { stroke:rgba(255,255,255,0.06); stroke-width:1; }
+
+/* Dentsu slide badge — top-right corner of every slide */
+.slide-dentsu {
+  position:absolute; top:28px; right:44px; z-index:10;
+  font-family:'DM Sans',sans-serif; font-size:13px; font-weight:700;
+  letter-spacing:-0.01em; color:rgba(255,255,255,0.22);
+  display:flex; align-items:center; gap:8px; pointer-events:none;
+}
+.slide-dentsu::before {
+  content:''; width:18px; height:1px; background:rgba(0,200,215,0.4);
+}
+
+/* Scope grid (2×3 icon cards) */
+.scope-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:28px; }
+.scope-card { background:var(--bg-card); border:1px solid var(--border); padding:30px 32px; display:flex; gap:22px; align-items:flex-start; transition:background 0.25s, border-color 0.25s; }
+.scope-card:hover { background:var(--bg-hover); border-color:var(--border-t); }
+.scope-icon { width:48px; height:48px; border-radius:50%; background:rgba(0,200,215,0.1); border:1px solid rgba(0,200,215,0.2); display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+.scope-title { font-family:var(--serif); font-size:18px; font-weight:700; color:var(--white); margin-bottom:8px; line-height:1.2; }
+.scope-body { font-family:var(--sans); font-size:14px; color:var(--white-35); line-height:1.6; }
 .cert-grid {
   display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:32px;
 }
@@ -810,6 +864,7 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 1 · COVER — Starfield + Metrics HUD
 ═══════════════════════════════════════════════ -->
 <section class="slide active" id="s1">
+  <div class="slide-dentsu" style="opacity:1;">dentsu</div>
   <!-- 3D starfield canvas fills the entire slide -->
   <canvas class="cover-canvas rev-fade" id="starCanvas"></canvas>
 
@@ -870,6 +925,7 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 2 · EXECUTIVE SUMMARY
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s2">
+  <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-full">
     <span class="eyebrow rev d1">The Case at a Glance</span>
     <h2 class="rev d2">Four numbers that define this decision.</h2>
@@ -902,6 +958,7 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 3 · THE PROBLEM
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s3">
+  <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-split">
     <div class="s-left">
       <span class="eyebrow rev d1">Define · DMAIC</span>
@@ -926,6 +983,7 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 4 · THE EVIDENCE
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s4">
+  <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-full">
     <span class="eyebrow rev d1">Measure · Performance Record</span>
     <h2 class="rev d2">The numbers don't lie.</h2>
@@ -955,30 +1013,145 @@ strong { color:var(--white); font-weight:500; }
 </section>
 
 <!-- ══════════════════════════════════════════════
-     SLIDE 5 · SCALE & GROWTH
+     SLIDE 5 · ACCOUNT GROWTH — FROM CLIENT QBRs
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s5">
-  <div class="s-full">
-    <span class="eyebrow rev d1">Analyze · Budget Scale</span>
-    <h2 class="rev d2">The account grew. The accountability grew with it.</h2>
-    <div class="scale-cols">
-      <div class="scale-col rev d3">
-        <div class="scale-period">H4 2023 — Starting Point</div>
-        <div class="scale-big">$10<span class="sm">.7M</span></div>
-        <div class="scale-items">
-          <div class="scale-item">Channels active <span>3 platforms</span></div>
-          <div class="scale-item">Campaign types <span>Standard display</span></div>
-          <div class="scale-item">Team support <span>1 AM</span></div>
+  <div class="slide-dentsu rev-fade">dentsu</div>
+  <div class="s-full" style="padding-bottom:40px;">
+    <span class="eyebrow rev d1">Account Growth · From the Client QBRs</span>
+    <h2 class="rev d2">The account I run has compounded.</h2>
+    <div class="growth-hero rev d3">
+      <div class="growth-box">
+        <div class="growth-period">H1 2024</div>
+        <div class="growth-big">$10<span style="font-size:56px;color:var(--white-35)">.7M</span></div>
+        <div class="growth-sub">media revenue, half-year</div>
+      </div>
+      <div class="growth-arrow">
+        <div class="growth-pct">+74<span style="font-size:44px">%</span></div>
+        <div class="growth-pct-label">YoY revenue</div>
+      </div>
+      <div class="growth-box hl">
+        <div class="growth-period">H1 2025</div>
+        <div class="growth-big">$18<span class="teal" style="font-size:56px">.7M</span></div>
+        <div class="growth-sub">media revenue, half-year</div>
+      </div>
+    </div>
+    <div class="growth-kpis rev d4">
+      <div class="growth-kpi">
+        <div class="gkpi-val">+73<span style="font-size:28px">%</span></div>
+        <div class="gkpi-label">Campaign volume YoY<br><strong style="color:var(--white);">71 → 123 / month</strong></div>
+      </div>
+      <div class="growth-kpi">
+        <div class="gkpi-val">98<span style="font-size:28px">%</span></div>
+        <div class="gkpi-label">Delivery-in-full held<br><strong style="color:var(--white);">through the growth</strong></div>
+      </div>
+      <div class="growth-kpi">
+        <div class="gkpi-val">99<span style="font-size:28px">%</span></div>
+        <div class="gkpi-label">On-time campaign<br><strong style="color:var(--white);">launches</strong></div>
+      </div>
+    </div>
+    <p class="rev d5" style="font-family:var(--sans);font-size:16px;color:var(--white-60);margin-top:18px;line-height:1.65;max-width:1400px;">
+      <strong style="color:var(--white);">From 39 campaigns in Q3 2023 to a record 171 in a single month (May 2026)</strong> — New Stream Media's flagship retail-media account, in the fastest-growing channel in advertising.
+    </p>
+    <div class="source-note rev d6">Source: Meijer × NSM Quarterly Business Reviews (H1 2025 QBR; One Team, May 2026). Client-presented New Stream activated revenue.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 5B · SCALE OF GOVERNANCE — WEEKLY SPEND
+═══════════════════════════════════════════════ -->
+<section class="slide" id="s5b">
+  <div class="slide-dentsu rev-fade">dentsu</div>
+  <div class="s-full" style="padding-bottom:36px;">
+    <span class="eyebrow rev d1">Scale &amp; Growth · Weekly Media Spend Log</span>
+    <h2 class="rev d2">The scale I govern — ~$275M a year.</h2>
+    <div class="gov-layout">
+      <div class="gov-metrics rev d3">
+        <div class="gov-row">
+          <div class="gov-val">$5.3<span style="font-size:32px">M</span></div>
+          <div class="gov-desc">Average weekly media spend<br><span style="color:var(--white-35);font-size:13px;">across 41 tracked weeks</span></div>
+        </div>
+        <div class="gov-row">
+          <div class="gov-val">$7.24<span style="font-size:32px">M</span></div>
+          <div class="gov-desc">Record week — <strong style="color:var(--white);">8 March 2026</strong></div>
+        </div>
+        <div class="gov-row" style="border-color:var(--border-t);background:var(--teal-05);">
+          <div class="gov-val">≈$275<span style="font-size:32px">M</span></div>
+          <div class="gov-desc">Annual run-rate governed<br><strong style="color:var(--teal);">₹2,300 Cr+</strong></div>
+        </div>
+        <div class="gov-row">
+          <div class="gov-val" style="color:var(--white);">+18<span class="teal" style="font-size:32px">%</span></div>
+          <div class="gov-desc">Recent lift — <strong style="color:var(--white);">H1 FY26 vs H2 FY25</strong></div>
+        </div>
+        <div style="padding:18px 36px;font-family:var(--sans);font-size:14px;color:var(--white-60);line-height:1.65;border:1px solid var(--border);background:var(--bg-card);">
+          <strong style="color:var(--white);">$216M+</strong> in media managed over the period — a $4.4–7.2M weekly range, now setting records rather than slipping.
         </div>
       </div>
-      <div class="scale-col hl rev d4">
-        <div class="scale-period t">H4 2024 — Current State</div>
-        <div class="scale-big">$18<span class="t" style="font-size:56px">.7M</span></div>
-        <div class="scale-items">
-          <div class="scale-item">Channels active <span style="color:var(--teal)">5 platforms</span></div>
-          <div class="scale-item">Campaign types <span style="color:var(--teal)">Full-funnel + CTV</span></div>
-          <div class="scale-item">Team support <span style="color:var(--teal)">1 AM + 1 AD + 3 Mgrs + 1 SM trained on pacing</span></div>
-        </div>
+      <div class="gov-chart rev d4">
+        <div class="gov-chart-title">Weekly media spend — monthly average (USD M)</div>
+        <!-- SVG line chart: Aug–May, data: 5.1,4.9,4.5,4.9,4.4,4.9,4.5,6.7,5.4,6.4 -->
+        <svg class="chart-svg" viewBox="0 0 560 380" preserveAspectRatio="xMidYMid meet">
+          <!-- Y-axis grid lines: 3,4,5,6,7,8 -->
+          <line class="chart-axis" x1="48" y1="20"  x2="540" y2="20"/>
+          <line class="chart-axis" x1="48" y1="75"  x2="540" y2="75"/>
+          <line class="chart-axis" x1="48" y1="130" x2="540" y2="130"/>
+          <line class="chart-axis" x1="48" y1="185" x2="540" y2="185"/>
+          <line class="chart-axis" x1="48" y1="240" x2="540" y2="240"/>
+          <line class="chart-axis" x1="48" y1="295" x2="540" y2="295"/>
+          <!-- Y labels -->
+          <text class="chart-label" x="38" y="24"  text-anchor="end">8</text>
+          <text class="chart-label" x="38" y="79"  text-anchor="end">7</text>
+          <text class="chart-label" x="38" y="134" text-anchor="end">6</text>
+          <text class="chart-label" x="38" y="189" text-anchor="end">5</text>
+          <text class="chart-label" x="38" y="244" text-anchor="end">4</text>
+          <text class="chart-label" x="38" y="299" text-anchor="end">3</text>
+          <!-- X-axis baseline -->
+          <line class="chart-axis" x1="48" y1="295" x2="540" y2="295" stroke-width="1.5"/>
+          <!--
+            Scale: Y range 3–8 → 275px height (20 to 295)
+            Each unit = 275/5 = 55px
+            y = 295 - (val - 3) * 55
+            X: 10 points in 492px width (48 to 540), step = 54.7
+          -->
+          <!-- Line path: 5.1,4.9,4.5,4.9,4.4,4.9,4.5,6.7,5.4,6.4 -->
+          <!-- y values: 5.1→(5.1-3)*55=115.5→295-115.5=179.5; 4.9→(1.9)*55=104.5→190.5; 4.5→(1.5)*55=82.5→212.5; 4.9→190.5; 4.4→(1.4)*55=77→218; 4.9→190.5; 4.5→212.5; 6.7→(3.7)*55=203.5→91.5; 5.4→(2.4)*55=132→163; 6.4→(3.4)*55=187→108 -->
+          <!-- X values: 48 + index*54.7: 48,102.7,157.4,212.1,266.8,321.5,376.2,430.9,485.6,540.3→540 -->
+          <polyline class="chart-line" points="48,179.5 102.7,190.5 157.4,212.5 212.1,190.5 266.8,218 321.5,190.5 376.2,212.5 430.9,91.5 485.6,163 540,108"/>
+          <!-- Dots -->
+          <circle class="chart-dot" cx="48"   cy="179.5" r="5" style="transition-delay:1.6s"/>
+          <circle class="chart-dot" cx="102.7" cy="190.5" r="5" style="transition-delay:1.7s"/>
+          <circle class="chart-dot" cx="157.4" cy="212.5" r="5" style="transition-delay:1.8s"/>
+          <circle class="chart-dot" cx="212.1" cy="190.5" r="5" style="transition-delay:1.9s"/>
+          <circle class="chart-dot" cx="266.8" cy="218"   r="5" style="transition-delay:2.0s"/>
+          <circle class="chart-dot" cx="321.5" cy="190.5" r="5" style="transition-delay:2.1s"/>
+          <circle class="chart-dot" cx="376.2" cy="212.5" r="5" style="transition-delay:2.2s"/>
+          <circle class="chart-dot" cx="430.9" cy="91.5"  r="7" style="transition-delay:2.3s;fill:#fff;"/>
+          <circle class="chart-dot" cx="485.6" cy="163"   r="5" style="transition-delay:2.4s"/>
+          <circle class="chart-dot" cx="540"   cy="108"   r="5" style="transition-delay:2.5s"/>
+          <!-- Value labels -->
+          <text class="chart-value" x="48"    y="170"  text-anchor="middle">5.1</text>
+          <text class="chart-value" x="102.7" y="181"  text-anchor="middle">4.9</text>
+          <text class="chart-value" x="157.4" y="224"  text-anchor="middle">4.5</text>
+          <text class="chart-value" x="212.1" y="181"  text-anchor="middle">4.9</text>
+          <text class="chart-value" x="266.8" y="230"  text-anchor="middle">4.4</text>
+          <text class="chart-value" x="321.5" y="181"  text-anchor="middle">4.9</text>
+          <text class="chart-value" x="376.2" y="224"  text-anchor="middle">4.5</text>
+          <text class="chart-value" x="430.9" y="82"   text-anchor="middle" style="fill:#fff;font-size:13px;">6.7</text>
+          <text class="chart-value" x="485.6" y="154"  text-anchor="middle">5.4</text>
+          <text class="chart-value" x="540"   cy="99"  text-anchor="middle" y="99">6.4</text>
+          <!-- X labels -->
+          <text class="chart-label" x="48"    y="315" text-anchor="middle">Aug</text>
+          <text class="chart-label" x="102.7" y="315" text-anchor="middle">Sep</text>
+          <text class="chart-label" x="157.4" y="315" text-anchor="middle">Oct</text>
+          <text class="chart-label" x="212.1" y="315" text-anchor="middle">Nov</text>
+          <text class="chart-label" x="266.8" y="315" text-anchor="middle">Dec</text>
+          <text class="chart-label" x="321.5" y="315" text-anchor="middle">Jan</text>
+          <text class="chart-label" x="376.2" y="315" text-anchor="middle">Feb</text>
+          <text class="chart-label" x="430.9" y="315" text-anchor="middle">Mar</text>
+          <text class="chart-label" x="485.6" y="315" text-anchor="middle">Apr</text>
+          <text class="chart-label" x="540"   y="315" text-anchor="middle">May</text>
+        </svg>
+        <div class="source-note" style="margin-top:8px;">Source: candidate's weekly Meijer revenue log, 27 Jul 2025 – 7 Jun 2026 (41 weeks). FX ≈ ₹83/USD.</div>
       </div>
     </div>
   </div>
@@ -988,6 +1161,7 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 6 · INDUSTRY CONTEXT
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s6">
+  <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-full">
     <span class="eyebrow rev d1">Context · Retail Media Landscape</span>
     <h2 class="rev d2">Retail Media is the fastest-growing channel in digital advertising.</h2>
@@ -1038,65 +1212,73 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 7 · SCOPE OF OWNERSHIP — OPERATIONAL CORE
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s7">
-  <div class="s-split">
-    <div class="s-left" style="flex:0 0 36%;">
-      <span class="eyebrow rev d1">Scope of Ownership</span>
-      <h2 class="rev d2">What is<br>owned today.</h2>
-      <div class="divider rev d3"></div>
-      <p class="lead rev d4" style="font-size:17px;">A Senior Manager's remit delivered under an Account Manager title.</p>
-      <div class="rev d5" style="margin-top:28px;">
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--white-60);"><span style="width:6px;height:6px;background:var(--teal);border-radius:50%;flex-shrink:0;"></span>2 DSPs — DV360 · TTD</div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--white-60);"><span style="width:6px;height:6px;background:var(--teal);border-radius:50%;flex-shrink:0;"></span>1 SSP — GAM</div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--white-60);"><span style="width:6px;height:6px;background:var(--teal);border-radius:50%;flex-shrink:0;"></span>2 Social — Meta · Pinterest</div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--white-60);"><span style="width:6px;height:6px;background:var(--teal);border-radius:50%;flex-shrink:0;"></span>$275M annual budget · 2025</div>
+  <div class="slide-dentsu rev-fade">dentsu</div>
+  <div class="s-full" style="padding-bottom:32px;">
+    <span class="eyebrow rev d1">Scope of Ownership · dentsu India</span>
+    <h2 class="rev d2" style="font-size:52px;margin-bottom:10px;">What I own today.</h2>
+    <p class="lead rev d3" style="font-size:17px;max-width:860px;margin-bottom:0;color:var(--white-60);">Day-to-day owner of the operational engine behind the account — a Senior Manager remit held under an Account Manager title.</p>
+    <div class="scope-grid rev d4">
+
+      <div class="scope-card">
+        <div class="scope-icon" style="background:rgba(0,200,215,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div style="font-family:var(--serif);font-weight:700;font-size:17px;color:var(--white);margin-bottom:6px;">Pacing &amp; optimization <span style="color:var(--teal);font-size:13px;font-family:var(--sans);font-weight:400;">— sole daily owner</span></div>
+          <div style="font-size:14px;color:var(--white-60);line-height:1.55;">Across DV360 (display, CTV, OLV, YouTube), The Trade Desk, GAM onsite, Meta and Pinterest. 100+ concurrent campaigns kept in full delivery.</div>
         </div>
       </div>
-    </div>
-    <div class="s-right" style="position:relative;">
-      <div class="oc-wrap">
-        <!-- SVG lines drawn from center to each node -->
-        <svg class="oc-svg" id="ocSvg" viewBox="0 0 700 600" preserveAspectRatio="xMidYMid meet">
-          <!-- Lines will be injected by JS -->
-        </svg>
 
-        <!-- Center hub -->
-        <div class="oc-center">
-          <div class="oc-center-label">The<br>Operational<br>Core</div>
+      <div class="scope-card">
+        <div class="scope-icon" style="background:rgba(0,200,215,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="#00C8D7" stroke-width="1.8"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round"/></svg>
         </div>
-
-        <!-- 6 nodes positioned around center (CSS translate from center 50%,50%) -->
-        <!-- Top: Pacing & Optimization -->
-        <div class="oc-node" style="left:50%;top:5%;transform:translateX(-50%);">
-          <div class="oc-node-title">Pacing &amp; Optimization</div>
-          <div class="oc-node-body">Sole daily owner across DV360, Trade Desk, GAM, Meta, Pinterest</div>
-        </div>
-        <!-- Top-right: Team Coordination -->
-        <div class="oc-node" style="right:3%;top:22%;">
-          <div class="oc-node-title">Team Coordination</div>
-          <div class="oc-node-body">Directs activation specialists; flags changes for client approval</div>
-        </div>
-        <!-- Bottom-right: Screenshot Delivery -->
-        <div class="oc-node" style="right:3%;bottom:22%;">
-          <div class="oc-node-title">Screenshot Delivery</div>
-          <div class="oc-node-body">70+ decks/week · 5-day SLA · automation co-built with team</div>
-        </div>
-        <!-- Bottom: QA & Trafficking -->
-        <div class="oc-node" style="left:50%;bottom:5%;transform:translateX(-50%);">
-          <div class="oc-node-title">QA &amp; Trafficking</div>
-          <div class="oc-node-body">Primary QA on all builds and trafficking sheets</div>
-        </div>
-        <!-- Bottom-left: Escalation & Diagnosis -->
-        <div class="oc-node" style="left:3%;bottom:22%;">
-          <div class="oc-node-title">Escalation &amp; Diagnosis</div>
-          <div class="oc-node-body">Team's first call — diagnosed Google bug before Google did</div>
-        </div>
-        <!-- Top-left: Best-Practice Owner -->
-        <div class="oc-node" style="left:3%;top:22%;">
-          <div class="oc-node-title">Best-Practice Owner</div>
-          <div class="oc-node-body">Defines and documents standards that keep delivery reliable</div>
+        <div>
+          <div style="font-family:var(--serif);font-weight:700;font-size:17px;color:var(--white);margin-bottom:6px;">Team coordination</div>
+          <div style="font-size:14px;color:var(--white-60);line-height:1.55;">Direct and support the activation specialists running campaigns; flag audience and major changes for client approval before action.</div>
         </div>
       </div>
+
+      <div class="scope-card">
+        <div class="scope-icon" style="background:rgba(0,200,215,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#00C8D7" stroke-width="1.8"/><path d="M3 9h18M9 21V9" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div style="font-family:var(--serif);font-weight:700;font-size:17px;color:var(--white);margin-bottom:6px;">Screenshot delivery at scale</div>
+          <div style="font-size:14px;color:var(--white-60);line-height:1.55;">70+ proof-of-delivery decks every week on a 5-day SLA. Co-built the automation process now standardised across the business.</div>
+        </div>
+      </div>
+
+      <div class="scope-card">
+        <div class="scope-icon" style="background:rgba(0,200,215,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 11l3 3L22 4" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div style="font-family:var(--serif);font-weight:700;font-size:17px;color:var(--white);margin-bottom:6px;">Quality assurance &amp; trafficking</div>
+          <div style="font-size:14px;color:var(--white-60);line-height:1.55;">Primary QA on builds and trafficking sheets — requires end-to-end command of the Meijer activation process, not just media.</div>
+        </div>
+      </div>
+
+      <div class="scope-card">
+        <div class="scope-icon" style="background:rgba(0,200,215,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#00C8D7" stroke-width="1.8"/><line x1="12" y1="8" x2="12" y2="12" stroke="#00C8D7" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="16" x2="12.01" y2="16" stroke="#00C8D7" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div style="font-family:var(--serif);font-weight:700;font-size:17px;color:var(--white);margin-bottom:6px;">Escalation &amp; diagnosis point</div>
+          <div style="font-size:14px;color:var(--white-60);line-height:1.55;">The team's go-to for DV360 and Meta platform issues; repeatedly diagnoses root causes before they reach the client.</div>
+        </div>
+      </div>
+
+      <div class="scope-card">
+        <div class="scope-icon" style="background:rgba(0,200,215,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 20h9" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div style="font-family:var(--serif);font-weight:700;font-size:17px;color:var(--white);margin-bottom:6px;">Operational best-practice owner</div>
+          <div style="font-size:14px;color:var(--white-60);line-height:1.55;">Defines and documents the standards that keep delivery reliable as the account keeps scaling.</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1105,6 +1287,7 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 8 · ROLE VARIANCE
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s8">
+  <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-full">
     <span class="eyebrow rev d1">Accountability Gap · Role Variance</span>
     <h2 class="rev d2">What the job spec says vs. what the job actually is.</h2>
@@ -1133,6 +1316,7 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 9 · OPERATIONAL EVOLUTION (5 PHASES)
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s9">
+  <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-full">
     <span class="eyebrow rev d1">Improve · Operational Evolution · DMAIC</span>
     <h2 class="rev d2">4.3× volume. &gt;98% DIF floor. Every phase.</h2>
@@ -1191,6 +1375,7 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 10 · PACING AUTHORITY — STEVEN MATOS
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s10a">
+  <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-split">
     <div class="s-left" style="flex:0 0 42%;">
       <span class="eyebrow rev d1">Scope Expansion · Official Record · March 2025</span>
@@ -1239,6 +1424,7 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 11 · THREE DOCUMENTED WINS
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s11a">
+  <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-full">
     <span class="eyebrow rev d1">Improve · Documented Impact</span>
     <h2 class="rev d2">Three moments that changed outcomes.</h2>
@@ -1266,6 +1452,7 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 12 · RAYMOND HALL — PARTNER RECOGNITION
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s10">
+  <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-split">
     <div class="s-left" style="flex:0 0 44%;">
       <span class="eyebrow rev d1">Account Partner Recognition · Multiple Channels · On the Record</span>
@@ -1332,6 +1519,7 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 11 · THE TEAM ALREADY KNOWS
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s11">
+  <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-full">
     <span class="eyebrow rev d1">The Team Already Knows · New Stream Media</span>
     <h2 class="rev d2">New Stream Media announced it<br>before dentsu did.</h2>
@@ -1360,6 +1548,7 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 12 · COMPENSATION CONTEXT
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s12">
+  <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-full">
     <span class="eyebrow rev d1">Control · Compensation Analysis</span>
     <h2 class="rev d2">A ₹14.9L gap to market.<br>Not a rounding error.</h2>
@@ -1399,6 +1588,7 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 13 · ACCOUNT CONTINUITY RISK
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s13">
+  <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-full">
     <span class="eyebrow rev d1">Risk · Account Continuity</span>
     <h2 class="rev d2">The cost of inaction<br>is not zero.</h2>
@@ -1426,6 +1616,7 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 14 · THE ASK
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s14">
+  <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-split">
     <div class="s-left">
       <span class="eyebrow rev d1">The Proposal</span>
@@ -1475,6 +1666,7 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 16 · PLATFORM CERTIFICATIONS
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="scerts">
+  <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-full">
     <span class="eyebrow rev d1">Credentials · Platform Certifications</span>
     <h2 class="rev d2">Certified across the full Meijer<br>technology stack.</h2>
@@ -1523,6 +1715,7 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 17 · FOR HR
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="shr">
+  <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-full">
     <span class="eyebrow rev d1">For HR · Summary Reference · July 5, 2026</span>
     <h2 class="rev d2">Everything HR needs<br>on one slide.</h2>
@@ -1557,6 +1750,7 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 18 · CLOSING
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s15">
+  <div class="slide-dentsu rev-fade">dentsu</div>
   <canvas class="cover-canvas rev-fade" id="closingCanvas"></canvas>
   <div class="cover-overlay" style="background:linear-gradient(135deg,rgba(5,8,14,0.97) 0%,rgba(5,8,14,0.85) 50%,rgba(0,200,215,0.04) 100%);"></div>
   <div class="s-full s-center" style="position:relative;z-index:2;">
