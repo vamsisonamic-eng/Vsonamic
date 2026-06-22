@@ -266,6 +266,50 @@ strong { color:var(--white); font-weight:500; }
 .plat-detail { font-size:14px; color:var(--white-35); margin-top:13px; line-height:1.55; }
 
 /* ═══════════════════════════════════════
+   S3 · PROBLEM SLIDE CARDS
+════════════════════════════════════════ */
+.s3-card {
+  background:var(--bg-card); border:1px solid var(--border);
+  padding:32px 28px; position:relative; overflow:hidden;
+  transition:border-color 0.22s var(--ease), background 0.22s, transform 0.22s var(--ease);
+}
+.s3-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg, var(--teal), transparent);
+  opacity:0; transition:opacity 0.3s;
+}
+.s3-card:hover { border-color:rgba(0,200,215,0.25); background:rgba(0,200,215,0.04); transform:translateY(-4px); }
+.s3-card:hover::before { opacity:1; }
+.s3-card-danger { border-color:rgba(255,60,80,0.18) !important; background:rgba(255,60,80,0.04) !important; }
+.s3-card-danger::before { background:linear-gradient(90deg, var(--danger), transparent) !important; opacity:1 !important; }
+.s3-card-danger:hover { border-color:rgba(255,60,80,0.35) !important; transform:translateY(-4px); }
+.s3-card-num {
+  font-family:var(--sans); font-size:9px; font-weight:700; letter-spacing:0.2em;
+  text-transform:uppercase; color:var(--teal); margin-bottom:16px; opacity:0.7;
+}
+.s3-card-icon { margin-bottom:14px; }
+.s3-card-label {
+  font-family:var(--sans); font-size:10px; font-weight:700; letter-spacing:0.18em;
+  text-transform:uppercase; color:var(--white-35); margin-bottom:8px;
+}
+.s3-card-value {
+  font-family:var(--serif); font-size:48px; font-weight:800; color:var(--teal);
+  line-height:1; letter-spacing:-0.02em; margin-bottom:10px;
+}
+.s3-card-desc { font-size:13px; color:var(--white-60); line-height:1.55; margin-bottom:18px; }
+.s3-card-bar { height:2px; background:rgba(255,255,255,0.06); border-radius:2px; overflow:hidden; margin-top:auto; }
+.s3-card-bar-fill { height:100%; width:0; border-radius:2px; transition:width 1.1s var(--ease) 0.6s; }
+/* per-card bar widths */
+.slide.visible .s3b1 { width:100% !important; }
+.slide.visible .s3b2 { width:83% !important; }
+.slide.visible .s3b3 { width:66% !important; }
+.slide.visible .s3b4 { width:47% !important; }
+
+/* gap-bar animation */
+.slide.visible .s3-bar-now { width:47% !important; }
+.slide.visible .s3-bar-mkt { width:100% !important; }
+
+/* ═══════════════════════════════════════
    PLATFORM LOGO ECOSYSTEM (s7)
 ════════════════════════════════════════ */
 .plat-eco { display:flex; align-items:flex-end; gap:24px; margin-top:28px; }
@@ -1212,28 +1256,119 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 2 · EXECUTIVE SUMMARY
 ═══════════════════════════════════════════════ -->
 <!-- ══════════════════════════════════════════════
-     SLIDE 3 · THE PROBLEM
+     SLIDE 3 · THE PROBLEM  (redesigned)
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s3">
   <div class="slide-dentsu rev-fade">dentsu</div>
-  <div class="s-split">
-    <div class="s-left">
-      <span class="eyebrow rev d1">Define · DMAIC</span>
-      <h2 class="rev d2">The role grew.<br>The title didn't.</h2>
-      <div class="divider rev d3"></div>
-      <p class="lead rev d4">Bharat has been delivering at Senior Manager scope for over 18 months — without the recognition, authority, or compensation the role demands.</p>
+
+  <!-- Ambient canvas background -->
+  <canvas id="s3Canvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.45;"></canvas>
+
+  <!-- Diagonal tension geometry -->
+  <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;" viewBox="0 0 1920 1080" preserveAspectRatio="none">
+    <!-- subtle diagonal band -->
+    <polygon points="0,0 820,0 640,1080 0,1080" fill="rgba(0,200,215,0.028)"/>
+    <line x1="820" y1="0" x2="640" y2="1080" stroke="rgba(0,200,215,0.12)" stroke-width="1.5"/>
+    <!-- Right-side faint grid lines -->
+    <line x1="900" y1="0" x2="900" y2="1080" stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
+    <line x1="1200" y1="0" x2="1200" y2="1080" stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
+    <line x1="1500" y1="0" x2="1500" y2="1080" stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
+    <line x1="0" y1="360" x2="1920" y2="360" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>
+    <line x1="0" y1="720" x2="1920" y2="720" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>
+  </svg>
+
+  <!-- Giant watermark ≠ -->
+  <div style="position:absolute;right:-60px;bottom:-120px;z-index:0;font-family:var(--serif);font-size:560px;font-weight:800;color:rgba(255,60,80,0.03);line-height:1;pointer-events:none;user-select:none;">≠</div>
+
+  <!-- LEFT: Headline block -->
+  <div style="position:absolute;left:96px;top:50%;transform:translateY(-50%);width:540px;z-index:2;">
+    <div class="rev d1" style="display:inline-flex;align-items:center;gap:8px;margin-bottom:28px;">
+      <span style="display:inline-block;width:28px;height:2px;background:rgba(140,100,255,0.7);"></span>
+      <span style="font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(140,100,255,0.9);">Define · DMAIC Phase 01</span>
     </div>
-    <div class="s-right" style="display:flex;align-items:center;padding:72px 80px 72px 64px;">
-      <div style="width:100%">
-        <ul class="num-list">
-          <li class="rev d2"><span class="ni">01</span>Sole AM on a Tier-1, top-5 US retail media account — $275M+ annual budget managed in 2025 alone</li>
-          <li class="rev d3"><span class="ni">02</span>Autonomously managing 5 platforms without dedicated support — 2 DSPs (DV360, TTD), 1 SSP (GAM), 2 social (Meta, Pinterest)</li>
-          <li class="rev d4"><span class="ni">03</span>Trained 1 AD, 3 Managers, and 1 Senior Manager on pacing — cross-functional knowledge transfer beyond AM scope</li>
-          <li class="rev d5"><span class="ni">04</span>Current CTC ₹13.10 LPA sits ₹14.9L below the Senior Manager market median for equivalent scope</li>
-        </ul>
+
+    <h2 class="rev d2" style="font-family:var(--serif);font-size:76px;font-weight:800;line-height:1.0;letter-spacing:-0.02em;color:var(--white);margin-bottom:0;">The role<br><span style="color:var(--teal);">grew.</span></h2>
+    <h2 class="rev d3" style="font-family:var(--serif);font-size:76px;font-weight:800;line-height:1.0;letter-spacing:-0.02em;color:var(--white-35);margin-bottom:36px;">The title didn't.</h2>
+
+    <div class="rev d4" style="width:36px;height:2px;background:var(--teal);margin-bottom:28px;"></div>
+
+    <p class="rev d5" style="font-family:var(--sans);font-size:16px;color:var(--white-60);line-height:1.7;max-width:460px;">18+ months delivering at Senior Manager scope — without the title, authority, or compensation the role demands.</p>
+
+    <!-- Tension meter: CTC vs market -->
+    <div class="rev d6" style="margin-top:44px;padding:24px 28px;background:rgba(255,60,80,0.07);border:1px solid rgba(255,60,80,0.2);border-left:3px solid var(--danger);position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;right:0;height:100%;background:linear-gradient(90deg,rgba(255,60,80,0.04) 0%,transparent 100%);pointer-events:none;"></div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--danger);margin-bottom:12px;">Compensation Gap</div>
+      <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:14px;">
+        <span style="font-family:var(--serif);font-size:48px;font-weight:800;color:var(--danger);line-height:1;">₹14.9L</span>
+        <span style="font-size:14px;color:var(--white-35);">below Senior Manager median</span>
+      </div>
+      <!-- Gap bar -->
+      <div style="display:flex;gap:4px;align-items:center;margin-bottom:6px;">
+        <div style="font-size:10px;color:var(--white-35);width:72px;flex-shrink:0;">Current</div>
+        <div style="flex:1;background:rgba(255,255,255,0.06);height:6px;border-radius:3px;overflow:hidden;">
+          <div class="s3-bar-now" style="height:100%;width:0;background:rgba(239,242,247,0.4);border-radius:3px;transition:width 1s var(--ease) 1.2s;"></div>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:var(--white-60);width:52px;text-align:right;">₹13.1L</div>
+      </div>
+      <div style="display:flex;gap:4px;align-items:center;">
+        <div style="font-size:10px;color:var(--teal);width:72px;flex-shrink:0;">Market</div>
+        <div style="flex:1;background:rgba(255,255,255,0.06);height:6px;border-radius:3px;overflow:hidden;">
+          <div class="s3-bar-mkt" style="height:100%;width:0;background:var(--teal);border-radius:3px;transition:width 1s var(--ease) 1.4s;"></div>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:var(--teal);width:52px;text-align:right;">₹28L</div>
       </div>
     </div>
   </div>
+
+  <!-- RIGHT: 4 animated proof-point cards -->
+  <div style="position:absolute;right:72px;top:50%;transform:translateY(-50%);width:1020px;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+
+    <div class="s3-card rev d2" style="--card-delay:0.15s">
+      <div class="s3-card-num">01</div>
+      <div class="s3-card-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#00C8D7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="s3-card-label">Account Scale</div>
+      <div class="s3-card-value">$275M</div>
+      <div class="s3-card-desc">Annual budget — sole owner, no backup, Tier-1 US retail media</div>
+      <div class="s3-card-bar"><div class="s3-card-bar-fill s3b1" style="background:var(--teal);"></div></div>
+    </div>
+
+    <div class="s3-card rev d3" style="--card-delay:0.28s">
+      <div class="s3-card-num">02</div>
+      <div class="s3-card-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="#00C8D7" stroke-width="1.6"/><path d="M8 21h8M12 17v4" stroke="#00C8D7" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+      <div class="s3-card-label">Platform Ownership</div>
+      <div class="s3-card-value">5 Platforms</div>
+      <div class="s3-card-desc">DV360 · TTD · GAM · Meta · Pinterest — no dedicated support</div>
+      <div class="s3-card-bar"><div class="s3-card-bar-fill s3b2" style="background:var(--teal);"></div></div>
+    </div>
+
+    <div class="s3-card rev d4" style="--card-delay:0.42s">
+      <div class="s3-card-num">03</div>
+      <div class="s3-card-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#00C8D7" stroke-width="1.6" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="#00C8D7" stroke-width="1.6"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="#00C8D7" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+      <div class="s3-card-label">Capability Building</div>
+      <div class="s3-card-value">5 People</div>
+      <div class="s3-card-desc">1 AD · 3 Managers · 1 Senior Manager trained on pacing</div>
+      <div class="s3-card-bar"><div class="s3-card-bar-fill s3b3" style="background:rgba(0,200,215,0.6);"></div></div>
+    </div>
+
+    <div class="s3-card s3-card-danger rev d5" style="--card-delay:0.56s">
+      <div class="s3-card-num" style="color:var(--danger);">04</div>
+      <div class="s3-card-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="rgba(255,60,80,0.8)" stroke-width="1.6"/><line x1="12" y1="8" x2="12" y2="12" stroke="rgba(255,60,80,0.9)" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="16" x2="12.01" y2="16" stroke="rgba(255,60,80,0.9)" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="s3-card-label" style="color:var(--danger);">Comp Gap</div>
+      <div class="s3-card-value" style="color:var(--danger);">₹14.9L</div>
+      <div class="s3-card-desc">Current ₹13.10L vs Senior Manager median — same scope, 2× gap</div>
+      <div class="s3-card-bar"><div class="s3-card-bar-fill s3b4" style="background:var(--danger);"></div></div>
+    </div>
+
+  </div>
+
 </section>
 
 <!-- ══════════════════════════════════════════════
@@ -2807,6 +2942,71 @@ class Starfield {
 }
 
 /* ══════════════════════════════════════════════
+   S3 AMBIENT PARTICLE CANVAS
+═══════════════════════════════════════════════ */
+class S3Ambient {
+  constructor(canvas) {
+    this.c = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.pts = [];
+    this.running = false;
+    this.raf = null;
+    this.resize();
+    window.addEventListener('resize', () => this.resize());
+  }
+  resize() {
+    this.c.width  = this.c.offsetWidth  * (window.devicePixelRatio || 1);
+    this.c.height = this.c.offsetHeight * (window.devicePixelRatio || 1);
+    this.ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+    this._spawn();
+  }
+  _spawn() {
+    const W = this.c.offsetWidth, H = this.c.offsetHeight;
+    this.pts = Array.from({length: 55}, () => ({
+      x: Math.random() * W, y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.28, vy: (Math.random() - 0.5) * 0.28,
+      r: Math.random() * 1.4 + 0.4,
+      a: Math.random() * 0.55 + 0.08,
+      teal: Math.random() > 0.72
+    }));
+  }
+  _draw() {
+    const ctx = this.ctx, W = this.c.offsetWidth, H = this.c.offsetHeight;
+    ctx.clearRect(0, 0, W, H);
+    for (const p of this.pts) {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.teal
+        ? `rgba(0,200,215,${p.a})`
+        : `rgba(239,242,247,${p.a * 0.5})`;
+      ctx.fill();
+    }
+    // draw connecting lines between nearby teal dots
+    for (let i = 0; i < this.pts.length; i++) {
+      for (let j = i+1; j < this.pts.length; j++) {
+        const a = this.pts[i], b = this.pts[j];
+        if (!a.teal && !b.teal) continue;
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 140) {
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = `rgba(0,200,215,${0.07 * (1 - dist/140)})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+  start() { if (this.running) return; this.running = true; this._loop(); }
+  stop()  { this.running = false; if (this.raf) cancelAnimationFrame(this.raf); }
+  _loop() { if (!this.running) return; this._draw(); this.raf = requestAnimationFrame(() => this._loop()); }
+}
+
+/* ══════════════════════════════════════════════
    SLIDE PRESENTATION CONTROLLER
 ═══════════════════════════════════════════════ */
 class SlidePresentation {
@@ -2830,6 +3030,10 @@ class SlidePresentation {
     // Init starfield on cover canvas
     const cvs = document.getElementById('starCanvas');
     if (cvs) { this.field = new Starfield(cvs); }
+
+    // Init ambient particles on s3
+    const s3cvs = document.getElementById('s3Canvas');
+    if (s3cvs) { this.s3amb = new S3Ambient(s3cvs); }
   }
 
   _scale() {
@@ -2865,6 +3069,10 @@ class SlidePresentation {
     requestAnimationFrame(() => requestAnimationFrame(() => s.classList.add('visible')));
     this.dots.forEach((d, j) => d.classList.toggle('active', j === i));
     if (this.countEl) this.countEl.textContent = `${i + 1} / ${this.slides.length}`;
+    // Start/stop s3 ambient particles
+    if (this.s3amb) {
+      s.id === 's3' ? this.s3amb.start() : this.s3amb.stop();
+    }
   }
 
   next() { this.show(this.current + 1); }
