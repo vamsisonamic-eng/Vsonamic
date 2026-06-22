@@ -41,11 +41,10 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--bg); }
 
 .deck-viewport {
   position:fixed; inset:0; overflow:hidden; background:var(--bg);
-  display:flex; align-items:center; justify-content:center;
 }
 
 .deck-stage {
-  position:relative; flex-shrink:0;
+  position:absolute; top:50%; left:50%;
   width:1920px; height:1080px;
   overflow:hidden; transform-origin:center center;
   background:var(--bg);
@@ -3200,7 +3199,7 @@ class SlidePresentation {
 
   _scale() {
     const f = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
-    this.stage.style.transform = `scale(${f})`;
+    this.stage.style.transform = `translate(-50%, -50%) scale(${f})`;
     if (this.field) {
       // Canvas is inside a fixed-scale stage; resize relative to CSS layout
       const cvs = document.getElementById('starCanvas');
