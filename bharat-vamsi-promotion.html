@@ -808,6 +808,123 @@ strong { color:var(--white); font-weight:500; }
 .scope-title { font-family:var(--serif); font-size:18px; font-weight:700; color:var(--white); margin-bottom:8px; line-height:1.2; }
 .scope-body { font-family:var(--sans); font-size:14px; color:var(--white-35); line-height:1.6; }
 
+/* ── Global hover micro-interactions ── */
+.hov-lift {
+  transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease), border-color 0.22s;
+}
+.hov-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,200,215,0.12);
+  border-color: rgba(0,200,215,0.3) !important;
+}
+/* Cards with teal left border reveal */
+.win-card, .risk-card, .compare-col, .mkt-card, .rhc-box,
+.evo-phase, .scope-card, .cert-card {
+  transition: background 0.2s, border-color 0.2s, transform 0.2s var(--ease);
+}
+.win-card:hover, .risk-card:hover, .mkt-card:hover, .scope-card:hover,
+.evo-phase:hover { transform: translateY(-3px); border-color: rgba(0,200,215,0.25) !important; background: rgba(0,200,215,0.04) !important; }
+/* Sigma pills pulse on hover */
+.sigma-pill { transition: background 0.2s, border-color 0.2s, transform 0.15s; cursor: default; }
+.sigma-pill:hover { background: rgba(0,200,215,0.08) !important; border-color: rgba(0,200,215,0.3) !important; transform: scale(1.03); }
+/* Compare cols */
+.compare-col:hover { background: rgba(0,200,215,0.04); }
+/* Teams card & timeline items */
+.teams-card { transition: border-color 0.2s, box-shadow 0.2s; }
+.teams-card:hover { border-color: rgba(0,200,215,0.3); box-shadow: 0 8px 28px rgba(0,200,215,0.1); }
+.rht-item { transition: background 0.2s, border-color 0.2s, padding-left 0.2s; cursor: default; }
+.rht-item:hover { background: rgba(0,200,215,0.04); border-left-color: var(--teal) !important; padding-left: 16px; }
+/* DMAIC phase hover */
+.dmaic-letter { transition: background 0.2s; cursor: default; }
+.dmaic-letter:hover { background: rgba(0,200,215,0.06); border-radius: 4px; }
+/* Ask items */
+.ask-item { transition: background 0.2s, padding-left 0.2s; }
+.ask-item:hover { background: rgba(0,200,215,0.05); padding-left: 6px; }
+/* Risk eq boxes */
+.risk-eq-box { transition: transform 0.2s var(--ease), box-shadow 0.2s; }
+.risk-eq-box:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(255,68,68,0.1); }
+/* Case step hover */
+.case-step { transition: border-color 0.2s, background 0.2s, transform 0.2s var(--ease); }
+.case-step:hover { border-color: rgba(0,200,215,0.3); background: rgba(0,200,215,0.04); transform: translateY(-3px); }
+/* Cert pills */
+.cert-pill { transition: background 0.2s, border-color 0.2s, transform 0.15s; }
+.cert-pill:hover { background: rgba(0,200,215,0.1); border-color: rgba(0,200,215,0.3); transform: scale(1.05); }
+/* Vouch cards */
+.vouch-card { transition: background 0.2s, border-color 0.2s, transform 0.2s var(--ease); }
+.vouch-card:hover { background: rgba(0,200,215,0.06) !important; border-color: rgba(0,200,215,0.3) !important; transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+
+/* Risk slide visual styles */
+.risk-pulse-ring {
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  width:600px; height:600px; border-radius:50%;
+  border:1px solid rgba(255,68,68,0.06);
+  pointer-events:none; z-index:0;
+  animation: risk-pulse 3s ease-in-out infinite;
+}
+.risk-pulse-ring::before {
+  content:''; position:absolute; inset:40px; border-radius:50%;
+  border:1px solid rgba(255,68,68,0.04);
+  animation: risk-pulse 3s ease-in-out 1s infinite;
+}
+@keyframes risk-pulse { 0%,100%{opacity:0.4;transform:scale(1);} 50%{opacity:1;transform:scale(1.05);} }
+.risk-eq-box {
+  background:var(--bg-card); border:1px solid var(--border);
+  padding:22px 24px; position:relative; z-index:1;
+}
+.risk-metric-bar { }
+.rmb-fill { padding:14px 20px; }
+
+/* Track record timeline */
+.track-timeline { position:relative; }
+.tl-line {
+  position:absolute; left:0; right:0; top:22px; height:1px;
+  background:var(--border); overflow:hidden;
+}
+.tl-progress {
+  height:100%; background:linear-gradient(90deg,var(--teal),rgba(0,200,215,0.3));
+  width:0; transition:width 1.2s var(--ease) 0.4s;
+}
+.slide.visible .tl-progress { width:100%; }
+.tl-items { display:flex; justify-content:space-between; position:relative; padding-bottom:4px; }
+.tl-item { display:flex; flex-direction:column; align-items:center; gap:10px; max-width:140px; text-align:center; }
+.tl-dot {
+  width:14px; height:14px; border-radius:50%; background:var(--teal-20);
+  border:2px solid var(--teal); flex-shrink:0; margin-top:16px;
+  transition: transform 0.2s, background 0.2s;
+}
+.tl-dot:hover { transform:scale(1.4); background:var(--teal); }
+.tl-item:hover .tl-dot { transform:scale(1.4); background:var(--teal); }
+.tl-dot-now {
+  width:14px; height:14px; border-radius:50%; background:var(--teal);
+  border:2px solid var(--teal); flex-shrink:0; margin-top:16px;
+  box-shadow:0 0 12px rgba(0,200,215,0.5);
+  animation:hub-pulse 2s ease-in-out infinite;
+}
+.tl-date { font-size:13px; font-weight:700; color:var(--white); }
+.tl-label { font-size:12px; color:var(--white-60); line-height:1.4; }
+.tl-item-now .tl-date, .tl-item-now .tl-label { color:var(--teal); }
+
+/* Vouch cards grid */
+.vouch-card {
+  background:var(--bg-card); border:1px solid var(--border);
+  padding:22px 22px; display:flex; flex-direction:column; gap:10px;
+}
+.vouch-q { font-family:var(--serif); font-size:36px; font-weight:800; color:var(--teal); line-height:0.7; opacity:0.5; }
+.vouch-text { font-size:13px; color:var(--white); font-style:italic; line-height:1.6; flex:1; }
+.vouch-who { font-size:13px; color:var(--teal); }
+.vouch-icon {
+  width:32px; height:32px; background:rgba(0,200,215,0.1);
+  border-radius:6px; display:flex; align-items:center; justify-content:center;
+}
+
+/* Cert pills */
+.cert-pill {
+  background:var(--bg-card); border:1px solid var(--border);
+  padding:8px 16px; font-size:13px; color:var(--white-60); border-radius:20px;
+  cursor:default;
+}
+
 /* DMAIC visual strip */
 .dmaic-strip {
   display:flex; align-items:center; gap:0; margin-bottom:6px;
@@ -1871,6 +1988,153 @@ strong { color:var(--white); font-weight:500; }
 </section>
 
 <!-- ══════════════════════════════════════════════
+     SLIDE · TRACK RECORD ON THE RECORD
+═══════════════════════════════════════════════ -->
+<section class="slide" id="strack">
+  <div class="slide-dentsu rev-fade">dentsu</div>
+  <div class="s-full" style="padding-bottom:24px;">
+    <span class="eyebrow rev d1">Recognition · Two Years On the Record · dentsu India</span>
+    <h2 class="rev d2" style="font-size:52px;margin-bottom:24px;">A track record, on the record.</h2>
+
+    <!-- Animated timeline -->
+    <div class="track-timeline rev d3">
+      <div class="tl-line"><div class="tl-progress"></div></div>
+      <div class="tl-items">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">Mar 2025</div>
+          <div class="tl-label">Climb High Award — dentsu</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">Sep 2025</div>
+          <div class="tl-label">Google-confirmed robots.txt fix</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">Oct 2025</div>
+          <div class="tl-label">Selected — 30B Pilot Program</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">Mar 2026</div>
+          <div class="tl-label">Record $7.24M spend week</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">2026</div>
+          <div class="tl-label">Written Sr-Manager recommendation</div>
+        </div>
+        <div class="tl-item tl-item-now">
+          <div class="tl-dot-now"></div>
+          <div class="tl-date" style="color:var(--teal);">2026</div>
+          <div class="tl-label" style="color:var(--teal);">DV360 + Trade Desk certified</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 client appreciations -->
+    <div style="margin-top:20px;" class="rev d4">
+      <div style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:14px;">In Their Words — Client Appreciations On File</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;">
+        <div class="vouch-card hov-lift">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <div class="vouch-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="#00C8D7" stroke-width="1.8"/><polyline points="22,6 12,13 2,6" stroke="#00C8D7" stroke-width="1.8"/></svg></div>
+            <div><div style="font-size:13px;font-weight:700;color:var(--white);">Kat Maring</div><div style="font-size:11px;color:var(--white-35);">Group Director, NSM · Email</div></div>
+          </div>
+          <div style="font-size:14px;color:var(--white-60);font-style:italic;line-height:1.6;">"Very excited about this new optimization initiative. Thank you, Bharat!"</div>
+        </div>
+        <div class="vouch-card hov-lift">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <div class="vouch-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#00C8D7" stroke-width="1.8"/></svg></div>
+            <div><div style="font-size:13px;font-weight:700;color:var(--white);">Chloe Nicholas</div><div style="font-size:11px;color:var(--white-35);">Activation, NSM · Teams</div></div>
+          </div>
+          <div style="font-size:14px;color:var(--white-60);font-style:italic;line-height:1.6;">"Wonderful — thank you SO much for helping stay on top of this one!"</div>
+        </div>
+        <div class="vouch-card hov-lift">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <div class="vouch-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#00C8D7" stroke-width="1.8"/></svg></div>
+            <div><div style="font-size:13px;font-weight:700;color:var(--white);">Steven Matos</div><div style="font-size:11px;color:var(--white-35);">Sr Manager, NSM · Teams</div></div>
+          </div>
+          <div style="font-size:14px;color:var(--white-60);font-style:italic;line-height:1.6;">"This is good feedback Bharath! … I think this could solve so many of our issues."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Certifications -->
+    <div style="margin-top:16px;" class="rev d5">
+      <div style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:10px;">Certified Across Google DV360, Amazon DSP &amp; The Trade Desk (Kokai)</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <div class="cert-pill hov-lift">🏅 DV360 — Google '26</div>
+        <div class="cert-pill hov-lift">🏅 Amazon DSP — '25</div>
+        <div class="cert-pill hov-lift">🏅 Amazon Ads Foundations — '25</div>
+        <div class="cert-pill hov-lift">🏅 Trade Desk Kokai — '26</div>
+        <div class="cert-pill hov-lift">🏅 Trade Desk Marketing — '26</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE · THE WHOLE TEAM VOUCHES
+═══════════════════════════════════════════════ -->
+<section class="slide" id="svouch">
+  <div class="slide-dentsu rev-fade">dentsu</div>
+  <div class="s-full" style="padding-bottom:20px;">
+    <span class="eyebrow rev d1">The Whole Team Vouches For Him · dentsu India</span>
+    <h2 class="rev d2" style="font-size:48px;margin-bottom:20px;">Recognition from every corner<br>of the account.</h2>
+
+    <!-- 4+4 quote grid -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:1fr 1fr;gap:2px;" class="rev d3">
+
+      <div class="vouch-card hov-lift">
+        <div class="vouch-q">"</div>
+        <div class="vouch-text">Very excited about this new optimization initiative. Thank you, Bharat!</div>
+        <div class="vouch-who"><strong>Kat Maring</strong><div style="color:var(--white-35);font-size:11px;margin-top:2px;">Group Director, NSM</div></div>
+      </div>
+      <div class="vouch-card hov-lift">
+        <div class="vouch-q">"</div>
+        <div class="vouch-text">Love this analysis — I'll be sure to share with the team!</div>
+        <div class="vouch-who"><strong>Raymond Hall</strong><div style="color:var(--white-35);font-size:11px;margin-top:2px;">Assoc. Director, NSM</div></div>
+      </div>
+      <div class="vouch-card hov-lift">
+        <div class="vouch-q">"</div>
+        <div class="vouch-text">Amazing news!! Thanks for keeping an eye on this — truly appreciate it.</div>
+        <div class="vouch-who"><strong>Kyle Lower</strong><div style="color:var(--white-35);font-size:11px;margin-top:2px;">Assoc. Director, NSM</div></div>
+      </div>
+      <div class="vouch-card hov-lift">
+        <div class="vouch-q">"</div>
+        <div class="vouch-text">This is good feedback Bharath! I think this could solve so many of our issues.</div>
+        <div class="vouch-who"><strong>Steven Matos</strong><div style="color:var(--white-35);font-size:11px;margin-top:2px;">Senior Manager, NSM</div></div>
+      </div>
+
+      <div class="vouch-card hov-lift">
+        <div class="vouch-q">"</div>
+        <div class="vouch-text">Thank you for your help! I definitely <em>want</em> to get to the bottom of this one.</div>
+        <div class="vouch-who"><strong>Nicole Howell</strong><div style="color:var(--white-35);font-size:11px;margin-top:2px;">Manager, NSM</div></div>
+      </div>
+      <div class="vouch-card hov-lift">
+        <div class="vouch-q">"</div>
+        <div class="vouch-text">Wonderful — thank you SO much for helping stay on top of this one!</div>
+        <div class="vouch-who"><strong>Chloe Nicholas</strong><div style="color:var(--white-35);font-size:11px;margin-top:2px;">Associate, NSM</div></div>
+      </div>
+      <div class="vouch-card hov-lift">
+        <div class="vouch-q">"</div>
+        <div class="vouch-text"><em>Thanks Bharat</em> for making those optimizations!</div>
+        <div class="vouch-who"><strong>Chloe Mietelka</strong><div style="color:var(--white-35);font-size:11px;margin-top:2px;">Associate, NSM</div></div>
+      </div>
+      <div class="vouch-card hov-lift" style="border-color:rgba(0,200,215,0.25);background:rgba(0,200,215,0.04);">
+        <div class="vouch-q" style="color:var(--teal);">"</div>
+        <div class="vouch-text">You are correct in your assessment regarding the blocked paths.</div>
+        <div class="vouch-who"><strong style="color:var(--teal);">Freddy Luong</strong><div style="color:var(--white-35);font-size:11px;margin-top:2px;">Google</div></div>
+      </div>
+
+    </div>
+    <div style="font-size:11px;color:var(--white-35);font-style:italic;margin-top:10px;" class="rev d4">Verbatim from Microsoft Teams and email, 2025–2026 (originals on file).</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
      SLIDE 12 · COMPENSATION CONTEXT
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s12">
@@ -1915,24 +2179,62 @@ strong { color:var(--white); font-weight:500; }
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s13">
   <div class="slide-dentsu rev-fade">dentsu</div>
-  <div class="s-full">
-    <span class="eyebrow rev d1">Risk · Account Continuity</span>
-    <h2 class="rev d2">The cost of inaction<br>is not zero.</h2>
-    <div class="risk-row">
-      <div class="risk-card rev d3">
-        <div class="risk-icon">⚠</div>
-        <div class="risk-heading">1 Resource, 0 Redundancy</div>
-        <div class="risk-detail">Bharat is the sole owner of the Meijer RMN relationship across 5 platforms (DV360, TTD, GAM, Meta, Pinterest). There is no backup and no transition plan. A departure leaves a $275M annual-budget account without an operational lead.</div>
+  <!-- animated warning pulse ring -->
+  <div class="risk-pulse-ring"></div>
+  <div class="s-full" style="padding-bottom:24px;">
+    <span class="eyebrow rev d1">Risk · Account Continuity · dentsu India</span>
+    <h2 class="rev d2" style="font-size:52px;margin-bottom:6px;">The cost of inaction<br>is not zero.</h2>
+
+    <!-- Visual cost equation -->
+    <div class="rev d3" style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0;align-items:stretch;margin-bottom:2px;margin-top:16px;">
+      <div class="risk-eq-box" style="border-top:2px solid #ff4444;">
+        <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,68,68,0.7);font-weight:600;margin-bottom:10px;">Risk ①</div>
+        <div style="font-family:var(--serif);font-size:44px;font-weight:800;color:#ff6666;line-height:1;">0</div>
+        <div style="font-size:13px;color:var(--white);font-weight:600;margin:8px 0 6px;">Redundancy</div>
+        <div style="font-size:13px;color:var(--white-60);line-height:1.55;">Sole owner of $275M annual Meijer account across 5 platforms. No backup. No transition plan. A departure leaves the account without an operational lead.</div>
       </div>
-      <div class="risk-card rev d4">
-        <div class="risk-icon">⏱</div>
-        <div class="risk-heading">6-Month Ramp Risk</div>
-        <div class="risk-detail">Replacing Bharat's institutional knowledge — platform configurations, client relationships, campaign architecture, and established processes — conservatively requires 4–6 months and $30–50K in hiring and onboarding costs at market rates.</div>
+      <div style="display:flex;align-items:center;justify-content:center;padding:0 16px;font-family:var(--serif);font-size:32px;font-weight:800;color:var(--white-35);">+</div>
+      <div class="risk-eq-box" style="border-top:2px solid #ff8800;">
+        <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,136,0,0.7);font-weight:600;margin-bottom:10px;">Risk ②</div>
+        <div style="font-family:var(--serif);font-size:44px;font-weight:800;color:#ffaa44;line-height:1;">4–6</div>
+        <div style="font-size:13px;color:var(--white);font-weight:600;margin:8px 0 6px;">Month Ramp Risk</div>
+        <div style="font-size:13px;color:var(--white-60);line-height:1.55;">Replacing institutional knowledge — platform configs, client relationships, architecture, established SOPs — requires 4–6 months + ₹25–40L in hiring &amp; onboarding at market rates.</div>
       </div>
-      <div class="risk-card rev d5">
-        <div class="risk-icon">🔗</div>
-        <div class="risk-heading">2 ADs Lose Their Anchor</div>
-        <div class="risk-detail">Two Associate Directors shadow and learn from Bharat's day-to-day decisions. His departure removes the account's operational memory and mentorship structure at the exact moment dentsu is scaling its RMN practice.</div>
+      <div style="display:flex;align-items:center;justify-content:center;padding:0 16px;font-family:var(--serif);font-size:32px;font-weight:800;color:var(--white-35);">+</div>
+      <div class="risk-eq-box" style="border-top:2px solid #cc4400;">
+        <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(200,68,0,0.7);font-weight:600;margin-bottom:10px;">Risk ③</div>
+        <div style="font-family:var(--serif);font-size:44px;font-weight:800;color:#ff7744;line-height:1;">1AD+3M</div>
+        <div style="font-size:13px;color:var(--white);font-weight:600;margin:8px 0 6px;">Team Loses Its Anchor</div>
+        <div style="font-size:13px;color:var(--white-60);line-height:1.55;">1 AD and 3 Managers shadow Bharat's daily decisions. Departure removes operational memory and the pacing capability model at the exact moment dentsu is scaling its RMN practice.</div>
+      </div>
+    </div>
+
+    <!-- Result equation bar -->
+    <div class="rev d4" style="display:flex;align-items:center;gap:0;margin-bottom:12px;">
+      <div style="flex:1;height:2px;background:linear-gradient(90deg,rgba(255,68,68,0.5),rgba(200,68,0,0.3));"></div>
+      <div style="padding:0 24px;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--white-35);font-weight:600;">= Total Cost of Inaction</div>
+      <div style="flex:1;height:2px;background:linear-gradient(270deg,rgba(255,68,68,0.5),rgba(200,68,0,0.3));"></div>
+    </div>
+
+    <!-- 3 impact metrics -->
+    <div class="rev d5" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;">
+      <div class="risk-metric-bar">
+        <div class="rmb-fill" style="width:100%;background:rgba(255,68,68,0.2);border-left:3px solid #ff4444;">
+          <div style="font-family:var(--serif);font-size:28px;font-weight:800;color:#ff6666;">$275M</div>
+          <div style="font-size:12px;color:var(--white-60);">annual budget exposed · no operational continuity</div>
+        </div>
+      </div>
+      <div class="risk-metric-bar">
+        <div class="rmb-fill" style="width:100%;background:rgba(255,136,0,0.1);border-left:3px solid #ff8800;">
+          <div style="font-family:var(--serif);font-size:28px;font-weight:800;color:#ffaa44;">₹25–40L</div>
+          <div style="font-size:12px;color:var(--white-60);">replacement cost · vs ₹28L retention ask</div>
+        </div>
+      </div>
+      <div class="risk-metric-bar">
+        <div class="rmb-fill" style="width:100%;background:rgba(200,68,0,0.1);border-left:3px solid #cc4400;">
+          <div style="font-family:var(--serif);font-size:28px;font-weight:800;color:#ff7744;">0%</div>
+          <div style="font-size:12px;color:var(--white-60);">DIF guarantee without institutional knowledge</div>
+        </div>
       </div>
     </div>
   </div>
