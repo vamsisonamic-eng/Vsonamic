@@ -1,0 +1,2683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bharat Vamsi — Senior Manager · dentsu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* === THEME TOKENS === */
+:root {
+  --navy:        #1C2644;
+  --navy-alt:    #232F55;
+  --cream:       #F0ECE3;
+  --cream-alt:   #E6E0D4;
+  --text-warm:   #E2DCD0;
+  --text-muted:  #8A96A8;
+  --text-hint:   #4E5A6E;
+  --ink:         #1A2030;
+  --ink-muted:   #5A6270;
+  --ink-hint:    #9AA0A8;
+  --gold:        #C8A870;
+  --border-dk:   #2E3D5C;
+  --border-lt:   #CAC4B4;
+
+  /* Typography scale at 1920×1080 */
+  --f-display:   182px;
+  --f-h1:        100px;
+  --f-h2:         58px;
+  --f-h3:         37px;
+  --f-lead:       27px;
+  --f-body:       20px;
+  --f-caption:    16px;
+  --f-label:      13px;
+  --f-stat:      106px;
+  --f-qt:         69px;
+  --f-qmark:     154px;
+  --f-edit:       53px;
+  --f-dense:      46px;
+
+  /* Spacing */
+  --px: 144px;
+  --py:  59px;
+  --gap-lg: 43px;
+  --gap-md: 27px;
+  --gap-sm: 13px;
+
+  /* Fonts */
+  --serif: 'Source Serif 4', Georgia, serif;
+  --sans:  'DM Sans', system-ui, sans-serif;
+  --mono:  'IBM Plex Mono', monospace;
+
+  /* Animation */
+  --ease-sharp: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* === VIEWPORT BASE (mandatory) === */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--navy);
+}
+
+.deck-viewport {
+  position: fixed; inset: 0;
+  overflow: hidden;
+  background: var(--navy);
+}
+
+.deck-stage {
+  position: absolute;
+  left: 0; top: 0;
+  width: 1920px; height: 1080px;
+  overflow: hidden;
+  transform-origin: 0 0;
+  background: var(--navy);
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 1920px; height: 1080px;
+  overflow: hidden;
+  display: block;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  background: var(--navy);
+}
+
+.slide.active, .slide.visible {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+img, video, canvas, svg { max-width: 100%; max-height: 100%; }
+
+.deck-controls {
+  position: fixed;
+  left: 50%; bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+@media print {
+  html, body { width: 1920px; height: auto; overflow: visible; background: #fff; }
+  .deck-viewport { position: static; overflow: visible; }
+  .deck-stage { position: static; width: auto; height: auto; transform: none !important; }
+  .slide { position: relative; display: block !important; visibility: visible !important; opacity: 1 !important; pointer-events: auto !important; width: 1920px; height: 1080px; break-after: page; page-break-after: always; }
+  .slide:last-child { break-after: auto; page-break-after: auto; }
+  .deck-controls { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; }
+}
+
+/* === BASE TYPOGRAPHY === */
+.serif  { font-family: var(--serif); }
+.sans   { font-family: var(--sans); }
+.mono   { font-family: var(--mono); }
+
+/* === SIGNAL DESIGN SYSTEM === */
+
+/* Dark slide grid texture fingerprint */
+.slide.dark::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.slide.dark  { background: var(--navy); }
+.slide.cream { background: var(--cream); }
+
+/* Content sits above the texture */
+.slide > * { position: relative; z-index: 1; }
+
+/* === CHROME SYSTEM === */
+.chrome {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--gap-sm);
+  border-bottom: 1px solid var(--border-dk);
+  margin-bottom: var(--gap-md);
+}
+.slide.cream .chrome { border-bottom-color: var(--border-lt); }
+
+.chrome-label {
+  font-family: var(--mono);
+  font-size: var(--f-label);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-hint);
+}
+.slide.cream .chrome-label { color: var(--ink-hint); }
+
+.chrome-counter {
+  font-family: var(--mono);
+  font-size: var(--f-label);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--text-hint);
+}
+.slide.cream .chrome-counter { color: var(--ink-hint); }
+
+.foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--gap-sm);
+  border-top: 1px solid var(--border-dk);
+  margin-top: auto;
+}
+.slide.cream .foot { border-top-color: var(--border-lt); }
+
+.foot-label {
+  font-family: var(--mono);
+  font-size: var(--f-label);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--text-hint);
+}
+.slide.cream .foot-label { color: var(--ink-hint); }
+
+/* === LAYOUT WRAPPER === */
+.slide-inner {
+  display: flex;
+  flex-direction: column;
+  height: 1080px;
+  padding: var(--py) var(--px);
+}
+
+/* === KICKER === */
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--mono);
+  font-size: var(--f-label);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--gap-md);
+}
+.kicker::before {
+  content: '';
+  display: block;
+  width: 36px; height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+/* === HEADLINES === */
+h1, h2, h3 { font-family: var(--serif); }
+
+h1 {
+  font-size: var(--f-h1);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: var(--text-warm);
+}
+.slide.cream h1 { color: var(--ink); }
+
+h2 {
+  font-size: var(--f-h2);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--text-warm);
+}
+.slide.cream h2 { color: var(--ink); }
+
+h3 {
+  font-size: var(--f-h3);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--text-warm);
+}
+.slide.cream h3 { color: var(--ink); }
+
+/* === THE SIGNAL MOMENT: italic gold em inside serif === */
+h1 em, h2 em, h3 em, .display-head em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+/* === BODY COPY === */
+.lead {
+  font-family: var(--sans);
+  font-size: var(--f-lead);
+  font-weight: 400;
+  line-height: 1.58;
+  color: var(--text-muted);
+}
+.slide.cream .lead { color: var(--ink-muted); }
+
+.body {
+  font-family: var(--sans);
+  font-size: var(--f-body);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+.slide.cream .body { color: var(--ink-muted); }
+
+.caption {
+  font-family: var(--sans);
+  font-size: var(--f-caption);
+  line-height: 1.5;
+  color: var(--text-hint);
+}
+.slide.cream .caption { color: var(--ink-hint); }
+
+/* Italic serif gold emphasis inside body */
+.lead em, .body em {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+/* === STAT VALUE === */
+.stat-value {
+  font-family: var(--serif);
+  font-size: var(--f-stat);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--gold);
+}
+
+.stat-label {
+  font-family: var(--sans);
+  font-size: var(--f-body);
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+.slide.cream .stat-label { color: var(--ink-muted); }
+
+.stat-note {
+  font-family: var(--mono);
+  font-size: var(--f-label);
+  letter-spacing: 0.12em;
+  color: var(--text-hint);
+  margin-top: 6px;
+}
+.slide.cream .stat-note { color: var(--ink-hint); }
+
+/* === BULLET LIST === */
+.bullet-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+}
+
+.bullet-list li {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 10px;
+  font-family: var(--sans);
+  font-size: var(--f-body);
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.slide.cream .bullet-list li { color: var(--ink-muted); }
+
+.bullet-list li::before {
+  content: '—';
+  font-family: var(--mono);
+  color: var(--gold);
+  font-size: var(--f-label);
+  line-height: 1.9;
+  letter-spacing: 0;
+}
+
+/* === GOLD TAG === */
+.gold-tag {
+  display: inline-block;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--mono);
+  font-size: var(--f-label);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+}
+
+/* === REVEAL ANIMATIONS === */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--ease-spring), transform 0.6s var(--ease-spring);
+}
+.slide.visible .reveal { opacity: 1; transform: translateY(0); }
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.6s var(--ease-spring), transform 0.6s var(--ease-spring);
+}
+.slide.visible .reveal-left { opacity: 1; transform: translateX(0); }
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 0.7s var(--ease-spring), transform 0.7s var(--ease-spring);
+}
+.slide.visible .reveal-scale { opacity: 1; transform: scale(1); }
+
+/* Stagger delays */
+.d1 { transition-delay: 0.08s; }
+.d2 { transition-delay: 0.18s; }
+.d3 { transition-delay: 0.28s; }
+.d4 { transition-delay: 0.38s; }
+.d5 { transition-delay: 0.48s; }
+.d6 { transition-delay: 0.58s; }
+.d7 { transition-delay: 0.68s; }
+.d8 { transition-delay: 0.78s; }
+
+/* === HAIRLINE DIVIDER === */
+.rule { width: 100%; height: 1px; background: var(--border-dk); }
+.slide.cream .rule { background: var(--border-lt); }
+.rule-gold { width: 36px; height: 1px; background: var(--gold); }
+
+/* ============================================================
+   SLIDE-SPECIFIC LAYOUTS
+   ============================================================ */
+
+/* === SLIDE 1: COVER (dark) === */
+#slide-cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--py) var(--px);
+}
+
+.cover-eyebrow {
+  font-family: var(--mono);
+  font-size: var(--f-label);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 32px;
+}
+
+.cover-name {
+  font-family: var(--serif);
+  font-size: 138px;
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--text-warm);
+  margin-bottom: 32px;
+}
+
+.cover-name em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.cover-meta {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.cover-role {
+  font-family: var(--sans);
+  font-size: var(--f-lead);
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.cover-tags {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cover-divider {
+  width: 1px; height: 48px;
+  background: var(--border-dk);
+}
+
+.cover-bottom-rule {
+  width: 100%; height: 1px;
+  background: var(--border-dk);
+  margin-bottom: 32px;
+}
+
+.cover-footnote {
+  font-family: var(--mono);
+  font-size: var(--f-label);
+  letter-spacing: 0.14em;
+  color: var(--text-hint);
+}
+
+/* === SLIDE 2: EXECUTIVE SUMMARY (cream) === */
+#slide-es .slide-inner {
+  display: flex;
+  flex-direction: column;
+  height: 1080px;
+  padding: var(--py) var(--px);
+}
+
+.es-grid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr 1px 1fr 1px 1fr;
+  gap: 0;
+  flex: 1;
+  margin-top: var(--gap-lg);
+}
+
+.es-col {
+  padding: 0 36px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+}
+
+.es-col:first-child { padding-left: 0; }
+.es-col:last-child { padding-right: 0; }
+
+.es-divider { background: var(--border-lt); width: 1px; }
+
+.es-num {
+  font-family: var(--serif);
+  font-size: 76px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--gold);
+}
+
+.es-label {
+  font-family: var(--mono);
+  font-size: var(--f-label);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-hint);
+  margin-top: 8px;
+}
+
+.es-desc {
+  font-family: var(--sans);
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink-muted);
+  margin-top: 12px;
+}
+
+/* === SLIDE 3: THE PROBLEM (dark) === */
+.problem-body {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 0;
+  flex: 1;
+  margin-top: var(--gap-lg);
+}
+
+.problem-left {
+  padding-right: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.problem-right {
+  padding-left: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+}
+
+.problem-item {
+  border-top: 1px solid var(--border-dk);
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.problem-item-num {
+  font-family: var(--mono);
+  font-size: var(--f-label);
+  color: var(--gold);
+  letter-spacing: 0.16em;
+  margin-bottom: 8px;
+}
+
+.problem-item-text {
+  font-family: var(--sans);
+  font-size: var(--f-body);
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* === SLIDE 4: THE EVIDENCE (cream) === */
+.evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  flex: 1;
+  margin-top: var(--gap-lg);
+}
+
+.evidence-stat {
+  border-top: 1px solid var(--border-lt);
+  padding: 28px 32px 28px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.evidence-stat:first-child { padding-left: 0; }
+
+.evidence-stat + .evidence-stat {
+  border-left: 1px solid var(--border-lt);
+  padding-left: 32px;
+}
+
+/* === SLIDE 5: SCALE & GROWTH (dark) === */
+.growth-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  flex: 1;
+  margin-top: var(--gap-lg);
+}
+
+.growth-left {
+  padding-right: 64px;
+  border-right: 1px solid var(--border-dk);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.growth-right {
+  padding-left: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+  justify-content: center;
+}
+
+.growth-row {
+  border-top: 1px solid var(--border-dk);
+  padding: 18px 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 24px;
+}
+
+.growth-row-label {
+  font-family: var(--sans);
+  font-size: var(--f-body);
+  color: var(--text-muted);
+}
+
+.growth-row-val {
+  font-family: var(--serif);
+  font-size: 34px;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: -0.01em;
+}
+
+/* === SLIDE 6: INDUSTRY CONTEXT (cream) === */
+.industry-cols {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 0;
+  flex: 1;
+  margin-top: var(--gap-lg);
+}
+
+.industry-col {
+  padding-right: 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--gap-md);
+}
+
+.industry-col:last-child {
+  padding-left: 56px;
+  padding-right: 0;
+}
+
+.industry-divider { background: var(--border-lt); }
+
+.bar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: var(--gap-sm);
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 130px 1fr 60px;
+  align-items: center;
+  gap: 12px;
+}
+
+.bar-year {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink-hint);
+  letter-spacing: 0.1em;
+}
+
+.bar-track {
+  height: 14px;
+  background: var(--border-lt);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background: var(--ink-hint);
+  transition: width 1s var(--ease-spring);
+}
+
+.bar-fill.gold { background: var(--gold); }
+
+.bar-val {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-muted);
+  text-align: right;
+  letter-spacing: 0.06em;
+}
+
+/* === SLIDE 7: SCOPE OF OWNERSHIP (dark) === */
+.scope-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  flex: 1;
+  margin-top: var(--gap-lg);
+}
+
+.scope-platform {
+  border-top: 1px solid var(--border-dk);
+  padding: 28px 24px 28px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.scope-platform + .scope-platform {
+  border-left: 1px solid var(--border-dk);
+  padding-left: 24px;
+}
+
+.scope-platform-name {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.scope-platform-role {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-warm);
+}
+
+.scope-platform-detail {
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* === SLIDE 8: ROLE VARIANCE (cream) === */
+.variance-body {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 0;
+  flex: 1;
+  margin-top: var(--gap-lg);
+}
+
+.variance-col {
+  padding-right: 52px;
+  display: flex;
+  flex-direction: column;
+}
+
+.variance-col.actual { padding-left: 52px; padding-right: 0; }
+
+.variance-header {
+  border-top: 2px solid var(--border-lt);
+  padding-top: 18px;
+  margin-bottom: var(--gap-md);
+}
+
+.variance-header.actual-hdr { border-top-color: var(--gold); }
+
+.variance-header-label {
+  font-family: var(--mono);
+  font-size: var(--f-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-hint);
+}
+
+.variance-header h3 {
+  margin-top: 8px;
+}
+
+.variance-items {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+}
+
+.variance-item {
+  border-top: 1px solid var(--border-lt);
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.variance-item-title {
+  font-family: var(--sans);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.variance-item-desc {
+  font-family: var(--sans);
+  font-size: 16px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+}
+
+.variance-ceiling {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: var(--gap-md);
+}
+
+.ceiling-stat {
+  border-top: 1px solid var(--border-lt);
+  padding-top: 12px;
+}
+
+.ceiling-val {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--ink-hint);
+  letter-spacing: -0.01em;
+}
+
+.ceiling-val.gold-stat { color: var(--gold); }
+
+.ceiling-lbl {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--ink-hint);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* === SLIDE 9: WINS (dark) === */
+.wins-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  flex: 1;
+  margin-top: var(--gap-lg);
+}
+
+.win-card {
+  border-top: 1px solid var(--border-dk);
+  padding: 28px 40px 28px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.win-card + .win-card {
+  border-left: 1px solid var(--border-dk);
+  padding-left: 40px;
+}
+
+.win-num {
+  font-family: var(--mono);
+  font-size: var(--f-label);
+  color: var(--gold);
+  letter-spacing: 0.18em;
+}
+
+.win-title {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-warm);
+}
+
+.win-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.win-step {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 10px;
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.win-step-num {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--gold);
+  padding-top: 3px;
+}
+
+.win-quote {
+  border-top: 1px solid var(--border-dk);
+  padding-top: 14px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--gold);
+}
+
+.win-attr {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--text-hint);
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+/* === SLIDE 10: RECOGNITION (cream) === */
+.recognition-grid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 0;
+  flex: 1;
+  margin-top: var(--gap-lg);
+}
+
+.recognition-main {
+  padding-right: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+}
+
+.recognition-voices {
+  padding-left: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rec-quote-mark {
+  font-family: var(--serif);
+  font-size: 96px;
+  font-weight: 300;
+  line-height: 0.6;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.rec-quote-text {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+.rec-attr-name {
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.rec-attr-role {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--ink-hint);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.voice-card {
+  border-top: 1px solid var(--border-lt);
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.voice-initial {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px; height: 28px;
+  background: var(--cream-alt);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.voice-text {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-muted);
+  font-style: italic;
+}
+
+.voice-from {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-hint);
+  letter-spacing: 0.12em;
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+
+/* === SLIDE 11: ANNOUNCEMENT (dark) === */
+.announcement-body {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 0;
+  flex: 1;
+  margin-top: var(--gap-lg);
+}
+
+.announcement-left {
+  padding-right: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+}
+
+.announcement-right {
+  padding-left: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.announcement-msg {
+  background: var(--navy-alt);
+  border: 1px solid var(--border-dk);
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.announcement-msg-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.announcement-msg-text {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--text-warm);
+}
+
+.announcement-msg-from {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-hint);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+.team-voice {
+  border-top: 1px solid var(--border-dk);
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.team-voice-name {
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--text-warm);
+}
+
+.team-voice-role {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--text-hint);
+  text-transform: uppercase;
+  margin-top: 2px;
+  margin-bottom: 6px;
+}
+
+.team-voice-quote {
+  font-family: var(--sans);
+  font-size: 16px;
+  font-style: italic;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* === SLIDE 12: COMPENSATION (cream) === */
+.comp-body {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 0;
+  flex: 1;
+  margin-top: var(--gap-lg);
+}
+
+.comp-left {
+  padding-right: 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--gap-lg);
+}
+
+.comp-right {
+  padding-left: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+  justify-content: center;
+}
+
+.comp-bar-item {
+  border-top: 1px solid var(--border-lt);
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.comp-bar-label {
+  font-family: var(--sans);
+  font-size: 17px;
+  color: var(--ink-muted);
+  margin-bottom: 10px;
+}
+
+.comp-bar-track {
+  height: 10px;
+  background: var(--cream-alt);
+  margin-bottom: 8px;
+}
+
+.comp-bar-fill {
+  height: 100%;
+  background: var(--border-lt);
+  transition: width 1s var(--ease-spring);
+}
+
+.comp-bar-fill.current { background: var(--ink-hint); width: 25%; }
+.comp-bar-fill.external { background: var(--ink-muted); width: 73%; }
+.comp-bar-fill.ask { background: var(--gold); width: 80%; }
+.comp-bar-fill.market { background: var(--border-lt); width: 100%; }
+
+.comp-bar-val {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.comp-bar-number {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.comp-bar-number.gold-num { color: var(--gold); }
+
+.comp-bar-sub {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-hint);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.timeline-list {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 80px 24px 1fr;
+  gap: 0 16px;
+  padding-bottom: 20px;
+  align-items: start;
+}
+
+.tl-date {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-hint);
+  letter-spacing: 0.12em;
+  padding-top: 2px;
+  text-align: right;
+}
+
+.tl-spine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.tl-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+.tl-line {
+  width: 1px;
+  flex: 1;
+  background: var(--border-lt);
+  min-height: 20px;
+}
+
+.tl-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.tl-event {
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.tl-detail {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-hint);
+  letter-spacing: 0.1em;
+}
+
+/* === SLIDE 13: CONTINUITY (dark) === */
+.continuity-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  flex: 1;
+  margin-top: var(--gap-lg);
+}
+
+.continuity-card {
+  border-top: 1px solid var(--border-dk);
+  padding: 24px 40px 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.continuity-card + .continuity-card {
+  border-left: 1px solid var(--border-dk);
+  padding-left: 40px;
+}
+
+.continuity-icon-val {
+  font-family: var(--serif);
+  font-size: 58px;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.continuity-icon-label {
+  font-family: var(--mono);
+  font-size: var(--f-label);
+  letter-spacing: 0.16em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.continuity-title {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--text-warm);
+  line-height: 1.3;
+  margin-top: 4px;
+}
+
+.continuity-body {
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--text-muted);
+  flex: 1;
+}
+
+/* === SLIDE 14: THE ASK (cream) === */
+.ask-body {
+  display: grid;
+  grid-template-columns: 1fr 1px 2fr;
+  gap: 0;
+  flex: 1;
+  margin-top: var(--gap-lg);
+}
+
+.ask-left {
+  padding-right: 52px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
+.ask-total-label {
+  font-family: var(--mono);
+  font-size: var(--f-label);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-hint);
+}
+
+.ask-total-val {
+  font-family: var(--serif);
+  font-size: 100px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--gold);
+}
+
+.ask-total-unit {
+  font-family: var(--mono);
+  font-size: var(--f-label);
+  letter-spacing: 0.14em;
+  color: var(--ink-hint);
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+.ask-sub {
+  font-family: var(--sans);
+  font-size: 17px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+.ask-right {
+  padding-left: 52px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  justify-content: center;
+}
+
+.ask-component {
+  border-top: 1px solid var(--border-lt);
+  padding: 20px 0;
+  display: grid;
+  grid-template-columns: 180px 1fr auto;
+  gap: 24px;
+  align-items: start;
+}
+
+.ask-comp-label {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: var(--ink-hint);
+  text-transform: uppercase;
+  padding-top: 4px;
+}
+
+.ask-comp-name {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.ask-comp-desc {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-muted);
+}
+
+.ask-comp-tag { align-self: start; }
+
+/* === SLIDE 15: CLOSING (dark) === */
+#slide-closing {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--py) var(--px);
+}
+
+.closing-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.closing-qmark {
+  font-family: var(--serif);
+  font-size: 154px;
+  font-weight: 300;
+  line-height: 0.7;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+
+.closing-quote {
+  font-family: var(--serif);
+  font-size: 52px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--text-warm);
+  max-width: 1100px;
+}
+
+.closing-quote em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.closing-meta {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-top: 48px;
+}
+
+.closing-name {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--text-warm);
+}
+
+.closing-role {
+  font-family: var(--mono);
+  font-size: var(--f-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-hint);
+  margin-top: 4px;
+}
+
+.closing-bottom {
+  font-family: var(--mono);
+  font-size: var(--f-label);
+  letter-spacing: 0.14em;
+  color: var(--text-hint);
+  text-transform: uppercase;
+  padding-top: var(--gap-sm);
+  border-top: 1px solid var(--border-dk);
+}
+
+/* === INLINE EDITOR === */
+.edit-hotzone {
+  position: fixed; top: 0; left: 0;
+  width: 80px; height: 80px;
+  z-index: 10000;
+  cursor: pointer;
+}
+
+.edit-toggle {
+  position: fixed;
+  top: 16px; left: 16px;
+  background: rgba(28,38,68,0.92);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  padding: 8px 14px;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  z-index: 10001;
+}
+
+.edit-toggle.show, .edit-toggle.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.edit-toggle.active {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+[contenteditable="true"] {
+  outline: 1px dashed rgba(200,168,112,0.5);
+  cursor: text;
+  min-width: 20px;
+  min-height: 1em;
+}
+
+/* === PROGRESS DOTS === */
+.progress-dots {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 1000;
+}
+
+.progress-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(200,168,112,0.25);
+  transition: background 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+
+.progress-dot.active {
+  background: var(--gold);
+  transform: scale(1.4);
+}
+
+</style>
+</head>
+<body>
+<div class="deck-viewport">
+<main class="deck-stage" id="deckStage">
+
+<!-- ============================================================
+     SLIDE 1 · COVER
+     ============================================================ -->
+<section class="slide dark active" id="slide-cover">
+  <div id="slide-cover" style="display:flex;flex-direction:column;justify-content:flex-end;height:1080px;padding:59px 144px;">
+    <div class="reveal d1" style="font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;">
+      Promotion Case &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; dentsu India &nbsp;·&nbsp; July 2026
+    </div>
+
+    <div class="rule" style="margin-bottom:36px;" class="reveal d2"></div>
+
+    <div class="reveal d2" style="font-family:var(--serif);font-size:138px;font-weight:700;line-height:0.95;letter-spacing:-0.02em;color:var(--text-warm);margin-bottom:12px;">
+      Bharat<br><em style="font-style:italic;color:var(--gold);">Vamsi</em>
+    </div>
+
+    <div class="reveal d3" style="font-family:var(--sans);font-size:27px;color:var(--text-muted);margin-bottom:36px;margin-top:16px;">
+      Account Manager → <span style="color:var(--text-warm);font-weight:500;">Senior Manager</span>
+      &nbsp;&nbsp;·&nbsp;&nbsp;
+      Meijer Retail Media Network &nbsp;·&nbsp; dentsu Hyderabad
+    </div>
+
+    <div class="reveal d4" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px;">
+      <span class="gold-tag">2.5 Yrs on Account</span>
+      <span class="gold-tag">$275M Run-Rate</span>
+      <span class="gold-tag">5 Platforms</span>
+      <span class="gold-tag">Client Endorsed</span>
+      <span class="gold-tag">Named in Q4 QBR</span>
+    </div>
+
+    <div class="rule reveal d5" style="margin-bottom:24px;"></div>
+
+    <div class="reveal d6" style="display:flex;justify-content:space-between;align-items:center;">
+      <span style="font-family:var(--mono);font-size:13px;letter-spacing:0.14em;color:var(--text-hint);">
+        Officially named in Meijer Q4 2025 QBR · Presented to client · March 23, 2026
+      </span>
+      <span style="font-family:var(--mono);font-size:13px;letter-spacing:0.14em;color:var(--text-hint);">1 / 15</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 2 · EXECUTIVE SUMMARY
+     ============================================================ -->
+<section class="slide cream" id="slide-es">
+  <div class="slide-inner">
+    <div class="chrome reveal d1">
+      <span class="chrome-label">Executive Summary</span>
+      <span class="chrome-counter">2 / 15</span>
+    </div>
+
+    <div class="reveal d2">
+      <div class="kicker">At a Glance</div>
+      <h2>This is a <em>market correction.</em><br>Not a reward.</h2>
+    </div>
+
+    <div class="es-grid reveal d3" style="flex:1;margin-top:40px;">
+      <div class="es-col">
+        <div class="es-num">2.5</div>
+        <div class="es-label">Years on Account</div>
+        <div class="rule" style="margin:14px 0;background:var(--border-lt);"></div>
+        <div class="es-desc">Operating at Senior Manager scope from day one — five platforms, 100+ concurrent campaigns, full pacing ownership.</div>
+      </div>
+      <div class="es-divider"></div>
+      <div class="es-col">
+        <div class="es-num">$275M</div>
+        <div class="es-label">Annual Media Governed</div>
+        <div class="rule" style="margin:14px 0;background:var(--border-lt);"></div>
+        <div class="es-desc">Meijer RMN — the fastest-growing channel in US digital advertising. $5.3M weekly at >98% Delivery in Full, every quarter.</div>
+      </div>
+      <div class="es-divider"></div>
+      <div class="es-col">
+        <div class="es-num">₹14.9L</div>
+        <div class="es-label">Structural Gap</div>
+        <div class="rule" style="margin:14px 0;background:var(--border-lt);"></div>
+        <div class="es-desc">Current ₹13.1 LPA vs. market ₹28–35 LPA for this exact scope in Hyderabad. Two annual review cycles passed. Zero correction.</div>
+      </div>
+      <div class="es-divider"></div>
+      <div class="es-col">
+        <div class="es-num">₹28L</div>
+        <div class="es-label">The Ask</div>
+        <div class="rule" style="margin:14px 0;background:var(--border-lt);"></div>
+        <div class="es-desc">Base ₹25–26 + performance bonus ₹2–3. Floor of the market band. Most of the increment is tied to delivery already happening.</div>
+      </div>
+    </div>
+
+    <div class="foot reveal d5">
+      <span class="foot-label">Endorsed in writing · Raymond Hall, AD, NSM · Announced to full team by client</span>
+      <span class="foot-label">dentsu India · Hyderabad</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 3 · THE PROBLEM
+     ============================================================ -->
+<section class="slide dark" id="slide-problem">
+  <div class="slide-inner">
+    <div class="chrome reveal d1">
+      <span class="chrome-label">Define · 01</span>
+      <span class="chrome-counter">3 / 15</span>
+    </div>
+
+    <div class="reveal d2">
+      <div class="kicker">The Problem</div>
+      <h2>Title and comp do not match<br><em>scope delivered.</em></h2>
+    </div>
+
+    <div class="problem-body reveal d3">
+      <div class="problem-left">
+        <p class="lead" style="margin-bottom:24px;">
+          Bharat has been operating as a <em>Senior Manager</em> since the first week on the Meijer account — full cross-platform strategy, pacing authority, root-cause analysis, client liaison. The title and compensation have not followed.
+        </p>
+        <p class="body">
+          Two consecutive Annual Salary Review cycles passed without correction. The account grew +74% in revenue and +73% in campaign volume across that period. The scope did not shrink. The pay did.
+        </p>
+      </div>
+      <div class="rule" style="width:1px;height:auto;background:var(--border-dk);margin:0 64px;flex-shrink:0;"></div>
+      <div class="problem-right">
+        <div class="problem-item reveal d4">
+          <div class="problem-item-num">01</div>
+          <div class="problem-item-text">Account Manager title for <strong style="color:var(--text-warm);">2.5 years</strong> while operating at Senior Manager scope from day one — 5 platforms, 100+ concurrent campaigns, full pacing ownership.</div>
+        </div>
+        <div class="problem-item reveal d5">
+          <div class="problem-item-num">02</div>
+          <div class="problem-item-text">Two consecutive ASR cycles passed with no real correction. Account grew +74% revenue in the same window.</div>
+        </div>
+        <div class="problem-item reveal d6">
+          <div class="problem-item-num">03</div>
+          <div class="problem-item-text">Current <strong style="color:var(--text-warm);">₹13.1 LPA</strong> vs. market <strong style="color:var(--gold);">₹28–35 LPA</strong> for this role and scope — a ₹14.9 LPA structural gap.</div>
+        </div>
+        <div class="problem-item reveal d7">
+          <div class="problem-item-num">04</div>
+          <div class="problem-item-text">Retail Media Networks growing at <strong style="color:var(--text-warm);">4× the digital ad market rate</strong> — specialist talent is actively bid up by the market in 2026.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot reveal d8">
+      <span class="foot-label">DMAIC Framework · Business Case</span>
+      <span class="foot-label">3 / 15</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 4 · THE EVIDENCE
+     ============================================================ -->
+<section class="slide cream" id="slide-evidence">
+  <div class="slide-inner">
+    <div class="chrome reveal d1">
+      <span class="chrome-label">Measure &amp; Analyze · 02</span>
+      <span class="chrome-counter">4 / 15</span>
+    </div>
+
+    <div class="reveal d2">
+      <div class="kicker">The Evidence</div>
+      <h2>QBR-validated. Client-endorsed.<br><em>On official record.</em></h2>
+    </div>
+
+    <div class="evidence-grid reveal d3">
+      <div class="evidence-stat">
+        <div class="stat-value">+134%</div>
+        <div class="stat-label">Program ROAS YoY</div>
+        <div class="stat-note">Q4 QBR · Presented to Meijer · Mar 23 2026</div>
+      </div>
+      <div class="evidence-stat">
+        <div class="stat-value">+107%</div>
+        <div class="stat-label">CVR YoY</div>
+        <div class="stat-note">Q4 QBR Validated · March 2026</div>
+      </div>
+      <div class="evidence-stat">
+        <div class="stat-value">&gt;98%</div>
+        <div class="stat-label">Delivery in Full</div>
+        <div class="stat-note">All Quarters · Zero SLA Defects</div>
+      </div>
+      <div class="evidence-stat">
+        <div class="stat-value">968</div>
+        <div class="stat-label">Campaigns — 2025</div>
+        <div class="stat-note">+31% YoY · 123 campaigns/mo avg Q4</div>
+      </div>
+    </div>
+
+    <div class="reveal d5" style="margin-top:32px;background:var(--cream-alt);border:1px solid var(--border-lt);padding:24px 32px;display:flex;gap:32px;align-items:center;">
+      <div style="flex-shrink:0;">
+        <div style="font-family:var(--mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">Official Record</div>
+        <div style="font-family:var(--serif);font-size:20px;font-weight:600;color:var(--ink);line-height:1.3;">Named in Meijer Q4 2025 QBR</div>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--ink-hint);letter-spacing:0.1em;margin-top:4px;">March 23, 2026 · Presented to client · Endorsed in writing by Raymond Hall, AD, NSM</div>
+      </div>
+      <div style="width:1px;height:60px;background:var(--border-lt);flex-shrink:0;"></div>
+      <div style="font-family:var(--serif);font-size:18px;font-style:italic;color:var(--ink-muted);line-height:1.55;flex:1;">
+        "Promotion announced to full team by client." The client side publicly celebrated this promotion before dentsu India formalised it.
+      </div>
+    </div>
+
+    <div class="foot reveal d6">
+      <span class="foot-label">Source: Meijer Q4 2025 QBR · dentsu / New Stream Media</span>
+      <span class="foot-label">4 / 15</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 5 · SCALE & GROWTH
+     ============================================================ -->
+<section class="slide dark" id="slide-scale">
+  <div class="slide-inner">
+    <div class="chrome reveal d1">
+      <span class="chrome-label">Scale &amp; Growth · 03</span>
+      <span class="chrome-counter">5 / 15</span>
+    </div>
+
+    <div class="reveal d2">
+      <div class="kicker">The Account</div>
+      <h2>~$275M a year under management.<br><em>Named in the official Q4 QBR.</em></h2>
+    </div>
+
+    <div class="growth-layout reveal d3">
+      <div class="growth-left">
+        <div style="font-family:var(--mono);font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">Account Growth — H4 Comparison</div>
+        <div style="display:flex;gap:56px;align-items:flex-end;margin-bottom:32px;">
+          <div>
+            <div style="font-family:var(--serif);font-size:72px;font-weight:600;color:var(--text-muted);line-height:1;letter-spacing:-0.02em;">$10.7M</div>
+            <div style="font-family:var(--mono);font-size:11px;color:var(--text-hint);letter-spacing:0.14em;margin-top:6px;">H4 2024 · 71 campaigns/mo</div>
+          </div>
+          <div style="font-family:var(--serif);font-size:48px;font-weight:300;color:var(--gold);line-height:1;margin-bottom:18px;">→</div>
+          <div>
+            <div style="font-family:var(--serif);font-size:72px;font-weight:600;color:var(--gold);line-height:1;letter-spacing:-0.02em;">$18.7M</div>
+            <div style="font-family:var(--mono);font-size:11px;color:var(--text-hint);letter-spacing:0.14em;margin-top:6px;">H4 2025 · 123 campaigns/mo &nbsp;<span style="color:var(--gold);">+74%</span></div>
+          </div>
+        </div>
+        <p class="body" style="max-width:700px;">
+          Maintained >98% DIF and 98% on-time launches throughout the entire growth phase — scale grew 4.3×, yield never moved. Cited in the official Meijer Q4 2025 QBR.
+        </p>
+      </div>
+
+      <div class="growth-right">
+        <div class="growth-row reveal d4">
+          <div class="growth-row-label">&gt;98% Delivery in Full</div>
+          <div class="growth-row-val">All Qtrs</div>
+        </div>
+        <div class="growth-row reveal d5">
+          <div class="growth-row-label">Record week — 8 Mar 2026</div>
+          <div class="growth-row-val">$7.24M</div>
+        </div>
+        <div class="growth-row reveal d6">
+          <div class="growth-row-label">+134% Program ROAS YoY</div>
+          <div class="growth-row-val">Q4 QBR</div>
+        </div>
+        <div class="growth-row reveal d7">
+          <div class="growth-row-label">+107% CVR YoY</div>
+          <div class="growth-row-val">Q4 QBR</div>
+        </div>
+        <div class="growth-row reveal d8">
+          <div class="growth-row-label">Campaigns launched — 2025</div>
+          <div class="growth-row-val">968</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot reveal">
+      <span class="foot-label">Meijer Retail Media Network · New Stream Media × dentsu</span>
+      <span class="foot-label">5 / 15</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 6 · INDUSTRY CONTEXT
+     ============================================================ -->
+<section class="slide cream" id="slide-industry">
+  <div class="slide-inner">
+    <div class="chrome reveal d1">
+      <span class="chrome-label">Industry Context · 03</span>
+      <span class="chrome-counter">6 / 15</span>
+    </div>
+
+    <div class="reveal d2">
+      <div class="kicker">Why This Account Commands Premium Expertise</div>
+      <h2>Retail Media is the <em>fastest-growing</em> channel<br>in US digital advertising.</h2>
+    </div>
+
+    <div class="industry-cols reveal d3">
+      <div class="industry-col">
+        <p class="lead" style="margin-bottom:var(--gap-md);">Managing $275M on Meijer's RMN is not generic ad operations. It is specialised expertise at the frontier of digital advertising's most measurable, most data-driven, fastest-growing channel.</p>
+
+        <div class="bar-chart">
+          <div style="font-family:var(--mono);font-size:11px;letter-spacing:0.14em;color:var(--ink-hint);text-transform:uppercase;margin-bottom:8px;">US RMN Ad Spend ($B) · eMarketer H1 2026</div>
+          <div class="bar-row">
+            <div class="bar-year">2023 Actual</div>
+            <div class="bar-track"><div class="bar-fill" style="width:45%;"></div></div>
+            <div class="bar-val">$44.2B</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-year">2024 Actual</div>
+            <div class="bar-track"><div class="bar-fill" style="width:56%;"></div></div>
+            <div class="bar-val">$54.9B</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-year">2025 Forecast</div>
+            <div class="bar-track"><div class="bar-fill" style="width:66%;"></div></div>
+            <div class="bar-val">$64.7B</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-year">2026 Forecast</div>
+            <div class="bar-track"><div class="bar-fill gold" style="width:73%;"></div></div>
+            <div class="bar-val" style="color:var(--gold);font-weight:600;">$71.09B</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-year">2028 Projected</div>
+            <div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--ink-muted);"></div></div>
+            <div class="bar-val">$97.9B</div>
+          </div>
+        </div>
+        <div class="caption" style="margin-top:10px;">Source: eMarketer H1 2026 Retail Media Forecast, May 2026</div>
+      </div>
+
+      <div class="industry-divider"></div>
+
+      <div class="industry-col" style="padding-left:56px;padding-right:0;">
+        <div style="display:flex;flex-direction:column;gap:20px;">
+          <div style="border-top:1px solid var(--border-lt);padding-top:16px;">
+            <div style="font-family:var(--serif);font-size:58px;font-weight:600;color:var(--gold);line-height:1;letter-spacing:-0.02em;">17.9%</div>
+            <div style="font-family:var(--sans);font-size:17px;color:var(--ink-muted);margin-top:8px;">RMN YoY growth — <strong style="color:var(--ink);">4×</strong> faster than overall digital ad market (4.3% YoY)</div>
+          </div>
+          <div style="border-top:1px solid var(--border-lt);padding-top:16px;">
+            <div style="font-family:var(--serif);font-size:58px;font-weight:600;color:var(--ink);line-height:1;letter-spacing:-0.02em;">81%</div>
+            <div style="font-family:var(--sans);font-size:17px;color:var(--ink-muted);margin-top:8px;">of marketers rank retail media as the <strong style="color:var(--ink);">#1 most important channel</strong> — above search &amp; social</div>
+          </div>
+          <div style="border-top:1px solid var(--border-lt);padding-top:16px;">
+            <div style="font-family:var(--serif);font-size:58px;font-weight:600;color:var(--ink);line-height:1;letter-spacing:-0.02em;">22%</div>
+            <div style="font-family:var(--sans);font-size:17px;color:var(--ink-muted);margin-top:8px;">of all US digital ad spend captured by retail media by 2027 — <strong style="color:var(--ink);">on par with search and social</strong></div>
+          </div>
+          <div style="border-top:1px solid var(--border-lt);padding-top:16px;">
+            <div style="font-family:var(--sans);font-size:17px;color:var(--ink-muted);">RMN specialists command <strong style="color:var(--gold);">15–20% premium</strong> above standard programmatic. This expertise is actively bid up by the market in 2026.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot reveal">
+      <span class="foot-label">Source: eMarketer H1 2026 Retail Media Forecast · May 2026</span>
+      <span class="foot-label">6 / 15</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 7 · SCOPE OF OWNERSHIP
+     ============================================================ -->
+<section class="slide dark" id="slide-scope">
+  <div class="slide-inner">
+    <div class="chrome reveal d1">
+      <span class="chrome-label">Scope of Ownership · 04</span>
+      <span class="chrome-counter">7 / 15</span>
+    </div>
+
+    <div class="reveal d2">
+      <div class="kicker">What Is Owned Today</div>
+      <h2>A <em>Senior Manager's remit</em> delivered<br>under an Account Manager title.</h2>
+    </div>
+
+    <div class="scope-grid reveal d3">
+      <div class="scope-platform">
+        <div class="scope-platform-name">DV360</div>
+        <div class="scope-platform-role">Full Governance</div>
+        <div class="scope-platform-detail">Sole optimization authority. Real-time budget reallocation. Root cause diagnosis — identified robots.txt/AdsBot rejection before Google engineering. No upstream approval required.</div>
+      </div>
+      <div class="scope-platform">
+        <div class="scope-platform-name">Trade Desk</div>
+        <div class="scope-platform-role">Cross-Platform Pacing</div>
+        <div class="scope-platform-detail">Manages TTD alongside DV360 in unified pacing log. Bid testing, frequency governance, delivery reconciliation. Formally transferred March 2025.</div>
+      </div>
+      <div class="scope-platform">
+        <div class="scope-platform-name">GAM</div>
+        <div class="scope-platform-role">Direct &amp; Programmatic</div>
+        <div class="scope-platform-detail">Diagnosed GAM campaigns at 0% delivery (URL L1/L2 misconfiguration) and resolved unprompted. Full line-item governance.</div>
+      </div>
+      <div class="scope-platform">
+        <div class="scope-platform-name">Meta</div>
+        <div class="scope-platform-role">Social Governance</div>
+        <div class="scope-platform-detail">Caught and corrected duplicate Meta campaigns running simultaneously. Budget set to $1,470 vs. planned $15,312 — fixed before reaching client or pacing log.</div>
+      </div>
+      <div class="scope-platform">
+        <div class="scope-platform-name">Pinterest</div>
+        <div class="scope-platform-role">Paid Social &amp; Recovery</div>
+        <div class="scope-platform-detail">MARS Pets FY26 dual-platform recovery — +16% pacing in one day. Ongoing bid cap, audience targeting, and delivery health management.</div>
+      </div>
+    </div>
+
+    <div class="foot reveal">
+      <span class="foot-label">$5.3M weekly · 100+ live campaigns · Sole autonomous authority · Onshore teams execute strategy</span>
+      <span class="foot-label">7 / 15</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 8 · ROLE VARIANCE ANALYSIS
+     ============================================================ -->
+<section class="slide cream" id="slide-variance">
+  <div class="slide-inner">
+    <div class="chrome reveal d1">
+      <span class="chrome-label">Role Variance · 06</span>
+      <span class="chrome-counter">8 / 15</span>
+    </div>
+
+    <div class="reveal d2">
+      <div class="kicker">AM Baseline vs. Actual Output</div>
+      <h2>Standard AM: QA inspection only.<br>Bharat: <em>complete Senior Manager execution.</em></h2>
+    </div>
+
+    <div class="variance-body reveal d3">
+      <div class="variance-col">
+        <div class="variance-header">
+          <div class="variance-header-label">Standard Account Manager · Role Spec</div>
+          <h3 style="margin-top:8px;">Downstream Inspection Only</h3>
+        </div>
+        <div class="variance-items">
+          <div class="variance-item">
+            <div class="variance-item-title">T-Sheet QA Execution</div>
+            <div class="variance-item-desc">Verify campaign build accuracy against trafficking sheet</div>
+          </div>
+          <div class="variance-item">
+            <div class="variance-item-title">Platform Build QA Validation</div>
+            <div class="variance-item-desc">Pre-launch checklist: targeting, budgets, creative, flight dates</div>
+          </div>
+          <div class="variance-item">
+            <div class="variance-item-title">Manual Screenshot Capture</div>
+            <div class="variance-item-desc">Delivery evidence capture — manual, per-campaign, per-cycle</div>
+          </div>
+          <div class="variance-item">
+            <div class="variance-item-title">Basic Delivery Health Check</div>
+            <div class="variance-item-desc">Pass/fail flag for standard pacing deviation — escalate upstream</div>
+          </div>
+        </div>
+        <div class="variance-ceiling">
+          <div class="ceiling-stat">
+            <div class="ceiling-val">0</div>
+            <div class="ceiling-lbl">Platforms with authority</div>
+          </div>
+          <div class="ceiling-stat">
+            <div class="ceiling-val">₹0</div>
+            <div class="ceiling-lbl">Budget governed</div>
+          </div>
+        </div>
+      </div>
+      <div class="rule" style="width:1px;background:var(--border-lt);height:auto;"></div>
+      <div class="variance-col actual">
+        <div class="variance-header actual-hdr">
+          <div class="variance-header-label">Bharat Vamsi · Measured Output</div>
+          <h3 style="margin-top:8px;color:var(--ink);">Senior Manager Execution — <em style="font-style:italic;color:var(--gold);">Every Day</em></h3>
+        </div>
+        <div class="variance-items">
+          <div class="variance-item">
+            <div class="variance-item-title">Automated Screenshot Pipeline</div>
+            <div class="variance-item-desc">Built Adreform automation to eliminate manual screenshot cycle — Lean waste reduction applied</div>
+          </div>
+          <div class="variance-item">
+            <div class="variance-item-title">Sole Governance · $5.3M Weekly</div>
+            <div class="variance-item-desc">100+ live campaigns across DV360, TTD, GAM, Meta, Pinterest — full autonomous authority</div>
+          </div>
+          <div class="variance-item">
+            <div class="variance-item-title">Pacing Optimization — Sole Authority</div>
+            <div class="variance-item-desc">Formally transferred by Steven Matos, March 2025 — onshore activators relay Bharat's optimization decisions</div>
+          </div>
+          <div class="variance-item">
+            <div class="variance-item-title">Root Cause &amp; Cross-Platform Diagnosis</div>
+            <div class="variance-item-desc">Diagnosed robots.txt/AdsBot DV360 rejection before Google. Confirmed correct by Google rep, cited in client QBR.</div>
+          </div>
+        </div>
+        <div class="variance-ceiling">
+          <div class="ceiling-stat">
+            <div class="ceiling-val gold-stat">5</div>
+            <div class="ceiling-lbl">Platforms with authority</div>
+          </div>
+          <div class="ceiling-stat">
+            <div class="ceiling-val gold-stat">$5.3M</div>
+            <div class="ceiling-lbl">Weekly budget governed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot reveal">
+      <span class="foot-label">Output Delta: 3 Tiers above AM role specification · >98% DIF yield across all output</span>
+      <span class="foot-label">8 / 15</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 9 · THREE DOCUMENTED WINS
+     ============================================================ -->
+<section class="slide dark" id="slide-wins">
+  <div class="slide-inner">
+    <div class="chrome reveal d1">
+      <span class="chrome-label">Documented Wins · 05</span>
+      <span class="chrome-counter">9 / 15</span>
+    </div>
+
+    <div class="reveal d2">
+      <div class="kicker">Verified by Client Communications</div>
+      <h2>Every save is <em>on the record.</em></h2>
+    </div>
+
+    <div class="wins-grid reveal d3">
+      <div class="win-card">
+        <div class="win-num">Win 01</div>
+        <div class="win-title">Google Platform Bug<br><em style="font-style:italic;color:var(--gold);">Diagnosed before Google</em></div>
+        <div class="win-steps">
+          <div class="win-step"><div class="win-step-num">1</div><div>Mass DV360 "Destination not crawlable" errors detected across campaigns</div></div>
+          <div class="win-step"><div class="win-step-num">2</div><div>/shopping/ URLs blocked for AdsBot in robots.txt — root cause isolated independently</div></div>
+          <div class="win-step"><div class="win-step-num">3</div><div>Google confirmed: "You are correct in your assessment." Cited in client QBR.</div></div>
+        </div>
+        <div class="win-quote">"love this analysis — I'll share with the team."</div>
+        <div class="win-attr">Raymond Hall, AD · NSM</div>
+      </div>
+
+      <div class="win-card">
+        <div class="win-num">Win 02</div>
+        <div class="win-title">Pacing Recovery<br><em style="font-style:italic;color:var(--gold);">619,636 impressions saved</em></div>
+        <div class="win-steps">
+          <div class="win-step"><div class="win-step-num">1</div><div>Labour Day flight, Aug 2025 — identified 8.4M impression plan quietly pacing behind</div></div>
+          <div class="win-step"><div class="win-step-num">2</div><div>Full plan reconciled, exact shortfall isolated, rolled into active flight</div></div>
+          <div class="win-step"><div class="win-step-num">3</div><div>Full delivery protected. No budget shift. No client-visible miss.</div></div>
+        </div>
+        <div class="win-quote">"great catch Bharath — you're the best, thank you so much"</div>
+        <div class="win-attr">Raymond Hall, AD · NSM</div>
+      </div>
+
+      <div class="win-card">
+        <div class="win-num">Win 03</div>
+        <div class="win-title">Budget Protection<br><em style="font-style:italic;color:var(--gold);">Two Meta errors. Both fixed.</em></div>
+        <div class="win-steps">
+          <div class="win-step"><div class="win-step-num">1</div><div>Two duplicate Meta campaigns found running simultaneously</div></div>
+          <div class="win-step"><div class="win-step-num">2</div><div>Budget set to $1,470 vs. planned $15,312.50 — caught and corrected pre-client</div></div>
+          <div class="win-step"><div class="win-step-num">3</div><div>Both issues flagged and resolved before reaching the client or the pacing log</div></div>
+        </div>
+        <div class="win-quote">"omg good catch — that probably explains the under-pacing!"</div>
+        <div class="win-attr">Raymond Hall, AD · NSM</div>
+      </div>
+    </div>
+
+    <div class="foot reveal">
+      <span class="foot-label">All wins documented in client communications · Raymond Hall, Associate Director, New Stream Media</span>
+      <span class="foot-label">9 / 15</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 10 · PARTNER RECOGNITION
+     ============================================================ -->
+<section class="slide cream" id="slide-recognition">
+  <div class="slide-inner">
+    <div class="chrome reveal d1">
+      <span class="chrome-label">Account Partner Voices · 07</span>
+      <span class="chrome-counter">10 / 15</span>
+    </div>
+
+    <div class="reveal d2">
+      <div class="kicker">Multiple Channels · On the Record</div>
+      <h2>Not just Raymond.<br><em>Every partner says the same.</em></h2>
+    </div>
+
+    <div class="recognition-grid reveal d3">
+      <div class="recognition-main">
+        <div class="rec-quote-mark">"</div>
+        <div class="rec-quote-text">Big congrats on the promo — so well deserved and excited to have you continue to grow on the Meijer account. I hope you take some time to celebrate!</div>
+        <div style="height:1px;background:var(--border-lt);margin:16px 0;"></div>
+        <div class="rec-attr-name">Raymond Hall</div>
+        <div class="rec-attr-role">Associate Director, Activation — New Stream Media · Microsoft Teams, 18 June 2026</div>
+        <div style="height:1px;background:var(--border-lt);margin:20px 0;"></div>
+        <p class="body" style="font-style:italic;">"Raymond formally communicated his recommendation for Senior Manager promotion to dentsu India leadership — covering scope, delivery, and platform expertise in detail."</p>
+        <p class="caption" style="margin-top:8px;">Raymond Hall has confirmed his support and assessment of scope on account calls — consistent with his written position to dentsu leadership.</p>
+      </div>
+
+      <div class="rule" style="width:1px;background:var(--border-lt);height:auto;"></div>
+
+      <div class="recognition-voices">
+        <div class="voice-card reveal d4">
+          <div class="voice-initial">NH</div>
+          <div class="voice-text">"This has to be a record on quickest PoP turnaround ever!! Your efforts are greatly appreciated."</div>
+          <div class="voice-from">Nicole Howell · Sr. Specialist, Activation · NSM · Sep 30, 2024</div>
+        </div>
+        <div class="voice-card reveal d5">
+          <div class="voice-initial">SM</div>
+          <div class="voice-text">"I'll let you take over the training" — trusted Bharat to lead full Ad Reform onboarding. "amazing, we're lucky to have you on the team!"</div>
+          <div class="voice-from">Steven Matos · Assoc. Manager, Activation · dentsu/NSM</div>
+        </div>
+        <div class="voice-card reveal d6">
+          <div class="voice-initial">CN</div>
+          <div class="voice-text">"Amazing — thanks for catching that and making those changes!!" — Bharat diagnosed GAM campaign at 0% (URL L1/L2) and resolved unprompted.</div>
+          <div class="voice-from">Chloe Nicholas · Activation Specialist · NSM</div>
+        </div>
+        <div class="voice-card reveal d7">
+          <div class="voice-initial">CM</div>
+          <div class="voice-text">"Great insight Bharath, thank you so much for exploring this issue further!" — DV360 bid + frequency root-cause deep-dive.</div>
+          <div class="voice-from">Chloe Mietelka · Activation Specialist · NSM</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot reveal">
+      <span class="foot-label">Communications on record · Microsoft Teams · Email · All verifiable</span>
+      <span class="foot-label">10 / 15</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 11 · CLIENT ANNOUNCEMENT
+     ============================================================ -->
+<section class="slide dark" id="slide-announcement">
+  <div class="slide-inner">
+    <div class="chrome reveal d1">
+      <span class="chrome-label">Official Announcement · 07</span>
+      <span class="chrome-counter">11 / 15</span>
+    </div>
+
+    <div class="reveal d2">
+      <div class="kicker">The Whole Team Already Celebrated It</div>
+      <h2>Announced by the <em>client side.</em><br>The only step remaining is dentsu India.</h2>
+    </div>
+
+    <div class="announcement-body reveal d3">
+      <div class="announcement-left">
+        <div class="announcement-msg">
+          <div class="announcement-msg-label">Official Channel · New Stream Media</div>
+          <div class="announcement-msg-text">"Hey Everyone! I'm excited to share that, starting in July, Bharat will be stepping into his new managerial role — congratulations again, Bharat Vamsi! As part of this transition, he'll be taking on campaign activation responsibilities over the next month."</div>
+          <div class="announcement-msg-from">Announced by client side team lead · NSM team channel</div>
+        </div>
+        <p class="body" style="margin-top:var(--gap-md);">
+          This promotion was announced to the entire account team by the <em>client.</em> The whole ecosystem — client side and agency — has already celebrated this moment. The only step remaining is making it official on the dentsu India side.
+        </p>
+      </div>
+
+      <div class="rule" style="width:1px;background:var(--border-dk);height:auto;"></div>
+
+      <div class="announcement-right">
+        <div style="font-family:var(--mono);font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Team Reactions</div>
+        <div class="team-voice reveal d4">
+          <div class="team-voice-name">Mason Kistler</div>
+          <div class="team-voice-role">Campaign Activation · NSM</div>
+          <div class="team-voice-quote">"Congrats Bharat Vamsi! Excited to work alongside you!"</div>
+        </div>
+        <div class="team-voice reveal d5">
+          <div class="team-voice-name">Chloe Mietelka</div>
+          <div class="team-voice-role">Activation Specialist · NSM</div>
+          <div class="team-voice-quote">"Congrats Bharat, well deserved!!"</div>
+        </div>
+        <div class="team-voice reveal d6">
+          <div class="team-voice-name">Caitlin Farrand</div>
+          <div class="team-voice-role">Account Team · NSM</div>
+          <div class="team-voice-quote">"Yay Bharat!! So well deserved!"</div>
+        </div>
+        <div class="team-voice reveal d7">
+          <div class="team-voice-name">Kyle Lower</div>
+          <div class="team-voice-role">Account Team · NSM</div>
+          <div class="team-voice-quote">"Congrats Bharat, that's fantastic news!! Very excited for this!"</div>
+        </div>
+        <div class="team-voice reveal d8">
+          <div class="team-voice-name">Raymond Hall</div>
+          <div class="team-voice-role">Associate Director · NSM · Teams DM · 18 Jun 2026</div>
+          <div class="team-voice-quote">"Big congrats on the promo — so well deserved and excited to have you continue to grow on the Meijer account."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot reveal">
+      <span class="foot-label">New Stream Media · Official team channel · June 2026</span>
+      <span class="foot-label">11 / 15</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 12 · COMPENSATION CONTEXT
+     ============================================================ -->
+<section class="slide cream" id="slide-comp">
+  <div class="slide-inner">
+    <div class="chrome reveal d1">
+      <span class="chrome-label">Compensation Context · 08</span>
+      <span class="chrome-counter">12 / 15</span>
+    </div>
+
+    <div class="reveal d2">
+      <div class="kicker">The Gap Is Structural, Not Incremental</div>
+      <h2>₹13.1 LPA for a scope the market<br>prices at <em>₹28–35 LPA.</em></h2>
+    </div>
+
+    <div class="comp-body reveal d3">
+      <div class="comp-left">
+        <p class="lead">Eight years of industry experience. Five enterprise platforms. $275M in annual media spend. An external resource managing display-only on one platform joined at ≈₹25 LPA. Bharat's package: ₹13.1 LPA.</p>
+
+        <div class="comp-bar-item">
+          <div class="comp-bar-label">Current CTC</div>
+          <div class="comp-bar-track"><div class="comp-bar-fill current"></div></div>
+          <div class="comp-bar-val">
+            <div class="comp-bar-number">₹13.1 LPA</div>
+            <div class="comp-bar-sub">As of June 2026</div>
+          </div>
+        </div>
+        <div class="comp-bar-item">
+          <div class="comp-bar-label">External hire (display-only, one platform)</div>
+          <div class="comp-bar-track"><div class="comp-bar-fill external"></div></div>
+          <div class="comp-bar-val">
+            <div class="comp-bar-number">≈₹25 LPA</div>
+            <div class="comp-bar-sub">Single-platform scope</div>
+          </div>
+        </div>
+        <div class="comp-bar-item">
+          <div class="comp-bar-label">The Ask</div>
+          <div class="comp-bar-track"><div class="comp-bar-fill ask"></div></div>
+          <div class="comp-bar-val">
+            <div class="comp-bar-number gold-num">₹28 LPA</div>
+            <div class="comp-bar-sub">Floor of market band</div>
+          </div>
+        </div>
+        <div class="comp-bar-item">
+          <div class="comp-bar-label">Market band — this scope &amp; seniority</div>
+          <div class="comp-bar-track"><div class="comp-bar-fill market" style="background:var(--border-lt);"></div></div>
+          <div class="comp-bar-val">
+            <div class="comp-bar-number">₹28–35 LPA</div>
+            <div class="comp-bar-sub">LinkedIn / Glassdoor 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rule" style="width:1px;background:var(--border-lt);height:auto;"></div>
+
+      <div class="comp-right">
+        <div style="font-family:var(--mono);font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-hint);margin-bottom:16px;">How We Got Here</div>
+        <div class="timeline-list">
+          <div class="timeline-item reveal d4">
+            <div class="tl-date">Jan 2024</div>
+            <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+            <div class="tl-content">
+              <div class="tl-event">Joined at ₹12.25 LPA</div>
+              <div class="tl-detail">Senior Manager scope from day one</div>
+            </div>
+          </div>
+          <div class="timeline-item reveal d5">
+            <div class="tl-date">Apr 2024</div>
+            <div class="tl-spine"><div class="tl-dot" style="background:var(--border-lt);"></div><div class="tl-line"></div></div>
+            <div class="tl-content">
+              <div class="tl-event">Missed ASR</div>
+              <div class="tl-detail">Too close to joining date — no correction</div>
+            </div>
+          </div>
+          <div class="timeline-item reveal d6">
+            <div class="tl-date">2024 Cycle</div>
+            <div class="tl-spine"><div class="tl-dot" style="background:var(--border-lt);"></div><div class="tl-line"></div></div>
+            <div class="tl-content">
+              <div class="tl-event">No correction — 0%</div>
+              <div class="tl-detail">Account grew +74% in revenue. Comp unchanged.</div>
+            </div>
+          </div>
+          <div class="timeline-item reveal d7">
+            <div class="tl-date">Jul 2025</div>
+            <div class="tl-spine"><div class="tl-dot" style="background:var(--border-lt);"></div><div class="tl-line"></div></div>
+            <div class="tl-content">
+              <div class="tl-event">7% increment → ₹13.10 LPA</div>
+              <div class="tl-detail">Scope already at Senior Manager for 18 months</div>
+            </div>
+          </div>
+          <div class="timeline-item reveal d8">
+            <div class="tl-date">Today</div>
+            <div class="tl-spine"><div class="tl-dot"></div></div>
+            <div class="tl-content">
+              <div class="tl-event" style="color:var(--gold);">Market: ₹28–35 LPA · Ask: ₹28 LPA</div>
+              <div class="tl-detail">The floor. Not the ceiling.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot reveal">
+      <span class="foot-label">LinkedIn Salary · Glassdoor 2026 · Senior Manager, Programmatic/Retail Media, Hyderabad</span>
+      <span class="foot-label">12 / 15</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 13 · ACCOUNT CONTINUITY
+     ============================================================ -->
+<section class="slide dark" id="slide-continuity">
+  <div class="slide-inner">
+    <div class="chrome reveal d1">
+      <span class="chrome-label">Account Continuity · 09</span>
+      <span class="chrome-counter">13 / 15</span>
+    </div>
+
+    <div class="reveal d2">
+      <div class="kicker">What This Correction Protects</div>
+      <h2>A <em>small correction</em> protects<br>a very large asset.</h2>
+    </div>
+
+    <div class="continuity-grid reveal d3">
+      <div class="continuity-card">
+        <div class="continuity-icon-val">1</div>
+        <div class="continuity-icon-label">Resource</div>
+        <div class="continuity-title">Consolidated Platform Ownership</div>
+        <div class="continuity-body">Currently, Bharat manages SSP (DV360, Trade Desk), DSP, Meta, and Pinterest as a single consolidated owner. Transitioning to individual platform owners — the standard model — would require separate specialists for each, each with their own onboarding period and no single owner holding the full pacing picture.</div>
+      </div>
+      <div class="continuity-card">
+        <div class="continuity-icon-val">6mo</div>
+        <div class="continuity-icon-label">Transfer Timeline</div>
+        <div class="continuity-title">Knowledge Transfer Risk Window</div>
+        <div class="continuity-body">Reaching full operational competency across all five platforms at $5.3M/week takes a minimum of 6 months. During that window, maintaining the current >98% DIF standard — which the client has formally acknowledged — would require careful oversight and carries delivery risk on a $275M engagement.</div>
+      </div>
+      <div class="continuity-card">
+        <div class="continuity-icon-val">2</div>
+        <div class="continuity-icon-label">ADs on Record</div>
+        <div class="continuity-title">Client Relationship Continuity</div>
+        <div class="continuity-body">Both Associate Directors on the account — Raymond Hall and Kyle Lower — have formally credited Bharat by name. The client has specifically recommended the promotion in writing. Continuity of this relationship is most effectively protected by recognising and retaining the individual they have named.</div>
+      </div>
+    </div>
+
+    <div class="reveal d5" style="margin-top:var(--gap-md);background:var(--navy-alt);border:1px solid var(--border-dk);padding:22px 32px;">
+      <div style="font-family:var(--sans);font-size:20px;color:var(--text-muted);line-height:1.6;">
+        A market-fair correction of <span style="color:var(--gold);font-family:var(--serif);font-weight:600;">₹15 LPA</span> — structured with most of the increase tied to the delivery targets already being met — is the most efficient way to protect account continuity, client trust, and operational stability on a <span style="color:var(--text-warm);font-weight:500;">$275M engagement.</span>
+      </div>
+    </div>
+
+    <div class="foot reveal">
+      <span class="foot-label">Retaining consolidated expertise at market rate is the lower-risk, more efficient path</span>
+      <span class="foot-label">13 / 15</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 14 · THE ASK
+     ============================================================ -->
+<section class="slide cream" id="slide-ask">
+  <div class="slide-inner">
+    <div class="chrome reveal d1">
+      <span class="chrome-label">The Ask · For Approval</span>
+      <span class="chrome-counter">14 / 15</span>
+    </div>
+
+    <div class="reveal d2">
+      <div class="kicker">Senior Manager · At the Right Number</div>
+      <h2>A correction. <em>Not a reward.</em><br>Built for long-term commitment.</h2>
+    </div>
+
+    <div class="ask-body reveal d3">
+      <div class="ask-left">
+        <div class="ask-total-label">Year-1 Target Total</div>
+        <div class="ask-total-val">₹28</div>
+        <div class="ask-total-unit">LPA · Base + Bonus</div>
+        <div class="rule-gold" style="margin:20px 0;"></div>
+        <div class="ask-sub">Base ₹25–26 + performance bonus ₹2–3. Most of the increment is earned through delivery, not granted unconditionally.</div>
+        <div style="margin-top:24px;">
+          <div style="font-family:var(--mono);font-size:11px;letter-spacing:0.14em;color:var(--ink-hint);text-transform:uppercase;margin-bottom:12px;">Why this works for the business</div>
+          <ul class="bullet-list">
+            <li>Steady, proven owner on $275M account the client credits to Bharat directly</li>
+            <li>≈₹2,300 Cr annual media governed at &gt;98% DIF — zero client-visible misses</li>
+            <li>The raise is performance-linked — the bonus is funded only when results are delivered</li>
+            <li>RMN expertise is the fastest-growing specialisation in digital advertising</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rule" style="width:1px;background:var(--border-lt);height:auto;"></div>
+
+      <div class="ask-right">
+        <div class="ask-component reveal d4">
+          <div class="ask-comp-label">01 · Title</div>
+          <div>
+            <div class="ask-comp-name">Senior Manager</div>
+            <div class="ask-comp-desc">A title I have been operating at since January 2024. The responsibilities, the ownership, the cross-platform strategy — all Senior Manager in practice. The paperwork is the only thing outstanding.</div>
+          </div>
+          <div class="ask-comp-tag"><span class="gold-tag">Client Endorsed</span></div>
+        </div>
+        <div class="ask-component reveal d5">
+          <div class="ask-comp-label">02 · Base Salary</div>
+          <div>
+            <div class="ask-comp-name">₹25–26 LPA</div>
+            <div class="ask-comp-desc">Market floor for this scope in Hyderabad — benchmarked against LinkedIn Salary &amp; Glassdoor for Senior Manager, Programmatic/Retail Media (2026). A correction, not a reward.</div>
+          </div>
+          <div class="ask-comp-tag"><span class="gold-tag">Market Rate</span></div>
+        </div>
+        <div class="ask-component reveal d6">
+          <div class="ask-comp-label">03 · Performance Bonus</div>
+          <div>
+            <div class="ask-comp-name">₹2–3 LPA</div>
+            <div class="ask-comp-desc">Tied to &gt;98% DIF and campaign SLA targets — both already met every quarter. Performance-linked, self-funding, and earned on delivery. The business funds this only on delivery.</div>
+          </div>
+          <div class="ask-comp-tag"><span class="gold-tag">De-Risked</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot reveal">
+      <span class="foot-label">Bharat Vamsi · dentsu India · Hyderabad · July 2026</span>
+      <span class="foot-label">14 / 15</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 15 · CLOSING
+     ============================================================ -->
+<section class="slide dark" id="slide-closing">
+  <div style="display:flex;flex-direction:column;justify-content:space-between;height:1080px;padding:59px 144px;">
+    <div class="reveal d1" style="font-family:var(--mono);font-size:13px;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-hint);padding-bottom:13px;border-bottom:1px solid var(--border-dk);">
+      Bharat Vamsi — Promotion Case · dentsu India · July 2026
+    </div>
+
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+      <div class="reveal d2" style="font-family:var(--serif);font-size:154px;font-weight:300;line-height:0.7;color:var(--gold);margin-bottom:24px;">"</div>
+      <div class="reveal d3" style="font-family:var(--serif);font-size:52px;font-weight:500;line-height:1.25;letter-spacing:-0.01em;color:var(--text-warm);max-width:1100px;">
+        What would it take to make<br>this move happen <em style="font-style:italic;color:var(--gold);">together?</em>
+      </div>
+      <div class="reveal d4" style="display:flex;align-items:center;gap:32px;margin-top:48px;">
+        <div>
+          <div style="font-family:var(--serif);font-size:26px;font-weight:600;color:var(--text-warm);">Bharat Vamsi</div>
+          <div style="font-family:var(--mono);font-size:13px;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-hint);margin-top:4px;">Account Manager → Senior Manager · dentsu India</div>
+        </div>
+        <div style="width:1px;height:48px;background:var(--border-dk);"></div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <span class="gold-tag">$275M Governed</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <span class="gold-tag">&gt;98% DIF All Quarters</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <span class="gold-tag">Client Endorsed · On Record</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal d5" style="display:flex;justify-content:space-between;align-items:center;padding-top:13px;border-top:1px solid var(--border-dk);">
+      <span style="font-family:var(--mono);font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-hint);">Promotion Case · Confidential · dentsu India · Hyderabad</span>
+      <span style="font-family:var(--mono);font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-hint);">15 / 15</span>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<!-- Progress dots -->
+<div class="progress-dots" id="progressDots"></div>
+
+<!-- Inline edit affordance -->
+<div class="edit-hotzone" id="editHotzone"></div>
+<button class="edit-toggle" id="editToggle">EDIT MODE</button>
+
+<script>
+/* === SLIDE PRESENTATION CONTROLLER === */
+class SlidePresentation {
+  constructor() {
+    this.slides = document.querySelectorAll('.slide');
+    this.current = 0;
+    this.stage = document.getElementById('deckStage');
+    this.dots = document.getElementById('progressDots');
+    this.total = this.slides.length;
+    this.setupScale();
+    this.setupDots();
+    this.setupKeyboard();
+    this.setupTouch();
+    this.setupWheel();
+    this.show(0);
+  }
+
+  setupScale() {
+    const scale = () => {
+      const f = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      const x = (window.innerWidth - 1920 * f) / 2;
+      const y = (window.innerHeight - 1080 * f) / 2;
+      this.stage.style.transform = `translate(${x}px,${y}px) scale(${f})`;
+    };
+    scale();
+    window.addEventListener('resize', scale);
+  }
+
+  setupDots() {
+    for (let i = 0; i < this.total; i++) {
+      const d = document.createElement('div');
+      d.className = 'progress-dot';
+      d.addEventListener('click', () => this.show(i));
+      this.dots.appendChild(d);
+    }
+  }
+
+  setupKeyboard() {
+    document.addEventListener('keydown', e => {
+      if (e.target.getAttribute('contenteditable')) return;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault(); this.next();
+      }
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+        e.preventDefault(); this.prev();
+      }
+      if (e.key === 'Home') { e.preventDefault(); this.show(0); }
+      if (e.key === 'End')  { e.preventDefault(); this.show(this.total - 1); }
+    });
+  }
+
+  setupTouch() {
+    let x0 = null;
+    document.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+    document.addEventListener('touchend', e => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 50) { dx < 0 ? this.next() : this.prev(); }
+      x0 = null;
+    }, { passive: true });
+  }
+
+  setupWheel() {
+    let last = 0;
+    document.addEventListener('wheel', e => {
+      const now = Date.now();
+      if (now - last < 600) return;
+      last = now;
+      e.deltaY > 0 ? this.next() : this.prev();
+    }, { passive: true });
+  }
+
+  show(n) {
+    this.current = Math.max(0, Math.min(n, this.total - 1));
+    this.slides.forEach((s, i) => {
+      const active = i === this.current;
+      s.classList.toggle('active', active);
+      /* Trigger animations with a tiny delay so layout settles */
+      if (active) {
+        s.classList.remove('visible');
+        requestAnimationFrame(() => requestAnimationFrame(() => s.classList.add('visible')));
+      } else {
+        s.classList.remove('visible');
+      }
+    });
+    document.querySelectorAll('.progress-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === this.current);
+    });
+  }
+
+  next() { this.show(this.current + 1); }
+  prev() { this.show(this.current - 1); }
+}
+
+const deck = new SlidePresentation();
+
+/* === INLINE EDITOR === */
+class InlineEditor {
+  constructor() {
+    this.isActive = false;
+    this.toggle = document.getElementById('editToggle');
+    this.hotzone = document.getElementById('editHotzone');
+    this.hideTimeout = null;
+    this.setupEvents();
+  }
+
+  setupEvents() {
+    this.toggle.addEventListener('click', () => this.toggleEditMode());
+    this.hotzone.addEventListener('click', () => this.toggleEditMode());
+
+    this.hotzone.addEventListener('mouseenter', () => {
+      clearTimeout(this.hideTimeout);
+      this.toggle.classList.add('show');
+    });
+    this.hotzone.addEventListener('mouseleave', () => {
+      this.hideTimeout = setTimeout(() => {
+        if (!this.isActive) this.toggle.classList.remove('show');
+      }, 400);
+    });
+    this.toggle.addEventListener('mouseenter', () => clearTimeout(this.hideTimeout));
+    this.toggle.addEventListener('mouseleave', () => {
+      this.hideTimeout = setTimeout(() => {
+        if (!this.isActive) this.toggle.classList.remove('show');
+      }, 400);
+    });
+
+    document.addEventListener('keydown', e => {
+      if ((e.key === 'e' || e.key === 'E') && !e.target.getAttribute('contenteditable')) {
+        this.toggleEditMode();
+      }
+      if (e.key === 's' && (e.ctrlKey || e.metaKey) && this.isActive) {
+        e.preventDefault();
+        this.save();
+      }
+    });
+  }
+
+  toggleEditMode() {
+    this.isActive = !this.isActive;
+    this.toggle.classList.toggle('active', this.isActive);
+    this.toggle.classList.add('show');
+    this.toggle.textContent = this.isActive ? 'EXIT EDIT' : 'EDIT MODE';
+
+    document.querySelectorAll('.slide *').forEach(el => {
+      if (el.children.length === 0 && el.textContent.trim()) {
+        if (this.isActive) {
+          el.setAttribute('contenteditable', 'true');
+        } else {
+          el.removeAttribute('contenteditable');
+        }
+      }
+    });
+
+    if (!this.isActive) this.save();
+  }
+
+  save() {
+    const html = document.documentElement.outerHTML;
+    const blob = new Blob([html], { type: 'text/html' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'bharat-vamsi-promotion.html';
+    a.click();
+  }
+}
+
+const editor = new InlineEditor();
+</script>
+</body>
+</html>
