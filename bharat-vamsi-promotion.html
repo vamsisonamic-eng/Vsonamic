@@ -617,8 +617,93 @@ strong { color:var(--white); font-weight:500; }
 .rht-quote strong { color:var(--white); }
 
 /* ═══════════════════════════════════════
-   OPERATIONAL EVOLUTION (5-PHASE TIMELINE)
+   DENTSU BRANDING
 ════════════════════════════════════════ */
+.dentsu-mark {
+  position:fixed; bottom:22px; left:36px; z-index:2000;
+  font-family:'DM Sans', sans-serif; font-size:16px; font-weight:700;
+  letter-spacing:-0.02em; color:rgba(255,255,255,0.18);
+  pointer-events:none; user-select:none;
+}
+
+/* Globe canvas — right half of cover */
+.globe-canvas {
+  position:absolute; right:0; top:0;
+  width:55%; height:100%; z-index:1;
+  pointer-events:none;
+}
+/* Tighten left overlay for globe visibility */
+.cover-overlay {
+  background: linear-gradient(100deg,
+    rgba(5,8,14,0.97) 0%,
+    rgba(5,8,14,0.88) 38%,
+    rgba(5,8,14,0.45) 60%,
+    rgba(5,8,14,0.05) 100%) !important;
+}
+
+/* ═══════════════════════════════════════
+   OPERATIONAL CORE DIAGRAM
+════════════════════════════════════════ */
+.oc-wrap {
+  position:relative; width:100%; height:100%;
+  display:flex; align-items:center; justify-content:center;
+}
+.oc-svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+.oc-line {
+  stroke:rgba(0,200,215,0.25); stroke-width:1.5; stroke-dasharray:4 4;
+  fill:none; opacity:0; transition:opacity 0.4s;
+}
+.slide.visible .oc-line { opacity:1; }
+
+/* Center hub */
+.oc-center {
+  position:absolute; left:50%; top:50%;
+  transform:translate(-50%,-50%);
+  width:148px; height:148px; border-radius:50%;
+  background:radial-gradient(circle at 40% 35%, rgba(0,200,215,0.18), rgba(0,200,215,0.04));
+  border:1px solid rgba(0,200,215,0.4);
+  display:flex; align-items:center; justify-content:center; flex-direction:column;
+  text-align:center;
+  box-shadow:0 0 48px rgba(0,200,215,0.15), inset 0 0 32px rgba(0,200,215,0.05);
+  opacity:0; transform:translate(-50%,-50%) scale(0.7);
+  transition:opacity 0.5s var(--ease) 0.1s, transform 0.5s var(--ease) 0.1s;
+}
+.slide.visible .oc-center { opacity:1; transform:translate(-50%,-50%) scale(1); }
+.oc-center-label {
+  font-family:var(--serif); font-size:13px; font-weight:800;
+  letter-spacing:0.08em; color:var(--teal); line-height:1.2; text-transform:uppercase;
+}
+
+/* Nodes */
+.oc-node {
+  position:absolute; width:210px;
+  background:rgba(10,15,26,0.92); border:1px solid rgba(0,200,215,0.18);
+  padding:16px 18px;
+  opacity:0; transform:scale(0.8);
+  transition:opacity 0.45s var(--ease), transform 0.45s var(--ease),
+             background 0.25s, border-color 0.25s;
+  cursor:default;
+}
+.oc-node:hover { background:rgba(0,200,215,0.08); border-color:rgba(0,200,215,0.5); }
+.slide.visible .oc-node { opacity:1; transform:scale(1); }
+.oc-node-title { font-family:var(--serif); font-size:15px; font-weight:700; color:var(--teal); line-height:1.25; margin-bottom:6px; }
+.oc-node-body  { font-family:var(--sans); font-size:13px; color:var(--white-35); line-height:1.5; }
+
+/* Stagger delays for nodes */
+.oc-node:nth-child(1) { transition-delay:0.2s; }
+.oc-node:nth-child(2) { transition-delay:0.32s; }
+.oc-node:nth-child(3) { transition-delay:0.44s; }
+.oc-node:nth-child(4) { transition-delay:0.56s; }
+.oc-node:nth-child(5) { transition-delay:0.68s; }
+.oc-node:nth-child(6) { transition-delay:0.80s; }
+
+/* Pulse ring on center hub when visible */
+@keyframes hub-pulse {
+  0%   { box-shadow:0 0 48px rgba(0,200,215,0.15), 0 0 0 0 rgba(0,200,215,0.3); }
+  70%  { box-shadow:0 0 48px rgba(0,200,215,0.15), 0 0 0 22px rgba(0,200,215,0); }
+  100% { box-shadow:0 0 48px rgba(0,200,215,0.15), 0 0 0 0 rgba(0,200,215,0); }
+}
+.slide.visible .oc-center { animation:hub-pulse 2.5s ease-out 0.8s infinite; }
 .evo-track {
   display:grid; grid-template-columns:repeat(5,1fr); gap:2px; margin-top:36px;
 }
@@ -716,6 +801,7 @@ strong { color:var(--white); font-weight:500; }
 <div class="slide-count" id="slideCount">1 / 19</div>
 <div class="edit-hotzone" id="editHotzone"></div>
 <button class="edit-toggle" id="editToggle">EDIT MODE</button>
+<div class="dentsu-mark">dentsu</div>
 
 <div class="deck-viewport">
 <main class="deck-stage" id="deckStage">
@@ -727,18 +813,25 @@ strong { color:var(--white); font-weight:500; }
   <!-- 3D starfield canvas fills the entire slide -->
   <canvas class="cover-canvas rev-fade" id="starCanvas"></canvas>
 
+  <!-- dentsu globe canvas — right side -->
+  <canvas class="globe-canvas" id="globeCanvas"></canvas>
+
   <!-- Gradient overlay — darkens left side for text legibility -->
   <div class="cover-overlay"></div>
 
   <!-- Main copy -->
   <div class="cover-content">
-    <span class="eyebrow rev d1">Promotion Business Case · dentsu India · Hyderabad · July 2026</span>
+    <div class="rev d1" style="display:flex;align-items:center;gap:12px;margin-bottom:28px;">
+      <span style="font-family:'DM Sans',sans-serif;font-size:22px;font-weight:700;letter-spacing:-0.01em;color:var(--white);opacity:0.9;">dentsu</span>
+      <span style="width:1px;height:18px;background:rgba(255,255,255,0.2);display:inline-block;"></span>
+      <span style="font-family:'DM Sans',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:0.22em;color:var(--teal);">Promotion Business Case · India · July 2026</span>
+    </div>
     <h1 class="rev d2">Bharat<br>Vamsi<span class="teal">.</span></h1>
     <div class="divider rev d3"></div>
     <p class="lead rev d4">Account Manager <span class="teal">→</span> <strong>Senior Manager</strong><br>Meijer Retail Media Network</p>
     <div class="tags rev d5">
       <span class="tag">2.5 Years</span>
-      <span class="tag">$275M Managed</span>
+      <span class="tag">$275M Annual</span>
       <span class="tag">5 Platforms</span>
       <span class="tag">Meijer RMN</span>
     </div>
@@ -942,37 +1035,67 @@ strong { color:var(--white); font-weight:500; }
 </section>
 
 <!-- ══════════════════════════════════════════════
-     SLIDE 7 · SCOPE OF OWNERSHIP
+     SLIDE 7 · SCOPE OF OWNERSHIP — OPERATIONAL CORE
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s7">
-  <div class="s-full">
-    <span class="eyebrow rev d1">Scope · Platform Coverage</span>
-    <h2 class="rev d2">Five platforms. One person. Zero gaps.</h2>
-    <div class="platform-strip">
-      <div class="plat rev d2">
-        <div class="plat-name">DV360</div>
-        <div class="plat-role">Programmatic Lead</div>
-        <div class="plat-detail">Full-funnel display, video, and CTV campaigns. Audience segmentation and bid optimization across the Google ecosystem.</div>
+  <div class="s-split">
+    <div class="s-left" style="flex:0 0 36%;">
+      <span class="eyebrow rev d1">Scope of Ownership</span>
+      <h2 class="rev d2">What is<br>owned today.</h2>
+      <div class="divider rev d3"></div>
+      <p class="lead rev d4" style="font-size:17px;">A Senior Manager's remit delivered under an Account Manager title.</p>
+      <div class="rev d5" style="margin-top:28px;">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--white-60);"><span style="width:6px;height:6px;background:var(--teal);border-radius:50%;flex-shrink:0;"></span>2 DSPs — DV360 · TTD</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--white-60);"><span style="width:6px;height:6px;background:var(--teal);border-radius:50%;flex-shrink:0;"></span>1 SSP — GAM</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--white-60);"><span style="width:6px;height:6px;background:var(--teal);border-radius:50%;flex-shrink:0;"></span>2 Social — Meta · Pinterest</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--white-60);"><span style="width:6px;height:6px;background:var(--teal);border-radius:50%;flex-shrink:0;"></span>$275M annual budget · 2025</div>
+        </div>
       </div>
-      <div class="plat rev d3">
-        <div class="plat-name">TTD</div>
-        <div class="plat-role">DSP Strategy</div>
-        <div class="plat-detail">The Trade Desk cross-channel activation. UID2 identity strategy and first-party data integration for Meijer.</div>
-      </div>
-      <div class="plat rev d4">
-        <div class="plat-name">GAM</div>
-        <div class="plat-role">Publisher Operations</div>
-        <div class="plat-detail">Google Ad Manager trafficking, pacing, and delivery management for Meijer's owned media inventory.</div>
-      </div>
-      <div class="plat rev d5">
-        <div class="plat-name">Meta</div>
-        <div class="plat-role">Social Commerce</div>
-        <div class="plat-detail">Facebook & Instagram campaign management. Caught and resolved systemic budget overdelivery errors, saving $40K+.</div>
-      </div>
-      <div class="plat rev d6">
-        <div class="plat-name">Pinterest</div>
-        <div class="plat-role">Discovery Commerce</div>
-        <div class="plat-detail">Catalog-based shopping campaigns and visual discovery ads for Meijer's seasonal and CPG partners.</div>
+    </div>
+    <div class="s-right" style="position:relative;">
+      <div class="oc-wrap">
+        <!-- SVG lines drawn from center to each node -->
+        <svg class="oc-svg" id="ocSvg" viewBox="0 0 700 600" preserveAspectRatio="xMidYMid meet">
+          <!-- Lines will be injected by JS -->
+        </svg>
+
+        <!-- Center hub -->
+        <div class="oc-center">
+          <div class="oc-center-label">The<br>Operational<br>Core</div>
+        </div>
+
+        <!-- 6 nodes positioned around center (CSS translate from center 50%,50%) -->
+        <!-- Top: Pacing & Optimization -->
+        <div class="oc-node" style="left:50%;top:5%;transform:translateX(-50%);">
+          <div class="oc-node-title">Pacing &amp; Optimization</div>
+          <div class="oc-node-body">Sole daily owner across DV360, Trade Desk, GAM, Meta, Pinterest</div>
+        </div>
+        <!-- Top-right: Team Coordination -->
+        <div class="oc-node" style="right:3%;top:22%;">
+          <div class="oc-node-title">Team Coordination</div>
+          <div class="oc-node-body">Directs activation specialists; flags changes for client approval</div>
+        </div>
+        <!-- Bottom-right: Screenshot Delivery -->
+        <div class="oc-node" style="right:3%;bottom:22%;">
+          <div class="oc-node-title">Screenshot Delivery</div>
+          <div class="oc-node-body">70+ decks/week · 5-day SLA · automation co-built with team</div>
+        </div>
+        <!-- Bottom: QA & Trafficking -->
+        <div class="oc-node" style="left:50%;bottom:5%;transform:translateX(-50%);">
+          <div class="oc-node-title">QA &amp; Trafficking</div>
+          <div class="oc-node-body">Primary QA on all builds and trafficking sheets</div>
+        </div>
+        <!-- Bottom-left: Escalation & Diagnosis -->
+        <div class="oc-node" style="left:3%;bottom:22%;">
+          <div class="oc-node-title">Escalation &amp; Diagnosis</div>
+          <div class="oc-node-body">Team's first call — diagnosed Google bug before Google did</div>
+        </div>
+        <!-- Top-left: Best-Practice Owner -->
+        <div class="oc-node" style="left:3%;top:22%;">
+          <div class="oc-node-title">Best-Practice Owner</div>
+          <div class="oc-node-body">Defines and documents standards that keep delivery reliable</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1699,6 +1822,145 @@ class InlineEditor {
 }
 
 /* ══════════════════════════════════════════════
+   DENTSU GLOBE
+   Fibonacci-distributed dots forming a rotating 3D sphere.
+   Teal-to-white palette matching the dentsu dark deck.
+═══════════════════════════════════════════════ */
+class DentsuGlobe {
+  constructor(canvas) {
+    this.c   = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.W   = 0; this.H = 0;
+    this.angle = 0;
+    this.tiltX = 0.3; // fixed tilt for depth
+    this.pts = [];
+    this.raf = null;
+    this._buildSphere(320);
+    this.resize();
+    window.addEventListener('resize', () => this.resize());
+    this.loop();
+  }
+
+  _buildSphere(N) {
+    const φ = (1 + Math.sqrt(5)) / 2;
+    for (let i = 0; i < N; i++) {
+      const θ = Math.acos(1 - 2 * (i + 0.5) / N);
+      const φi = 2 * Math.PI * i / φ;
+      this.pts.push({
+        x: Math.sin(θ) * Math.cos(φi),
+        y: Math.sin(θ) * Math.sin(φi),
+        z: Math.cos(θ),
+      });
+    }
+  }
+
+  resize() {
+    this.W = this.c.width  = this.c.offsetWidth;
+    this.H = this.c.height = this.c.offsetHeight;
+  }
+
+  loop() {
+    const { ctx, W, H } = this;
+    const cx = W * 0.52, cy = H * 0.5;
+    const R  = Math.min(W, H) * 0.36;
+
+    ctx.clearRect(0, 0, W, H);
+    this.angle += 0.004;
+
+    const cosY = Math.cos(this.angle);
+    const sinY = Math.sin(this.angle);
+    const cosX = Math.cos(this.tiltX);
+    const sinX = Math.sin(this.tiltX);
+
+    const projected = this.pts.map(p => {
+      // Rotate Y
+      let rx = p.x * cosY - p.z * sinY;
+      let ry = p.y;
+      let rz = p.x * sinY + p.z * cosY;
+      // Tilt X
+      let ry2 = ry * cosX - rz * sinX;
+      let rz2 = ry * sinX + rz * cosX;
+      return { sx: cx + rx * R, sy: cy + ry2 * R, z: rz2 };
+    }).sort((a, b) => a.z - b.z);
+
+    projected.forEach(p => {
+      const t = (p.z + 1) / 2; // 0=back, 1=front
+      const size  = Math.max(0.4, t * 2.8);
+      const alpha = 0.08 + t * 0.82;
+
+      // Teal front, dim back
+      const r = Math.round(t * 20);
+      const g = Math.round(160 + t * 95);
+      const b = Math.round(180 + t * 75);
+
+      ctx.beginPath();
+      ctx.arc(p.sx, p.sy, size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`;
+      ctx.fill();
+    });
+
+    // Subtle "dentsu" wordmark beneath globe
+    ctx.font = `700 ${Math.round(R * 0.28)}px 'DM Sans', sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'rgba(255,255,255,0.08)';
+    ctx.letterSpacing = '-0.5px';
+    ctx.fillText('dentsu', cx, cy + R * 1.28);
+
+    this.raf = requestAnimationFrame(() => this.loop());
+  }
+
+  stop() { if (this.raf) cancelAnimationFrame(this.raf); }
+}
+
+/* ══════════════════════════════════════════════
+   OPERATIONAL CORE — draw SVG connector lines
+   Runs once after slide 7 becomes visible.
+═══════════════════════════════════════════════ */
+function initOperationalCore() {
+  const wrap = document.querySelector('#s7 .oc-wrap');
+  const svg  = document.getElementById('ocSvg');
+  if (!wrap || !svg) return;
+
+  const center = document.querySelector('#s7 .oc-center');
+  const nodes  = Array.from(document.querySelectorAll('#s7 .oc-node'));
+  if (!center || nodes.length === 0) return;
+
+  const wRect = wrap.getBoundingClientRect();
+  const cRect = center.getBoundingClientRect();
+  const cx = cRect.left - wRect.left + cRect.width / 2;
+  const cy = cRect.top  - wRect.top  + cRect.height / 2;
+
+  // SVG viewBox matches wrap pixel size
+  const vW = wRect.width, vH = wRect.height;
+  svg.setAttribute('viewBox', `0 0 ${vW} ${vH}`);
+
+  svg.innerHTML = '';
+  nodes.forEach((node, i) => {
+    const nRect = node.getBoundingClientRect();
+    const nx = nRect.left - wRect.left + nRect.width / 2;
+    const ny = nRect.top  - wRect.top  + nRect.height / 2;
+
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', cx); line.setAttribute('y1', cy);
+    line.setAttribute('x2', nx); line.setAttribute('y2', ny);
+    line.setAttribute('stroke', 'rgba(0,200,215,0.22)');
+    line.setAttribute('stroke-width', '1.5');
+    line.setAttribute('stroke-dasharray', '5 4');
+
+    const len = Math.hypot(nx - cx, ny - cy);
+    line.setAttribute('stroke-dashoffset', len);
+    line.style.transition = `stroke-dashoffset 0.7s cubic-bezier(0.22,1,0.36,1) ${0.2 + i * 0.12}s`;
+    svg.appendChild(line);
+
+    // Animate on slide visible
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      line.setAttribute('stroke-dasharray', `${len} ${len}`);
+      line.setAttribute('stroke-dashoffset', '0');
+    }));
+  });
+}
+
+/* ══════════════════════════════════════════════
    COUNT-UP ANIMATION
    Runs on elements with data-count="target" when slide goes visible.
 ═══════════════════════════════════════════════ */
@@ -1793,6 +2055,20 @@ CountUp.run(deck.slides[0]);
 // Closing slide starfield
 const closingCvs = document.getElementById('closingCanvas');
 if (closingCvs) { new Starfield(closingCvs); }
+
+// dentsu globe on cover
+const globeCvs = document.getElementById('globeCanvas');
+if (globeCvs) { new DentsuGlobe(globeCvs); }
+
+// Operational core lines — draw when slide 7 becomes visible
+const _origShow2 = deck.show.bind(deck);
+deck.show = function(i) {
+  _origShow2(i);
+  // Slide index 6 = s7 (0-based)
+  if (i === 6) {
+    setTimeout(initOperationalCore, 300);
+  }
+};
 
 // Ambient particles on a shared background canvas
 (function() {
