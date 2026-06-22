@@ -807,6 +807,33 @@ strong { color:var(--white); font-weight:500; }
 .scope-icon { width:48px; height:48px; border-radius:50%; background:rgba(0,200,215,0.1); border:1px solid rgba(0,200,215,0.2); display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
 .scope-title { font-family:var(--serif); font-size:18px; font-weight:700; color:var(--white); margin-bottom:8px; line-height:1.2; }
 .scope-body { font-family:var(--sans); font-size:14px; color:var(--white-35); line-height:1.6; }
+
+/* Case study slides */
+.case-accent-line {
+  position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, var(--teal) 0%, rgba(0,200,215,0.3) 60%, transparent 100%);
+  animation: accent-grow 0.8s var(--ease) 0.3s both;
+  transform-origin: left;
+}
+@keyframes accent-grow { from { transform:scaleX(0); } to { transform:scaleX(1); } }
+
+.case-step {
+  background:var(--bg-card); border:1px solid var(--border);
+  padding:22px 20px; display:flex; flex-direction:column; gap:8px;
+  position:relative; transition:border-color 0.25s;
+}
+.case-step:not(:last-child)::after {
+  content:'›'; position:absolute; right:-14px; top:50%; transform:translateY(-50%);
+  color:var(--teal); font-size:22px; z-index:2;
+}
+.case-step-highlight { border-color:rgba(0,200,215,0.3); background:rgba(0,200,215,0.04); }
+.case-step-icon {
+  width:38px; height:38px; border-radius:50%; background:rgba(0,200,215,0.1);
+  display:flex; align-items:center; justify-content:center; margin-bottom:2px;
+}
+.case-step-n { font-family:var(--serif); font-size:30px; font-weight:800; color:var(--white-35); line-height:1; }
+.case-step-title { font-family:var(--serif); font-size:17px; font-weight:700; color:var(--white); }
+.case-step-body { font-size:13px; color:var(--white-60); line-height:1.55; }
 .cert-grid {
   display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:32px;
 }
@@ -852,7 +879,7 @@ strong { color:var(--white); font-weight:500; }
 
 <!-- Chrome (outside stage) -->
 <nav class="progress-nav" id="progressNav" aria-label="Slide navigation"></nav>
-<div class="slide-count" id="slideCount">1 / 19</div>
+<div class="slide-count" id="slideCount">1 / 23</div>
 <div class="edit-hotzone" id="editHotzone"></div>
 <button class="edit-toggle" id="editToggle">EDIT MODE</button>
 <div class="dentsu-mark">dentsu</div>
@@ -1317,56 +1344,56 @@ strong { color:var(--white); font-weight:500; }
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s9">
   <div class="slide-dentsu rev-fade">dentsu</div>
-  <div class="s-full">
-    <span class="eyebrow rev d1">Improve · Operational Evolution · DMAIC</span>
-    <h2 class="rev d2">4.3× volume. &gt;98% DIF floor. Every phase.</h2>
-    <div class="evo-track">
+  <div class="s-full" style="padding-bottom:24px;">
+    <span class="eyebrow rev d1">Improve · Operational Evolution · DMAIC — dentsu India</span>
+    <h2 class="rev d2" style="font-size:44px;margin-bottom:8px;">H2 2024 → Now. Consistent delivery at every scale.</h2>
+    <div class="evo-track" style="margin-top:22px;gap:3px;">
       <div class="evo-phase rev d2">
         <div class="evo-num">01</div>
-        <div class="evo-period">H4 2023</div>
-        <div class="evo-title">Foundation</div>
-        <div class="evo-detail">Onboarded Meijer RMN. Established baseline processes, reporting cadence, and DV360 campaign architecture across 3 platforms.</div>
-        <div class="evo-kpi">71</div>
-        <div class="evo-kpi-label">Campaigns/month</div>
+        <div class="evo-period">H2 2024</div>
+        <div class="evo-title">Onboarding &amp; Command</div>
+        <div class="evo-detail">Joined Meijer RMN. Within weeks, sole owner of pacing across DV360, TTD, GAM, Meta and Pinterest. Established baseline SOPs and campaign architecture.</div>
+        <div class="evo-kpi">39</div>
+        <div class="evo-kpi-label">Campaigns Q3 2023 baseline</div>
       </div>
       <div class="evo-phase rev d3">
         <div class="evo-num">02</div>
-        <div class="evo-period">H1 2024</div>
-        <div class="evo-title">Expansion</div>
-        <div class="evo-detail">Added TTD + GAM. Introduced first-party data activation. Built pacing SOPs and cross-platform budget reconciliation frameworks.</div>
+        <div class="evo-period">Q4 2024</div>
+        <div class="evo-title">Optimization</div>
+        <div class="evo-detail">Built ROAS optimization playbook. Trained 1 AD, 3 Managers &amp; 1 SM on pacing. Pacing authority formally transferred by NSM. Screenshot delivery automation co-built.</div>
         <div class="evo-kpi">89</div>
         <div class="evo-kpi-label">Campaigns/month</div>
       </div>
       <div class="evo-phase rev d4">
         <div class="evo-num">03</div>
-        <div class="evo-period">H2 2024</div>
-        <div class="evo-title">Optimization</div>
-        <div class="evo-detail">Full Meta + Pinterest integration. Launched ROAS optimization playbook. Trained 1 AD, 3 Managers &amp; 1 SM on pacing. Pacing authority formally transferred by NSM.</div>
+        <div class="evo-period">Q1 2025</div>
+        <div class="evo-title">Resilience</div>
+        <div class="evo-detail">Diagnosed Google DV360 platform bug before client impact. Recovered 619,636 under-delivered impressions. Caught Meta duplicate + $15.3K budget mis-set. Cpk ≥ 1.33 sustained.</div>
         <div class="evo-kpi">104</div>
         <div class="evo-kpi-label">Campaigns/month</div>
       </div>
       <div class="evo-phase rev d5">
         <div class="evo-num">04</div>
-        <div class="evo-period">Q1 2025</div>
-        <div class="evo-title">Resilience</div>
-        <div class="evo-detail">Identified Google DV360 platform bug before client impact. Delivered 619K impression make-good. Caught Meta overdelivery — $40K protected. Cpk ≥ 1.33 sustained.</div>
-        <div class="evo-kpi">115</div>
-        <div class="evo-kpi-label">Campaigns/month</div>
+        <div class="evo-period">H1 2025</div>
+        <div class="evo-title">Scale</div>
+        <div class="evo-detail">Account budget grew +74% YoY ($10.7M → $18.7M H1). Campaign volume +73% (71 → 123/mo). $5.3M avg weekly spend. DIF &gt;98% maintained throughout.</div>
+        <div class="evo-kpi">123</div>
+        <div class="evo-kpi-label">Campaigns/month avg</div>
       </div>
       <div class="evo-phase current rev d6">
         <div class="evo-num">05</div>
         <div class="evo-period">H1 2026 · Now</div>
         <div class="evo-title">Authority</div>
-        <div class="evo-detail">End-to-end account ownership. Client-endorsed managerial announcement. Raymond Hall formally recommends Senior Manager to dentsu India leadership.</div>
-        <div class="evo-kpi">123</div>
-        <div class="evo-kpi-label">Campaigns/month · 4.3× growth</div>
+        <div class="evo-detail">171 campaigns in May 2026. $275M annual budget. $7.24M record week. Raymond Hall formally recommends Senior Manager to dentsu India leadership.</div>
+        <div class="evo-kpi">171</div>
+        <div class="evo-kpi-label">Campaigns · May 2026</div>
       </div>
     </div>
     <div class="sigma-strip rev d7">
       <div class="sigma-pill"><div class="sigma-val">Cpk ≥ 1.33</div><div class="sigma-lbl">Process Capability · Six Sigma threshold</div></div>
-      <div class="sigma-pill"><div class="sigma-val">&gt;98%</div><div class="sigma-lbl">DIF Yield Floor · All 5 phases</div></div>
-      <div class="sigma-pill"><div class="sigma-val">4.3×</div><div class="sigma-lbl">Volume Scale · 71 → 123 campaigns/mo</div></div>
-      <div class="sigma-pill"><div class="sigma-val">$5.3M</div><div class="sigma-lbl">Weekly Budget Under Management</div></div>
+      <div class="sigma-pill"><div class="sigma-val">&gt;98%</div><div class="sigma-lbl">DIF Floor · Every phase</div></div>
+      <div class="sigma-pill"><div class="sigma-val">4.4×</div><div class="sigma-lbl">Volume Scale · 39 → 171 campaigns</div></div>
+      <div class="sigma-pill"><div class="sigma-val">$275M</div><div class="sigma-lbl">Annual Budget · 2025</div></div>
     </div>
   </div>
 </section>
@@ -1421,30 +1448,230 @@ strong { color:var(--white); font-weight:500; }
 </section>
 
 <!-- ══════════════════════════════════════════════
-     SLIDE 11 · THREE DOCUMENTED WINS
+     SLIDE 11 · IMPACT UNDER PRESSURE — OVERVIEW
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s11a">
   <div class="slide-dentsu rev-fade">dentsu</div>
-  <div class="s-full">
-    <span class="eyebrow rev d1">Improve · Documented Impact</span>
-    <h2 class="rev d2">Three moments that changed outcomes.</h2>
-    <div class="win-row">
-      <div class="win-card rev d3">
-        <div class="win-n">01</div>
-        <div class="win-title">Google Platform Bug — Proactive Recovery</div>
-        <div class="win-detail">Identified and escalated a DV360 bidding anomaly before the client noticed impact. Worked directly with Google TAM to resolve within 48 hours — turning a potential crisis into a proof point of operational vigilance.</div>
+  <div class="s-full" style="padding-bottom:28px;">
+    <span class="eyebrow rev d1">Improve · Impact Under Pressure · dentsu India</span>
+    <h2 class="rev d2" style="font-size:52px;margin-bottom:18px;">Reliability is the product.</h2>
+
+    <!-- 4 metric tiles -->
+    <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2px;margin-bottom:2px;" class="rev d3">
+      <div style="background:var(--teal);padding:32px 36px;position:relative;overflow:hidden;">
+        <div style="font-family:var(--serif);font-size:72px;font-weight:800;color:#05080E;line-height:1;">&gt;98%</div>
+        <div style="font-size:14px;color:rgba(5,8,14,0.75);margin-top:8px;font-weight:500;">Delivery in Full,<br>maintained as the account scaled</div>
+        <div style="position:absolute;right:-20px;top:-20px;width:100px;height:100px;border-radius:50%;background:rgba(5,8,14,0.08);"></div>
       </div>
-      <div class="win-card rev d4">
-        <div class="win-n">02</div>
-        <div class="win-title">619K Impression Recovery</div>
-        <div class="win-detail">Post-bug make-good campaign delivered 619,000 recovered impressions through precision audience targeting and accelerated pacing. Zero budget overspend. DIF score maintained above 98% throughout the incident window.</div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);padding:32px 28px;">
+        <div style="font-family:var(--serif);font-size:52px;font-weight:800;color:var(--teal);line-height:1;">+134%</div>
+        <div style="font-size:13px;color:var(--white-60);margin-top:8px;">Program ROAS, YoY</div>
       </div>
-      <div class="win-card rev d5">
-        <div class="win-n">03</div>
-        <div class="win-title">Meta Budget Error — $40K Saved</div>
-        <div class="win-detail">Caught systemic budget overdelivery errors across Meta campaigns before month-end billing. Corrected targeting parameters and pacing rules, preventing ~$40,000 in unauthorized client charges. Later codified into team SOPs.</div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);padding:32px 28px;">
+        <div style="font-family:var(--serif);font-size:52px;font-weight:800;color:var(--teal);line-height:1;">+107%</div>
+        <div style="font-size:13px;color:var(--white-60);margin-top:8px;">Conversion rate, YoY</div>
+      </div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);padding:32px 28px;">
+        <div style="font-family:var(--serif);font-size:52px;font-weight:800;color:var(--teal);line-height:1;">$5.46</div>
+        <div style="font-size:13px;color:var(--white-60);margin-top:8px;">Median onsite ROAS</div>
       </div>
     </div>
+    <div style="font-size:12px;color:var(--white-35);font-style:italic;margin-bottom:22px;padding:0 2px;" class="rev d4">Program results — Meijer Q4 2025 QBR.</div>
+
+    <!-- 3 documented saves -->
+    <div style="border-top:1px solid var(--border-t);padding-top:20px;" class="rev d5">
+      <div style="font-size:11px;letter-spacing:0.15em;color:var(--teal);font-weight:600;text-transform:uppercase;margin-bottom:16px;">Three Documented Saves — detailed in the next three slides</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;">
+        <div style="background:var(--bg-card);border:1px solid var(--border);padding:24px 26px;display:flex;gap:16px;align-items:flex-start;">
+          <div style="width:40px;height:40px;border-radius:50%;background:rgba(0,200,215,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="#00C8D7" stroke-width="1.8"/><line x1="12" y1="9" x2="12" y2="13" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="#00C8D7" stroke-width="2.5" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:700;font-size:15px;color:var(--white);margin-bottom:6px;">Creative-rejection bug</div>
+            <div style="font-size:13px;color:var(--white-60);line-height:1.5;">Traced "destination not crawlable" to a robots.txt block on AdsBot — and Google confirmed the diagnosis. (Case 1)</div>
+          </div>
+        </div>
+        <div style="background:var(--bg-card);border:1px solid var(--border);padding:24px 26px;display:flex;gap:16px;align-items:flex-start;">
+          <div style="width:40px;height:40px;border-radius:50%;background:rgba(0,200,215,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="#00C8D7" stroke-width="1.8"/><path d="m21 21-4.35-4.35" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:700;font-size:15px;color:var(--white);margin-bottom:6px;">619,636-impression catch</div>
+            <div style="font-size:13px;color:var(--white-60);line-height:1.5;">Audited the full media plan and recovered 619,636 under-delivered impressions into the live flight before delivery slipped. (Case 2)</div>
+          </div>
+        </div>
+        <div style="background:var(--bg-card);border:1px solid var(--border);padding:24px 26px;display:flex;gap:16px;align-items:flex-start;">
+          <div style="width:40px;height:40px;border-radius:50%;background:rgba(0,200,215,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:700;font-size:15px;color:var(--white);margin-bottom:6px;">Meta budget protection</div>
+            <div style="font-size:13px;color:var(--white-60);line-height:1.5;">Spotted duplicate Meta campaigns and a mis-set budget quietly burning spend — flagged and fixed both. (Case 3)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     CASE STUDY 1 · GOOGLE BUG
+═══════════════════════════════════════════════ -->
+<section class="slide" id="scase1">
+  <div class="slide-dentsu rev-fade">dentsu</div>
+  <!-- Animated teal accent line -->
+  <div class="case-accent-line"></div>
+  <div class="s-full" style="padding-bottom:24px;">
+    <span class="eyebrow rev d1">Case Study 1 · Documented in the Client QBR · dentsu India</span>
+    <h2 class="rev d2" style="font-size:50px;margin-bottom:20px;">I diagnosed a Google bug —<br>before Google did.</h2>
+
+    <!-- 4-step flow -->
+    <div class="rev d3" style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-bottom:18px;">
+      <div class="case-step">
+        <div class="case-step-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="#00C8D7" stroke-width="1.8"/><line x1="12" y1="9" x2="12" y2="13" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <div class="case-step-n">01</div>
+        <div class="case-step-title">Detected</div>
+        <div class="case-step-body">Mass DV360 "Destination not crawlable" rejections threatening pacing</div>
+      </div>
+      <div class="case-step">
+        <div class="case-step-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="#00C8D7" stroke-width="1.8"/><path d="m21 21-4.35-4.35" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <div class="case-step-n">02</div>
+        <div class="case-step-title">Diagnosed</div>
+        <div class="case-step-body">100% correlation with /shopping/ URLs blocked for AdsBot in robots.txt — not Googlebot</div>
+      </div>
+      <div class="case-step">
+        <div class="case-step-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="4" y1="22" x2="4" y2="15" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <div class="case-step-n">03</div>
+        <div class="case-step-title">Escalated</div>
+        <div class="case-step-body">Compiled impacted campaigns + the fix; Raymond carried it to Google</div>
+      </div>
+      <div class="case-step case-step-highlight">
+        <div class="case-step-icon" style="background:rgba(0,200,215,0.2);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round"/><polyline points="22 4 12 14.01 9 11.01" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="case-step-n" style="color:var(--teal);">04</div>
+        <div class="case-step-title" style="color:var(--teal);">Google confirmed</div>
+        <div class="case-step-body">Google's own rep validated the diagnosis as correct</div>
+      </div>
+    </div>
+
+    <!-- Evidence side-by-side -->
+    <div class="rev d4" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;">
+      <div style="background:var(--bg-card);border:1px solid var(--border);padding:24px 28px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <div style="width:32px;height:32px;background:rgba(0,200,215,0.12);border-radius:6px;display:flex;align-items:center;justify-content:center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#00C8D7" stroke-width="1.8"/></svg>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--white);">Bharat → NSM activation team</div>
+            <div style="font-size:11px;color:var(--white-35);">Microsoft Teams · Sep 2025</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--white-60);line-height:1.65;font-style:italic;border-left:2px solid var(--teal-20);padding-left:14px;">"All rejected creatives point to URLs under /shopping/. In robots.txt, /shopping/ is disallowed — so DV360's ad crawler can't reach those pages, even though Googlebot isn't blocked. That's the repeated 'Destination not crawlable' rejection. Fix: allow AdsBot/DV360 to crawl /shopping/, or serve alternate crawlable landing URLs."</div>
+      </div>
+      <div style="background:rgba(0,200,215,0.06);border:1px solid var(--border-t);padding:24px 28px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <div style="width:32px;height:32px;background:rgba(0,200,215,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:800;font-size:13px;color:var(--teal);">G</div>
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--white);">Freddy Luong — Google</div>
+            <div style="font-size:11px;color:var(--white-35);">Email · reply to the escalation</div>
+          </div>
+        </div>
+        <div style="font-size:14px;color:var(--white);line-height:1.65;font-style:italic;border-left:2px solid var(--teal);padding-left:14px;">"You are correct in your assessment regarding some of the blocked paths in the website — that is causing creatives to be flagged and blocked, since Google cannot crawl the page."</div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--white-35);font-style:italic;margin-top:10px;" class="rev d5">Verbatim from Microsoft Teams and email records, Sep 2025 (originals on file). Case referenced in the Meijer client QBR.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     CASE STUDY 2 · 619,636 IMPRESSIONS
+═══════════════════════════════════════════════ -->
+<section class="slide" id="scase2">
+  <div class="slide-dentsu rev-fade">dentsu</div>
+  <div class="case-accent-line"></div>
+  <div class="s-split">
+    <div class="s-left" style="flex:0 0 48%;justify-content:center;">
+      <span class="eyebrow rev d1">Case Study 2 · Pacing Recovery · dentsu India</span>
+      <div class="rev d2" style="margin-top:14px;">
+        <div style="font-family:var(--serif);font-size:96px;font-weight:800;color:var(--teal);line-height:0.9;" class="count-anim" data-target="619636" data-comma="true">619,636</div>
+        <div style="font-size:15px;color:var(--white-60);margin-top:14px;max-width:340px;line-height:1.6;">under-delivered impressions recovered into the live flight — before pacing slipped</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:28px;" class="rev d3">
+        <div style="display:flex;gap:16px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;color:var(--teal);text-transform:uppercase;width:72px;flex-shrink:0;padding-top:2px;">Situation</div>
+          <div style="font-size:14px;color:var(--white-60);line-height:1.55;">Labour Day flight, Aug 2025. An 8.4M-impression media plan was quietly behind — earlier flights had under-delivered, risking a stall in spend.</div>
+        </div>
+        <div style="display:flex;gap:16px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;color:var(--teal);text-transform:uppercase;width:72px;flex-shrink:0;padding-top:2px;">Action</div>
+          <div style="font-size:14px;color:var(--white-60);line-height:1.55;">Reconciled the full plan across all flights, isolated the exact 619,636-impression shortfall, and rolled it into the active flight so the campaign could keep spending.</div>
+        </div>
+        <div style="display:flex;gap:16px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;color:var(--teal);text-transform:uppercase;width:72px;flex-shrink:0;padding-top:2px;">Result</div>
+          <div style="font-size:14px;color:var(--white-60);line-height:1.55;">Full delivery protected with no budget shift and no escalation — caught before it became a client-visible miss.</div>
+        </div>
+      </div>
+    </div>
+    <div class="s-right" style="display:flex;flex-direction:column;justify-content:center;padding:48px 64px 48px 40px;">
+      <div class="rev d2" style="background:rgba(0,200,215,0.06);border:1px solid var(--border-t);border-radius:4px;padding:36px 40px;position:relative;">
+        <div style="font-family:var(--serif);font-size:64px;font-weight:800;color:var(--teal);line-height:0.7;margin-bottom:22px;opacity:0.4;">"</div>
+        <div style="font-family:var(--serif);font-size:22px;font-weight:700;color:var(--white);line-height:1.5;font-style:italic;">"I didn't even notice that — great catch Bharath, thanks for digging into this… you're the best, thank you so much."</div>
+        <div style="margin-top:24px;padding-top:18px;border-top:1px solid var(--border);">
+          <div style="font-size:14px;font-weight:700;color:var(--white);">Raymond Hall</div>
+          <div style="font-size:12px;color:var(--white-35);margin-top:2px;">Associate Director, Activation — New Stream Media</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;font-size:11px;color:var(--white-35);font-style:italic;" class="rev d3">Verbatim from Microsoft Teams, Aug 2025 (original on file). Labour Day flight, Meijer account.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     CASE STUDY 3 · META BUDGET PROTECTION
+═══════════════════════════════════════════════ -->
+<section class="slide" id="scase3">
+  <div class="slide-dentsu rev-fade">dentsu</div>
+  <div class="case-accent-line"></div>
+  <div class="s-full" style="padding-bottom:24px;">
+    <span class="eyebrow rev d1">Case Study 3 · Budget Protection · dentsu India</span>
+    <h2 class="rev d2" style="font-size:48px;margin-bottom:22px;">Two identical campaigns,<br>one quietly burning budget.</h2>
+
+    <!-- 2 hero stats -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:20px;" class="rev d3">
+      <div style="background:var(--bg-card);border:1px solid var(--border);padding:28px 36px;display:flex;align-items:center;gap:28px;">
+        <div style="font-family:var(--serif);font-size:80px;font-weight:800;color:var(--teal);line-height:1;">2</div>
+        <div style="font-size:15px;color:var(--white-60);line-height:1.5;">duplicate Meta campaigns found running at once — and paused</div>
+      </div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);padding:28px 36px;display:flex;align-items:center;gap:28px;">
+        <div style="font-family:var(--serif);font-size:64px;font-weight:800;color:var(--teal);line-height:1;">$15.3K</div>
+        <div style="font-size:15px;color:var(--white-60);line-height:1.5;">Meta budget mis-set at $1,470 vs the planned $15,312.50 — caught and corrected</div>
+      </div>
+    </div>
+
+    <div style="font-size:14px;color:var(--white-60);line-height:1.7;max-width:1080px;background:var(--bg-card);border:1px solid var(--border);padding:20px 28px;margin-bottom:16px;" class="rev d4">
+      <strong style="color:var(--white);">What happened:</strong> while optimizing Meta campaign 02663 I noticed two near-identical campaigns delivering at the same time — one of them not in the pacing log. I flagged both IDs and asked for a duplicate check rather than assume. Raymond paused the duplicate and we reconciled its impressions in the pacing log — stopping double-delivery and protecting budget accuracy. Separately, I caught a Meta budget set to $1,470 instead of the planned $15,312.50, which explained an under-pacing campaign.
+    </div>
+
+    <!-- 2 quote blocks -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;" class="rev d5">
+      <div style="background:var(--bg-card);border:1px solid var(--border);padding:20px 24px;">
+        <div style="font-family:var(--serif);font-size:32px;color:var(--teal);line-height:0.8;opacity:0.5;margin-bottom:10px;">"</div>
+        <div style="font-size:14px;color:var(--white);font-style:italic;line-height:1.6;">"omg good catch — that probably explains the under-pacing! thank you so much."</div>
+        <div style="font-size:12px;color:var(--white-35);margin-top:10px;">Raymond Hall — Assoc. Director, NSM · on the budget fix</div>
+      </div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);padding:20px 24px;">
+        <div style="font-family:var(--serif);font-size:32px;color:var(--teal);line-height:0.8;opacity:0.5;margin-bottom:10px;">"</div>
+        <div style="font-size:14px;color:var(--white);font-style:italic;line-height:1.6;">"I just paused the duplicate — we'll subtract those impressions and account for it in the pacing log."</div>
+        <div style="font-size:12px;color:var(--white-35);margin-top:10px;">Raymond Hall — Assoc. Director, NSM · on the duplicate catch</div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--white-35);font-style:italic;margin-top:10px;" class="rev d6">Verbatim from Microsoft Teams, Aug 2025 &amp; Mar 2026 (originals on file). Meijer Meta campaigns.</div>
   </div>
 </section>
 
