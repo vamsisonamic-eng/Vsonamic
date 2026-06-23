@@ -13,21 +13,33 @@
    THEME
 ════════════════════════════════════════ */
 :root {
+  /* ── backgrounds ── */
   --bg:         #05080E;
   --bg-card:    #0A0F1A;
   --bg-hover:   rgba(0,200,215,0.07);
+  /* ── text ── */
   --white:      #EFF2F7;
   --white-60:   rgba(239,242,247,0.6);
   --white-35:   rgba(239,242,247,0.35);
   --white-15:   rgba(239,242,247,0.08);
+  /* ── teal (growth / wins / positive) ── */
   --teal:       #00C8D7;
   --teal-20:    rgba(0,200,215,0.20);
   --teal-10:    rgba(0,200,215,0.10);
   --teal-05:    rgba(0,200,215,0.05);
+  /* ── danger (risk / gap / negative) ── */
+  --danger:        rgba(255, 60, 80, 0.9);
+  --danger-20:     rgba(255, 60, 80, 0.15);
+  --danger-border: rgba(255, 60, 80, 0.25);
+  /* ── gold (secondary accent) ── */
+  --gold:    rgba(255, 190, 80, 0.9);
+  --gold-10: rgba(255, 190, 80, 0.08);
+  /* ── borders ── */
   --border:     rgba(255,255,255,0.06);
   --border-t:   rgba(0,200,215,0.22);
   --red-bg:     rgba(255,70,50,0.06);
   --red-border: rgba(255,70,50,0.20);
+  /* ── type & motion ── */
   --serif: 'Syne', sans-serif;
   --sans:  'DM Sans', sans-serif;
   --ease:  cubic-bezier(0.22, 1, 0.36, 1);
@@ -955,22 +967,6 @@ strong { color:var(--white); font-weight:500; }
 .scope-title { font-family:var(--serif); font-size:18px; font-weight:700; color:var(--white); margin-bottom:8px; line-height:1.2; }
 .scope-body { font-family:var(--sans); font-size:14px; color:var(--white-35); line-height:1.6; }
 
-/* ══════════════════════════════════════════════
-   VISUAL IDENTITY SYSTEM — v2
-   Color convention (strict):
-     --teal   = growth / wins / positive delta
-     --danger = risk / gap / negative
-     --white  = operational volume (neutral facts)
-     --white-60 = supporting context
-══════════════════════════════════════════════ */
-:root {
-  --danger: rgba(255, 60, 80, 0.9);
-  --danger-20: rgba(255, 60, 80, 0.15);
-  --danger-border: rgba(255, 60, 80, 0.25);
-  --gold: rgba(255, 190, 80, 0.9);
-  --gold-10: rgba(255, 190, 80, 0.08);
-}
-
 /* Slide background watermark letter / number */
 .slide-watermark {
   position:absolute; right:-40px; bottom:-60px; z-index:0; pointer-events:none;
@@ -1321,6 +1317,66 @@ strong { color:var(--white); font-weight:500; }
 <!-- ══════════════════════════════════════════════
      SLIDE 2 · EXECUTIVE SUMMARY
 ═══════════════════════════════════════════════ -->
+<section class="slide" id="s2">
+  <div class="slide-dentsu rev-fade">dentsu</div>
+  <div class="slide-watermark" style="font-size:360px;right:-20px;bottom:-80px;color:rgba(0,200,215,0.025);">∑</div>
+  <div class="s-split">
+    <div class="s-left" style="padding:72px 64px 72px 96px;">
+      <span class="eyebrow rev d1">Executive Summary · dentsu India · July 2026</span>
+      <h2 class="rev d2" style="font-size:66px;line-height:0.98;margin-bottom:0;">The case<br>in one page.</h2>
+      <div class="divider rev d3"></div>
+      <p class="lead rev d4" style="font-size:17px;line-height:1.65;max-width:500px;color:var(--white-60);">18+ months of Senior Manager output — $275M managed, 968 campaigns delivered, 5 platforms owned — compensated at Account Manager rate. This deck makes the case to correct it.</p>
+      <!-- Transition visual -->
+      <div class="rev d5" style="margin-top:40px;display:flex;flex-direction:column;gap:0;">
+        <div style="display:flex;align-items:center;gap:20px;padding:18px 24px;background:rgba(255,255,255,0.03);border:1px solid var(--border);">
+          <div style="font-family:var(--serif);font-size:28px;font-weight:800;color:var(--white-35);min-width:60px;letter-spacing:-0.02em;">AM</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:var(--white-60);">Account Manager · Current</div>
+            <div style="font-size:12px;color:var(--white-35);margin-top:3px;">₹13.10L · 2.5 years at Meijer scope</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:center;height:32px;border-left:2px dashed rgba(0,200,215,0.25);border-right:2px dashed rgba(0,200,215,0.25);margin:0 24px;background:transparent;position:relative;">
+          <span style="font-family:var(--serif);font-size:20px;color:var(--teal);position:absolute;">↓</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:20px;padding:18px 24px;background:rgba(0,200,215,0.08);border:1px solid rgba(0,200,215,0.35);border-left:3px solid var(--teal);">
+          <div style="font-family:var(--serif);font-size:28px;font-weight:800;color:var(--teal);min-width:60px;letter-spacing:-0.02em;">SM</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:var(--white);">Senior Manager · Proposed</div>
+            <div style="font-size:12px;color:var(--teal);margin-top:3px;">₹28L · market median · effective July 5</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="s-right" style="padding:60px 60px 60px 2px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;align-content:center;">
+      <div class="rev d2" style="background:var(--bg-card);border:1px solid var(--border);padding:36px 32px;transition:background 0.25s,border-color 0.25s;" onmouseenter="this.style.background='var(--bg-hover)';this.style.borderColor='var(--border-t)'" onmouseleave="this.style.background='var(--bg-card)';this.style.borderColor='var(--border)'">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.2em;color:var(--teal);margin-bottom:14px;">Performance</div>
+        <div style="font-family:var(--serif);font-size:60px;font-weight:800;color:var(--teal);line-height:1;" data-count="+134">+134</div>
+        <div style="font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:0.1em;color:var(--teal);margin-bottom:8px;">%</div>
+        <div style="font-size:14px;color:var(--white-60);line-height:1.5;">ROAS improvement · H2 2024 → H1 2025</div>
+      </div>
+      <div class="rev d3" style="background:var(--bg-card);border:1px solid var(--border);padding:36px 32px;transition:background 0.25s,border-color 0.25s;" onmouseenter="this.style.background='var(--bg-hover)';this.style.borderColor='var(--border-t)'" onmouseleave="this.style.background='var(--bg-card)';this.style.borderColor='var(--border)'">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.2em;color:var(--teal);margin-bottom:14px;">Scale</div>
+        <div style="font-family:var(--serif);font-size:60px;font-weight:800;color:var(--white);line-height:1;">$275</div>
+        <div style="font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:0.1em;color:var(--white-35);margin-bottom:8px;">M annual</div>
+        <div style="font-size:14px;color:var(--white-60);line-height:1.5;">5 platforms · sole owner · no backup</div>
+      </div>
+      <div class="rev d4" style="background:var(--bg-card);border:1px solid var(--border);padding:36px 32px;transition:background 0.25s,border-color 0.25s;" onmouseenter="this.style.background='var(--bg-hover)';this.style.borderColor='var(--border-t)'" onmouseleave="this.style.background='var(--bg-card)';this.style.borderColor='var(--border)'">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.2em;color:var(--teal);margin-bottom:14px;">Delivery</div>
+        <div style="font-family:var(--serif);font-size:60px;font-weight:800;color:var(--white);line-height:1;">&gt;98</div>
+        <div style="font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:0.1em;color:var(--white-35);margin-bottom:8px;">% DIF</div>
+        <div style="font-size:14px;color:var(--white-60);line-height:1.5;">968 campaigns · in full · on time</div>
+      </div>
+      <div class="rev d5" style="background:rgba(0,200,215,0.07);border:1px solid rgba(0,200,215,0.3);padding:36px 32px;transition:background 0.25s,border-color 0.25s;" onmouseenter="this.style.background='rgba(0,200,215,0.12)'" onmouseleave="this.style.background='rgba(0,200,215,0.07)'">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.2em;color:var(--teal);margin-bottom:14px;">The Ask</div>
+        <div style="font-family:var(--serif);font-size:60px;font-weight:800;color:var(--teal);line-height:1;">₹28L</div>
+        <div style="font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:0.1em;color:var(--teal);margin-bottom:8px;">total CTC</div>
+        <div style="font-size:14px;color:var(--white-60);line-height:1.5;">Senior Manager · at market · July 5 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ══════════════════════════════════════════════
      SLIDE 3 · THE PROBLEM  (redesigned)
 ═══════════════════════════════════════════════ -->
@@ -2841,6 +2897,119 @@ strong { color:var(--white); font-weight:500; }
       <div style="font-family:var(--serif);font-size:36px;font-weight:800;color:var(--teal);white-space:nowrap;letter-spacing:-0.02em;">Accountable.</div>
       <div style="font-size:14px;color:var(--white-60);line-height:1.6;">Not promises — commitments with deadlines and KPIs. The operational groundwork is already laid. What's missing is the title and mandate to act at this level within dentsu India.</div>
     </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE · WHAT DENTSU GETS — YEAR 1 RETURN
+═══════════════════════════════════════════════ -->
+<section class="slide" id="syear1">
+  <div class="slide-dentsu rev-fade">dentsu</div>
+  <div class="slide-watermark" style="font-size:320px;right:-40px;bottom:-60px;color:rgba(0,200,215,0.02);">ROI</div>
+  <div class="s-full" style="padding-bottom:28px;position:relative;z-index:1;">
+    <span class="eyebrow eyebrow-control rev d1">Investment Return · Year 1 · dentsu India</span>
+    <h2 class="rev d2" style="font-size:54px;margin-bottom:8px;">₹28L in. What dentsu gets out.</h2>
+    <p class="rev d3" style="font-size:15px;color:var(--white-60);margin-bottom:24px;max-width:820px;">A ₹14.9L correction that buys dentsu three things that money cannot replace once lost: institutional knowledge, account continuity, and operational scale.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:2px;" class="rev d4">
+
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-top:3px solid var(--teal);padding:36px 32px;">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--teal);margin-bottom:16px;">Asset ①</div>
+        <div style="font-family:var(--serif);font-size:44px;font-weight:800;color:var(--teal);line-height:1;margin-bottom:12px;">$275M</div>
+        <div style="font-size:15px;font-weight:700;color:var(--white);margin-bottom:10px;">Account continuity — guaranteed</div>
+        <div style="font-size:14px;color:var(--white-60);line-height:1.6;">The sole operational lead on the Meijer account stays in place. Zero disruption to pacing, delivery, or the client relationship dentsu has spent 2+ years building.</div>
+        <div style="margin-top:18px;padding:10px 14px;background:rgba(0,200,215,0.06);border-left:2px solid var(--teal);font-size:12px;color:var(--teal);font-weight:600;">vs. ₹25–40L replacement cost + 4–6 month ramp</div>
+      </div>
+
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-top:3px solid rgba(0,200,215,0.5);padding:36px 32px;">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--teal);margin-bottom:16px;">Asset ②</div>
+        <div style="font-family:var(--serif);font-size:44px;font-weight:800;color:var(--white);line-height:1;margin-bottom:12px;">4 SM</div>
+        <div style="font-size:15px;font-weight:700;color:var(--white);margin-bottom:10px;">Capability exported to the team</div>
+        <div style="font-size:14px;color:var(--white-60);line-height:1.6;">Pacing framework + FMEA SOP rolled to 1 new dentsu account by Q4 2026. 1 AD + 3 Managers trained under an accountable SM — turning a dependency into a platform for scale.</div>
+        <div style="margin-top:18px;padding:10px 14px;background:rgba(0,200,215,0.06);border-left:2px solid rgba(0,200,215,0.4);font-size:12px;color:var(--white-60);font-weight:600;">Committed KPI: SOP adopted by 1 new account</div>
+      </div>
+
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-top:3px solid rgba(0,200,215,0.25);padding:36px 32px;">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--teal);margin-bottom:16px;">Asset ③</div>
+        <div style="font-family:var(--serif);font-size:44px;font-weight:800;color:var(--white);line-height:1;margin-bottom:12px;">QBR</div>
+        <div style="font-size:15px;font-weight:700;color:var(--white);margin-bottom:10px;">Client-facing voice, owned</div>
+        <div style="font-size:14px;color:var(--white-60);line-height:1.6;">Q3 2026 Meijer QBR narrative presented directly. dentsu reduces NSM dependency for client communication. A Senior Manager title is the prerequisite for this authority to be credible externally.</div>
+        <div style="margin-top:18px;padding:10px 14px;background:rgba(0,200,215,0.06);border-left:2px solid rgba(0,200,215,0.25);font-size:12px;color:var(--white-60);font-weight:600;">Committed KPI: Q3 QBR deck delivered independently</div>
+      </div>
+
+    </div>
+
+    <!-- Bottom ROI equation -->
+    <div class="rev d5" style="display:flex;align-items:stretch;gap:0;background:rgba(0,200,215,0.04);border:1px solid rgba(0,200,215,0.18);">
+      <div style="padding:18px 28px;border-right:1px solid rgba(0,200,215,0.15);display:flex;align-items:center;gap:14px;">
+        <div style="font-family:var(--serif);font-size:28px;font-weight:800;color:var(--danger);">₹14.9L</div>
+        <div style="font-size:12px;color:var(--white-60);">correction cost<br>(over current CTC)</div>
+      </div>
+      <div style="padding:18px 20px;display:flex;align-items:center;font-family:var(--serif);font-size:24px;color:var(--white-35);">→</div>
+      <div style="padding:18px 28px;border-right:1px solid rgba(0,200,215,0.15);display:flex;align-items:center;gap:14px;">
+        <div style="font-family:var(--serif);font-size:28px;font-weight:800;color:var(--teal);">$275M</div>
+        <div style="font-size:12px;color:var(--white-60);">account protected<br>at &gt;98% delivery</div>
+      </div>
+      <div style="padding:18px 20px;display:flex;align-items:center;font-family:var(--serif);font-size:24px;color:var(--white-35);">+</div>
+      <div style="padding:18px 28px;border-right:1px solid rgba(0,200,215,0.15);display:flex;align-items:center;gap:14px;">
+        <div style="font-family:var(--serif);font-size:28px;font-weight:800;color:var(--white);">0</div>
+        <div style="font-size:12px;color:var(--white-60);">replacement &amp; ramp<br>cost absorbed</div>
+      </div>
+      <div style="padding:18px 20px;display:flex;align-items:center;font-family:var(--serif);font-size:24px;color:var(--white-35);">+</div>
+      <div style="flex:1;padding:18px 28px;display:flex;align-items:center;gap:14px;">
+        <div style="font-family:var(--serif);font-size:28px;font-weight:800;color:var(--teal);">×3</div>
+        <div style="font-size:12px;color:var(--white-60);">capability exported<br>to new accounts</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE · WHY NOW, NOT LATER
+═══════════════════════════════════════════════ -->
+<section class="slide" id="swhy">
+  <div class="slide-dentsu rev-fade">dentsu</div>
+  <div class="slide-watermark" style="font-size:360px;right:-40px;bottom:-60px;color:rgba(255,60,80,0.02);">!</div>
+  <div class="s-full" style="padding-bottom:28px;position:relative;z-index:1;">
+    <span class="eyebrow rev d1" style="color:var(--danger);">Decision Timing · July 5, 2026 · dentsu India</span>
+    <h2 class="rev d2" style="font-size:58px;margin-bottom:10px;">Three reasons this<br>is the right moment.</h2>
+    <p class="rev d3" style="font-size:15px;color:var(--white-60);margin-bottom:28px;max-width:760px;">Waiting another review cycle does not reduce the cost of this decision — it increases it.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;margin-bottom:20px;" class="rev d4">
+
+      <div style="background:var(--bg-card);border:1px solid var(--border);padding:40px 36px;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,rgba(140,100,255,0.7),rgba(140,100,255,0.1));"></div>
+        <div style="font-family:var(--serif);font-size:80px;font-weight:800;color:rgba(140,100,255,0.1);line-height:0.85;margin-bottom:20px;letter-spacing:-0.04em;">1</div>
+        <div style="font-size:15px;font-weight:700;color:var(--white);margin-bottom:12px;line-height:1.3;">The output already happened.<br>The pay did not.</div>
+        <div style="font-size:14px;color:var(--white-60);line-height:1.65;">18 months of Senior Manager delivery are already on the books — cannot be returned. The ₹14.9L gap is not hypothetical; it is owed. Every additional month widens it.</div>
+      </div>
+
+      <div style="background:var(--bg-card);border:1px solid var(--border);padding:40px 36px;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,rgba(255,60,80,0.7),rgba(255,60,80,0.1));"></div>
+        <div style="font-family:var(--serif);font-size:80px;font-weight:800;color:rgba(255,60,80,0.08);line-height:0.85;margin-bottom:20px;letter-spacing:-0.04em;">2</div>
+        <div style="font-size:15px;font-weight:700;color:var(--white);margin-bottom:12px;line-height:1.3;">The replacement window<br>is already open.</div>
+        <div style="font-size:14px;color:var(--white-60);line-height:1.65;">Senior Manager roles in Hyderabad RMN are actively being filled at ₹28L. The market is not waiting. Inaction does not preserve the status quo — it makes departure incrementally more likely each month.</div>
+      </div>
+
+      <div style="background:rgba(0,200,215,0.05);border:1px solid rgba(0,200,215,0.22);padding:40px 36px;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),rgba(0,200,215,0.1));"></div>
+        <div style="font-family:var(--serif);font-size:80px;font-weight:800;color:rgba(0,200,215,0.08);line-height:0.85;margin-bottom:20px;letter-spacing:-0.04em;">3</div>
+        <div style="font-size:15px;font-weight:700;color:var(--white);margin-bottom:12px;line-height:1.3;">Meijer Q3 2026 planning<br>needs an SM in the seat.</div>
+        <div style="font-size:14px;color:var(--white-60);line-height:1.65;">The Q3 flight plan, budget reallocation decisions, and QBR narrative for dentsu's largest RMN account all land in Q3. Having an authorised SM — not an AM acting up — is the difference between dentsu leading that conversation and following it.</div>
+      </div>
+
+    </div>
+
+    <!-- Bottom closer -->
+    <div class="rev d5" style="display:flex;align-items:center;justify-content:space-between;padding:20px 28px;background:rgba(0,200,215,0.06);border:1px solid rgba(0,200,215,0.2);">
+      <div style="font-family:var(--serif);font-size:24px;font-weight:800;color:var(--white);letter-spacing:-0.01em;">This is a correction — not a cost.</div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="font-size:13px;color:var(--white-60);">Effective date requested:</div>
+        <div style="font-family:var(--serif);font-size:22px;font-weight:800;color:var(--teal);">July 5, 2026</div>
+      </div>
+    </div>
+
   </div>
 </section>
 
