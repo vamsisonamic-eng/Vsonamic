@@ -1155,6 +1155,179 @@ strong { color:var(--white); font-weight:500; }
 .cs-modal-close:hover { background:rgba(0,200,215,0.2); }
 .cs-modal-body { padding:48px 56px 56px; }
 
+/* ═══════════════════════════════════════
+   S-CASES · DMAIC INTERACTIVE TAB SLIDE
+════════════════════════════════════════ */
+.sc-wrap {
+  position:absolute; inset:0;
+  display:grid; grid-template-columns:360px 1fr;
+  gap:0;
+}
+/* ── Left column: case tabs ── */
+.sc-left {
+  display:flex; flex-direction:column;
+  background:rgba(5,8,14,0.7); border-right:1px solid var(--border);
+  padding:72px 0 40px;
+}
+.sc-left-header {
+  padding:0 36px 32px;
+  border-bottom:1px solid var(--border);
+}
+.sc-left-header .eyebrow { margin-bottom:10px; }
+.sc-left-header h2 {
+  font-size:28px; line-height:1.15; color:var(--white);
+}
+.sc-tabs { display:flex; flex-direction:column; gap:2px; padding:24px 16px; flex:1; }
+.sc-tab {
+  display:flex; flex-direction:column; gap:6px;
+  padding:20px 20px; cursor:pointer;
+  border:1px solid transparent;
+  position:relative; overflow:hidden;
+  transition:background 0.22s var(--ease), border-color 0.22s var(--ease);
+}
+.sc-tab::before {
+  content:''; position:absolute; left:0; top:0; bottom:0; width:3px;
+  background:var(--teal); transform:scaleY(0); transform-origin:bottom;
+  transition:transform 0.3s var(--ease);
+}
+.sc-tab:hover { background:rgba(0,200,215,0.04); border-color:var(--border); }
+.sc-tab.active {
+  background:rgba(0,200,215,0.06);
+  border-color:rgba(0,200,215,0.2);
+}
+.sc-tab.active::before { transform:scaleY(1); }
+.sc-tab-num {
+  font-size:9px; font-weight:700; letter-spacing:0.22em; text-transform:uppercase;
+  color:var(--white-35);
+}
+.sc-tab.active .sc-tab-num { color:var(--teal); }
+.sc-tab-title {
+  font-family:var(--serif); font-size:16px; font-weight:700; color:var(--white-60);
+  line-height:1.25; transition:color 0.2s;
+}
+.sc-tab.active .sc-tab-title { color:var(--white); }
+.sc-tab-kpi {
+  font-family:var(--serif); font-size:30px; font-weight:800;
+  color:var(--teal); line-height:1; letter-spacing:-0.02em;
+  opacity:0; transform:translateX(-6px);
+  transition:opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.sc-tab.active .sc-tab-kpi { opacity:1; transform:none; }
+.sc-tab-kpi-label {
+  font-size:10px; color:var(--white-35); text-transform:uppercase;
+  letter-spacing:0.14em; line-height:1.3;
+}
+.sc-tab-arrow {
+  position:absolute; right:20px; top:50%; transform:translateY(-50%);
+  color:var(--teal); font-size:18px; opacity:0;
+  transition:opacity 0.2s, transform 0.2s var(--ease);
+}
+.sc-tab.active .sc-tab-arrow { opacity:1; transform:translateY(-50%) translateX(0); }
+
+/* ── Right column: panels ── */
+.sc-right {
+  position:relative; overflow:hidden;
+  padding:64px 72px 48px;
+}
+.sc-panel {
+  position:absolute; inset:0; padding:64px 72px 48px;
+  display:flex; flex-direction:column; gap:20px;
+  opacity:0; pointer-events:none;
+  transform:translateX(16px);
+  transition:opacity 0.38s var(--ease), transform 0.38s var(--ease);
+}
+.sc-panel.active {
+  opacity:1; pointer-events:auto; transform:translateX(0);
+}
+
+/* Panel header */
+.sc-panel-hdr { display:flex; align-items:center; gap:16px; margin-bottom:4px; }
+.sc-panel-tag {
+  font-size:9px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase;
+  padding:4px 12px; border:1px solid; display:inline-flex; align-items:center;
+}
+.sc-panel-title {
+  font-family:var(--serif); font-size:34px; font-weight:800;
+  color:var(--white); line-height:1.1;
+}
+
+/* KPI row */
+.sc-kpi-row { display:flex; gap:3px; margin-bottom:4px; }
+.sc-kpi-card {
+  flex:1; background:var(--bg-card); border:1px solid var(--border);
+  padding:18px 20px; position:relative; overflow:hidden;
+}
+.sc-kpi-card::after {
+  content:''; position:absolute; top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg, var(--teal), transparent);
+}
+.sc-kpi-val {
+  font-family:var(--serif); font-size:38px; font-weight:800;
+  color:var(--teal); line-height:1; letter-spacing:-0.02em;
+  display:block;
+}
+.sc-kpi-lbl {
+  font-size:10px; text-transform:uppercase; letter-spacing:0.13em;
+  color:var(--white-35); margin-top:4px; display:block;
+}
+
+/* DMAIC rail */
+.sc-dmaic {
+  display:flex; gap:3px;
+}
+.sc-dmaic-cell {
+  flex:1; padding:14px 16px;
+  background:var(--bg-card); border:1px solid var(--border);
+  position:relative;
+}
+.sc-dmaic-cell.highlight {
+  background:rgba(0,200,215,0.06);
+  border-color:rgba(0,200,215,0.22);
+}
+.sc-dmaic-letter {
+  font-family:var(--serif); font-size:22px; font-weight:800;
+  color:var(--white-35); line-height:1; margin-bottom:6px;
+  display:block;
+}
+.sc-dmaic-cell.highlight .sc-dmaic-letter { color:var(--teal); }
+.sc-dmaic-phase {
+  font-size:8px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--white-35); margin-bottom:8px; display:block;
+}
+.sc-dmaic-cell.highlight .sc-dmaic-phase { color:var(--teal); opacity:0.8; }
+.sc-dmaic-text {
+  font-size:11px; color:var(--white-60); line-height:1.55;
+}
+
+/* Micro table */
+.sc-table {
+  width:100%; border-collapse:collapse;
+  font-size:12px; color:var(--white-60);
+}
+.sc-table th {
+  font-size:9px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--white-35); padding:8px 14px; text-align:left;
+  border-bottom:1px solid var(--border); background:rgba(255,255,255,0.02);
+}
+.sc-table td {
+  padding:10px 14px; border-bottom:1px solid var(--border);
+  vertical-align:top;
+}
+.sc-table tr:last-child td { border-bottom:none; }
+.sc-table td:first-child { color:var(--white); font-weight:600; }
+.sc-table .teal { color:var(--teal); font-weight:700; }
+
+/* Outcome bar */
+.sc-outcome {
+  display:flex; align-items:center; gap:14px;
+  background:rgba(0,200,215,0.05);
+  border:1px solid rgba(0,200,215,0.2);
+  padding:14px 20px; margin-top:auto;
+}
+.sc-outcome-icon { color:var(--teal); flex-shrink:0; font-size:18px; }
+.sc-outcome-text { font-size:12px; color:var(--white-60); line-height:1.5; }
+.sc-outcome-text strong { color:var(--white); }
+
 </style>
 </head>
 <body>
@@ -2243,51 +2416,222 @@ strong { color:var(--white); font-weight:500; }
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="scases">
   <div class="slide-dentsu rev-fade">dentsu</div>
-  <div class="case-accent-line"></div>
-  <div class="slide-watermark" style="font-size:300px;right:40px;bottom:-60px;color:rgba(0,200,215,0.02);">★</div>
-  <div class="s-full" style="position:relative;z-index:1;">
-    <span class="eyebrow rev d1">Documented Cases · Analyse &amp; Improve · DMAIC · dentsu India</span>
-    <h2 class="rev d2" style="font-size:52px;margin-bottom:8px;">Three moments where expertise<br>protected $275M in spend.</h2>
-    <p class="rev d3" style="font-size:15px;color:var(--white-35);margin-bottom:28px;">Click any case to expand the full evidence.</p>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;flex:1;" class="rev d4">
-      <div class="cs-card" onclick="openCase(1)">
-        <div class="cs-card-num">Case 01</div>
-        <div class="cs-card-tag" style="background:rgba(66,133,244,0.15);border-color:rgba(66,133,244,0.3);color:#79aeff;">DV360 · Platform Bug</div>
-        <div class="cs-card-headline">I diagnosed a Google bug —<br>before Google did.</div>
-        <div class="cs-card-stat" style="color:var(--teal);">619K</div>
-        <div class="cs-card-stat-label">impressions protected</div>
-        <div class="cs-card-desc">Mass DV360 creative rejections traced to robots.txt conflict. Root cause identified before Google's own rep confirmed it.</div>
-        <div class="cs-card-outcome"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#00C8D7" stroke-width="2"/></svg>FMEA: crawlability check now in QA SOP</div>
-        <div class="cs-card-cta">View full case <span>→</span></div>
+  <div class="slide-watermark" style="font-size:480px;right:-40px;bottom:-100px;color:rgba(0,200,215,0.015);pointer-events:none;z-index:0;">⬡</div>
+
+  <div class="sc-wrap">
+
+    <!-- ── LEFT: Case Navigator ── -->
+    <div class="sc-left rev d1">
+      <div class="sc-left-header">
+        <span class="eyebrow">Case Evidence · DMAIC · dentsu India</span>
+        <h2 style="font-family:var(--serif);font-size:22px;font-weight:800;color:var(--white);line-height:1.3;">Three documented<br>high-stakes interventions.</h2>
       </div>
-      <div class="cs-card" onclick="openCase(2)">
-        <div class="cs-card-num">Case 02</div>
-        <div class="cs-card-tag" style="background:rgba(0,200,215,0.12);border-color:rgba(0,200,215,0.3);color:var(--teal);">Pacing · Recovery</div>
-        <div class="cs-card-headline">619,636 impressions<br>recovered mid-flight.</div>
-        <div class="cs-card-stat" style="color:var(--teal);">8.4M</div>
-        <div class="cs-card-stat-label">impression plan protected</div>
-        <div class="cs-card-desc">Labour Day flight quietly under-delivering. Reconciled all flights, isolated the exact shortfall and rolled it into the active campaign.</div>
-        <div class="cs-card-outcome"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#00C8D7" stroke-width="2"/></svg>Full delivery protected · 0 client escalation</div>
-        <div class="cs-card-cta">View full case <span>→</span></div>
+      <div class="sc-tabs" id="scTabs">
+        <div class="sc-tab active" data-case="1" onclick="switchCase(1)">
+          <div class="sc-tab-num">Case 01 · Process Optimization</div>
+          <div class="sc-tab-title">ROAS Step-Change<br>via Baseline Rebuild</div>
+          <div class="sc-tab-kpi">+134%</div>
+          <div class="sc-tab-kpi-label">ROAS lift · DV360</div>
+          <span class="sc-tab-arrow">›</span>
+        </div>
+        <div class="sc-tab" data-case="2" onclick="switchCase(2)">
+          <div class="sc-tab-num">Case 02 · System Stress &amp; Scale</div>
+          <div class="sc-tab-title">$275M Run-Rate<br>Zero Structural Failures</div>
+          <div class="sc-tab-kpi">$7.24M</div>
+          <div class="sc-tab-kpi-label">Record peak week governed</div>
+          <span class="sc-tab-arrow">›</span>
+        </div>
+        <div class="sc-tab" data-case="3" onclick="switchCase(3)">
+          <div class="sc-tab-num">Case 03 · Variance Control</div>
+          <div class="sc-tab-title">Multi-Platform DIF<br>&gt;98% Across 5 Systems</div>
+          <div class="sc-tab-kpi">&gt;98%</div>
+          <div class="sc-tab-kpi-label">DIF · no dedicated support</div>
+          <span class="sc-tab-arrow">›</span>
+        </div>
       </div>
-      <div class="cs-card" onclick="openCase(3)">
-        <div class="cs-card-num">Case 03</div>
-        <div class="cs-card-tag" style="background:rgba(255,60,80,0.12);border-color:rgba(255,60,80,0.3);color:#ff6070;">Meta · Budget Risk</div>
-        <div class="cs-card-headline">Two identical campaigns,<br>one burning budget.</div>
-        <div class="cs-card-stat" style="color:var(--danger);">$15.3K</div>
-        <div class="cs-card-stat-label">budget mis-set caught</div>
-        <div class="cs-card-desc">Spotted duplicate Meta campaigns + a budget set to $1,470 vs planned $15,312.50. Both flagged before client could see a miss.</div>
-        <div class="cs-card-outcome"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#00C8D7" stroke-width="2"/></svg>FMEA: duplicate + mis-set checks in weekly SOP</div>
-        <div class="cs-card-cta">View full case <span>→</span></div>
+      <div style="padding:0 20px;margin-top:auto;">
+        <div style="font-size:10px;color:var(--white-35);letter-spacing:0.1em;text-transform:uppercase;line-height:1.6;">All cases documented<br>in team QBR / pacing logs</div>
       </div>
     </div>
-  </div>
-  <div class="cs-modal" id="csModal" onclick="closeCase(event)">
-    <div class="cs-modal-box" onclick="event.stopPropagation()">
-      <button class="cs-modal-close" onclick="closeCase()">&times;</button>
-      <div class="cs-modal-body" id="csModalBody"></div>
-    </div>
-  </div>
+
+    <!-- ── RIGHT: Panel Details ── -->
+    <div class="sc-right">
+
+      <!-- PANEL 1: Process Optimization -->
+      <div class="sc-panel active" id="scPanel1">
+        <div>
+          <div class="sc-panel-hdr rev d2">
+            <span class="sc-panel-tag" style="color:#79aeff;border-color:rgba(66,133,244,0.35);background:rgba(66,133,244,0.1);">DV360 · Audience Optimization</span>
+          </div>
+          <div class="sc-panel-title rev d3">Process Optimization Capabilities</div>
+        </div>
+        <div class="sc-kpi-row rev d4">
+          <div class="sc-kpi-card">
+            <span class="sc-kpi-val count-shimmer" data-count="134" data-prefix="+" data-suffix="%">+134%</span>
+            <span class="sc-kpi-lbl">ROAS lift · step-change</span>
+          </div>
+          <div class="sc-kpi-card">
+            <span class="sc-kpi-val count-shimmer" data-count="107" data-prefix="+" data-suffix="%">+107%</span>
+            <span class="sc-kpi-lbl">CVR growth · same period</span>
+          </div>
+          <div class="sc-kpi-card">
+            <span class="sc-kpi-val" style="font-size:22px;color:var(--white);">Baseline</span>
+            <span class="sc-kpi-lbl">Rebuilt · not incremental</span>
+          </div>
+        </div>
+        <div class="sc-dmaic rev d5">
+          <div class="sc-dmaic-cell">
+            <span class="sc-dmaic-letter">D</span>
+            <span class="sc-dmaic-phase">Define</span>
+            <span class="sc-dmaic-text">ROAS under-performing vs. category benchmark. Audience strategy inherited from prior AM — no documented rationale.</span>
+          </div>
+          <div class="sc-dmaic-cell">
+            <span class="sc-dmaic-letter">M</span>
+            <span class="sc-dmaic-phase">Measure</span>
+            <span class="sc-dmaic-text">Audited 6 weeks of DV360 line-item performance. Isolated audience segments with &lt;0.8× ROAS vs. account floor.</span>
+          </div>
+          <div class="sc-dmaic-cell highlight">
+            <span class="sc-dmaic-letter">A</span>
+            <span class="sc-dmaic-phase">Analyze</span>
+            <span class="sc-dmaic-text">Root cause: broad-match audience overlap diluting CVR signal. Affinity lists cannibalizing in-market intent segments.</span>
+          </div>
+          <div class="sc-dmaic-cell highlight">
+            <span class="sc-dmaic-letter">I</span>
+            <span class="sc-dmaic-phase">Improve</span>
+            <span class="sc-dmaic-text">Rebuilt targeting from scratch: separated in-market from affinity, applied exclusion layers, reallocated budget to top-5 performers.</span>
+          </div>
+          <div class="sc-dmaic-cell">
+            <span class="sc-dmaic-letter">C</span>
+            <span class="sc-dmaic-phase">Control</span>
+            <span class="sc-dmaic-text">Audience governance framework added to QA SOP. Monthly ROAS floor review standardised across all DV360 line items.</span>
+          </div>
+        </div>
+        <div class="sc-outcome rev d6">
+          <span class="sc-outcome-icon">⬡</span>
+          <div class="sc-outcome-text"><strong>Control output:</strong> Audience segmentation rules codified into team playbook. +134% ROAS sustained for 3 consecutive months post-rebuild — not a spike, a new baseline.</div>
+        </div>
+      </div>
+
+      <!-- PANEL 2: System Stress & Scale -->
+      <div class="sc-panel" id="scPanel2">
+        <div>
+          <div class="sc-panel-hdr">
+            <span class="sc-panel-tag" style="color:var(--teal);border-color:rgba(0,200,215,0.3);background:rgba(0,200,215,0.08);">Pacing · Budget Governance</span>
+          </div>
+          <div class="sc-panel-title">System Stress &amp; Scaling Stability</div>
+        </div>
+        <div class="sc-kpi-row">
+          <div class="sc-kpi-card">
+            <span class="sc-kpi-val count-shimmer" data-prefix="$" data-suffix="M">275</span>
+            <span class="sc-kpi-lbl">Annual run-rate managed</span>
+          </div>
+          <div class="sc-kpi-card">
+            <span class="sc-kpi-val count-shimmer" data-prefix="$" data-suffix="M">7.24</span>
+            <span class="sc-kpi-lbl">Record peak-week spend</span>
+          </div>
+          <div class="sc-kpi-card">
+            <span class="sc-kpi-val" style="font-size:28px;color:var(--white);">Zero</span>
+            <span class="sc-kpi-lbl">Structural defect failures</span>
+          </div>
+        </div>
+        <div class="sc-dmaic">
+          <div class="sc-dmaic-cell">
+            <span class="sc-dmaic-letter">D</span>
+            <span class="sc-dmaic-phase">Define</span>
+            <span class="sc-dmaic-text">Meijer RMN scaling from ~$180M to $275M annual. Peak promotional weeks creating pacing volatility risk across 5 DSPs.</span>
+          </div>
+          <div class="sc-dmaic-cell highlight">
+            <span class="sc-dmaic-letter">M</span>
+            <span class="sc-dmaic-phase">Measure</span>
+            <span class="sc-dmaic-text">Tracked daily pacing deltas across DV360, TTD, GAM, Meta, Pinterest. Flagged when any platform deviated &gt;8% from weekly pace.</span>
+          </div>
+          <div class="sc-dmaic-cell highlight">
+            <span class="sc-dmaic-letter">A</span>
+            <span class="sc-dmaic-phase">Analyze</span>
+            <span class="sc-dmaic-text">Peak-week $7.24M spend concentrated into 5-day window. Highest fragility: GAM + DV360 simultaneous push creating delivery conflicts.</span>
+          </div>
+          <div class="sc-dmaic-cell highlight">
+            <span class="sc-dmaic-letter">I</span>
+            <span class="sc-dmaic-phase">Improve</span>
+            <span class="sc-dmaic-text">Pre-flight budget lock procedure. Platform-specific pacing buffers. Daily 9am cross-platform reconciliation during peak weeks.</span>
+          </div>
+          <div class="sc-dmaic-cell">
+            <span class="sc-dmaic-letter">C</span>
+            <span class="sc-dmaic-phase">Control</span>
+            <span class="sc-dmaic-text">Zero missed delivery targets at $275M scale. Peak governance checklist embedded in activation SOP. Replicated across all subsequent high-spend windows.</span>
+          </div>
+        </div>
+        <div class="sc-outcome">
+          <span class="sc-outcome-icon">⬡</span>
+          <div class="sc-outcome-text"><strong>Control output:</strong> $7.24M record week governed without a single structural defect. Governance procedure now standard for every high-spend promotional period.</div>
+        </div>
+      </div>
+
+      <!-- PANEL 3: Multi-Platform Variance Control -->
+      <div class="sc-panel" id="scPanel3">
+        <div>
+          <div class="sc-panel-hdr">
+            <span class="sc-panel-tag" style="color:#f5a623;border-color:rgba(245,166,35,0.35);background:rgba(245,166,35,0.08);">DV360 · TTD · GAM · Meta · Pinterest</span>
+          </div>
+          <div class="sc-panel-title">Multi-Platform Variance Control</div>
+        </div>
+        <div class="sc-kpi-row">
+          <div class="sc-kpi-card">
+            <span class="sc-kpi-val count-shimmer" data-prefix=">" data-suffix="%">98</span>
+            <span class="sc-kpi-lbl">DIF sustained</span>
+          </div>
+          <div class="sc-kpi-card">
+            <span class="sc-kpi-val count-shimmer">5</span>
+            <span class="sc-kpi-lbl">Concurrent platforms</span>
+          </div>
+          <div class="sc-kpi-card">
+            <span class="sc-kpi-val" style="font-size:22px;color:var(--white);">Solo</span>
+            <span class="sc-kpi-lbl">No dedicated support staff</span>
+          </div>
+        </div>
+        <div class="sc-dmaic">
+          <div class="sc-dmaic-cell">
+            <span class="sc-dmaic-letter">D</span>
+            <span class="sc-dmaic-phase">Define</span>
+            <span class="sc-dmaic-text">5 platforms with divergent pacing clocks, reporting lags, and delivery mechanics. Variance across platforms erodes aggregate DIF.</span>
+          </div>
+          <div class="sc-dmaic-cell">
+            <span class="sc-dmaic-letter">M</span>
+            <span class="sc-dmaic-phase">Measure</span>
+            <span class="sc-dmaic-text">Unified pacing dashboard aggregating DV360, TTD, GAM, Meta, Pinterest into a single daily view. DIF tracked platform-by-platform.</span>
+          </div>
+          <div class="sc-dmaic-cell highlight">
+            <span class="sc-dmaic-letter">A</span>
+            <span class="sc-dmaic-phase">Analyze</span>
+            <span class="sc-dmaic-text">Pinterest + Meta reporting 24-36hr lag causes false under-pacing signals. TTD algorithms compete with DV360 on overlapping audiences.</span>
+          </div>
+          <div class="sc-dmaic-cell highlight">
+            <span class="sc-dmaic-letter">I</span>
+            <span class="sc-dmaic-phase">Improve</span>
+            <span class="sc-dmaic-text">Platform-specific reporting offsets built into pacing model. Audience exclusion fences set cross-platform. Budget split algorithm tuned weekly.</span>
+          </div>
+          <div class="sc-dmaic-cell">
+            <span class="sc-dmaic-letter">C</span>
+            <span class="sc-dmaic-phase">Control</span>
+            <span class="sc-dmaic-text">&gt;98% DIF maintained across all 5 platforms without dedicated ops support. Platform variance model now standard across Meijer RMN planning.</span>
+          </div>
+        </div>
+        <table class="sc-table" style="margin-top:4px;">
+          <thead>
+            <tr><th>Platform</th><th>Primary Challenge</th><th>Variance Fix</th><th>DIF Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>DV360</td><td>Audience overlap · creative rejections</td><td>Exclusion layers + crawl SOP</td><td class="teal">&gt;98%</td></tr>
+            <tr><td>TTD</td><td>Algorithm competing vs DV360</td><td>Audience fence + budget split</td><td class="teal">&gt;98%</td></tr>
+            <tr><td>GAM</td><td>Peak-week delivery conflict</td><td>Pre-flight lock procedure</td><td class="teal">&gt;98%</td></tr>
+            <tr><td>Meta</td><td>36hr reporting lag · duplicate campaigns</td><td>Lag offset + duplicate SOP</td><td class="teal">&gt;98%</td></tr>
+            <tr><td>Pinterest</td><td>24hr lag · under-pacing false signal</td><td>Reporting offset model</td><td class="teal">&gt;98%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div><!-- /.sc-right -->
+  </div><!-- /.sc-wrap -->
 </section>
 
 <!-- ══════════════════════════════════════════════
@@ -3412,6 +3756,18 @@ const CASE_CONTENT = {
       <div style="font-size:13px;color:var(--white-60);margin-left:12px;">Built a permanent FMEA-based check into the team's weekly SOPs — budget-duplication and mis-set errors are now <em style="color:var(--white);">fully engineered out</em>. The class of waste does not recur.</div>
     </div>`
 };
+
+/* ═══════════════════════════════════════
+   S-CASES: DMAIC TAB SWITCHER
+════════════════════════════════════════ */
+function switchCase(n) {
+  document.querySelectorAll('#scTabs .sc-tab').forEach((t,i) => {
+    t.classList.toggle('active', i+1 === n);
+  });
+  document.querySelectorAll('.sc-panel').forEach((p,i) => {
+    p.classList.toggle('active', i+1 === n);
+  });
+}
 
 function openCase(n) {
   const modal = document.getElementById('csModal');
