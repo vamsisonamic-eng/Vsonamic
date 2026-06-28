@@ -31,6 +31,10 @@
   --serif: 'Syne', sans-serif;
   --sans:  'DM Sans', sans-serif;
   --ease:  cubic-bezier(0.22, 1, 0.36, 1);
+  /* electric-violet secondary accent (duotone with teal) */
+  --violet:    #7C6CFF;
+  --violet-30: rgba(124,108,255,0.30);
+  --violet-12: rgba(124,108,255,0.12);
 }
 
 /* ═══════════════════════════════════════
@@ -105,7 +109,7 @@ p, li { font-family:var(--sans); font-size:17px; color:var(--white-35); line-hei
 strong { color:var(--white); font-weight:500; }
 .teal { color:var(--teal); }
 
-.divider { width:36px; height:2px; background:var(--teal); margin:28px 0; }
+.divider { width:36px; height:2px; background:linear-gradient(90deg,var(--teal),var(--violet)); margin:28px 0; }
 
 /* ═══════════════════════════════════════
    COVER SLIDE (slide 1)
@@ -1112,6 +1116,41 @@ strong { color:var(--white); font-weight:500; }
 /* Ask items */
 .ask-item { transition: background 0.2s, padding-left 0.2s; }
 .ask-item:hover { background: rgba(0,200,215,0.05); padding-left: 6px; }
+
+/* ═══════════════════════════════════════
+   HI-FI · GLOBAL PREMIUM HOVER (lift + crisp + teal→violet duotone)
+   Applies to every card across the deck.
+════════════════════════════════════════ */
+.scope-card, .mkt-card, .cert-card, .win-card, .risk-card, .compare-col, .rhc-box,
+.evo-phase, .gov-row, .vouch-card, .reaction, .hr-col, .teams-card, .stat-card,
+.cover-metric, .fb-card, .nsm-ins, .flow-node, .mover-step, .cs-card, .gap-box,
+.sc-kpi-card, .sc-dmaic-cell {
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease),
+              border-color 0.2s var(--ease), background 0.2s var(--ease) !important;
+  will-change: transform;
+}
+@media (hover:hover) and (pointer:fine){
+  .scope-card:hover, .mkt-card:hover, .cert-card:hover, .win-card:hover, .risk-card:hover,
+  .compare-col:hover, .rhc-box:hover, .evo-phase:hover, .gov-row:hover, .vouch-card:hover,
+  .reaction:hover, .hr-col:hover, .teams-card:hover, .stat-card:hover, .cover-metric:hover,
+  .fb-card:hover, .nsm-ins:hover, .flow-node:hover, .mover-step:hover, .cs-card:hover,
+  .gap-box:hover, .sc-kpi-card:hover, .sc-dmaic-cell:hover {
+    transform: translateY(-5px) !important;
+    border-color: var(--border-t) !important;
+    box-shadow: inset 0 2px 0 0 var(--teal),
+                0 18px 44px rgba(0,0,0,0.46),
+                0 6px 26px var(--violet-12) !important;
+  }
+}
+/* Hairline accent-draw shared utility (teal→violet) */
+.fx-underline { position:relative; }
+.fx-underline::after {
+  content:''; position:absolute; left:0; bottom:0; height:2px; width:100%;
+  background:linear-gradient(90deg, var(--teal), var(--violet));
+  transform:scaleX(0); transform-origin:left;
+  transition:transform 0.28s var(--ease); pointer-events:none;
+}
+@media (hover:hover) and (pointer:fine){ .fx-underline:hover::after { transform:scaleX(1); } }
 /* Risk eq boxes */
 .risk-eq-box { transition: transform 0.2s var(--ease), box-shadow 0.2s; }
 .risk-eq-box:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(255,68,68,0.1); }
@@ -1736,7 +1775,7 @@ strong { color:var(--white); font-weight:500; }
 <section class="slide" id="scommercial">
   <style>
     /* ── Slide 2 · Commercial Case — craft layer (emil-design-eng) ── */
-    #scommercial .sc2-hairline{height:2px;width:0;background:linear-gradient(90deg,var(--teal),transparent);margin:2px 0 18px;border-radius:2px;}
+    #scommercial .sc2-hairline{height:2px;width:0;background:linear-gradient(90deg,var(--teal),var(--violet));margin:2px 0 18px;border-radius:2px;}
     .slide.visible #scommercial .sc2-hairline,#scommercial.visible .sc2-hairline{animation:sc2-draw .7s var(--ease) .35s forwards;}
     @keyframes sc2-draw{to{width:320px;}}
     #scommercial .sc2-panel{transition:transform .25s var(--ease),border-color .25s var(--ease),box-shadow .25s var(--ease);}
@@ -2401,7 +2440,7 @@ strong { color:var(--white); font-weight:500; }
   <div class="s-full" style="padding:64px 80px 48px;">
     <span class="eyebrow rev d1">Efficiency &amp; Margins · Meijer RMN · 2023 → 2026</span>
     <h2 class="rev d2" style="font-size:44px;margin-bottom:6px;">From volatile growth to a predictable,<br>high-margin performance engine.</h2>
-    <p class="lead rev d3" style="font-size:15px;max-width:980px;margin-bottom:22px;color:var(--white-60);">Scale was never the problem — efficiency and pacing were. Since mid-2024 the account grew ~7× in volume while every margin metric multiplied and execution volatility was engineered out.</p>
+    <p class="lead rev d3" style="font-size:16px;max-width:980px;margin-bottom:22px;color:var(--white-60);">Scale was never the problem — <span class="teal">efficiency and pacing were.</span> Same scale, far higher margin.</p>
 
     <!-- THEN → NOW efficiency comparison -->
     <div class="rev d4" style="display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:14px;">
@@ -2901,7 +2940,7 @@ strong { color:var(--white); font-weight:500; }
   <div class="s-full" style="position:relative;z-index:1;padding:64px 80px 48px;">
     <span class="eyebrow rev d1" style="color:var(--danger);">The Risk Equation · Structural Continuity · dentsu India</span>
     <h2 class="rev d2" style="font-size:46px;margin-bottom:8px;">The risk isn't a person leaving.<br>It's an operational bottleneck.</h2>
-    <p class="lead rev d3" style="font-size:16px;max-width:1000px;margin-bottom:24px;color:var(--white-60);">As Meijer's pipeline velocity accelerates, the gap between current staffing capability and what the account demands widens. Today, one person is the structural bridge keeping that operation secure.</p>
+    <p class="lead rev d3" style="font-size:16px;max-width:1000px;margin-bottom:24px;color:var(--white-60);">As pipeline velocity accelerates, capability and demand diverge — and <span class="teal">one person is the bridge holding it secure.</span></p>
 
     <!-- The gap: capability vs velocity -->
     <div class="risk-row rev d4" style="display:flex;gap:3px;margin-top:8px;">
