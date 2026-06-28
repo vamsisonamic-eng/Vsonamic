@@ -1850,55 +1850,51 @@ strong { color:var(--white); font-weight:500; }
 ═══════════════════════════════════════════════ -->
 <!-- ===== VIDEO SLIDE (added) — animated headline summary ===== -->
 <section class="slide" id="s2">
-  <div class="slide-dentsu rev-fade">dentsu</div>
   <style>
-    /* ── Slide 3 · Scorecard — editorial number wall (impeccable/bolder) ── */
-    #s2 .s-full{justify-content:space-between;padding:66px 96px 54px;}
+    /* ── Slide 3 · Scorecard — centered split stat board ── */
+    #s2 .s-full{justify-content:center;gap:30px;padding:60px 96px;}
     #s2 .sc-kicker{font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);}
-    #s2 .sc-hero{font-family:var(--serif);font-weight:800;font-size:248px;line-height:0.8;letter-spacing:-0.045em;color:var(--white);margin:10px 0 0 -6px;}
-    #s2 .sc-hero .u{font-size:120px;letter-spacing:-0.02em;color:var(--white-35);}
-    #s2 .sc-hero-sub{font-size:17px;color:var(--white-60);line-height:1.55;max-width:560px;margin-top:18px;font-weight:300;}
-    #s2 .sc-hero-sub b{color:var(--white);font-weight:500;}
-    #s2 .sc-facts{display:flex;flex-direction:column;border-top:1px solid var(--border);}
-    #s2 .sc-fact{display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:20px 4px;border-bottom:1px solid var(--border);
-      transition:padding-left .25s var(--ease),background .25s var(--ease);}
-    @media (hover:hover){#s2 .sc-fact:hover{padding-left:14px;background:linear-gradient(90deg,var(--teal-05),transparent);}}
-    #s2 .sc-fact .k{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--white-35);}
-    #s2 .sc-fact .v{font-family:var(--serif);font-size:34px;font-weight:800;color:var(--white);line-height:1;white-space:nowrap;}
-    #s2 .sc-fact.hl .v{color:var(--teal);}
-    #s2 .sc-fact .v .ar{color:var(--violet);font-size:24px;}
-    #s2 .sc-ticker{display:grid;grid-template-columns:repeat(4,1fr);align-items:end;border-top:1px solid var(--teal-20);padding-top:22px;}
-    #s2 .sc-tick{padding:0 30px;position:relative;}
-    #s2 .sc-tick + .sc-tick{border-left:1px solid var(--border);}
-    #s2 .sc-tick .n{font-family:var(--serif);font-size:72px;font-weight:800;line-height:0.9;letter-spacing:-0.02em;color:var(--white);}
-    #s2 .sc-tick.t .n{color:var(--teal);}
-    #s2 .sc-tick .l{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white-35);margin-top:12px;line-height:1.4;}
-    #s2 .sc-tick::after{content:'';position:absolute;left:30px;bottom:-22px;height:2px;width:0;background:linear-gradient(90deg,var(--teal),var(--violet));transition:width .4s var(--ease);}
-    @media (hover:hover){#s2 .sc-tick:hover::after{width:calc(100% - 60px);}}
+    #s2 .sc-hero{font-family:var(--serif);font-weight:800;font-size:184px;line-height:0.82;letter-spacing:-0.04em;color:var(--white);margin:12px 0 0 -4px;}
+    #s2 .sc-hero .u{font-size:90px;color:var(--white-35);}
+    #s2 .sc-sub{font-size:15px;color:var(--white-60);line-height:1.55;max-width:420px;margin-top:18px;font-weight:300;}
+    #s2 .sc-sub b{color:var(--white);font-weight:500;}
+    #s2 .sc-rule{width:1px;height:230px;background:linear-gradient(180deg,transparent,var(--border-t),transparent);justify-self:center;}
+    #s2 .sc-yg{display:grid;grid-template-columns:1fr 1fr;}
+    #s2 .sc-y{padding:20px 30px;transition:background .25s var(--ease);position:relative;}
+    #s2 .sc-y:nth-child(-n+2){border-bottom:1px solid var(--border);}
+    #s2 .sc-y:nth-child(odd){border-right:1px solid var(--border);}
+    #s2 .sc-y .n{font-family:var(--serif);font-size:54px;font-weight:800;line-height:1;letter-spacing:-0.02em;color:var(--white);}
+    #s2 .sc-y.t .n{color:var(--teal);}
+    #s2 .sc-y .l{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white-35);margin-top:8px;}
+    @media (hover:hover){#s2 .sc-y:hover{background:var(--teal-05);}}
+    #s2 .sc-facts{display:flex;justify-content:space-between;gap:30px;border-top:1px solid var(--teal-20);padding-top:22px;}
+    #s2 .sc-f{display:flex;align-items:baseline;gap:14px;}
+    #s2 .sc-f .k{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--white-35);}
+    #s2 .sc-f .v{font-family:var(--serif);font-size:28px;font-weight:800;color:var(--white);}
+    #s2 .sc-f.hl .v{color:var(--teal);}
+    #s2 .sc-f .ar{color:var(--violet);}
   </style>
+  <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-full">
-    <!-- Hero block -->
-    <div>
-      <span class="eyebrow rev d1">The Scorecard · Quantified Performance · Measure · DMAIC</span>
-      <div style="display:grid;grid-template-columns:1.55fr 1fr;gap:80px;align-items:end;margin-top:30px;">
-        <div class="rev d2">
-          <div class="sc-kicker">The Account · Meijer RMN · 2025</div>
-          <div class="sc-hero">$<span data-count="275">275</span><span class="u">M</span></div>
-          <div class="sc-hero-sub">Annual media budget under <b>sole ownership</b> — a Top-5 US Retail Media account run with no backup and no handover.</div>
-        </div>
-        <div class="sc-facts rev d3">
-          <div class="sc-fact"><span class="k">Sole pacing owner</span><span class="v">H2 2024</span></div>
-          <div class="sc-fact"><span class="k">Alignment opportunity</span><span class="v">₹13.1<span class="ar"> → </span>30L</span></div>
-          <div class="sc-fact hl"><span class="k">The ask</span><span class="v">₹30L</span></div>
-        </div>
+    <span class="eyebrow rev d1">The Scorecard · Quantified Performance · Measure · DMAIC</span>
+    <div class="rev d2" style="display:grid;grid-template-columns:1.25fr auto 1fr;gap:56px;align-items:center;">
+      <div>
+        <div class="sc-kicker">The Account · Meijer RMN · 2025</div>
+        <div class="sc-hero">$<span data-count="275">275</span><span class="u">M</span></div>
+        <div class="sc-sub">Annual media budget under <b>sole ownership</b> — a Top-5 US Retail Media account, no backup, no handover.</div>
+      </div>
+      <div class="sc-rule"></div>
+      <div class="sc-yg">
+        <div class="sc-y t"><div class="n">+<span data-count="134">134</span>%</div><div class="l">Program ROAS · YoY</div></div>
+        <div class="sc-y t"><div class="n">+<span data-count="107">107</span>%</div><div class="l">Conversion · YoY</div></div>
+        <div class="sc-y"><div class="n">&gt;<span data-count="98">98</span>%</div><div class="l">Delivery in Full · Cpk≥1.33</div></div>
+        <div class="sc-y"><div class="n"><span data-count="968">968</span></div><div class="l">Campaigns · end-to-end</div></div>
       </div>
     </div>
-    <!-- Yield ticker baseline -->
-    <div class="sc-ticker rev d4">
-      <div class="sc-tick t"><div class="n">+<span data-count="134">134</span>%</div><div class="l">Program ROAS · YoY</div></div>
-      <div class="sc-tick t"><div class="n">+<span data-count="107">107</span>%</div><div class="l">Conversion rate · YoY</div></div>
-      <div class="sc-tick"><div class="n">&gt;<span data-count="98">98</span>%</div><div class="l">Delivery in Full · Cpk ≥ 1.33</div></div>
-      <div class="sc-tick"><div class="n"><span data-count="968">968</span></div><div class="l">Campaigns · end-to-end</div></div>
+    <div class="sc-facts rev d3">
+      <div class="sc-f"><span class="k">Sole pacing owner</span><span class="v">H2 2024</span></div>
+      <div class="sc-f"><span class="k">Alignment opportunity</span><span class="v">₹13.1<span class="ar"> → </span>30L</span></div>
+      <div class="sc-f hl"><span class="k">The ask</span><span class="v">₹30L</span></div>
     </div>
   </div>
 </section>
@@ -2112,7 +2108,7 @@ strong { color:var(--white); font-weight:500; }
 <section class="slide" id="s7">
   <style>
     /* ── Slide 7 · Scope & Scale — editorial index list (impeccable/bolder) ── */
-    #s7 .s-full{padding:66px 96px 48px;justify-content:space-between;}
+    #s7 .s-full{padding:60px 96px;justify-content:center;gap:34px;}
     #s7 .sx-stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--teal-20);border-bottom:1px solid var(--border);}
     #s7 .sx-stat{padding:22px 30px 22px 0;position:relative;}
     #s7 .sx-stat + .sx-stat{padding-left:30px;border-left:1px solid var(--border);}
@@ -2426,7 +2422,7 @@ strong { color:var(--white); font-weight:500; }
 <section class="slide" id="stransform">
   <style>
     /* ── Slide 11 · Transformation — multiplier ledger (impeccable/bolder) ── */
-    #stransform .s-full{padding:64px 96px 48px;justify-content:space-between;}
+    #stransform .s-full{padding:60px 96px;justify-content:center;gap:36px;}
     #stransform .tx-ledger{display:flex;flex-direction:column;border-top:1px solid var(--teal-20);}
     #stransform .tx-row{display:grid;grid-template-columns:1fr 120px 34px 120px 180px;align-items:center;gap:28px;
       padding:22px 8px;border-bottom:1px solid var(--border);transition:background .28s var(--ease),padding-left .28s var(--ease);}
