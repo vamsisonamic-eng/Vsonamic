@@ -1,3 +1,5 @@
 node_modules/
 dist/
 .motion-canvas/
+output/
+player/
