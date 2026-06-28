@@ -1967,7 +1967,7 @@ strong { color:var(--white); font-weight:500; }
 <!-- ══════════════════════════════════════════════
      SLIDE 5B · SCALE OF GOVERNANCE — WEEKLY SPEND
 ═══════════════════════════════════════════════ -->
-<section class="slide" id="s5b">
+<section class="slide appendix" id="s5b">
   <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-full" style="padding-bottom:36px;">
     <span class="eyebrow rev d1">Control · Weekly Media Spend Log · Process Stability</span>
@@ -2608,7 +2608,7 @@ strong { color:var(--white); font-weight:500; }
 <!-- ══════════════════════════════════════════════
      CRAWL INCIDENT · animated robots.txt visualization
 ═══════════════════════════════════════════════ -->
-<section class="slide" id="scrawl">
+<section class="slide appendix" id="scrawl">
   <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-full" style="padding:60px 96px 48px;">
     <span class="eyebrow rev d1">Case 01 · Root-Cause Visualized · DV360 × robots.txt</span>
@@ -2812,7 +2812,7 @@ strong { color:var(--white); font-weight:500; }
 <!-- ══════════════════════════════════════════════
      PEER FEEDBACK WALL · Workday 2025 · living testimonial
 ═══════════════════════════════════════════════ -->
-<section class="slide" id="sfeedback">
+<section class="slide appendix" id="sfeedback">
   <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="fb-orbs" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="s-split" style="position:relative;z-index:1;">
@@ -2863,7 +2863,7 @@ strong { color:var(--white); font-weight:500; }
 <!-- ══════════════════════════════════════════════
      SLIDE · TRACK RECORD ON THE RECORD
 ═══════════════════════════════════════════════ -->
-<section class="slide" id="strack">
+<section class="slide appendix" id="strack">
   <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="tr2">
     <div class="tr2-left">
@@ -3358,7 +3358,7 @@ class Starfield {
 ═══════════════════════════════════════════════ */
 class SlidePresentation {
   constructor() {
-    this.slides  = Array.from(document.querySelectorAll('.slide'));
+    this.slides  = Array.from(document.querySelectorAll('.slide:not(.appendix)'));
     this.stage   = document.getElementById('deckStage');
     this.navEl   = document.getElementById('progressNav');
     this.countEl = document.getElementById('slideCount');
