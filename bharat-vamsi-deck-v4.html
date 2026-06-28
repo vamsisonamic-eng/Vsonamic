@@ -1135,11 +1135,10 @@ strong { color:var(--white); font-weight:500; }
   .reaction:hover, .hr-col:hover, .teams-card:hover, .stat-card:hover, .cover-metric:hover,
   .fb-card:hover, .nsm-ins:hover, .flow-node:hover, .mover-step:hover, .cs-card:hover,
   .gap-box:hover, .sc-kpi-card:hover, .sc-dmaic-cell:hover {
-    transform: translateY(-5px) !important;
+    transform: translateY(-3px) !important;
     border-color: var(--border-t) !important;
     box-shadow: inset 0 2px 0 0 var(--teal),
-                0 18px 44px rgba(0,0,0,0.46),
-                0 6px 26px var(--violet-12) !important;
+                0 10px 26px rgba(0,0,0,0.38) !important;
   }
 }
 /* Hairline accent-draw shared utility (teal→violet) */
@@ -3626,8 +3625,8 @@ const editor = new InlineEditor();
 /* ── Pointer-reactive 3D tilt on cards (subtle depth) ── */
 (function(){
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const SEL = '.cover-metric,.stat-card,.scale-col,.mkt-card,.compare-col,.voice-card,.reaction,.gov-row,.gap-box,.win-card,.cert-card';
-  const MAX = 5; // degrees
+  const SEL = '.cover-metric'; // tilt only on the cover hero metrics (key moment); off all data cards for calmer exec read
+  const MAX = 4; // degrees
   document.querySelectorAll(SEL).forEach(card=>{
     card.classList.add('tilt3d');
     let raf=null;
@@ -3718,7 +3717,7 @@ deck.show = function(i) {
 // Ambient particles on a shared background canvas
 (function() {
   const cvs = document.createElement('canvas');
-  cvs.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.45;';
+  cvs.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.26;';
   document.querySelector('.deck-viewport').prepend(cvs);
   new AmbientParticles(cvs);
 })();
