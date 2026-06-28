@@ -2286,6 +2286,113 @@ strong { color:var(--white); font-weight:500; }
 </section>
 
 <!-- ══════════════════════════════════════════════
+     SLIDE · THE OPERATING SYSTEM (workflow-visualizer)
+═══════════════════════════════════════════════ -->
+<section class="slide" id="ssystem">
+  <style>
+    #ssystem .wf-row{display:flex;align-items:stretch;justify-content:center;gap:0;margin:56px 0 30px;}
+    #ssystem .wf-node{position:relative;flex:1;max-width:250px;background:var(--bg-card);border:1px solid var(--border);
+      border-top:2px solid var(--nc,var(--teal));padding:22px 20px 20px;display:flex;flex-direction:column;gap:7px;
+      cursor:default;transition:transform .25s var(--ease),border-color .25s var(--ease),box-shadow .25s var(--ease),opacity .25s var(--ease);}
+    @media (hover:hover){#ssystem .wf-node:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.42),0 0 0 1px var(--nc,var(--teal));}}
+    #ssystem .wf-node:hover .wf-tip{opacity:1;transform:translateY(0);}
+    #ssystem.dimmed .wf-node:not(.on){opacity:.32;}
+    #ssystem .wf-type{font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--nc,var(--teal));}
+    #ssystem .wf-icon{font-size:22px;line-height:1;}
+    #ssystem .wf-label{font-family:var(--serif);font-size:17px;font-weight:800;color:var(--white);line-height:1.12;}
+    #ssystem .wf-sub{font-size:11px;color:var(--white-60);line-height:1.45;}
+    #ssystem .wf-tip{position:absolute;bottom:calc(100% + 8px);left:0;right:0;background:#0b1426;border:1px solid var(--border-t);
+      padding:8px 12px;font-size:11px;color:var(--white);line-height:1.4;opacity:0;transform:translateY(4px);
+      transition:opacity .2s var(--ease),transform .2s var(--ease);pointer-events:none;z-index:5;box-shadow:0 10px 30px rgba(0,0,0,.5);}
+    #ssystem .wf-arrow{flex:0 0 34px;display:flex;align-items:center;justify-content:center;color:var(--teal);position:relative;}
+    #ssystem .wf-arrow svg{width:34px;height:14px;overflow:visible;}
+    #ssystem .wf-arrow line{stroke:rgba(0,200,215,.45);stroke-width:2;stroke-dasharray:5 5;}
+    #ssystem.visible .wf-arrow line{animation:wf-dash 1.1s linear infinite;}
+    @keyframes wf-dash{to{stroke-dashoffset:-20;}}
+    #ssystem .wf-loop{display:flex;align-items:center;gap:12px;justify-content:center;font-size:12px;color:var(--white-60);
+      letter-spacing:0.04em;padding:12px 22px;border:1px dashed var(--border-t);background:var(--teal-05);width:fit-content;margin:0 auto;}
+    #ssystem .wf-loop b{color:var(--teal);font-weight:700;}
+    #ssystem .wf-legend{display:flex;gap:22px;justify-content:center;margin-top:18px;font-size:10.5px;color:var(--white-35);text-transform:uppercase;letter-spacing:0.12em;}
+    #ssystem .wf-legend span{display:inline-flex;align-items:center;gap:7px;}
+    #ssystem .wf-legend i{width:9px;height:9px;border-radius:2px;display:inline-block;}
+  </style>
+  <div class="slide-dentsu rev-fade">dentsu</div>
+  <div class="s-full s-center" style="padding:60px 70px 44px;">
+    <span class="eyebrow rev d1">The Operating System · Pacing Governance · Runs Every Day</span>
+    <h2 class="rev d2" style="font-size:46px;margin-bottom:4px;">Not a person on the account —<br>a <span class="teal">system</span> on the account.</h2>
+
+    <div class="wf-row rev d3" id="wfRow">
+      <div class="wf-node on" data-step="1" style="--nc:#5b9bf5;">
+        <div class="wf-tip">Inputs: live campaign pacing across DV360, The Trade Desk, GAM, Meta &amp; Pinterest.</div>
+        <span class="wf-type">Trigger</span><div class="wf-icon">⚡</div>
+        <div class="wf-label">100+ live campaigns</div><div class="wf-sub">5 platforms · daily</div>
+      </div>
+      <div class="wf-arrow"><svg viewBox="0 0 34 14"><line x1="0" y1="7" x2="28" y2="7"/><path d="M26 3l6 4-6 4" fill="none" stroke="var(--teal)" stroke-width="2"/></svg></div>
+
+      <div class="wf-node on" data-step="2" style="--nc:var(--teal);">
+        <div class="wf-tip">Daily pacing-log reconciliation — the single source of truth for delivery.</div>
+        <span class="wf-type">Monitor</span><div class="wf-icon">📊</div>
+        <div class="wf-label">Pacing monitor</div><div class="wf-sub">daily reconciliation</div>
+      </div>
+      <div class="wf-arrow"><svg viewBox="0 0 34 14"><line x1="0" y1="7" x2="28" y2="7"/><path d="M26 3l6 4-6 4" fill="none" stroke="var(--teal)" stroke-width="2"/></svg></div>
+
+      <div class="wf-node on" data-step="3" style="--nc:#f5a623;">
+        <div class="wf-tip">Branches: ending ≤7d &amp; &lt;80%; under 20% in early flight; over bid-cap / max budget.</div>
+        <span class="wf-type">Decision</span><div class="wf-icon">⑂</div>
+        <div class="wf-label">Risk thresholds</div><div class="wf-sub">&lt;80% @7d · bid-cap</div>
+      </div>
+      <div class="wf-arrow"><svg viewBox="0 0 34 14"><line x1="0" y1="7" x2="28" y2="7"/><path d="M26 3l6 4-6 4" fill="none" stroke="var(--teal)" stroke-width="2"/></svg></div>
+
+      <div class="wf-node on" data-step="4" style="--nc:var(--teal);">
+        <div class="wf-tip">Acts: adjust bid, budget &amp; audience; reconcile impressions back into the live flight.</div>
+        <span class="wf-type">Optimize</span><div class="wf-icon">⚙</div>
+        <div class="wf-label">Optimize &amp; reconcile</div><div class="wf-sub">bid · budget · audience</div>
+      </div>
+      <div class="wf-arrow"><svg viewBox="0 0 34 14"><line x1="0" y1="7" x2="28" y2="7"/><path d="M26 3l6 4-6 4" fill="none" stroke="var(--teal)" stroke-width="2"/></svg></div>
+
+      <div class="wf-node on" data-step="5" style="--nc:#9b8cff;">
+        <div class="wf-tip">Standing controls: duplicate &amp; mis-set checks, creative-crawlability QA — failure modes designed out.</div>
+        <span class="wf-type">Control · FMEA</span><div class="wf-icon">🛡</div>
+        <div class="wf-label">FMEA gate</div><div class="wf-sub">dup · mis-set · QA</div>
+      </div>
+      <div class="wf-arrow"><svg viewBox="0 0 34 14"><line x1="0" y1="7" x2="28" y2="7"/><path d="M26 3l6 4-6 4" fill="none" stroke="var(--teal)" stroke-width="2"/></svg></div>
+
+      <div class="wf-node on" data-step="6" style="--nc:var(--teal);background:var(--teal-05);border-color:var(--border-t);">
+        <div class="wf-tip">Result held continuously: &gt;98% Delivery-in-Full, Cpk ≥ 1.33, zero structural defects.</div>
+        <span class="wf-type">Output</span><div class="wf-icon">✓</div>
+        <div class="wf-label" style="color:var(--teal);">&gt;98% DIF</div><div class="wf-sub">zero structural defects</div>
+      </div>
+    </div>
+
+    <div class="wf-loop rev d4"><span style="font-size:16px;color:var(--teal);">↺</span> <span><b>Continuous control loop</b> — output re-enters monitoring · governed by a shared SOP, not one person's memory.</span></div>
+
+    <div class="wf-legend rev d5">
+      <span><i style="background:#5b9bf5;"></i>Trigger</span>
+      <span><i style="background:var(--teal);"></i>Process</span>
+      <span><i style="background:#f5a623;"></i>Decision</span>
+      <span><i style="background:#9b8cff;"></i>Control</span>
+      <span style="color:var(--white-60);">Hover a step for detail · click to trace the path</span>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var sec=document.getElementById('ssystem'); if(!sec) return;
+  var nodes=[].slice.call(sec.querySelectorAll('.wf-node'));
+  nodes.forEach(function(n){
+    n.addEventListener('click',function(){
+      var on=n.classList.contains('solo');
+      nodes.forEach(function(m){m.classList.remove('solo','on');});
+      sec.classList.remove('dimmed');
+      if(!on){ sec.classList.add('dimmed'); n.classList.add('solo','on'); }
+      else { nodes.forEach(function(m){m.classList.add('on');}); }
+    });
+  });
+  sec.addEventListener('click',function(e){ if(e.target===sec||e.target.classList.contains('s-full')){ sec.classList.remove('dimmed'); nodes.forEach(function(m){m.classList.remove('solo');m.classList.add('on');}); }});
+})();
+</script>
+
+<!-- ══════════════════════════════════════════════
      SLIDE · MEIJER TRANSFORMATION (2023 → 2026)
      Efficiency & Margins, not raw volume
 ═══════════════════════════════════════════════ -->
