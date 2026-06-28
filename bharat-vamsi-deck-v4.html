@@ -1851,59 +1851,54 @@ strong { color:var(--white); font-weight:500; }
 <!-- ===== VIDEO SLIDE (added) — animated headline summary ===== -->
 <section class="slide" id="s2">
   <div class="slide-dentsu rev-fade">dentsu</div>
-  <div class="slide-watermark">$</div>
-  <div class="case-accent-line"></div>
-  <div class="s-full" style="position:relative;z-index:1;">
-    <span class="eyebrow rev d1">The Scorecard · Quantified Performance · Measure · DMAIC</span>
-
-    <!-- Row 1 · the account, the gap, the ask -->
-    <div style="display:grid;grid-template-columns:1fr 430px;gap:2px;margin-top:16px;align-items:stretch;height:430px;">
-      <div class="rev d2" style="background:var(--bg-card);border:1px solid var(--border);border-top:2px solid var(--teal);padding:48px 56px;display:flex;flex-direction:column;justify-content:center;">
-        <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:20px;">The Account · Meijer RMN · 2025</div>
-        <div class="hero-anchor" style="font-size:128px;">$<span data-count="275" data-suffix="M" class="count-shimmer">275M</span></div>
-        <div style="font-size:18px;color:var(--white);font-weight:600;margin-top:14px;">Annual budget under Bharat's sole ownership</div>
-        <div style="font-size:14px;color:var(--white-60);margin-top:6px;">Top-5 US Retail Media account — no backup, no handover · on account since <strong style="color:var(--white);">H2 2024</strong></div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:2px;" class="rev d3">
-        <div style="background:var(--bg-card);border:1px solid var(--border);padding:26px 32px;flex:1;display:flex;flex-direction:column;justify-content:center;">
-          <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--white-35);font-weight:600;margin-bottom:8px;">Sole Pacing Owner Since</div>
-          <div style="font-family:var(--serif);font-size:46px;font-weight:800;color:var(--white);line-height:1;">H2 <span style="color:var(--teal);">2024</span></div>
-          <div style="font-size:13px;color:var(--white-60);margin-top:6px;">Within weeks of joining</div>
+  <style>
+    /* ── Slide 3 · Scorecard — editorial number wall (impeccable/bolder) ── */
+    #s2 .s-full{justify-content:space-between;padding:66px 96px 54px;}
+    #s2 .sc-kicker{font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);}
+    #s2 .sc-hero{font-family:var(--serif);font-weight:800;font-size:248px;line-height:0.8;letter-spacing:-0.045em;color:var(--white);margin:10px 0 0 -6px;}
+    #s2 .sc-hero .u{font-size:120px;letter-spacing:-0.02em;color:var(--white-35);}
+    #s2 .sc-hero-sub{font-size:17px;color:var(--white-60);line-height:1.55;max-width:560px;margin-top:18px;font-weight:300;}
+    #s2 .sc-hero-sub b{color:var(--white);font-weight:500;}
+    #s2 .sc-facts{display:flex;flex-direction:column;border-top:1px solid var(--border);}
+    #s2 .sc-fact{display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:20px 4px;border-bottom:1px solid var(--border);
+      transition:padding-left .25s var(--ease),background .25s var(--ease);}
+    @media (hover:hover){#s2 .sc-fact:hover{padding-left:14px;background:linear-gradient(90deg,var(--teal-05),transparent);}}
+    #s2 .sc-fact .k{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--white-35);}
+    #s2 .sc-fact .v{font-family:var(--serif);font-size:34px;font-weight:800;color:var(--white);line-height:1;white-space:nowrap;}
+    #s2 .sc-fact.hl .v{color:var(--teal);}
+    #s2 .sc-fact .v .ar{color:var(--violet);font-size:24px;}
+    #s2 .sc-ticker{display:grid;grid-template-columns:repeat(4,1fr);align-items:end;border-top:1px solid var(--teal-20);padding-top:22px;}
+    #s2 .sc-tick{padding:0 30px;position:relative;}
+    #s2 .sc-tick + .sc-tick{border-left:1px solid var(--border);}
+    #s2 .sc-tick .n{font-family:var(--serif);font-size:72px;font-weight:800;line-height:0.9;letter-spacing:-0.02em;color:var(--white);}
+    #s2 .sc-tick.t .n{color:var(--teal);}
+    #s2 .sc-tick .l{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white-35);margin-top:12px;line-height:1.4;}
+    #s2 .sc-tick::after{content:'';position:absolute;left:30px;bottom:-22px;height:2px;width:0;background:linear-gradient(90deg,var(--teal),var(--violet));transition:width .4s var(--ease);}
+    @media (hover:hover){#s2 .sc-tick:hover::after{width:calc(100% - 60px);}}
+  </style>
+  <div class="s-full">
+    <!-- Hero block -->
+    <div>
+      <span class="eyebrow rev d1">The Scorecard · Quantified Performance · Measure · DMAIC</span>
+      <div style="display:grid;grid-template-columns:1.55fr 1fr;gap:80px;align-items:end;margin-top:30px;">
+        <div class="rev d2">
+          <div class="sc-kicker">The Account · Meijer RMN · 2025</div>
+          <div class="sc-hero">$<span data-count="275">275</span><span class="u">M</span></div>
+          <div class="sc-hero-sub">Annual media budget under <b>sole ownership</b> — a Top-5 US Retail Media account run with no backup and no handover.</div>
         </div>
-        <div style="background:var(--bg-card);border:1px solid var(--border);padding:26px 32px;flex:1;display:flex;flex-direction:column;justify-content:center;">
-          <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--white-35);font-weight:600;margin-bottom:8px;">Alignment Opportunity</div>
-          <div style="font-family:var(--serif);font-size:46px;font-weight:800;color:var(--white);line-height:1;">₹13.1L <span style="color:var(--teal);font-size:30px;">→</span> ₹30L</div>
-          <div style="font-size:13px;color:var(--white-60);margin-top:6px;">Current CTC vs scope-aligned package</div>
-        </div>
-        <div style="background:rgba(0,200,215,0.06);border:1px solid var(--border-t);padding:26px 32px;flex:1;display:flex;flex-direction:column;justify-content:center;">
-          <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:8px;">The Ask</div>
-          <div style="font-family:var(--serif);font-size:46px;font-weight:800;color:var(--teal);line-height:1;">₹30L</div>
-          <div style="font-size:13px;color:var(--white-60);margin-top:6px;">₹28L base + ₹2L retention bonus · client-continuity linked</div>
+        <div class="sc-facts rev d3">
+          <div class="sc-fact"><span class="k">Sole pacing owner</span><span class="v">H2 2024</span></div>
+          <div class="sc-fact"><span class="k">Alignment opportunity</span><span class="v">₹13.1<span class="ar"> → </span>30L</span></div>
+          <div class="sc-fact hl"><span class="k">The ask</span><span class="v">₹30L</span></div>
         </div>
       </div>
     </div>
-
-    <!-- Row 2 · proven yield (Measure) -->
-    <div class="rev d4" style="margin-top:14px;">
-      <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:10px;">Proven process yield — Meijer QBR, Mar 2026</div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;">
-        <div style="background:var(--bg-card);border:1px solid var(--border);border-top:2px solid var(--teal);padding:26px 30px;">
-          <div style="font-family:var(--serif);font-size:60px;font-weight:800;color:var(--teal);line-height:1;">+<span data-count="134" data-suffix="%" class="count-shimmer">134%</span></div>
-          <div style="font-size:13px;color:var(--white-60);margin-top:8px;">Program ROAS · YoY</div>
-        </div>
-        <div style="background:var(--bg-card);border:1px solid var(--border);padding:26px 30px;">
-          <div style="font-family:var(--serif);font-size:60px;font-weight:800;color:var(--teal);line-height:1;">+<span data-count="107" data-suffix="%" class="count-shimmer">107%</span></div>
-          <div style="font-size:13px;color:var(--white-60);margin-top:8px;">Conversion rate · YoY</div>
-        </div>
-        <div style="background:var(--bg-card);border:1px solid var(--border);padding:26px 30px;">
-          <div style="font-family:var(--serif);font-size:60px;font-weight:800;color:var(--white);line-height:1;">&gt;<span data-count="98" data-suffix="%" class="count-shimmer">98%</span></div>
-          <div style="font-size:13px;color:var(--white-60);margin-top:8px;">Delivery in Full · Cpk ≥ 1.33</div>
-        </div>
-        <div style="background:var(--bg-card);border:1px solid var(--border);padding:26px 30px;">
-          <div style="font-family:var(--serif);font-size:60px;font-weight:800;color:var(--white);line-height:1;"><span data-count="968" class="count-shimmer">968</span></div>
-          <div style="font-size:13px;color:var(--white-60);margin-top:8px;">Campaigns executed · end-to-end</div>
-        </div>
-      </div>
+    <!-- Yield ticker baseline -->
+    <div class="sc-ticker rev d4">
+      <div class="sc-tick t"><div class="n">+<span data-count="134">134</span>%</div><div class="l">Program ROAS · YoY</div></div>
+      <div class="sc-tick t"><div class="n">+<span data-count="107">107</span>%</div><div class="l">Conversion rate · YoY</div></div>
+      <div class="sc-tick"><div class="n">&gt;<span data-count="98">98</span>%</div><div class="l">Delivery in Full · Cpk ≥ 1.33</div></div>
+      <div class="sc-tick"><div class="n"><span data-count="968">968</span></div><div class="l">Campaigns · end-to-end</div></div>
     </div>
   </div>
 </section>
@@ -2115,69 +2110,62 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 7 · SCOPE OF OWNERSHIP — OPERATIONAL CORE
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s7">
+  <style>
+    /* ── Slide 7 · Scope & Scale — editorial index list (impeccable/bolder) ── */
+    #s7 .s-full{padding:66px 96px 48px;justify-content:space-between;}
+    #s7 .sx-stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--teal-20);border-bottom:1px solid var(--border);}
+    #s7 .sx-stat{padding:22px 30px 22px 0;position:relative;}
+    #s7 .sx-stat + .sx-stat{padding-left:30px;border-left:1px solid var(--border);}
+    #s7 .sx-stat .n{font-family:var(--serif);font-size:42px;font-weight:800;line-height:1;letter-spacing:-0.02em;color:var(--teal);}
+    #s7 .sx-stat .n .s{color:var(--white-35);font-size:24px;}
+    #s7 .sx-stat .l{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--white-35);margin-top:10px;line-height:1.4;}
+    #s7 .sx-list{display:flex;flex-direction:column;}
+    #s7 .sx-row{display:grid;grid-template-columns:104px 1fr;gap:30px;align-items:baseline;padding:21px 6px;border-bottom:1px solid var(--border);
+      transition:padding-left .28s var(--ease),background .28s var(--ease);}
+    #s7 .sx-row:first-child{border-top:1px solid var(--border);}
+    #s7 .sx-idx{font-family:var(--serif);font-size:46px;font-weight:800;line-height:0.9;color:var(--white-15);transition:color .28s var(--ease);}
+    #s7 .sx-title{font-family:var(--serif);font-size:23px;font-weight:700;color:var(--white);line-height:1.1;}
+    #s7 .sx-title .o{font-family:var(--sans);font-size:13px;font-weight:400;color:var(--teal);}
+    #s7 .sx-sub{font-size:14px;color:var(--white-60);line-height:1.5;margin-top:5px;max-width:780px;}
+    @media (hover:hover){
+      #s7 .sx-row:hover{padding-left:20px;background:linear-gradient(90deg,var(--teal-05),transparent);}
+      #s7 .sx-row:hover .sx-idx{color:var(--teal);}
+    }
+  </style>
   <div class="slide-dentsu rev-fade">dentsu</div>
-  <div class="s-full" style="padding-bottom:30px;">
-    <span class="eyebrow rev d1">Scope &amp; Scale · What I Own · dentsu India</span>
-    <h2 class="rev d2" style="font-size:46px;margin-bottom:8px;">I own the operational engine —<br>and it has compounded.</h2>
-
-    <!-- Growth strip (from the client QBRs) -->
-    <div class="rev d3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin:12px 0 16px;">
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-top:2px solid var(--teal);padding:18px 24px;">
-        <div style="font-family:var(--serif);font-size:36px;font-weight:800;color:var(--teal);line-height:1;">$10.7M <span style="color:var(--white-35);font-size:20px;">&#8594;</span> $18.7M</div>
-        <div style="font-size:11.5px;color:var(--white-60);text-transform:uppercase;letter-spacing:0.1em;margin-top:6px;">NSM-activated revenue &middot; half-year &middot; +74% YoY</div>
-      </div>
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-top:2px solid var(--teal);padding:18px 24px;">
-        <div style="font-family:var(--serif);font-size:36px;font-weight:800;color:var(--teal);line-height:1;">71 <span style="color:var(--white-35);font-size:20px;">&#8594;</span> 123<span style="font-size:20px;color:var(--white-60);">/mo</span></div>
-        <div style="font-size:11.5px;color:var(--white-60);text-transform:uppercase;letter-spacing:0.1em;margin-top:6px;">Campaign volume &middot; +73% YoY &middot; peak 171 (May 2026)</div>
-      </div>
-      <div style="background:var(--teal-05);border:1px solid var(--border-t);border-top:2px solid var(--teal);padding:18px 24px;">
-        <div style="font-family:var(--serif);font-size:36px;font-weight:800;color:var(--teal);line-height:1;">98% <span style="color:var(--white-35);font-size:20px;">&middot;</span> 99%</div>
-        <div style="font-size:11.5px;color:var(--white-60);text-transform:uppercase;letter-spacing:0.1em;margin-top:6px;">Delivery-in-full &middot; on-time launches &middot; held through growth</div>
+  <div class="s-full">
+    <div>
+      <span class="eyebrow rev d1">Scope &amp; Scale · What I Own · dentsu India</span>
+      <h2 class="rev d2" style="font-size:50px;line-height:1.05;margin:10px 0 26px;">I own the operational engine&nbsp;&mdash;<br>and it has <span class="teal">compounded.</span></h2>
+      <div class="sx-stats rev d3">
+        <div class="sx-stat"><div class="n">$10.7<span class="s">&#8594;</span>18.7M</div><div class="l">NSM-activated revenue · half-year · +74% YoY</div></div>
+        <div class="sx-stat"><div class="n">71<span class="s">&#8594;</span>123<span class="s">/mo</span></div><div class="l">Campaign volume · +73% YoY · peak 171</div></div>
+        <div class="sx-stat"><div class="n">98<span class="s">/</span>99<span class="s">%</span></div><div class="l">Delivery-in-full · on-time · held through growth</div></div>
       </div>
     </div>
-
-    <div class="rev d3" style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:10px;">What I own day-to-day &mdash; a Senior Manager remit under an Account Manager title</div>
-
-    <!-- Scope: 4 cards (2x2) -->
-    <div class="scope-grid rev d4" style="margin-top:0;">
-      <div class="scope-card">
-        <div class="scope-icon" style="background:rgba(0,200,215,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div>
-          <div style="font-family:var(--serif);font-weight:700;font-size:17px;color:var(--white);margin-bottom:6px;">Pacing &amp; optimization <span style="color:var(--teal);font-size:13px;font-family:var(--sans);font-weight:400;">&mdash; sole daily owner</span></div>
-          <div style="font-size:14px;color:var(--white-60);line-height:1.5;">100+ concurrent campaigns across DV360, The Trade Desk, GAM, Meta &amp; Pinterest &mdash; kept in full delivery. PoP automation (70+ decks/week) frees the bandwidth.</div>
-        </div>
+    <div class="sx-list rev d4">
+      <div class="sx-row">
+        <div class="sx-idx">01</div>
+        <div><div class="sx-title">Pacing &amp; optimization <span class="o">&mdash; sole daily owner</span></div>
+        <div class="sx-sub">100+ concurrent campaigns across DV360, The Trade Desk, GAM, Meta &amp; Pinterest, kept in full delivery. PoP automation frees the bandwidth.</div></div>
       </div>
-      <div class="scope-card">
-        <div class="scope-icon" style="background:rgba(0,200,215,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 11l3 3L22 4" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </div>
-        <div>
-          <div style="font-family:var(--serif);font-weight:700;font-size:17px;color:var(--white);margin-bottom:6px;">Quality assurance &amp; trafficking</div>
-          <div style="font-size:14px;color:var(--white-60);line-height:1.5;">Primary QA on builds and trafficking sheets &mdash; end-to-end command of the Meijer activation process, not just media.</div>
-        </div>
+      <div class="sx-row">
+        <div class="sx-idx">02</div>
+        <div><div class="sx-title">Quality assurance &amp; trafficking</div>
+        <div class="sx-sub">Primary QA on builds and trafficking sheets &mdash; end-to-end command of the Meijer activation process, not just media.</div></div>
       </div>
-      <div class="scope-card">
-        <div class="scope-icon" style="background:rgba(0,200,215,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#00C8D7" stroke-width="1.8"/><line x1="12" y1="8" x2="12" y2="12" stroke="#00C8D7" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="16" x2="12.01" y2="16" stroke="#00C8D7" stroke-width="2.5" stroke-linecap="round"/></svg>
-        </div>
-        <div>
-          <div style="font-family:var(--serif);font-weight:700;font-size:17px;color:var(--white);margin-bottom:6px;">Escalation &amp; diagnosis point</div>
-          <div style="font-size:14px;color:var(--white-60);line-height:1.5;">The team&rsquo;s go-to for DV360 and Meta platform issues; repeatedly diagnoses root causes before they reach the client.</div>
-        </div>
+      <div class="sx-row">
+        <div class="sx-idx">03</div>
+        <div><div class="sx-title">Escalation &amp; diagnosis point</div>
+        <div class="sx-sub">The team's go-to for DV360 and Meta platform issues; repeatedly diagnoses root causes before they reach the client.</div></div>
       </div>
-      <div class="scope-card">
-        <div class="scope-icon" style="background:rgba(0,200,215,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 20h9" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div>
-          <div style="font-family:var(--serif);font-weight:700;font-size:17px;color:var(--white);margin-bottom:6px;">Operational best-practice owner</div>
-          <div style="font-size:14px;color:var(--white-60);line-height:1.5;">Defines and documents the standards &mdash; co-owned with onshore leads &mdash; that keep delivery reliable as the account keeps scaling.</div>
-        </div>
+      <div class="sx-row">
+        <div class="sx-idx">04</div>
+        <div><div class="sx-title">Operational best-practice owner</div>
+        <div class="sx-sub">Defines the standards &mdash; co-owned with onshore leads &mdash; that keep delivery reliable as the account scales.</div></div>
       </div>
     </div>
-    <div class="source-note rev d5" style="margin-top:12px;">Source: Meijer &times; NSM Quarterly Business Reviews (H1 2025 QBR; One Team, May 2026). Client-presented New Stream activated revenue.</div>
+    <div class="source-note rev d5">A Senior Manager remit under an Account Manager title · Source: Meijer &times; NSM QBRs (H1 2025; One Team, May 2026).</div>
   </div>
 </section>
 
@@ -2436,67 +2424,44 @@ strong { color:var(--white); font-weight:500; }
      Efficiency & Margins, not raw volume
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="stransform">
+  <style>
+    /* ── Slide 11 · Transformation — multiplier ledger (impeccable/bolder) ── */
+    #stransform .s-full{padding:64px 96px 48px;justify-content:space-between;}
+    #stransform .tx-ledger{display:flex;flex-direction:column;border-top:1px solid var(--teal-20);}
+    #stransform .tx-row{display:grid;grid-template-columns:1fr 120px 34px 120px 180px;align-items:center;gap:28px;
+      padding:22px 8px;border-bottom:1px solid var(--border);transition:background .28s var(--ease),padding-left .28s var(--ease);}
+    #stransform .tx-metric{font-family:var(--serif);font-size:21px;font-weight:700;color:var(--white);}
+    #stransform .tx-then{font-family:var(--serif);font-size:30px;font-weight:800;color:var(--white-35);text-align:right;line-height:1;}
+    #stransform .tx-arrow{color:var(--violet);font-size:22px;text-align:center;}
+    #stransform .tx-now{font-family:var(--serif);font-size:30px;font-weight:800;color:var(--teal);text-align:left;line-height:1;}
+    #stransform .tx-mult{font-family:var(--serif);font-size:62px;font-weight:800;color:var(--white);text-align:right;line-height:0.9;letter-spacing:-0.02em;}
+    #stransform .tx-mult .x{color:var(--teal);font-size:38px;}
+    #stransform .tx-mult .tri{font-size:18px;color:var(--teal);vertical-align:middle;margin-right:4px;}
+    @media (hover:hover){#stransform .tx-row:hover{background:linear-gradient(90deg,var(--teal-05),transparent);padding-left:18px;}}
+    #stransform .tx-foot{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border);padding-top:20px;}
+    #stransform .tx-f{padding:0 28px;}
+    #stransform .tx-f + .tx-f{border-left:1px solid var(--border);}
+    #stransform .tx-f .n{font-family:var(--serif);font-size:40px;font-weight:800;color:var(--teal);line-height:0.95;}
+    #stransform .tx-f .l{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--white-35);margin-top:8px;line-height:1.4;}
+  </style>
   <div class="slide-dentsu rev-fade">dentsu</div>
-  <div class="s-full" style="padding:64px 80px 48px;">
-    <span class="eyebrow rev d1">Efficiency &amp; Margins · Meijer RMN · 2023 → 2026</span>
-    <h2 class="rev d2" style="font-size:44px;margin-bottom:6px;">From volatile growth to a predictable,<br>high-margin performance engine.</h2>
-    <p class="lead rev d3" style="font-size:16px;max-width:980px;margin-bottom:22px;color:var(--white-60);">Scale was never the problem — <span class="teal">efficiency and pacing were.</span> Same scale, far higher margin.</p>
-
-    <!-- THEN → NOW efficiency comparison -->
-    <div class="rev d4" style="display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:14px;">
-      <!-- THEN -->
-      <div style="background:var(--red-bg);border:1px solid var(--red-border);padding:24px 30px;">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-          <span style="width:9px;height:9px;border-radius:50%;background:var(--danger);"></span>
-          <span style="font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--danger);">Then · 2023 (pre-Feb 2024)</span>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
-          <div><div style="font-family:var(--serif);font-size:30px;font-weight:800;color:var(--white);">0.01<span style="font-size:16px;">%</span></div><div style="font-size:11px;color:var(--white-35);text-transform:uppercase;letter-spacing:0.1em;">Offsite CVR</div></div>
-          <div><div style="font-family:var(--serif);font-size:30px;font-weight:800;color:var(--white);">$0.79</div><div style="font-size:11px;color:var(--white-35);text-transform:uppercase;letter-spacing:0.1em;">Offsite ROAS</div></div>
-          <div><div style="font-family:var(--serif);font-size:30px;font-weight:800;color:var(--white);">0.35<span style="font-size:16px;">%</span></div><div style="font-size:11px;color:var(--white-35);text-transform:uppercase;letter-spacing:0.1em;">Onsite CVR</div></div>
-          <div><div style="font-family:var(--serif);font-size:30px;font-weight:800;color:var(--white);">$1.07</div><div style="font-size:11px;color:var(--white-35);text-transform:uppercase;letter-spacing:0.1em;">Onsite ROAS</div></div>
-        </div>
-        <div style="margin-top:16px;font-size:12px;color:var(--white-35);line-height:1.5;border-top:1px solid var(--red-border);padding-top:12px;">Spiky, event-driven pacing · reactive launches · ~20% expedited load. <strong style="color:var(--white-60);">Scale existed — efficiency didn't.</strong></div>
-      </div>
-      <!-- NOW -->
-      <div style="background:var(--teal-05);border:1px solid var(--border-t);padding:24px 30px;">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-          <span style="width:9px;height:9px;border-radius:50%;background:var(--teal);"></span>
-          <span style="font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--teal);">Now · 2026 (mature state)</span>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
-          <div><div style="font-family:var(--serif);font-size:30px;font-weight:800;color:var(--teal);">~0.7<span style="font-size:16px;">%</span> <span style="font-size:13px;color:var(--white-60);">▲70×</span></div><div style="font-size:11px;color:var(--white-35);text-transform:uppercase;letter-spacing:0.1em;">Offsite CVR</div></div>
-          <div><div style="font-family:var(--serif);font-size:30px;font-weight:800;color:var(--teal);">$2.3+ <span style="font-size:13px;color:var(--white-60);">▲3×</span></div><div style="font-size:11px;color:var(--white-35);text-transform:uppercase;letter-spacing:0.1em;">Offsite ROAS</div></div>
-          <div><div style="font-family:var(--serif);font-size:30px;font-weight:800;color:var(--teal);">~2.9<span style="font-size:16px;">%</span> <span style="font-size:13px;color:var(--white-60);">▲8×</span></div><div style="font-size:11px;color:var(--white-35);text-transform:uppercase;letter-spacing:0.1em;">Onsite CVR</div></div>
-          <div><div style="font-family:var(--serif);font-size:30px;font-weight:800;color:var(--teal);">$5.4+ <span style="font-size:13px;color:var(--white-60);">▲5×</span></div><div style="font-size:11px;color:var(--white-35);text-transform:uppercase;letter-spacing:0.1em;">Onsite ROAS</div></div>
-        </div>
-        <div style="margin-top:16px;font-size:12px;color:var(--white-60);line-height:1.5;border-top:1px solid var(--border-t);padding-top:12px;">Stable weekly baseline · planned peaks · controlled flow. <strong style="color:var(--white);">Same scale — far higher margin.</strong></div>
+  <div class="s-full">
+    <div>
+      <span class="eyebrow rev d1">Efficiency &amp; Margins · Meijer RMN · 2023 &rarr; 2026</span>
+      <h2 class="rev d2" style="font-size:50px;line-height:1.05;margin:10px 0 4px;">Same scale.<br>Far higher <span class="teal">margin.</span></h2>
+      <p class="rev d2" style="font-size:15px;color:var(--white-60);margin-bottom:26px;">Scale was never the problem &mdash; efficiency and pacing were. Every margin metric multiplied.</p>
+      <div class="tx-ledger rev d3">
+        <div class="tx-row"><div class="tx-metric">Offsite CVR</div><div class="tx-then">0.01%</div><div class="tx-arrow">&rarr;</div><div class="tx-now">~0.7%</div><div class="tx-mult"><span class="tri">&#9650;</span>70<span class="x">&times;</span></div></div>
+        <div class="tx-row"><div class="tx-metric">Onsite CVR</div><div class="tx-then">0.35%</div><div class="tx-arrow">&rarr;</div><div class="tx-now">~2.9%</div><div class="tx-mult"><span class="tri">&#9650;</span>8<span class="x">&times;</span></div></div>
+        <div class="tx-row"><div class="tx-metric">Onsite ROAS</div><div class="tx-then">$1.07</div><div class="tx-arrow">&rarr;</div><div class="tx-now">$5.4+</div><div class="tx-mult"><span class="tri">&#9650;</span>5<span class="x">&times;</span></div></div>
+        <div class="tx-row"><div class="tx-metric">Offsite ROAS</div><div class="tx-then">$0.79</div><div class="tx-arrow">&rarr;</div><div class="tx-now">$2.3+</div><div class="tx-mult"><span class="tri">&#9650;</span>3<span class="x">&times;</span></div></div>
       </div>
     </div>
-
-    <!-- Efficiency / margin strip (operational leverage, not gross volume) -->
-    <div class="rev d5" style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px;">
-      <div style="background:var(--bg-card);border:1px solid var(--border);padding:18px 22px;">
-        <div style="font-family:var(--serif);font-size:38px;font-weight:800;color:var(--teal);line-height:1;">~7×</div>
-        <div style="font-size:11px;color:var(--white-35);text-transform:uppercase;letter-spacing:0.12em;margin-top:6px;">Campaign volume · 145 → ~1000, no headcount added</div>
-      </div>
-      <div style="background:var(--bg-card);border:1px solid var(--border);padding:18px 22px;">
-        <div style="font-family:var(--serif);font-size:38px;font-weight:800;color:var(--teal);line-height:1;">~70%</div>
-        <div style="font-size:11px;color:var(--white-35);text-transform:uppercase;letter-spacing:0.12em;margin-top:6px;">Cycle-time cut · PoP automation, 70+ decks/wk freed</div>
-      </div>
-      <div style="background:var(--bg-card);border:1px solid var(--border);padding:18px 22px;">
-        <div style="font-family:var(--serif);font-size:38px;font-weight:800;color:var(--teal);line-height:1;">98<span style="font-size:22px;">%</span></div>
-        <div style="font-size:11px;color:var(--white-35);text-transform:uppercase;letter-spacing:0.12em;margin-top:6px;">On-time launches · 97% delivery-in-full held</div>
-      </div>
-      <div style="background:var(--teal-05);border:1px solid var(--border-t);padding:18px 22px;">
-        <div style="font-family:var(--serif);font-size:38px;font-weight:800;color:var(--teal);line-height:1;">~20% → 0</div>
-        <div style="font-size:11px;color:var(--white-60);text-transform:uppercase;letter-spacing:0.12em;margin-top:6px;">Expedite load removed · spiky → predictable pacing</div>
-      </div>
-    </div>
-
-    <!-- One-line impact statement -->
-    <div class="rev d6" style="margin-top:16px;padding:16px 24px;background:linear-gradient(135deg,var(--bg-card),#0b1426);border-left:3px solid var(--teal);font-family:var(--serif);font-size:18px;font-weight:600;color:var(--white);line-height:1.5;">
-      "Since mid-2024 we scaled campaigns ~7× while improving CVR up to ~70× and ROAS 3–5× — <span class="teal">all while transforming pacing from volatile to fully predictable, with no added headcount.</span>"
+    <div class="tx-foot rev d4">
+      <div class="tx-f"><div class="n">~7&times;</div><div class="l">Campaign volume · no headcount added</div></div>
+      <div class="tx-f"><div class="n">~70%</div><div class="l">Cycle-time cut · PoP automation</div></div>
+      <div class="tx-f"><div class="n">98%</div><div class="l">On-time launches · 97% DIF held</div></div>
+      <div class="tx-f"><div class="n">~20%&rarr;0</div><div class="l">Expedite load removed · predictable pacing</div></div>
     </div>
   </div>
 </section>
