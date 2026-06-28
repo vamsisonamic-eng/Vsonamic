@@ -2174,50 +2174,61 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 8 · ROLE VARIANCE
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="s8">
+  <style>
+    #s8 .s-full{padding:54px 96px;}
+    #s8 .sm-hero{display:flex;align-items:baseline;gap:24px;margin:14px 0 22px;}
+    #s8 .sm-hero .n{font-family:var(--serif);font-size:108px;font-weight:800;line-height:0.8;letter-spacing:-0.04em;color:var(--teal);}
+    #s8 .sm-hero .t{font-size:16px;color:var(--white-60);line-height:1.4;max-width:300px;}
+    #s8 .sm-hero .t b{color:var(--white);}
+    #s8 .sm-cols{display:grid;grid-template-columns:0.8fr 1.35fr 0.95fr;gap:3px;align-items:stretch;}
+    #s8 .sm-col{padding:24px 28px;background:var(--bg-card);border:1px solid var(--border);display:flex;flex-direction:column;}
+    #s8 .sm-col.hl{background:var(--teal-05);border:1px solid var(--border-t);}
+    #s8 .sm-h{font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--white-35);margin-bottom:14px;}
+    #s8 .sm-col.hl .sm-h{color:var(--teal);}
+    #s8 .sm-role{font-family:var(--serif);font-size:30px;font-weight:800;color:var(--white);line-height:1.05;}
+    #s8 .sm-li{font-size:14.5px;color:var(--white-60);line-height:1.4;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+    #s8 .sm-col.hl .sm-li{color:var(--white);}
+    #s8 .sm-col.hl .sm-li b{color:var(--teal);}
+    #s8 .sm-li:last-child{border-bottom:none;}
+    #s8 .sm-bar{display:flex;align-items:stretch;gap:3px;margin-top:16px;}
+    #s8 .sm-gap{background:var(--red-bg);border:1px solid var(--red-border);padding:15px 26px;display:flex;align-items:center;gap:16px;}
+    #s8 .sm-gap .x{font-family:var(--serif);font-size:26px;font-weight:800;color:var(--danger);}
+    #s8 .sm-real{flex:1;background:linear-gradient(135deg,var(--bg-card),#0b1426);border:1px solid var(--teal);padding:15px 26px;display:flex;align-items:center;gap:18px;}
+    #s8 .sm-tag{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;white-space:nowrap;}
+  </style>
   <div class="slide-dentsu rev-fade">dentsu</div>
-  <div class="slide-watermark" style="font-size:300px;right:60px;bottom:-40px;color:rgba(255,60,80,0.025);">≠</div>
-  <div class="s-full" style="position:relative;z-index:1;">
-    <span class="eyebrow rev d1">Why This Is Beyond Current Scope · Role Variance · dentsu India</span>
-    <h2 class="rev d2">The role has outgrown the title.</h2>
-    <!-- Business-logic anchor: scope band, not a salary number -->
-    <div class="rev d2" style="display:inline-flex;align-items:center;gap:20px;margin:12px 0 16px;padding:14px 28px;background:var(--teal-05);border:1px solid var(--border-t);border-radius:2px;">
-      <div style="font-family:var(--serif);font-size:30px;font-weight:800;color:var(--white);line-height:1.1;">Account Manager <span style="color:var(--teal);">title</span> · Senior Manager <span style="color:var(--teal);">scope</span></div>
-      <div style="font-size:14px;color:var(--white-60);line-height:1.5;">18+ months of commercial ownership<br>performed above the current band</div>
+  <div class="slide-watermark" style="font-size:300px;right:60px;bottom:-40px;color:rgba(255,60,80,0.025);">&ne;</div>
+  <div class="s-full">
+    <span class="eyebrow rev d1">Scope vs Role Misalignment · dentsu India</span>
+    <h2 class="rev d2" style="font-size:44px;line-height:1.06;">Operating as Senior Manager.<br>Titled <span style="color:var(--danger);">Account Manager.</span></h2>
+    <div class="sm-hero rev d2">
+      <div class="n">$275M</div>
+      <div class="t"><b>owned solo</b> &mdash; the budget a peer Senior Manager would split across a team.</div>
     </div>
-    <div class="compare-grid">
-      <div class="compare-col rev d3">
-        <div class="compare-title">Account Manager — Job Spec</div>
-        <div class="compare-item"><span class="dot-x"></span>Executes campaigns with AM supervision</div>
-        <div class="compare-item"><span class="dot-x"></span>Manages 1–2 platforms with support</div>
-        <div class="compare-item"><span class="dot-x"></span>Follows established playbooks</div>
-        <div class="compare-item"><span class="dot-x"></span>Reports to Senior Manager for approvals</div>
-        <div class="compare-item"><span class="dot-x"></span>Client contact limited to status calls</div>
+    <div class="sm-cols rev d3">
+      <div class="sm-col">
+        <div class="sm-h">Current role</div>
+        <div class="sm-role">Account<br>Manager</div>
       </div>
-      <div class="compare-col hl rev d4">
-        <div class="compare-title t">Bharat Vamsi — Actual Ownership</div>
-        <div class="compare-item"><span class="dot-t"></span>Independently manages a $275M annual-budget Tier-1 account (2025)</div>
-        <div class="compare-item"><span class="dot-t"></span>Operates across 5 platforms without backup</div>
-        <div class="compare-item"><span class="dot-t"></span>Builds new processes and escalation frameworks</div>
-        <div class="compare-item"><span class="dot-t"></span>Primary decision-maker on all pacing and budget issues</div>
-        <div class="compare-item"><span class="dot-t"></span>Established cross-functional pacing capability model — upskilled 1 AD, 3 Managers &amp; 1 SM, reducing team-wide optimisation defects</div>
+      <div class="sm-col hl">
+        <div class="sm-h">Actual scope</div>
+        <div class="sm-li">$275M budget ownership</div>
+        <div class="sm-li">100+ live campaigns</div>
+        <div class="sm-li">DSP · SSP · Social platforms</div>
+        <div class="sm-li">Budget · bidding · pacing decisions</div>
+        <div class="sm-li">Stakeholder escalation ownership</div>
+        <div class="sm-li">Built automation &mdash; <b>reclaimed 10&ndash;12 hrs/week</b></div>
+      </div>
+      <div class="sm-col">
+        <div class="sm-h">Peer role · Senior Manager</div>
+        <div class="sm-li">Platform-specific ownership</div>
+        <div class="sm-li">Limited budget scope</div>
+        <div class="sm-li">Advisory on optimization</div>
       </div>
     </div>
-    <!-- Resolution bar: closes the logic gap -->
-    <div class="rev d5" style="display:flex;align-items:stretch;gap:3px;margin-top:16px;">
-      <div style="flex:1;background:var(--bg-card);border:1px solid var(--border);padding:14px 22px;">
-        <div style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--white-35);margin-bottom:4px;">Paid &amp; titled for</div>
-        <div style="font-size:14px;color:var(--white-60);">Campaign delivery · reporting · optimization</div>
-      </div>
-      <div style="display:flex;align-items:center;font-family:var(--serif);font-size:24px;color:var(--teal);">→</div>
-      <div style="flex:1.4;background:linear-gradient(135deg,var(--bg-card),#0b1426);border:1px solid var(--border-t);padding:14px 22px;">
-        <div style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Actually delivering</div>
-        <div style="font-size:14px;color:var(--white);">Commercial ownership · revenue continuity · operating-model design · capacity creation</div>
-      </div>
-      <div style="display:flex;align-items:center;font-family:var(--serif);font-size:24px;color:var(--teal);">→</div>
-      <div style="flex:0 0 280px;background:rgba(0,200,215,0.08);border:1px solid var(--teal);padding:14px 22px;display:flex;flex-direction:column;justify-content:center;">
-        <div style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">The request</div>
-        <div style="font-family:var(--serif);font-size:22px;font-weight:800;color:var(--white);line-height:1.1;">Senior Manager</div>
-      </div>
+    <div class="sm-bar rev d4">
+      <div class="sm-gap"><span class="sm-tag" style="color:var(--danger);">Gap</span><span class="x">Role &ne; Scope</span></div>
+      <div class="sm-real"><span class="sm-tag" style="color:var(--teal);">Reality</span><span style="font-family:var(--serif);font-size:20px;font-weight:700;color:var(--white);">Already operating beyond Senior Manager &mdash; the title hasn't caught up.</span></div>
     </div>
   </div>
 </section>
@@ -2901,44 +2912,61 @@ strong { color:var(--white); font-weight:500; }
      SLIDE · THE RISK EQUATION (operational bottleneck)
 ═══════════════════════════════════════════════ -->
 <section class="slide" id="srisk">
+  <style>
+    #srisk .s-full{padding:56px 96px;}
+    #srisk .od-split{display:grid;grid-template-columns:1fr 1px 1fr;gap:54px;align-items:stretch;margin:30px 0 26px;}
+    #srisk .od-p{padding:8px 4px;display:flex;flex-direction:column;gap:14px;}
+    #srisk .od-lab{font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;}
+    #srisk .od-p.risk .od-lab{color:var(--danger);}
+    #srisk .od-p.now .od-lab{color:var(--teal);}
+    #srisk .od-big{font-family:var(--serif);font-weight:800;font-size:130px;line-height:0.82;letter-spacing:-0.03em;}
+    #srisk .od-p.risk .od-big{color:var(--danger);}
+    #srisk .od-p.now .od-big{color:var(--teal);}
+    #srisk .od-cap{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--white);line-height:1.2;}
+    #srisk .od-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
+    #srisk .od-chip{font-size:13px;color:var(--white-60);padding:7px 14px;border:1px solid var(--border);background:var(--bg-card);}
+    #srisk .od-p.risk .od-chip{border-color:var(--red-border);}
+    #srisk .od-p.now .od-chip{border-color:var(--border-t);color:var(--white);}
+    #srisk .od-rule{background:linear-gradient(180deg,transparent,var(--border-t),transparent);}
+    #srisk .od-why{display:flex;align-items:center;gap:26px;border-top:1px solid var(--border);padding:16px 0;}
+    #srisk .od-why-h{font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--teal);white-space:nowrap;}
+    #srisk .od-why-items{display:flex;gap:32px;font-size:14px;color:var(--white-60);}
+    #srisk .od-quote{font-family:var(--serif);font-size:18px;font-style:italic;color:var(--white);line-height:1.5;border-left:3px solid var(--teal);padding:8px 0 8px 22px;}
+    #srisk .od-quote .by{display:block;font-style:normal;font-size:13px;color:var(--teal);margin-top:7px;letter-spacing:0.04em;}
+  </style>
   <div class="slide-dentsu rev-fade">dentsu</div>
-  <div class="slide-watermark" style="font-size:300px;right:60px;bottom:-40px;color:rgba(255,60,80,0.025);">⚠</div>
-  <div class="s-full" style="position:relative;z-index:1;padding:64px 80px 48px;">
-    <span class="eyebrow rev d1" style="color:var(--danger);">The Risk Equation · Structural Continuity · dentsu India</span>
-    <h2 class="rev d2" style="font-size:46px;margin-bottom:8px;">The risk isn't a person leaving.<br>It's an operational bottleneck.</h2>
-    <p class="lead rev d3" style="font-size:16px;max-width:1000px;margin-bottom:24px;color:var(--white-60);">As pipeline velocity accelerates, capability and demand diverge — and <span class="teal">one person is the bridge holding it secure.</span></p>
-
-    <!-- The gap: capability vs velocity -->
-    <div class="risk-row rev d4" style="display:flex;gap:3px;margin-top:8px;">
-      <div class="risk-card" style="flex:1;border:1px solid var(--red-border);background:var(--red-bg);padding:30px 32px;">
-        <div style="font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--danger);margin-bottom:12px;">The Bottleneck Risk</div>
-        <div style="font-family:var(--serif);font-size:24px;font-weight:700;color:var(--white);line-height:1.25;margin-bottom:12px;">Single-threaded operational ownership.</div>
-        <div style="font-size:14px;color:var(--white-60);line-height:1.65;">Pacing, optimization, QA and escalation across 5 platforms currently route through one person. As campaign velocity climbs toward ~1000/yr, that concentration becomes the account's primary delivery risk — not a personnel risk.</div>
+  <div class="slide-watermark" style="font-size:300px;right:60px;bottom:-40px;color:rgba(255,60,80,0.025);">&#9888;</div>
+  <div class="s-full">
+    <span class="eyebrow rev d1" style="color:var(--danger);">Operational Dependency &amp; Business Risk · dentsu India</span>
+    <h2 class="rev d2" style="font-size:46px;line-height:1.08;">This is not optional talent.<br>It's <span class="teal">structural dependency.</span></h2>
+    <div class="od-split rev d3">
+      <div class="od-p risk">
+        <div class="od-lab">If removed</div>
+        <div class="od-big">&lt;95<span style="font-size:64px;">%</span></div>
+        <div class="od-cap">Delivery falls. ROAS slips.</div>
+        <div class="od-chips">
+          <span class="od-chip">Optimization slows</span>
+          <span class="od-chip">Platform-expertise gap</span>
+          <span class="od-chip">DV360 · Meta · Social</span>
+        </div>
       </div>
-      <div class="risk-card" style="flex:1;border:1px solid var(--red-border);background:var(--red-bg);padding:30px 32px;">
-        <div style="font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--danger);margin-bottom:12px;">The Capability Gap</div>
-        <div style="font-family:var(--serif);font-size:24px;font-weight:700;color:var(--white);line-height:1.25;margin-bottom:12px;">Pipeline velocity &gt; current staffing.</div>
-        <div style="font-size:14px;color:var(--white-60);line-height:1.65;">Volume has grown ~7× with no added headcount. The forward pipeline needs a defined leadership layer to absorb it — without one, expedites and defects re-enter the system the discipline removed.</div>
-      </div>
-      <div class="risk-card" style="flex:1;border:1px solid var(--border-t);background:var(--teal-05);padding:30px 32px;">
-        <div style="font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;">The Structural Bridge</div>
-        <div style="font-family:var(--serif);font-size:24px;font-weight:700;color:var(--white);line-height:1.25;margin-bottom:12px;">Formalize the leadership layer.</div>
-        <div style="font-size:14px;color:var(--white-60);line-height:1.65;">Promoting and resourcing this role converts a single point of dependency into a documented, repeatable capability — already proven by upskilling 1 AD, 3 Managers &amp; 1 SM. Leadership <strong style="color:var(--white);">is</strong> the de-risking instrument.</div>
-      </div>
-    </div>
-
-    <!-- Equation bar -->
-    <div class="rev d5" style="margin-top:16px;display:flex;align-items:stretch;gap:3px;">
-      <div style="flex:1;background:var(--bg-card);border:1px solid var(--red-border);padding:18px 24px;display:flex;align-items:center;gap:14px;">
-        <div style="font-family:var(--serif);font-size:30px;font-weight:800;color:var(--danger);">~7×</div>
-        <div style="font-size:12px;color:var(--white-60);line-height:1.4;">volume growth absorbed<br>by <strong style="color:var(--white);">one</strong> structural owner</div>
-      </div>
-      <div style="display:flex;align-items:center;padding:0 6px;font-family:var(--serif);font-size:26px;color:var(--white-35);">→</div>
-      <div style="flex:1.6;background:linear-gradient(135deg,var(--bg-card),#0b1426);border:1px solid var(--border-t);padding:18px 24px;display:flex;align-items:center;gap:14px;">
-        <div style="font-family:var(--serif);font-size:18px;font-weight:700;color:var(--teal);line-height:1.4;">Formalized leadership = continuity insurance</div>
-        <div style="font-size:12px;color:var(--white-60);line-height:1.4;">securing &gt;98% DIF and the agency revenue this account represents — as the pipeline scales.</div>
+      <div class="od-rule"></div>
+      <div class="od-p now">
+        <div class="od-lab">Current state · with my system</div>
+        <div class="od-big">&gt;98<span style="font-size:64px;">%</span></div>
+        <div class="od-cap">Delivery held. <span class="teal">+134% ROAS.</span></div>
+        <div class="od-chips">
+          <span class="od-chip">Real-time optimization</span>
+          <span class="od-chip">Zero structural defects</span>
+          <span class="od-chip">Cpk &ge; 1.33</span>
+        </div>
       </div>
     </div>
+    <div class="od-why rev d4">
+      <div class="od-why-h">Why · single-point ownership of</div>
+      <div class="od-why-items"><span>Budget &amp; pacing decisions</span><span>Cross-platform strategy</span><span>Escalation &amp; resolution</span></div>
+    </div>
+    <div class="od-quote rev d5">"Bharath owns day-to-day pacing across ALL platforms &mdash; Meijer has held &gt;98% Delivery-in-Full since inception, and Bharath is a huge part of that."<span class="by">&mdash; Raymond Hall · Associate Director · New Stream Media (Meijer RMN)</span></div>
   </div>
 </section>
 
