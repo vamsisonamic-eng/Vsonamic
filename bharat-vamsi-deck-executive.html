@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bharat Vamsi · Senior Manager Promotion & Compensation Alignment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   THEME TOKENS
+═══════════════════════════════════════════════ */
+:root{
+  --bg:#05080E; --bg-card:#0A0F1A; --bg-card2:#0d1422;
+  --teal:#00C8D7; --teal-05:rgba(0,200,215,0.05); --teal-10:rgba(0,200,215,0.10);
+  --white:#EFF2F7; --white-60:rgba(239,242,247,0.60); --white-35:rgba(239,242,247,0.35);
+  --border:rgba(239,242,247,0.10); --border-t:rgba(0,200,215,0.30);
+  --danger:#FF6B6B; --red-bg:rgba(255,107,107,0.06);
+  --serif:'Syne',sans-serif; --sans:'DM Sans',sans-serif;
+  --ease:cubic-bezier(0.22,1,0.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:var(--sans);}
+
+/* ═══════════════════════════════════════════════
+   FIXED 1920×1080 STAGE, SCALED TO VIEWPORT
+═══════════════════════════════════════════════ */
+#deckStage{position:absolute;top:0;left:0;width:1920px;height:1080px;transform-origin:top left;}
+.slide{position:absolute;inset:0;width:1920px;height:1080px;background:var(--bg);color:var(--white);
+  visibility:hidden;opacity:0;pointer-events:none;transition:opacity .5s var(--ease);overflow:hidden;}
+.slide.active{visibility:visible;opacity:1;pointer-events:auto;}
+.s-full{height:100%;display:flex;flex-direction:column;justify-content:center;padding:80px 120px;position:relative;z-index:1;}
+
+/* atmospheric */
+.slide::before{content:"";position:absolute;inset:0;
+  background:radial-gradient(120% 80% at 80% 0%,var(--teal-05),transparent 60%);pointer-events:none;}
+.dentsu-mark{position:absolute;top:46px;right:64px;font-family:var(--sans);font-size:18px;font-weight:700;
+  letter-spacing:-0.01em;color:var(--white);opacity:0.55;z-index:2;}
+.pagefoot{position:absolute;bottom:40px;left:64px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--white-35);z-index:2;}
+
+/* type */
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--teal);margin-bottom:22px;}
+h1{font-family:var(--serif);font-weight:800;font-size:104px;line-height:0.95;letter-spacing:-0.03em;color:var(--white);}
+h2{font-family:var(--serif);font-weight:800;font-size:60px;line-height:1.02;letter-spacing:-0.02em;color:var(--white);}
+.teal{color:var(--teal);}
+.hairline{height:2px;width:300px;background:linear-gradient(90deg,var(--teal),transparent);margin:26px 0;border-radius:2px;}
+
+/* reveal */
+.rev{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.slide.active .rev{opacity:1;transform:none;}
+.slide.active .d1{transition-delay:.10s;} .slide.active .d2{transition-delay:.22s;}
+.slide.active .d3{transition-delay:.34s;} .slide.active .d4{transition-delay:.46s;}
+.slide.active .d5{transition-delay:.58s;} .slide.active .d6{transition-delay:.70s;}
+.slide.active .d7{transition-delay:.82s;} .slide.active .d8{transition-delay:.94s;}
+
+/* cards & grids */
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:34px 38px;}
+.card.accent{border-top:2px solid var(--teal);}
+.lbl{font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--white-60);margin-bottom:18px;}
+.lbl.t{color:var(--teal);}
+
+/* nav */
+.nav{position:absolute;right:30px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:11px;z-index:5;}
+.nav i{width:8px;height:8px;border-radius:50%;background:var(--white-35);cursor:pointer;transition:.25s var(--ease);display:block;}
+.nav i.on{background:var(--teal);transform:scale(1.35);}
+.count{position:absolute;bottom:40px;right:64px;font-size:13px;color:var(--white-35);letter-spacing:0.1em;z-index:5;}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}
+}
+</style>
+</head>
+<body>
+<div id="deckStage">
+
+<!-- ═══════════ SLIDE 1 · TITLE ═══════════ -->
+<section class="slide active" id="t1">
+  <div class="dentsu-mark">dentsu</div>
+  <div class="s-full">
+    <span class="eyebrow rev d1">Promotion Business Case · Meijer RMN · July 2026</span>
+    <h1 class="rev d2">Senior Manager<br>Promotion<span class="teal">.</span></h1>
+    <div class="hairline rev d3"></div>
+    <p class="rev d3" style="font-family:var(--serif);font-weight:600;font-size:30px;color:var(--white);line-height:1.25;">
+      + Compensation Alignment
+    </p>
+    <p class="rev d4" style="font-size:19px;color:var(--white-60);line-height:1.6;margin-top:22px;max-width:760px;">
+      2.5 years of expanded ownership across <strong style="color:var(--white);">Activation, Governance</strong>
+      and <strong style="color:var(--white);">Platform Operations</strong>.
+    </p>
+    <p class="rev d5" style="font-size:16px;color:var(--white-35);margin-top:54px;letter-spacing:0.02em;">
+      Bharat Vamsi &middot; Account Manager &middot; 8+ years experience
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════ SLIDE 2 · EXECUTIVE SNAPSHOT ═══════════ -->
+<section class="slide" id="t2">
+  <div class="dentsu-mark">dentsu</div>
+  <div class="s-full">
+    <span class="eyebrow rev d1">Executive Snapshot</span>
+    <h2 class="rev d2">Current scope vs current title.</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;margin:48px 0 36px;">
+      <div class="card rev d3" style="border-top:2px solid var(--white-35);">
+        <div class="lbl">Current</div>
+        <div style="font-family:var(--serif);font-weight:800;font-size:46px;color:var(--white);line-height:1;">Account Manager</div>
+        <div style="display:flex;gap:38px;margin-top:26px;">
+          <div><div style="font-family:var(--serif);font-size:34px;font-weight:800;color:var(--white);">&#8377;13.10<span style="font-size:18px;color:var(--white-60);"> LPA</span></div></div>
+          <div><div style="font-family:var(--serif);font-size:34px;font-weight:800;color:var(--white);">8+<span style="font-size:18px;color:var(--white-60);"> yrs exp</span></div></div>
+        </div>
+      </div>
+      <div class="card accent rev d4">
+        <div class="lbl t">Actual operating scope</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 30px;font-size:18px;color:var(--white);line-height:1.4;">
+          <div>&#8226; Multi-platform activation ownership</div>
+          <div>&#8226; <strong>$275M+</strong> budget</div>
+          <div>&#8226; 70&ndash;100 live campaigns</div>
+          <div>&#8226; 5-platform ownership</div>
+          <div>&#8226; Cross-team governance</div>
+          <div>&#8226; Escalation lead</div>
+        </div>
+      </div>
+    </div>
+    <div class="rev d5" style="padding:18px 30px;background:linear-gradient(135deg,var(--bg-card),var(--bg-card2));border-left:3px solid var(--teal);font-family:var(--serif);font-size:24px;font-weight:600;color:var(--white);">
+      Current operating scope is <span class="teal">materially above</span> current leveling.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SLIDE 3 · BUSINESS OWNERSHIP ═══════════ -->
+<section class="slide" id="t3">
+  <div class="dentsu-mark">dentsu</div>
+  <div class="s-full">
+    <span class="eyebrow rev d1">Business Ownership</span>
+    <h2 class="rev d2">What I own today.</h2>
+    <div style="display:flex;gap:14px;align-items:stretch;margin:46px 0 40px;flex-wrap:nowrap;">
+      <!-- flow chain -->
+      <div class="rev d3" style="display:flex;align-items:center;gap:8px;flex:1;">
+        <div class="flowchip">Execution</div><span class="ar">&rarr;</span>
+        <div class="flowchip">Optimization</div><span class="ar">&rarr;</span>
+        <div class="flowchip">Pacing</div><span class="ar">&rarr;</span>
+        <div class="flowchip">Delivery</div><span class="ar">&rarr;</span>
+        <div class="flowchip">Escalations</div><span class="ar">&rarr;</span>
+        <div class="flowchip hot">Process Design</div>
+      </div>
+    </div>
+    <div class="rev d4">
+      <div class="lbl t">Platforms owned</div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <span class="plat">Display &amp; Video 360</span>
+        <span class="plat">The Trade Desk</span>
+        <span class="plat">Google Ad Manager</span>
+        <span class="plat">Meta Ads Manager</span>
+        <span class="plat">Pinterest Ads</span>
+      </div>
+    </div>
+    <div class="rev d5" style="margin-top:50px;font-family:var(--serif);font-size:30px;font-weight:600;color:var(--white);line-height:1.3;max-width:1100px;">
+      This is no longer channel execution ownership.<br>It is <span class="teal">operational business ownership.</span>
+    </div>
+  </div>
+  <style>
+    #t3 .flowchip{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:16px 18px;
+      font-size:16px;font-weight:500;color:var(--white);white-space:nowrap;}
+    #t3 .flowchip.hot{border-color:var(--teal);background:var(--teal-10);color:var(--teal);font-weight:700;}
+    #t3 .ar{color:var(--teal);font-size:18px;}
+    #t3 .plat{background:var(--bg-card);border:1px solid var(--border-t);border-radius:999px;padding:11px 22px;
+      font-size:16px;font-weight:500;color:var(--white);}
+  </style>
+</section>
+
+<!-- ═══════════ SLIDE 4 · IMPACT ═══════════ -->
+<section class="slide" id="t4">
+  <div class="dentsu-mark">dentsu</div>
+  <div class="s-full">
+    <span class="eyebrow rev d1">Measurable Outcomes</span>
+    <h2 class="rev d2">The impact, in six numbers.</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:50px;">
+      <div class="card rev d3"><div class="mv">98<span class="u">%</span></div><div class="ml">Delivery in full</div></div>
+      <div class="card rev d3"><div class="mv">+134<span class="u">%</span></div><div class="ml">ROAS improvement · YoY</div></div>
+      <div class="card rev d4"><div class="mv">70&ndash;100</div><div class="ml">Campaigns managed</div></div>
+      <div class="card rev d4"><div class="mv">70<span class="u">+</span></div><div class="ml">Vendor decks weekly</div></div>
+      <div class="card rev d5"><div class="mv">5<span class="u">-day</span></div><div class="ml">SLA maintained</div></div>
+      <div class="card rev d5"><div class="mv">Zero</div><div class="ml">Major delivery failures</div></div>
+    </div>
+  </div>
+  <style>
+    #t4 .mv{font-family:var(--serif);font-weight:800;font-size:62px;line-height:1;color:var(--teal);letter-spacing:-0.02em;}
+    #t4 .mv .u{font-size:30px;color:var(--white-35);}
+    #t4 .ml{font-size:16px;color:var(--white-60);margin-top:14px;letter-spacing:0.02em;}
+  </style>
+</section>
+
+<!-- ═══════════ SLIDE 5 · CLIENT VALIDATION ═══════════ -->
+<section class="slide" id="t5">
+  <div class="dentsu-mark">dentsu</div>
+  <div class="s-full">
+    <span class="eyebrow rev d1">External Leadership Recognition</span>
+    <h2 class="rev d2">The client moved first.</h2>
+    <div style="display:flex;flex-direction:column;gap:20px;margin:46px 0 34px;">
+      <blockquote class="q rev d3">&ldquo;Owns day-to-day pacing across all platforms.&rdquo;</blockquote>
+      <blockquote class="q rev d4">&ldquo;Trusted escalation point.&rdquo;</blockquote>
+      <blockquote class="q rev d5">&ldquo;Deserving of Senior Account Manager title.&rdquo;</blockquote>
+    </div>
+    <p class="rev d6" style="font-size:19px;color:var(--white-60);line-height:1.55;max-width:980px;">
+      This is not self-assessment. It reflects <strong style="color:var(--white);">external stakeholder evaluation over 2+ years</strong>.
+    </p>
+  </div>
+  <style>
+    #t5 .q{font-family:var(--serif);font-weight:600;font-size:38px;color:var(--white);line-height:1.2;
+      padding:22px 0 22px 34px;border-left:3px solid var(--teal);}
+  </style>
+</section>
+
+<!-- ═══════════ SLIDE 6 · BEYOND ROLE SCOPE ═══════════ -->
+<section class="slide" id="t6">
+  <div class="dentsu-mark">dentsu</div>
+  <div class="s-full">
+    <span class="eyebrow rev d1">Beyond Standard Expectations</span>
+    <h2 class="rev d2">Ownership past the brief.</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:50px;">
+      <div class="card accent rev d3">
+        <div class="lbl t">01 · DV360 Bug Audit</div>
+        <div class="po"><b>Problem</b> Silent delivery discrepancy in DV360.</div>
+        <div class="po"><b>Action</b> Ran a full audit and flagged the platform bug.</div>
+        <div class="po"><b>Outcome</b> Corrected delivery; protected billed spend.</div>
+      </div>
+      <div class="card accent rev d4">
+        <div class="lbl t">02 · Creative Rejection Governance</div>
+        <div class="po"><b>Problem</b> Rejections stalling launches at scale.</div>
+        <div class="po"><b>Action</b> Built a rejection-handling governance SOP.</div>
+        <div class="po"><b>Outcome</b> Faster approvals; fewer launch delays.</div>
+      </div>
+      <div class="card accent rev d5">
+        <div class="lbl t">03 · Screenshot Automation</div>
+        <div class="po"><b>Problem</b> Manual screenshot pulls across all campaigns.</div>
+        <div class="po"><b>Action</b> Designed an automated capture process.</div>
+        <div class="po"><b>Outcome</b> Cut 10&ndash;12 hours/week of manual work.</div>
+      </div>
+    </div>
+  </div>
+  <style>
+    #t6 .po{font-size:16px;color:var(--white-60);line-height:1.5;margin-bottom:14px;}
+    #t6 .po:last-child{margin-bottom:0;}
+    #t6 .po b{display:block;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--white-35);margin-bottom:3px;}
+  </style>
+</section>
+
+<!-- ═══════════ SLIDE 7 · COMPENSATION ALIGNMENT ═══════════ -->
+<section class="slide" id="t7">
+  <div class="dentsu-mark">dentsu</div>
+  <div class="s-full">
+    <span class="eyebrow rev d1">The Request</span>
+    <h2 class="rev d2">Align title and pay to scope.</h2>
+    <div style="display:grid;grid-template-columns:300px 1fr;gap:28px;margin:48px 0 34px;align-items:stretch;">
+      <div class="card rev d3" style="border-top:2px solid var(--white-35);display:flex;flex-direction:column;justify-content:center;">
+        <div class="lbl">Current</div>
+        <div style="font-family:var(--serif);font-weight:800;font-size:56px;color:var(--white);line-height:1;">&#8377;13.10<span style="font-size:22px;color:var(--white-60);"> LPA</span></div>
+      </div>
+      <div class="card accent rev d4">
+        <div class="lbl t">Context</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 30px;font-size:18px;color:var(--white);line-height:1.4;">
+          <div>&#8226; 8+ years experience</div>
+          <div>&#8226; Expanded operating scope</div>
+          <div>&#8226; Client-endorsed promotion</div>
+          <div>&#8226; Market-aligned Senior Manager range</div>
+        </div>
+      </div>
+    </div>
+    <div class="rev d5" style="padding:22px 32px;background:linear-gradient(135deg,var(--bg-card),var(--bg-card2));border-left:3px solid var(--teal);">
+      <div class="lbl t" style="margin-bottom:10px;">Request</div>
+      <div style="font-family:var(--serif);font-size:30px;font-weight:700;color:var(--white);line-height:1.25;">
+        Promotion to <span class="teal">Senior Manager</span> + a compensation alignment plan.
+      </div>
+    </div>
+    <p class="rev d6" style="font-size:16px;color:var(--white-35);margin-top:20px;font-style:italic;">
+      Open to discussing structure and timing if immediate full alignment isn&rsquo;t possible.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════ SLIDE 8 · CLOSING ═══════════ -->
+<section class="slide" id="t8">
+  <div class="dentsu-mark">dentsu</div>
+  <div class="s-full" style="justify-content:center;">
+    <span class="eyebrow rev d1">Closing</span>
+    <h2 class="rev d2" style="font-size:46px;line-height:1.3;max-width:1380px;font-weight:700;">
+      &ldquo;I&rsquo;m proud of what we&rsquo;ve built on Meijer. My ask is not based on tenure&mdash;it&rsquo;s based on
+      <span class="teal">sustained ownership, measurable outcomes, and the scope already being delivered.</span>
+      I&rsquo;d like to align title and compensation accordingly.&rdquo;
+    </h2>
+    <div class="hairline rev d3" style="margin-top:40px;"></div>
+    <p class="rev d4" style="font-size:18px;color:var(--white-60);margin-top:10px;">
+      Anchor: the client changed the commercial rate card effective <strong style="color:var(--white);">July 1</strong> &mdash; the business case already exists.
+    </p>
+  </div>
+</section>
+
+</div>
+
+<!-- nav + count -->
+<div class="nav" id="nav"></div>
+<div class="count" id="count">1 / 8</div>
+
+<script>
+/* ═══════════ CONTROLLER ═══════════ */
+const stage = document.getElementById('deckStage');
+const slides = Array.from(document.querySelectorAll('.slide'));
+const navEl = document.getElementById('nav');
+const countEl = document.getElementById('count');
+let cur = 0;
+
+function scale(){
+  const f = Math.min(window.innerWidth/1920, window.innerHeight/1080);
+  stage.style.transform = `translate(${(window.innerWidth-1920*f)/2}px,${(window.innerHeight-1080*f)/2}px) scale(${f})`;
+}
+window.addEventListener('resize', scale); scale();
+
+slides.forEach((s,i)=>{
+  const d=document.createElement('i');
+  d.addEventListener('click',()=>show(i));
+  navEl.appendChild(d);
+});
+function show(i){
+  i=Math.max(0,Math.min(slides.length-1,i));
+  slides[cur].classList.remove('active');
+  navEl.children[cur].classList.remove('on');
+  cur=i;
+  slides[cur].classList.add('active');
+  navEl.children[cur].classList.add('on');
+  countEl.textContent=`${i+1} / ${slides.length}`;
+}
+navEl.children[0].classList.add('on');
+
+window.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ')show(cur+1);
+  if(e.key==='ArrowLeft'||e.key==='PageUp')show(cur-1);
+});
+let sx=0;
+window.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
+window.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)show(cur+(dx<0?1:-1));},{passive:true});
+</script>
+</body>
+</html>
