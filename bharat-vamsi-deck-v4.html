@@ -1761,8 +1761,8 @@ strong { color:var(--white); font-weight:500; }
       <div class="cm-label">Campaigns Executed · 2025</div>
     </div>
     <div class="cover-metric rev d7">
-      <div class="cm-val teal">₹30<span style="font-size:0.55em;letter-spacing:0">L</span></div>
-      <div class="cm-label">Total Package Ask</div>
+      <div class="cm-val teal">$5.46</div>
+      <div class="cm-label">Onsite ROAS · 2026 Q1</div>
     </div>
   </div>
 </section>
@@ -1798,55 +1798,41 @@ strong { color:var(--white); font-weight:500; }
   </style>
   <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="slide-watermark" style="font-size:300px;right:60px;bottom:-40px;color:rgba(0,200,215,0.02);">$</div>
-  <div class="s-full" style="position:relative;z-index:1;padding:50px 80px 38px;">
-    <span class="eyebrow rev d1">Executive Summary · The Commercial Case · dentsu × Meijer RMN</span>
+  <div class="s-full" style="position:relative;z-index:1;padding:48px 80px 40px;justify-content:center;">
     <style>
-      #scommercial .ec-row{display:flex;align-items:baseline;gap:14px;padding:12px 0;border-bottom:1px solid var(--border);}
-      #scommercial .ec-row:last-child{border-bottom:none;}
-      #scommercial .ec-v{font-family:var(--serif);font-size:40px;font-weight:800;color:var(--teal);line-height:1;min-width:140px;}
-      #scommercial .ec-k{font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:var(--white-60);}
-      #scommercial .ec-label{font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);margin-bottom:8px;}
+      /* ── Executive Summary · transformation grid ── */
+      #scommercial .xg{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:1fr 1fr;
+        border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-top:30px;}
+      #scommercial .xc{padding:26px 30px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);
+        display:flex;flex-direction:column;justify-content:center;background:var(--bg-card);min-height:150px;
+        transition:background .25s var(--ease);}
+      #scommercial .xc:nth-child(4n){border-right:none;}
+      #scommercial .xc:nth-child(n+5){border-bottom:none;}
+      @media (hover:hover) and (pointer:fine){#scommercial .xc:hover{background:#0d1422;}}
+      #scommercial .xk{font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--white-60);margin-bottom:12px;}
+      #scommercial .xv{font-family:var(--serif);font-weight:800;font-size:38px;line-height:1;color:var(--white);letter-spacing:-0.02em;}
+      #scommercial .xv .ar{color:var(--teal);font-weight:700;margin:0 6px;}
+      #scommercial .xn{font-size:12px;font-weight:700;letter-spacing:0.04em;color:var(--teal);margin-top:11px;}
+      #scommercial .xc.dark{background:#03161a;}
+      #scommercial .xc.dark .xk{color:var(--teal);}
+      #scommercial .xc.dark .xv{font-style:italic;font-size:30px;line-height:1.08;}
     </style>
-    <h2 class="rev d2" style="font-size:40px;line-height:1.22;margin-bottom:6px;">
-      <span style="color:var(--white-35);">$275M at risk</span> &mdash; without operational consistency.<br>
-      <span class="teal">$275M protected</span> &mdash; with my execution system.
-    </h2>
+    <span class="eyebrow rev d1">2023 Q4 → 2026 Q1 · At a glance</span>
+    <h2 class="rev d2" style="font-size:54px;line-height:1.04;margin:6px 0 4px;">The whole transformation,<br>one frame.</h2>
     <div class="sc2-hairline"></div>
-    <!-- ===== Inputs → Operator → Outputs ===== -->
-    <div class="rev d3" style="display:grid;grid-template-columns:1fr 260px 1fr;gap:0;align-items:stretch;margin:46px 0 42px;">
 
-      <!-- INPUTS · Advertiser -->
-      <div class="sc2-panel" style="background:var(--bg-card);border:1px solid var(--border);border-top:2px solid var(--teal);padding:34px 40px;display:flex;flex-direction:column;justify-content:center;">
-        <div class="ec-label">Advertiser &middot; inputs protected</div>
-        <div class="ec-row"><span class="ec-v">+134%</span><span class="ec-k">ROAS · YoY</span></div>
-        <div class="ec-row"><span class="ec-v">&gt;98%</span><span class="ec-k">Delivery in full</span></div>
-        <div class="ec-row"><span class="ec-v" style="color:var(--white);">&darr; Churn</span><span class="ec-k">Risk neutralized</span></div>
-      </div>
-
-      <!-- OPERATOR · the bridge -->
-      <div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 6px;">
-        <div class="sc2-wire"></div>
-        <div class="sc2-medallion" style="width:168px;height:168px;">
-          <div class="sc2-ring"></div>
-          <div style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--teal);">The Operator</div>
-          <div style="font-family:var(--serif);font-size:22px;font-weight:800;color:var(--white);line-height:1.05;margin-top:7px;">Bharat<br>Vamsi</div>
-          <div style="font-size:9.5px;color:var(--white-35);margin-top:7px;letter-spacing:0.08em;">AM → SAM</div>
-        </div>
-      </div>
-
-      <!-- OUTPUTS · Retailer -->
-      <div class="sc2-panel" style="background:var(--bg-card);border:1px solid var(--border);border-top:2px solid var(--teal);padding:34px 40px;display:flex;flex-direction:column;justify-content:center;">
-        <div class="ec-label">Retailer &middot; outputs grown</div>
-        <div class="ec-row"><span class="ec-v">$75&rarr;275M</span><span class="ec-k">Budget · 2023→26</span></div>
-        <div class="ec-row"><span class="ec-v">3.7&times;</span><span class="ec-k">Scale</span></div>
-        <div class="ec-row"><span class="ec-v" style="color:var(--white);">Zero</span><span class="ec-k">Added headcount</span></div>
-      </div>
+    <div class="xg rev d3">
+      <div class="xc"><div class="xk">Campaigns</div><div class="xv">145<span class="ar">→</span>968</div><div class="xn">7× scale</div></div>
+      <div class="xc"><div class="xk">Offsite CVR</div><div class="xv">0.01<span class="ar">→</span>0.69%</div><div class="xn">~70× improvement</div></div>
+      <div class="xc"><div class="xk">Offsite ROAS</div><div class="xv">$0.79<span class="ar">→</span>$2.32</div><div class="xn">3×+ improvement</div></div>
+      <div class="xc"><div class="xk">Onsite CVR</div><div class="xv">0.35<span class="ar">→</span>2.94%</div><div class="xn">~8× improvement</div></div>
+      <div class="xc"><div class="xk">Onsite ROAS</div><div class="xv">$1.07<span class="ar">→</span>$5.46</div><div class="xn">~5× improvement</div></div>
+      <div class="xc"><div class="xk">Pacing</div><div class="xv">Spiky<span class="ar">→</span>Predictable</div><div class="xn">Fully stabilized</div></div>
+      <div class="xc"><div class="xk">Execution</div><div class="xv">97–99% SLA</div><div class="xn">Enterprise-grade</div></div>
+      <div class="xc dark"><div class="xk">Bottom line</div><div class="xv">Scale + Efficiency,<br>together.</div></div>
     </div>
 
-    <!-- one-line recommendation -->
-    <div class="rev d4" style="padding:16px 28px;background:linear-gradient(135deg,var(--bg-card),#0b1426);border-left:3px solid var(--teal);font-family:var(--serif);font-size:19px;font-weight:600;color:var(--white);line-height:1.4;">
-      <span class="teal">Align the role to the scale already owned.</span>
-    </div>
+    <p class="rev d4" style="font-family:var(--sans);font-size:13px;color:var(--white-35);margin-top:18px;letter-spacing:0.02em;">2026 figures reflect Q1 2026 data · Meijer Retail Media Network · 5 platforms.</p>
   </div>
 </section>
 
@@ -1854,7 +1840,7 @@ strong { color:var(--white); font-weight:500; }
      SLIDE 2 · EXECUTIVE SUMMARY
 ═══════════════════════════════════════════════ -->
 <!-- ===== VIDEO SLIDE (added) — animated headline summary ===== -->
-<section class="slide" id="s2" data-order="3">
+<section class="slide appendix" id="s2">
   <style>
     /* ── Slide 3 · Scorecard — centered split stat board ── */
     #s2 .s-full{justify-content:center;gap:30px;padding:60px 96px;}
@@ -2110,7 +2096,7 @@ strong { color:var(--white); font-weight:500; }
 <!-- ══════════════════════════════════════════════
      SLIDE 7 · SCOPE OF OWNERSHIP — OPERATIONAL CORE
 ═══════════════════════════════════════════════ -->
-<section class="slide" id="s7" data-order="6">
+<section class="slide" id="s7" data-order="5">
   <style>
     /* ── Slide 7 · Scope & Scale — editorial index list (impeccable/bolder) ── */
     #s7 .s-full{padding:60px 96px;justify-content:center;gap:34px;}
@@ -2173,7 +2159,7 @@ strong { color:var(--white); font-weight:500; }
 <!-- ══════════════════════════════════════════════
      SLIDE 8 · ROLE VARIANCE
 ═══════════════════════════════════════════════ -->
-<section class="slide" id="s8" data-order="11">
+<section class="slide" id="s8" data-order="10">
   <style>
     #s8 .s-full{padding:54px 96px;}
     #s8 .sm-hero{display:flex;align-items:baseline;gap:24px;margin:14px 0 22px;}
@@ -2236,7 +2222,7 @@ strong { color:var(--white); font-weight:500; }
 <!-- ══════════════════════════════════════════════
      SLIDE 9 · OPERATIONAL EVOLUTION (5 PHASES)
 ═══════════════════════════════════════════════ -->
-<section class="slide" id="s9" data-order="5">
+<section class="slide" id="s9" data-order="4">
   <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-full" style="padding-bottom:16px;">
     <span class="eyebrow rev d1">DMAIC · Operational Evolution · dentsu India · Meijer RMN</span>
@@ -2327,7 +2313,7 @@ strong { color:var(--white); font-weight:500; }
 <!-- ══════════════════════════════════════════════
      SLIDE · THE OPERATING SYSTEM (workflow-visualizer)
 ═══════════════════════════════════════════════ -->
-<section class="slide" id="ssystem" data-order="7">
+<section class="slide" id="ssystem" data-order="6">
   <style>
     #ssystem .wf-row{display:flex;align-items:stretch;justify-content:center;gap:0;margin:56px 0 30px;}
     #ssystem .wf-node{position:relative;flex:1;max-width:250px;background:var(--bg-card);border:1px solid var(--border);
@@ -2435,7 +2421,7 @@ strong { color:var(--white); font-weight:500; }
      SLIDE · MEIJER TRANSFORMATION (2023 → 2026)
      Efficiency & Margins, not raw volume
 ═══════════════════════════════════════════════ -->
-<section class="slide" id="stransform" data-order="4">
+<section class="slide" id="stransform" data-order="3">
   <style>
     /* ── Slide 11 · Transformation — multiplier ledger (impeccable/bolder) ── */
     #stransform .s-full{padding:60px 96px;justify-content:center;gap:36px;}
@@ -2530,7 +2516,7 @@ strong { color:var(--white); font-weight:500; }
 <!-- ══════════════════════════════════════════════
      SLIDE 11 · IMPACT UNDER PRESSURE — OVERVIEW
 ═══════════════════════════════════════════════ -->
-<section class="slide" id="s11a" data-order="8">
+<section class="slide" id="s11a" data-order="7">
   <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="fc-stage">
     <!-- LEFT · title + arrows (Fensea "Our Care" pattern) -->
@@ -2709,7 +2695,7 @@ strong { color:var(--white); font-weight:500; }
 <!-- ══════════════════════════════════════════════
      SLIDE 12 · RAYMOND HALL — PARTNER RECOGNITION
 ═══════════════════════════════════════════════ -->
-<section class="slide" id="s10" data-order="9">
+<section class="slide" id="s10" data-order="8">
   <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-split">
     <div class="s-left" style="flex:0 0 44%;">
@@ -2854,7 +2840,7 @@ strong { color:var(--white); font-weight:500; }
 <!-- ══════════════════════════════════════════════
      PEER FEEDBACK WALL · Workday 2025 · living testimonial
 ═══════════════════════════════════════════════ -->
-<section class="slide" id="sfeedback" data-order="10">
+<section class="slide" id="sfeedback" data-order="9">
   <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="fb-orbs" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="s-split" style="position:relative;z-index:1;">
@@ -2911,7 +2897,7 @@ strong { color:var(--white); font-weight:500; }
 <!-- ══════════════════════════════════════════════
      SLIDE · THE RISK EQUATION (operational bottleneck)
 ═══════════════════════════════════════════════ -->
-<section class="slide" id="srisk" data-order="12">
+<section class="slide" id="srisk" data-order="11">
   <style>
     #srisk .s-full{padding:56px 96px;}
     #srisk .od-split{display:grid;grid-template-columns:1fr 1px 1fr;gap:54px;align-items:stretch;margin:30px 0 26px;}
@@ -2973,7 +2959,7 @@ strong { color:var(--white); font-weight:500; }
 <!-- ══════════════════════════════════════════════
      SLIDE 12 · COMPENSATION CONTEXT
 ═══════════════════════════════════════════════ -->
-<section class="slide" id="s12" data-order="13">
+<section class="slide" id="s12" data-order="12">
   <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-full">
     <span class="eyebrow rev d1">Compensation Alignment Opportunity · dentsu India</span>
@@ -3020,7 +3006,7 @@ strong { color:var(--white); font-weight:500; }
 <!-- ══════════════════════════════════════════════
      SLIDE 14 · THE ASK
 ═══════════════════════════════════════════════ -->
-<section class="slide" id="s14" data-order="14">
+<section class="slide" id="s14" data-order="13">
   <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-split">
     <div class="s-left">
@@ -3071,7 +3057,7 @@ strong { color:var(--white); font-weight:500; }
 <!-- ══════════════════════════════════════════════
      SLIDE 16 · PLATFORM CERTIFICATIONS
 ═══════════════════════════════════════════════ -->
-<section class="slide" id="scerts" data-order="15">
+<section class="slide" id="scerts" data-order="14">
   <div class="slide-dentsu rev-fade">dentsu</div>
   <div class="s-full">
     <span class="eyebrow rev d1">Learning &amp; Future Roadmap</span>
@@ -3170,7 +3156,7 @@ strong { color:var(--white); font-weight:500; }
 <!-- ══════════════════════════════════════════════
      SLIDE 18 · CLOSING
 ═══════════════════════════════════════════════ -->
-<section class="slide" id="s15" data-order="16">
+<section class="slide" id="s15" data-order="15">
   <div class="slide-dentsu rev-fade">dentsu</div>
   <canvas class="cover-canvas rev-fade" id="closingCanvas"></canvas>
   <div class="cover-overlay" style="background:linear-gradient(135deg,rgba(5,8,14,0.97) 0%,rgba(5,8,14,0.85) 50%,rgba(0,200,215,0.04) 100%);"></div>
