@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Style A – Signal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* === VIEWPORT BASE === */
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #0d1220; }
+.deck-viewport { position: fixed; inset: 0; overflow: hidden; background: #0d1220; }
+.deck-stage {
+  position: absolute; left: 0; top: 0;
+  width: 1920px; height: 1080px;
+  overflow: hidden; transform-origin: 0 0;
+}
+.slide {
+  position: absolute; inset: 0;
+  width: 1920px; height: 1080px;
+  overflow: hidden; display: block;
+  visibility: hidden; opacity: 0; pointer-events: none;
+}
+.slide.active { visibility: visible; opacity: 1; pointer-events: auto; z-index: 1; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; } }
+
+/* === SIGNAL THEME === */
+:root {
+  --navy: #1C2644;
+  --navy-deep: #131b38;
+  --cream: #F0ECE3;
+  --cream-alt: #E6E0D4;
+  --gold: #C8A870;
+  --gold-light: #dfc090;
+  --text-warm: #E2DCD0;
+  --text-muted: #8A96A8;
+  --ink: #1A2030;
+  --border-dark: rgba(200,168,112,0.25);
+  --border-light: rgba(26,32,48,0.15);
+}
+
+.slide-signal {
+  background: var(--navy);
+  font-family: 'DM Sans', sans-serif;
+  position: relative;
+}
+
+/* Subtle grid texture overlay */
+.slide-signal::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(200,168,112,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,168,112,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none; z-index: 0;
+}
+
+/* Cream panel — right side */
+.cream-panel {
+  position: absolute;
+  right: 0; top: 0;
+  width: 540px; height: 1080px;
+  background: var(--cream);
+  border-left: 1px solid var(--border-dark);
+  z-index: 1;
+}
+
+/* Top masthead bar */
+.masthead {
+  position: absolute;
+  top: 0; left: 0; right: 540px;
+  height: 64px;
+  border-bottom: 1px solid var(--border-dark);
+  display: flex; align-items: center;
+  padding: 0 80px;
+  z-index: 2;
+}
+.masthead-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.masthead-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); margin: 0 20px; }
+.masthead-date {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
+/* Main content area */
+.main-content {
+  position: absolute;
+  top: 64px; left: 80px; right: 620px;
+  bottom: 80px;
+  display: flex; flex-direction: column;
+  justify-content: center;
+  z-index: 2;
+}
+
+.kicker {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 36px;
+  animation: fadeUp 0.8s ease 0.1s both;
+}
+
+.title-block {
+  animation: fadeUp 0.8s ease 0.3s both;
+}
+.title-main {
+  font-family: 'Source Serif 4', serif;
+  font-weight: 700; font-size: 92px;
+  line-height: 1.0;
+  color: var(--text-warm);
+  margin: 0 0 12px;
+  letter-spacing: -0.01em;
+}
+.title-italic {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic; font-weight: 600;
+  color: var(--gold);
+}
+
+.gold-rule {
+  width: 60px; height: 1px;
+  background: var(--gold);
+  margin: 40px 0;
+  animation: expandRule 0.9s ease 0.6s both;
+}
+
+.subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300; font-size: 22px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  max-width: 580px;
+  animation: fadeUp 0.8s ease 0.7s both;
+}
+
+/* Bottom left meta */
+.bottom-meta {
+  position: absolute;
+  bottom: 56px; left: 80px;
+  display: flex; align-items: center; gap: 32px;
+  z-index: 2;
+  animation: fadeUp 0.8s ease 0.9s both;
+}
+.meta-item {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.meta-divider { width: 1px; height: 24px; background: var(--border-dark); }
+
+/* Cream panel content */
+.panel-top-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 64px;
+  border-bottom: 1px solid var(--border-light);
+  display: flex; align-items: center;
+  padding: 0 48px;
+}
+.panel-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.4;
+}
+
+.panel-content {
+  padding: 80px 48px 48px;
+}
+
+.panel-section-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+
+.panel-headline {
+  font-family: 'Source Serif 4', serif;
+  font-weight: 600; font-size: 28px;
+  color: var(--ink);
+  line-height: 1.3;
+  margin-bottom: 48px;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 32px;
+}
+
+.panel-items { display: flex; flex-direction: column; gap: 0; }
+.panel-item {
+  display: flex; align-items: flex-start; gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border-light);
+  animation: fadeLeft 0.7s ease calc(0.5s + var(--i) * 0.12s) both;
+}
+.item-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; color: var(--gold);
+  letter-spacing: 0.1em; min-width: 28px;
+  padding-top: 2px;
+}
+.item-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px; color: var(--ink);
+  line-height: 1.55;
+  opacity: 0.8;
+}
+
+/* Large decorative numeral */
+.bg-numeral {
+  position: absolute;
+  right: 560px; bottom: -20px;
+  font-family: 'Source Serif 4', serif;
+  font-weight: 700;
+  font-size: 400px;
+  line-height: 1;
+  color: rgba(200,168,112,0.04);
+  pointer-events: none;
+  z-index: 1;
+  user-select: none;
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeLeft {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes expandRule {
+  from { width: 0; opacity: 0; }
+  to   { width: 60px; opacity: 1; }
+}
+</style>
+</head>
+<body>
+<div class="deck-viewport">
+  <div class="deck-stage" id="stage">
+
+    <div class="slide slide-signal active">
+      <!-- Masthead -->
+      <div class="masthead">
+        <span class="masthead-label">Internal Review</span>
+        <div class="masthead-dot"></div>
+        <span class="masthead-label">Business Analysis — Q2 2026</span>
+        <span class="masthead-date">June 2026</span>
+      </div>
+
+      <!-- Cream right panel -->
+      <div class="cream-panel">
+        <div class="panel-top-bar">
+          <span class="panel-label">Career Brief</span>
+        </div>
+        <div class="panel-content">
+          <div class="panel-section-label">Highlights</div>
+          <div class="panel-headline">Sprint Delivery<br>& Impact</div>
+          <div class="panel-items">
+            <div class="panel-item" style="--i:0">
+              <span class="item-num">01</span>
+              <span class="item-text">Delivered SE FI Distrib Cash, In Kind & data source in a single sprint — early release ready</span>
+            </div>
+            <div class="panel-item" style="--i:1">
+              <span class="item-num">02</span>
+              <span class="item-text">Self-assigned M39 days before release — zero UI issues reported by user</span>
+            </div>
+            <div class="panel-item" style="--i:2">
+              <span class="item-num">03</span>
+              <span class="item-text">Proactive cross-team coordination on ME 16 extensions — no waiting, immediate action</span>
+            </div>
+            <div class="panel-item" style="--i:3">
+              <span class="item-num">04</span>
+              <span class="item-text">Leading Merge Batch Rebalancing — highest complexity module in current pipeline</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Background numeral -->
+      <div class="bg-numeral">01</div>
+
+      <!-- Main content -->
+      <div class="main-content">
+        <div class="kicker">Promotion Case · Lead Business Analyst</div>
+        <div class="title-block">
+          <h1 class="title-main">
+            Ready to<br>
+            <span class="title-italic">Lead.</span>
+          </h1>
+        </div>
+        <div class="gold-rule"></div>
+        <p class="subtitle">
+          A track record of owning complexity, driving delivery,<br>
+          and elevating every sprint I touch.
+        </p>
+      </div>
+
+      <!-- Bottom meta -->
+      <div class="bottom-meta">
+        <span class="meta-item">Vamsi Sonamic</span>
+        <div class="meta-divider"></div>
+        <span class="meta-item">Business Analyst</span>
+        <div class="meta-divider"></div>
+        <span class="meta-item">2026</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script>
+(function() {
+  const stage = document.getElementById('stage');
+  function scaleStage() {
+    const vw = window.innerWidth, vh = window.innerHeight;
+    const scaleX = vw / 1920, scaleY = vh / 1080;
+    const scale = Math.min(scaleX, scaleY);
+    const tx = (vw - 1920 * scale) / 2;
+    const ty = (vh - 1080 * scale) / 2;
+    stage.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+  }
+  scaleStage();
+  window.addEventListener('resize', scaleStage);
+})();
+</script>
+</body>
+</html>
