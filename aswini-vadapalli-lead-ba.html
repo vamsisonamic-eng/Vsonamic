@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lead BA — Aswini Vadapalli · 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+/* ===========================================
+   CSS CUSTOM PROPERTIES — OBSIDIAN EXECUTIVE 2026
+   =========================================== */
+:root {
+  --obsidian:    #08090d;
+  --obsidian-2:  #0c0d14;
+  --slate:       #12141e;
+  --slate-2:     #1a1d2a;
+  --teal:        #00d4b4;
+  --teal-dim:    rgba(0, 212, 180, 0.12);
+  --teal-glow:   rgba(0, 212, 180, 0.06);
+  --teal-border: rgba(0, 212, 180, 0.22);
+  --amber:       #f5a623;
+  --amber-dim:   rgba(245, 166, 35, 0.14);
+  --amber-border:rgba(245, 166, 35, 0.28);
+  --red:         #ff4d6a;
+  --red-dim:     rgba(255, 77, 106, 0.12);
+  --white:       #f0f2f5;
+  --white-80:    rgba(240, 242, 245, 0.8);
+  --white-60:    rgba(240, 242, 245, 0.6);
+  --white-30:    rgba(240, 242, 245, 0.3);
+  --white-12:    rgba(240, 242, 245, 0.12);
+  --white-06:    rgba(240, 242, 245, 0.06);
+  --white-03:    rgba(240, 242, 245, 0.03);
+  --border:      rgba(240, 242, 245, 0.08);
+  --ease-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ===========================================
+   VIEWPORT BASE — FIXED 16:9 STAGE
+   =========================================== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--obsidian);
+}
+
+.deck-viewport {
+  position: fixed; inset: 0;
+  overflow: hidden;
+  background: var(--obsidian);
+}
+
+.deck-stage {
+  position: absolute; left: 0; top: 0;
+  width: 1920px; height: 1080px;
+  overflow: hidden;
+  transform-origin: 0 0;
+  background: var(--obsidian);
+}
+
+.slide {
+  position: absolute; inset: 0;
+  width: 1920px; height: 1080px;
+  overflow: hidden; display: block;
+  visibility: hidden; opacity: 0;
+  pointer-events: none;
+  background: var(--obsidian);
+}
+
+.slide.active {
+  visibility: visible; opacity: 1;
+  pointer-events: auto; z-index: 1;
+}
+
+img, video, canvas, svg {
+  max-width: 100%; max-height: 100%;
+}
+
+@media print {
+  html, body { width: 1920px; height: auto; overflow: visible; }
+  .deck-viewport { position: static; overflow: visible; }
+  .deck-stage { position: static; width: auto; height: auto; transform: none !important; }
+  .slide { position: relative; display: block !important; visibility: visible !important; opacity: 1 !important; pointer-events: auto !important; width: 1920px; height: 1080px; break-after: page; }
+  .slide:last-child { break-after: auto; }
+  .slide-counter, .edit-hotzone, .edit-toggle { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.2s !important;
+  }
+}
+
+/* ===========================================
+   SHARED ATMOSPHERIC ELEMENTS
+   =========================================== */
+
+/* Aurora background common to all slides */
+.aurora {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 1000px 700px at 10% 110%, rgba(0,212,180,0.09) 0%, transparent 70%),
+    radial-gradient(ellipse 700px 500px at 90% -10%, rgba(245,166,35,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 1400px 900px at 50% 50%, rgba(0,212,180,0.025) 0%, transparent 80%);
+}
+
+/* Dot grid */
+.dot-grid {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image: radial-gradient(circle, rgba(240,242,245,0.055) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, black 30%, transparent 100%);
+}
+
+/* Left vertical accent bar */
+.left-bar {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 4px; z-index: 3;
+  background: linear-gradient(180deg, transparent 0%, var(--teal) 25%, var(--teal) 75%, transparent 100%);
+}
+
+/* Top navigation strip */
+.nav-strip {
+  position: absolute; top: 0; left: 4px; right: 0;
+  height: 60px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center;
+  padding: 0 80px;
+  z-index: 4;
+}
+.nav-name {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--teal);
+}
+.nav-sep { width: 1px; height: 18px; background: var(--border); margin: 0 24px; }
+.nav-ctx {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--white-30);
+}
+.nav-date {
+  margin-left: auto;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; letter-spacing: 0.1em;
+  color: rgba(240,242,245,0.2);
+}
+
+/* Bottom status bar */
+.status-bar {
+  position: absolute; bottom: 0; left: 4px; right: 0;
+  height: 60px;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center;
+  padding: 0 80px;
+  gap: 40px;
+  z-index: 4;
+}
+.status-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(240,242,245,0.25);
+}
+.status-tag.active-tag { color: var(--teal); }
+.live-dot {
+  display: inline-block; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--teal);
+  margin-right: 8px;
+  animation: pulse-dot 2s ease infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.65); }
+}
+
+/* ===========================================
+   SHARED ANIMATION UTILITIES
+   =========================================== */
+.reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.7s var(--ease-expo), transform 0.7s var(--ease-expo);
+}
+.slide.active .reveal { opacity: 1; transform: translateY(0); }
+.reveal-left {
+  opacity: 0; transform: translateX(-24px);
+  transition: opacity 0.7s var(--ease-expo), transform 0.7s var(--ease-expo);
+}
+.slide.active .reveal-left { opacity: 1; transform: translateX(0); }
+.reveal-scale {
+  opacity: 0; transform: scale(0.92);
+  transition: opacity 0.7s var(--ease-expo), transform 0.7s var(--ease-expo);
+}
+.slide.active .reveal-scale { opacity: 1; transform: scale(1); }
+
+/* Staggered delays */
+.d1 { transition-delay: 0.1s; }
+.d2 { transition-delay: 0.22s; }
+.d3 { transition-delay: 0.36s; }
+.d4 { transition-delay: 0.50s; }
+.d5 { transition-delay: 0.64s; }
+.d6 { transition-delay: 0.78s; }
+.d7 { transition-delay: 0.92s; }
+.d8 { transition-delay: 1.06s; }
+
+/* Teal glowing number badge */
+.badge-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 52px; height: 52px;
+  border: 1px solid var(--teal-border);
+  background: var(--teal-dim);
+  border-radius: 4px;
+  font-family: 'Space Mono', monospace;
+  font-size: 13px; font-weight: 700;
+  color: var(--teal); letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+/* Pill tag */
+.pill {
+  display: inline-block;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--teal);
+  background: var(--teal-dim);
+  border: 1px solid var(--teal-border);
+  padding: 4px 12px; border-radius: 2px;
+}
+.pill.amber {
+  color: var(--amber);
+  background: var(--amber-dim);
+  border-color: var(--amber-border);
+}
+
+/* Thin horizontal line */
+.h-rule { height: 1px; background: var(--border); }
+.h-rule-teal { height: 1px; background: var(--teal-border); }
+
+
+/* ===========================================
+   SLIDE 1 — TITLE
+   =========================================== */
+.slide-1 {
+  background: var(--obsidian);
+  font-family: 'Figtree', sans-serif;
+}
+
+.s1-grid {
+  position: absolute;
+  top: 60px; left: 4px; right: 0; bottom: 60px;
+  display: grid;
+  grid-template-columns: 1fr 500px;
+}
+
+.s1-left {
+  padding: 80px 80px 80px 80px;
+  display: flex; flex-direction: column; justify-content: center;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+
+.s1-eyebrow {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 52px;
+}
+.s1-eyebrow-line { width: 32px; height: 1px; background: var(--teal); }
+.s1-eyebrow-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--teal);
+}
+
+.s1-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 104px;
+  line-height: 0.92; letter-spacing: -0.03em;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.s1-name-2 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 104px;
+  line-height: 0.92; letter-spacing: -0.03em;
+  background: linear-gradient(90deg, var(--teal) 0%, #7fffd4 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.s1-rule {
+  width: 0; height: 1px; background: linear-gradient(90deg, var(--teal), transparent);
+  margin: 44px 0;
+  animation: grow-w 1s var(--ease-expo) 0.7s forwards;
+}
+@keyframes grow-w { to { width: 440px; } }
+
+.s1-desc {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 300; font-size: 22px;
+  line-height: 1.75; color: var(--white-60);
+  max-width: 560px;
+}
+.s1-desc strong { color: var(--white-80); font-weight: 500; }
+
+.s1-meta {
+  position: absolute; bottom: 80px; left: 80px;
+  display: flex; align-items: center; gap: 28px;
+}
+.s1-meta-item {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--white-30);
+}
+.s1-meta-sep { width: 1px; height: 20px; background: var(--border); }
+
+.s1-right {
+  padding: 80px 56px;
+  display: flex; flex-direction: column;
+  justify-content: center;
+  gap: 0;
+}
+
+.s1-r-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 40px;
+}
+
+.s1-stat {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 6px;
+}
+.s1-stat:first-of-type { border-top: 1px solid var(--border); }
+.s1-stat-val {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 52px;
+  letter-spacing: -0.03em; line-height: 1;
+  color: var(--white);
+}
+.s1-stat-val .unit { font-size: 24px; opacity: 0.4; }
+.s1-stat-label {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 400; font-size: 14px;
+  color: var(--white-60); line-height: 1.45;
+}
+
+/* large bg numeral */
+.bg-num {
+  position: absolute; right: 520px; bottom: -60px;
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: 560px; line-height: 1;
+  color: rgba(0,212,180,0.035);
+  pointer-events: none; user-select: none; z-index: 0;
+  letter-spacing: -0.05em;
+}
+
+
+/* ===========================================
+   SLIDE 2 — EXECUTIVE SUMMARY
+   =========================================== */
+.slide-2 { background: var(--obsidian); font-family: 'Figtree', sans-serif; }
+
+.s2-layout {
+  position: absolute;
+  top: 60px; left: 4px; right: 0; bottom: 60px;
+  display: grid;
+  grid-template-columns: 560px 1fr;
+}
+
+.s2-left {
+  padding: 80px 64px 80px 80px;
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; justify-content: center;
+}
+
+.s2-section-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 36px;
+}
+
+.s2-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 72px;
+  line-height: 1.0; letter-spacing: -0.03em;
+  color: var(--white);
+  margin-bottom: 40px;
+}
+
+.s2-bio {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 300; font-size: 19px;
+  line-height: 1.8; color: var(--white-60);
+  border-left: 2px solid var(--teal-border);
+  padding-left: 24px;
+}
+.s2-bio strong { color: var(--white-80); font-weight: 500; }
+
+.s2-right {
+  padding: 64px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-content: center;
+}
+
+.s2-card {
+  background: var(--white-03);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 32px;
+  position: relative; overflow: hidden;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+.s2-card:hover { border-color: var(--teal-border); background: var(--teal-glow); }
+.s2-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--teal), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.s2-card:hover::before { opacity: 1; }
+
+.s2-card-icon {
+  font-size: 28px; margin-bottom: 16px; display: block;
+}
+.s2-card-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700; font-size: 18px; letter-spacing: -0.01em;
+  color: var(--white); margin-bottom: 10px;
+}
+.s2-card-desc {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 300; font-size: 14px; line-height: 1.65;
+  color: var(--white-60);
+}
+
+
+/* ===========================================
+   SLIDE 3 — SPRINT DELIVERY AT A GLANCE
+   =========================================== */
+.slide-3 { background: var(--obsidian); font-family: 'Figtree', sans-serif; }
+
+.s3-layout {
+  position: absolute;
+  top: 60px; left: 4px; right: 0; bottom: 60px;
+  display: flex; flex-direction: column;
+  padding: 60px 80px;
+  gap: 40px;
+}
+
+.s3-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+}
+.s3-section-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--teal); display: block; margin-bottom: 12px;
+}
+.s3-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 56px;
+  line-height: 1.0; letter-spacing: -0.03em;
+  color: var(--white);
+}
+
+.s3-big-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.s3-big-stat {
+  background: var(--white-03);
+  border: 1px solid var(--border);
+  border-radius: 4px; padding: 36px 32px;
+  position: relative; overflow: hidden;
+}
+.s3-big-stat::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--teal), transparent);
+}
+.s3-big-num {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 72px;
+  line-height: 1; letter-spacing: -0.04em;
+  background: linear-gradient(135deg, var(--white) 0%, var(--teal) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block; margin-bottom: 12px;
+}
+.s3-big-desc {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 400; font-size: 15px; line-height: 1.55;
+  color: var(--white-60);
+}
+
+.s3-modules {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.s3-module-chip {
+  background: var(--white-06);
+  border: 1px solid var(--border);
+  border-radius: 4px; padding: 18px 22px;
+  display: flex; align-items: center; gap: 16px;
+}
+.s3-chip-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--teal); flex-shrink: 0;
+  box-shadow: 0 0 8px var(--teal);
+}
+.s3-chip-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600; font-size: 16px; color: var(--white-80);
+}
+.s3-chip-sub {
+  font-family: 'Figtree', sans-serif;
+  font-size: 13px; color: var(--white-30);
+  margin-top: 2px;
+}
+
+
+/* ===========================================
+   SLIDE 4 — THE CRITICAL INSIGHT (SPECIAL ANIMATION)
+   =========================================== */
+.slide-4 { background: var(--obsidian); font-family: 'Figtree', sans-serif; }
+
+.s4-layout {
+  position: absolute;
+  top: 60px; left: 4px; right: 0; bottom: 60px;
+  display: grid;
+  grid-template-columns: 480px 1fr;
+}
+
+.s4-left {
+  padding: 80px 56px 80px 80px;
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; justify-content: center;
+}
+
+.s4-section-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 28px;
+}
+.s4-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 56px;
+  line-height: 1.0; letter-spacing: -0.03em;
+  color: var(--white); margin-bottom: 32px;
+}
+.s4-title em {
+  font-style: italic; font-weight: 600;
+  background: linear-gradient(90deg, var(--amber), #ffd082);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.s4-desc {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 300; font-size: 18px; line-height: 1.8;
+  color: var(--white-60);
+  border-left: 2px solid var(--amber-border);
+  padding-left: 22px;
+}
+.s4-desc strong { color: var(--white-80); font-weight: 500; }
+
+/* Timeline on right */
+.s4-right {
+  padding: 80px 80px 80px 72px;
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 0;
+  position: relative;
+}
+
+/* Vertical connecting line */
+.s4-timeline-line {
+  position: absolute;
+  left: 108px; top: 120px; bottom: 120px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--teal-border), var(--amber-border) 50%, var(--teal-border));
+}
+
+.s4-step {
+  display: flex; gap: 32px;
+  padding: 28px 0;
+  position: relative;
+}
+
+.s4-step-node {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; position: relative; z-index: 2;
+  font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700;
+}
+.s4-step-node.teal {
+  background: var(--teal-dim);
+  border: 2px solid var(--teal);
+  color: var(--teal);
+  box-shadow: 0 0 20px rgba(0,212,180,0.25);
+}
+.s4-step-node.red {
+  background: var(--red-dim);
+  border: 2px solid var(--red);
+  color: var(--red);
+  box-shadow: 0 0 12px rgba(255,77,106,0.2);
+}
+.s4-step-node.amber {
+  background: var(--amber-dim);
+  border: 2px solid var(--amber);
+  color: var(--amber);
+  box-shadow: 0 0 20px rgba(245,166,35,0.35);
+}
+
+.s4-step-body { flex: 1; padding-top: 4px; }
+.s4-step-time {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--white-30); margin-bottom: 6px;
+}
+.s4-step-heading {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700; font-size: 22px;
+  color: var(--white); margin-bottom: 6px;
+}
+.s4-step-text {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 300; font-size: 16px; line-height: 1.65;
+  color: var(--white-60);
+}
+
+/* Special amber "validation" badge animates in with delay */
+.s4-validated-badge {
+  display: flex; align-items: center; gap: 12px;
+  margin-top: 12px; padding: 10px 18px;
+  background: var(--amber-dim);
+  border: 1px solid var(--amber-border);
+  border-radius: 4px;
+  opacity: 0; transform: translateX(16px);
+  transition: opacity 0.8s var(--ease-expo), transform 0.8s var(--ease-expo);
+  transition-delay: 1.6s;
+  display: inline-flex; align-self: flex-start;
+}
+.slide.active .s4-validated-badge { opacity: 1; transform: translateX(0); }
+.s4-badge-icon { font-size: 18px; }
+.s4-badge-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--amber);
+}
+
+.s4-insight-bar {
+  margin-top: 24px;
+  padding: 20px 28px;
+  background: linear-gradient(90deg, rgba(245,166,35,0.08), transparent);
+  border-left: 3px solid var(--amber);
+  border-radius: 0 4px 4px 0;
+  opacity: 0; transform: translateY(12px);
+  transition: opacity 0.8s var(--ease-expo), transform 0.8s var(--ease-expo);
+  transition-delay: 2.0s;
+}
+.slide.active .s4-insight-bar { opacity: 1; transform: translateY(0); }
+.s4-insight-text {
+  font-family: 'Figtree', sans-serif;
+  font-style: italic; font-weight: 400; font-size: 18px;
+  color: var(--amber); line-height: 1.5;
+}
+
+
+/* ===========================================
+   SLIDE 5 — MODULE OWNERSHIP
+   =========================================== */
+.slide-5 { background: var(--obsidian); font-family: 'Figtree', sans-serif; }
+
+.s5-layout {
+  position: absolute;
+  top: 60px; left: 4px; right: 0; bottom: 60px;
+  padding: 60px 80px;
+  display: flex; flex-direction: column; gap: 36px;
+}
+
+.s5-header { display: flex; flex-direction: column; }
+.s5-section-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 10px;
+}
+.s5-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 52px;
+  line-height: 1.0; letter-spacing: -0.03em; color: var(--white);
+}
+
+.s5-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  flex: 1;
+}
+
+.s5-item {
+  background: var(--white-03);
+  border: 1px solid var(--border);
+  border-radius: 4px; padding: 28px 24px;
+  display: flex; flex-direction: column; gap: 12px;
+  position: relative; overflow: hidden;
+  transition: border-color 0.3s, background 0.3s;
+}
+.s5-item:hover { border-color: var(--teal-border); background: var(--teal-glow); }
+.s5-item-top-rule {
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--teal), transparent);
+}
+.s5-item-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.16em; color: var(--teal);
+}
+.s5-item-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700; font-size: 18px; letter-spacing: -0.01em;
+  color: var(--white); line-height: 1.2;
+}
+.s5-item-detail {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 300; font-size: 13px; line-height: 1.65;
+  color: var(--white-60);
+}
+.s5-item-pill {
+  align-self: flex-start; margin-top: auto;
+}
+
+
+/* ===========================================
+   SLIDE 6 — PROACTIVE LEADERSHIP
+   =========================================== */
+.slide-6 { background: var(--obsidian); font-family: 'Figtree', sans-serif; }
+
+.s6-layout {
+  position: absolute;
+  top: 60px; left: 4px; right: 0; bottom: 60px;
+  display: grid;
+  grid-template-columns: 520px 1fr;
+}
+
+.s6-left {
+  padding: 80px 56px 80px 80px;
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.s6-section-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 28px;
+}
+.s6-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 64px;
+  line-height: 1.0; letter-spacing: -0.03em; color: var(--white);
+  margin-bottom: 36px;
+}
+.s6-title em {
+  font-style: italic;
+  background: linear-gradient(90deg, var(--teal), #7fffd4);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.s6-intro {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 300; font-size: 18px; line-height: 1.8;
+  color: var(--white-60);
+}
+.s6-intro strong { color: var(--white-80); font-weight: 500; }
+
+.s6-right {
+  padding: 72px 80px 72px 72px;
+  display: flex; flex-direction: column; gap: 0;
+  justify-content: center;
+}
+
+.s6-behavior {
+  display: flex; gap: 28px; align-items: flex-start;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+}
+.s6-behavior:first-child { border-top: 1px solid var(--border); }
+
+.s6-b-icon-wrap {
+  width: 48px; height: 48px;
+  background: var(--teal-dim); border: 1px solid var(--teal-border);
+  border-radius: 4px; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 20px;
+}
+.s6-b-body { flex: 1; }
+.s6-b-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700; font-size: 19px; color: var(--white);
+  margin-bottom: 6px;
+}
+.s6-b-text {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 300; font-size: 15px; line-height: 1.65;
+  color: var(--white-60);
+}
+.s6-b-tag { margin-top: 8px; }
+
+
+/* ===========================================
+   SLIDE 7 — LEAD BA COMPETENCIES
+   =========================================== */
+.slide-7 { background: var(--obsidian); font-family: 'Figtree', sans-serif; }
+
+.s7-layout {
+  position: absolute;
+  top: 60px; left: 4px; right: 0; bottom: 60px;
+  padding: 60px 80px;
+  display: flex; flex-direction: column; gap: 36px;
+}
+.s7-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+}
+.s7-section-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 10px;
+}
+.s7-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 52px;
+  line-height: 1.0; letter-spacing: -0.03em; color: var(--white);
+}
+
+.s7-comp-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; flex: 1;
+}
+
+.s7-comp {
+  background: var(--white-03);
+  border: 1px solid var(--border);
+  border-radius: 4px; padding: 32px;
+  display: flex; flex-direction: column; gap: 14px;
+  position: relative; overflow: hidden;
+}
+.s7-comp::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 0;
+  background: var(--teal);
+  transition: height 0.8s var(--ease-expo);
+  transition-delay: var(--cd, 0s);
+}
+.slide.active .s7-comp::before { height: 100%; }
+
+.s7-comp-icon { font-size: 32px; }
+.s7-comp-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700; font-size: 19px; color: var(--white);
+}
+.s7-comp-desc {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 300; font-size: 14px; line-height: 1.7;
+  color: var(--white-60);
+  flex: 1;
+}
+.s7-comp-level {
+  display: flex; gap: 6px; align-items: center; margin-top: 4px;
+}
+.s7-level-bar {
+  height: 3px; border-radius: 2px;
+  background: var(--teal); flex: 1;
+}
+.s7-level-bar.dim { background: var(--white-12); flex: none; width: 20%; }
+.s7-level-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--teal);
+}
+
+
+/* ===========================================
+   SLIDE 8 — THE ASK / CLOSING
+   =========================================== */
+.slide-8 { background: var(--obsidian); font-family: 'Figtree', sans-serif; }
+
+.s8-layout {
+  position: absolute;
+  top: 60px; left: 4px; right: 0; bottom: 60px;
+  display: grid;
+  grid-template-columns: 1fr 480px;
+}
+
+.s8-left {
+  padding: 100px 80px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative;
+}
+
+.s8-eyebrow {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 52px;
+}
+.s8-eyebrow-line { width: 32px; height: 1px; background: var(--teal); }
+.s8-eyebrow-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--teal);
+}
+
+.s8-headline {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 96px;
+  line-height: 0.92; letter-spacing: -0.03em;
+  color: var(--white); margin-bottom: 0;
+}
+.s8-headline-2 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 96px;
+  line-height: 0.92; letter-spacing: -0.03em;
+  background: linear-gradient(90deg, var(--teal), #7fffd4);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block; margin-bottom: 12px;
+}
+.s8-headline-3 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 400; font-size: 44px;
+  line-height: 1.2; letter-spacing: -0.01em;
+  color: var(--white-30); display: block;
+}
+
+.s8-rule {
+  width: 0; height: 1px;
+  background: linear-gradient(90deg, var(--teal), transparent);
+  margin: 48px 0;
+  animation: grow-w8 1s var(--ease-expo) 0.8s forwards;
+}
+@keyframes grow-w8 { to { width: 500px; } }
+
+.s8-ask {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 300; font-size: 22px; line-height: 1.75;
+  color: var(--white-60); max-width: 560px;
+}
+.s8-ask strong { color: var(--white-80); font-weight: 500; }
+
+.s8-right {
+  border-left: 1px solid var(--border);
+  padding: 80px 56px;
+  display: flex; flex-direction: column; justify-content: center; gap: 0;
+}
+
+.s8-r-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 36px;
+}
+
+.s8-reason {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex; gap: 20px; align-items: flex-start;
+}
+.s8-reason:first-of-type { border-top: 1px solid var(--border); }
+.s8-reason-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; letter-spacing: 0.1em;
+  color: var(--teal); min-width: 28px; padding-top: 2px;
+}
+.s8-reason-text {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 400; font-size: 16px; line-height: 1.6;
+  color: var(--white-60);
+}
+.s8-reason-text strong { color: var(--white-80); font-weight: 500; }
+
+.s8-final-tag {
+  margin-top: 40px; align-self: flex-start;
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 20px;
+  background: linear-gradient(90deg, var(--teal-dim), transparent);
+  border: 1px solid var(--teal-border);
+  border-radius: 4px;
+}
+.s8-final-icon { font-size: 16px; }
+.s8-final-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--teal);
+}
+
+
+/* ===========================================
+   SLIDE COUNTER (OUTSIDE STAGE)
+   =========================================== */
+.slide-counter {
+  position: fixed; bottom: 20px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex; align-items: center; gap: 8px;
+}
+.counter-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--white-30);
+  transition: background 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+.counter-dot.active {
+  background: var(--teal); transform: scale(1.4);
+  box-shadow: 0 0 8px var(--teal);
+}
+
+/* ===========================================
+   INLINE EDITOR
+   =========================================== */
+.edit-hotzone {
+  position: fixed; top: 0; left: 0;
+  width: 80px; height: 80px;
+  z-index: 10000; cursor: pointer;
+}
+.edit-toggle {
+  position: fixed; top: 16px; left: 16px;
+  z-index: 10001;
+  background: var(--slate-2); border: 1px solid var(--teal-border);
+  color: var(--teal); padding: 8px 14px; border-radius: 4px;
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  letter-spacing: 0.1em; cursor: pointer;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.edit-toggle.show, .edit-toggle.active { opacity: 1; pointer-events: auto; }
+
+[contenteditable="true"] {
+  outline: 1px dashed var(--teal);
+  border-radius: 2px;
+  cursor: text;
+}
+[contenteditable="true"]:focus { outline: 2px solid var(--teal); }
+
+</style>
+</head>
+<body>
+
+<!-- ==========================================
+     SLIDE COUNTER NAV (outside stage)
+     ========================================== -->
+<div class="slide-counter" id="slideCounter"></div>
+
+<!-- ==========================================
+     INLINE EDITOR TOGGLE
+     ========================================== -->
+<div class="edit-hotzone" id="editHotzone"></div>
+<button class="edit-toggle" id="editToggle">✏ Edit</button>
+
+<!-- ==========================================
+     MAIN DECK
+     ========================================== -->
+<div class="deck-viewport">
+  <main class="deck-stage" id="deckStage">
+
+    <!-- ========== SLIDE 1: TITLE ========== -->
+    <section class="slide slide-1 active" aria-label="Title Slide">
+      <div class="aurora"></div>
+      <div class="dot-grid"></div>
+      <div class="left-bar"></div>
+
+      <nav class="nav-strip" aria-label="Deck header">
+        <span class="nav-name">Aswini Vadapalli</span>
+        <div class="nav-sep"></div>
+        <span class="nav-ctx">Lead Business Analyst · Promotion Review</span>
+        <span class="nav-date">Q2 — 2026</span>
+      </nav>
+
+      <div class="s1-grid">
+        <div class="s1-left">
+          <div class="s1-eyebrow reveal d1">
+            <div class="s1-eyebrow-line"></div>
+            <span class="s1-eyebrow-text">Internal Promotion Case</span>
+          </div>
+
+          <div class="reveal d2">
+            <div class="s1-name">Delivering</div>
+            <div class="s1-name-2">At Lead Level.</div>
+          </div>
+
+          <div class="s1-rule"></div>
+
+          <p class="s1-desc reveal d4">
+            <strong>Consistent ownership. Proactive coordination.</strong><br>
+            A sprint record that already operates at Lead BA scope —<br>
+            it's time the title reflects the impact.
+          </p>
+
+          <div class="s1-meta">
+            <span class="s1-meta-item">Business Analysis</span>
+            <div class="s1-meta-sep"></div>
+            <span class="s1-meta-item">Sprint Delivery</span>
+            <div class="s1-meta-sep"></div>
+            <span class="s1-meta-item">2026</span>
+          </div>
+        </div>
+
+        <div class="s1-right reveal-left d3">
+          <div class="s1-r-label">Performance Snapshot</div>
+
+          <div class="s1-stat">
+            <div class="s1-stat-val">6<span class="unit">+</span></div>
+            <div class="s1-stat-label">Modules owned & delivered across sprints</div>
+          </div>
+          <div class="s1-stat">
+            <div class="s1-stat-val">0</div>
+            <div class="s1-stat-label">UI issues reported post-delivery (M39)</div>
+          </div>
+          <div class="s1-stat">
+            <div class="s1-stat-val">1<span class="unit">×</span></div>
+            <div class="s1-stat-label">SE FI Cash + In-Kind + data source in one sprint</div>
+          </div>
+          <div class="s1-stat">
+            <div class="s1-stat-val">↑</div>
+            <div class="s1-stat-label">Proactive escalation & cross-team ownership</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-num" aria-hidden="true">01</div>
+
+      <footer class="status-bar" aria-label="Status">
+        <span class="status-tag active-tag"><span class="live-dot"></span>Business Analysis</span>
+        <span class="status-tag">Sprint Delivery</span>
+        <span class="status-tag">Cross-functional Ownership</span>
+        <span class="status-tag">Strategic Communication</span>
+      </footer>
+    </section>
+
+
+    <!-- ========== SLIDE 2: EXECUTIVE SUMMARY ========== -->
+    <section class="slide slide-2" aria-label="Executive Summary">
+      <div class="aurora"></div>
+      <div class="dot-grid"></div>
+      <div class="left-bar"></div>
+
+      <nav class="nav-strip">
+        <span class="nav-name">Aswini Vadapalli</span>
+        <div class="nav-sep"></div>
+        <span class="nav-ctx">About</span>
+        <span class="nav-date">2 / 8</span>
+      </nav>
+
+      <div class="s2-layout">
+        <div class="s2-left">
+          <div class="s2-section-tag reveal d1">About</div>
+          <h2 class="s2-title reveal d2">The BA<br>Behind the<br>Numbers.</h2>
+          <p class="s2-bio reveal d3">
+            A Business Analyst who <strong>doesn't wait to be assigned</strong> — she identifies what needs doing, takes ownership, and delivers. Across complex modules, tight deadlines, and shifting requirements, Aswini brings <strong>clarity, precision, and proactive momentum</strong> to every sprint.
+          </p>
+        </div>
+
+        <div class="s2-right">
+          <div class="s2-card reveal d2">
+            <span class="s2-card-icon">🎯</span>
+            <div class="s2-card-title">Delivery Ownership</div>
+            <p class="s2-card-desc">Self-assigns critical modules before release windows. No waiting, no gaps in coverage — just ownership.</p>
+          </div>
+          <div class="s2-card reveal d3">
+            <span class="s2-card-icon">🔍</span>
+            <div class="s2-card-title">Sharp Requirement Instinct</div>
+            <p class="s2-card-desc">Flags ambiguities and risks before they become incidents. Validated by client — not after the fact.</p>
+          </div>
+          <div class="s2-card reveal d4">
+            <span class="s2-card-icon">⚡</span>
+            <div class="s2-card-title">Cross-team Agility</div>
+            <p class="s2-card-desc">Jumps into complex extensions immediately, escalates fast, and coordinates across dev, QA, and client.</p>
+          </div>
+          <div class="s2-card reveal d5">
+            <span class="s2-card-icon">📋</span>
+            <div class="s2-card-title">Documentation Rigour</div>
+            <p class="s2-card-desc">Detailed View All mapping, test documentation, and requirement traceability — always audit-ready.</p>
+          </div>
+        </div>
+      </div>
+
+      <footer class="status-bar">
+        <span class="status-tag active-tag"><span class="live-dot"></span>About</span>
+        <span class="status-tag">Core Strengths</span>
+        <span class="status-tag">Aswini Vadapalli</span>
+      </footer>
+    </section>
+
+
+    <!-- ========== SLIDE 3: SPRINT DELIVERY AT A GLANCE ========== -->
+    <section class="slide slide-3" aria-label="Sprint Delivery Overview">
+      <div class="aurora"></div>
+      <div class="dot-grid"></div>
+      <div class="left-bar"></div>
+
+      <nav class="nav-strip">
+        <span class="nav-name">Aswini Vadapalli</span>
+        <div class="nav-sep"></div>
+        <span class="nav-ctx">Sprint Delivery</span>
+        <span class="nav-date">3 / 8</span>
+      </nav>
+
+      <div class="s3-layout">
+        <div class="s3-header reveal d1">
+          <div>
+            <span class="s3-section-tag">Sprint Record</span>
+            <h2 class="s3-title">Delivery at a Glance</h2>
+          </div>
+        </div>
+
+        <div class="s3-big-stats">
+          <div class="s3-big-stat reveal d2">
+            <span class="s3-big-num">6+</span>
+            <p class="s3-big-desc">Major modules owned and delivered across multiple sprint cycles</p>
+          </div>
+          <div class="s3-big-stat reveal d3">
+            <span class="s3-big-num">1×</span>
+            <p class="s3-big-desc">SE FI Distrib: Cash, In Kind & data source — single sprint, early release</p>
+          </div>
+          <div class="s3-big-stat reveal d4">
+            <span class="s3-big-num">0</span>
+            <p class="s3-big-desc">UI issues reported by user post-delivery on M39 — 3 screens submitted clean</p>
+          </div>
+          <div class="s3-big-stat reveal d5">
+            <span class="s3-big-num">↑</span>
+            <p class="s3-big-desc">Proactively self-assigned M39 & M10 before planned release — zero lead time lost</p>
+          </div>
+        </div>
+
+        <div class="s3-modules">
+          <div class="s3-module-chip reveal d2">
+            <div class="s3-chip-dot"></div>
+            <div>
+              <div class="s3-chip-name">M4 / M5A / M5B</div>
+              <div class="s3-chip-sub">Tested & documented</div>
+            </div>
+          </div>
+          <div class="s3-module-chip reveal d3">
+            <div class="s3-chip-dot"></div>
+            <div>
+              <div class="s3-chip-name">SE FI Distribution</div>
+              <div class="s3-chip-sub">Cash, In Kind, data source</div>
+            </div>
+          </div>
+          <div class="s3-module-chip reveal d4">
+            <div class="s3-chip-dot"></div>
+            <div>
+              <div class="s3-chip-name">ME 16 Extensions</div>
+              <div class="s3-chip-sub">Immediate cross-team coordination</div>
+            </div>
+          </div>
+          <div class="s3-module-chip reveal d5">
+            <div class="s3-chip-dot"></div>
+            <div>
+              <div class="s3-chip-name">M39 / M10</div>
+              <div class="s3-chip-sub">Self-assigned before release</div>
+            </div>
+          </div>
+          <div class="s3-module-chip reveal d3">
+            <div class="s3-chip-dot"></div>
+            <div>
+              <div class="s3-chip-name">View All</div>
+              <div class="s3-chip-sub">Identified issues + full mapping</div>
+            </div>
+          </div>
+          <div class="s3-module-chip reveal d4">
+            <div class="s3-chip-dot"></div>
+            <div>
+              <div class="s3-chip-name">Newbury Notices</div>
+              <div class="s3-chip-sub">Active ownership</div>
+            </div>
+          </div>
+          <div class="s3-module-chip reveal d5">
+            <div class="s3-chip-dot"></div>
+            <div>
+              <div class="s3-chip-name">Merge Batch</div>
+              <div class="s3-chip-sub">Rebalancing — in progress</div>
+            </div>
+          </div>
+          <div class="s3-module-chip reveal d6">
+            <div class="s3-chip-dot" style="background:var(--amber);box-shadow:0 0 8px var(--amber)"></div>
+            <div>
+              <div class="s3-chip-name">Ongoing Pipeline</div>
+              <div class="s3-chip-sub">M10 testing underway</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="status-bar">
+        <span class="status-tag active-tag"><span class="live-dot"></span>Sprint Record</span>
+        <span class="status-tag">8 Modules</span>
+        <span class="status-tag">Multiple Streams</span>
+      </footer>
+    </section>
+
+
+    <!-- ========== SLIDE 4: THE CRITICAL INSIGHT (SPECIAL ANIMATION) ========== -->
+    <section class="slide slide-4" aria-label="The Critical Insight">
+      <div class="aurora" style="background:
+        radial-gradient(ellipse 900px 600px at 10% 110%, rgba(245,166,35,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 700px 500px at 85% -10%, rgba(0,212,180,0.06) 0%, transparent 70%);"></div>
+      <div class="dot-grid"></div>
+      <div class="left-bar" style="background:linear-gradient(180deg,transparent,var(--amber) 30%,var(--amber) 70%,transparent)"></div>
+
+      <nav class="nav-strip">
+        <span class="nav-name">Aswini Vadapalli</span>
+        <div class="nav-sep"></div>
+        <span class="nav-ctx">The Critical Insight</span>
+        <span class="nav-date">4 / 8</span>
+      </nav>
+
+      <div class="s4-layout">
+        <div class="s4-left">
+          <div class="s4-section-tag reveal d1">Signature Moment</div>
+          <h2 class="s4-title reveal d2">
+            She Saw It<br><em>First.</em><br>Client Confirmed<br>It Later.
+          </h2>
+          <p class="s4-desc reveal d3">
+            When the team faced <strong>multiple back-and-forth changes on existing requirements</strong>, Aswini identified and conveyed the core issue to Dev — before the client independently raised the exact same concern and validated her position.
+          </p>
+        </div>
+
+        <div class="s4-right">
+          <!-- Vertical timeline line -->
+          <div class="s4-timeline-line"></div>
+
+          <!-- Step 1: BA flags the issue -->
+          <div class="s4-step reveal d2">
+            <div class="s4-step-node teal">BA</div>
+            <div class="s4-step-body">
+              <div class="s4-step-time">Sprint · Requirements Review</div>
+              <div class="s4-step-heading">Issue Identified & Raised</div>
+              <p class="s4-step-text">Aswini spotted inconsistency in existing requirements during back-and-forth changes. Conveyed the root cause clearly to the development team.</p>
+            </div>
+          </div>
+
+          <!-- Step 2: Dev disagreement -->
+          <div class="s4-step reveal d4">
+            <div class="s4-step-node red">✗</div>
+            <div class="s4-step-body">
+              <div class="s4-step-time">Dev Response</div>
+              <div class="s4-step-heading">Development Team Did Not Agree</div>
+              <p class="s4-step-text">The concern was not accepted at the dev level — the issue remained unresolved and disputed internally.</p>
+            </div>
+          </div>
+
+          <!-- Step 3: Client validates (animated in with extra delay) -->
+          <div class="s4-step reveal d6">
+            <div class="s4-step-node amber">✓</div>
+            <div class="s4-step-body">
+              <div class="s4-step-time">Client Review · Independent Feedback</div>
+              <div class="s4-step-heading">Client Confirmed the Same Issue</div>
+              <p class="s4-step-text">The client independently raised and reported the identical concern — validating Aswini's original analysis entirely.</p>
+              <!-- Special validated badge -->
+              <div class="s4-validated-badge">
+                <span class="s4-badge-icon">🏆</span>
+                <span class="s4-badge-text">Analysis Validated</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Insight summary bar -->
+          <div class="s4-insight-bar">
+            <p class="s4-insight-text">"The issue was flagged by the BA first. The client confirmed it independently. That's Lead-level instinct."</p>
+          </div>
+        </div>
+      </div>
+
+      <footer class="status-bar">
+        <span class="status-tag active-tag" style="color:var(--amber)"><span class="live-dot" style="background:var(--amber)"></span>Insight Validated</span>
+        <span class="status-tag">Requirements Intelligence</span>
+        <span class="status-tag">Stakeholder Trust</span>
+      </footer>
+    </section>
+
+
+    <!-- ========== SLIDE 5: MODULE OWNERSHIP ========== -->
+    <section class="slide slide-5" aria-label="Module Ownership">
+      <div class="aurora"></div>
+      <div class="dot-grid"></div>
+      <div class="left-bar"></div>
+
+      <nav class="nav-strip">
+        <span class="nav-name">Aswini Vadapalli</span>
+        <div class="nav-sep"></div>
+        <span class="nav-ctx">Module Ownership</span>
+        <span class="nav-date">5 / 8</span>
+      </nav>
+
+      <div class="s5-layout">
+        <div class="s5-header reveal d1">
+          <span class="s5-section-tag">Ownership Portfolio</span>
+          <h2 class="s5-title">Every Module. Full Accountability.</h2>
+        </div>
+
+        <div class="s5-grid">
+          <div class="s5-item reveal d2">
+            <div class="s5-item-top-rule"></div>
+            <div class="s5-item-num">MOD-01</div>
+            <div class="s5-item-name">View All</div>
+            <p class="s5-item-detail">Identified valuation issues end-to-end. Produced comprehensive View All mapping documentation for full traceability.</p>
+            <span class="pill s5-item-pill">Documentation</span>
+          </div>
+          <div class="s5-item reveal d3">
+            <div class="s5-item-top-rule"></div>
+            <div class="s5-item-num">MOD-02</div>
+            <div class="s5-item-name">M4 / M5A / M5B</div>
+            <p class="s5-item-detail">Full test coverage across three module variants. Comprehensive testing with results documented and signed off.</p>
+            <span class="pill s5-item-pill">Testing</span>
+          </div>
+          <div class="s5-item reveal d4">
+            <div class="s5-item-top-rule"></div>
+            <div class="s5-item-num">MOD-03</div>
+            <div class="s5-item-name">SE FI Distribution</div>
+            <p class="s5-item-detail">Cash, In Kind, and data source streams delivered in a single sprint. Early release ready, minimal open items at handover.</p>
+            <span class="pill amber s5-item-pill">Early Release</span>
+          </div>
+          <div class="s5-item reveal d5">
+            <div class="s5-item-top-rule"></div>
+            <div class="s5-item-num">MOD-04</div>
+            <div class="s5-item-name">ME 16</div>
+            <p class="s5-item-detail">Immediately picked up extensions on assignment. Proactively reached out cross-team rather than waiting for guidance.</p>
+            <span class="pill s5-item-pill">Proactive</span>
+          </div>
+          <div class="s5-item reveal d3">
+            <div class="s5-item-top-rule"></div>
+            <div class="s5-item-num">MOD-05</div>
+            <div class="s5-item-name">M39</div>
+            <p class="s5-item-detail">Self-assigned days before release. Submitted to user for 3 different screens — zero UI issues reported post-delivery.</p>
+            <span class="pill s5-item-pill">Zero Issues</span>
+          </div>
+          <div class="s5-item reveal d4">
+            <div class="s5-item-top-rule"></div>
+            <div class="s5-item-num">MOD-06</div>
+            <div class="s5-item-name">Newbury Notices</div>
+            <p class="s5-item-detail">Active ownership of Newbury Notices delivery stream alongside concurrent high-priority module work.</p>
+            <span class="pill s5-item-pill">Multi-stream</span>
+          </div>
+          <div class="s5-item reveal d5">
+            <div class="s5-item-top-rule"></div>
+            <div class="s5-item-num">MOD-07</div>
+            <div class="s5-item-name">Merge Batch Rebalancing</div>
+            <p class="s5-item-detail">Leading the most complex module in the current pipeline. Major cross-functional coordination underway.</p>
+            <span class="pill amber s5-item-pill">High Complexity</span>
+          </div>
+          <div class="s5-item reveal d6">
+            <div class="s5-item-top-rule"></div>
+            <div class="s5-item-num">MOD-08</div>
+            <div class="s5-item-name">M10</div>
+            <p class="s5-item-detail">Self-assigned before planned release date. Currently in active testing phase — demonstrating sustained ownership pace.</p>
+            <span class="pill s5-item-pill">In Progress</span>
+          </div>
+        </div>
+      </div>
+
+      <footer class="status-bar">
+        <span class="status-tag active-tag"><span class="live-dot"></span>8 Modules</span>
+        <span class="status-tag">Full Portfolio</span>
+        <span class="status-tag">Active Coverage</span>
+      </footer>
+    </section>
+
+
+    <!-- ========== SLIDE 6: PROACTIVE LEADERSHIP ========== -->
+    <section class="slide slide-6" aria-label="Proactive Leadership">
+      <div class="aurora"></div>
+      <div class="dot-grid"></div>
+      <div class="left-bar"></div>
+
+      <nav class="nav-strip">
+        <span class="nav-name">Aswini Vadapalli</span>
+        <div class="nav-sep"></div>
+        <span class="nav-ctx">Proactive Leadership</span>
+        <span class="nav-date">6 / 8</span>
+      </nav>
+
+      <div class="s6-layout">
+        <div class="s6-left">
+          <div class="s6-section-tag reveal d1">Leadership Behaviors</div>
+          <h2 class="s6-title reveal d2">
+            She Doesn't<br>Wait to be<br><em>Told.</em>
+          </h2>
+          <p class="s6-intro reveal d3">
+            Three distinct behaviors that separate a <strong>Lead BA</strong> from a BA: <strong>proactive self-assignment, immediate escalation, and cross-team coordination</strong> without being asked. Aswini does all three — consistently.
+          </p>
+        </div>
+
+        <div class="s6-right">
+          <div class="s6-behavior reveal d2">
+            <div class="s6-b-icon-wrap">⚡</div>
+            <div class="s6-b-body">
+              <div class="s6-b-title">ME 16 — Immediate Action</div>
+              <p class="s6-b-text">Jumped onto ME 16 extensions the moment they appeared. Instead of waiting for escalation, she immediately reached out cross-team to unblock progress.</p>
+              <span class="pill s6-b-tag">No Waiting</span>
+            </div>
+          </div>
+          <div class="s6-behavior reveal d3">
+            <div class="s6-b-icon-wrap">🎯</div>
+            <div class="s6-b-body">
+              <div class="s6-b-title">M39 — Pre-Release Self-Assignment</div>
+              <p class="s6-b-text">Self-assigned M39 just days before the release window. Delivered 3 screens to user with zero UI issues — a clean handover under pressure.</p>
+              <span class="pill s6-b-tag">Zero Issues</span>
+            </div>
+          </div>
+          <div class="s6-behavior reveal d4">
+            <div class="s6-b-icon-wrap">🔬</div>
+            <div class="s6-b-body">
+              <div class="s6-b-title">M10 — Ahead of the Curve</div>
+              <p class="s6-b-text">Self-assigned M10 before the planned release date while Merge Batch Rebalancing is simultaneously in progress — demonstrating multi-stream capacity.</p>
+              <span class="pill s6-b-tag">Multi-stream</span>
+            </div>
+          </div>
+          <div class="s6-behavior reveal d5">
+            <div class="s6-b-icon-wrap">📣</div>
+            <div class="s6-b-body">
+              <div class="s6-b-title">Requirements Intelligence Under Pressure</div>
+              <p class="s6-b-text">Held her position on requirement discrepancies through repeated back-and-forth — and was proven correct when the client independently confirmed her analysis.</p>
+              <span class="pill amber s6-b-tag">Validated</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="status-bar">
+        <span class="status-tag active-tag"><span class="live-dot"></span>Leadership Behaviors</span>
+        <span class="status-tag">Self-directed</span>
+        <span class="status-tag">Cross-functional</span>
+      </footer>
+    </section>
+
+
+    <!-- ========== SLIDE 7: LEAD BA COMPETENCIES ========== -->
+    <section class="slide slide-7" aria-label="Lead BA Competencies">
+      <div class="aurora"></div>
+      <div class="dot-grid"></div>
+      <div class="left-bar"></div>
+
+      <nav class="nav-strip">
+        <span class="nav-name">Aswini Vadapalli</span>
+        <div class="nav-sep"></div>
+        <span class="nav-ctx">Lead BA Competencies</span>
+        <span class="nav-date">7 / 8</span>
+      </nav>
+
+      <div class="s7-layout">
+        <div class="s7-header reveal d1">
+          <div>
+            <span class="s7-section-tag">Competency Map</span>
+            <h2 class="s7-title">Already Operating at Lead Level.</h2>
+          </div>
+        </div>
+
+        <div class="s7-comp-grid">
+          <div class="s7-comp reveal d2" style="--cd:0.3s">
+            <span class="s7-comp-icon">📐</span>
+            <div class="s7-comp-title">Requirements Engineering</div>
+            <p class="s7-comp-desc">End-to-end requirement ownership — from discovery and documentation to validation under ambiguity and stakeholder challenge.</p>
+            <div class="s7-comp-level">
+              <div class="s7-level-bar"></div>
+              <span class="s7-level-label">Expert</span>
+            </div>
+          </div>
+          <div class="s7-comp reveal d3" style="--cd:0.45s">
+            <span class="s7-comp-icon">🚀</span>
+            <div class="s7-comp-title">Sprint Delivery Leadership</div>
+            <p class="s7-comp-desc">Multi-module, multi-stream sprint execution. Self-assigns and delivers before deadlines — no handholding required.</p>
+            <div class="s7-comp-level">
+              <div class="s7-level-bar"></div>
+              <span class="s7-level-label">Expert</span>
+            </div>
+          </div>
+          <div class="s7-comp reveal d4" style="--cd:0.6s">
+            <span class="s7-comp-icon">🤝</span>
+            <div class="s7-comp-title">Stakeholder Management</div>
+            <p class="s7-comp-desc">Direct client liaison. Manages competing dev/client perspectives with poise — and holds her analytical ground when validated.</p>
+            <div class="s7-comp-level">
+              <div class="s7-level-bar"></div>
+              <div class="s7-level-bar dim"></div>
+              <span class="s7-level-label">Advanced</span>
+            </div>
+          </div>
+          <div class="s7-comp reveal d3" style="--cd:0.75s">
+            <span class="s7-comp-icon">🔎</span>
+            <div class="s7-comp-title">Quality & Testing Rigour</div>
+            <p class="s7-comp-desc">Comprehensive test coverage on M4/M5A/M5B and SE FI streams. Documented, traceable, and release-ready with minimal open items.</p>
+            <div class="s7-comp-level">
+              <div class="s7-level-bar"></div>
+              <span class="s7-level-label">Expert</span>
+            </div>
+          </div>
+          <div class="s7-comp reveal d4" style="--cd:0.9s">
+            <span class="s7-comp-icon">⚙️</span>
+            <div class="s7-comp-title">Complex Module Handling</div>
+            <p class="s7-comp-desc">Leading Merge Batch Rebalancing — highest complexity module in pipeline. Demonstrates readiness for Lead-scope ownership.</p>
+            <div class="s7-comp-level">
+              <div class="s7-level-bar"></div>
+              <span class="s7-level-label">Expert</span>
+            </div>
+          </div>
+          <div class="s7-comp reveal d5" style="--cd:1.05s">
+            <span class="s7-comp-icon">📡</span>
+            <div class="s7-comp-title">Cross-functional Coordination</div>
+            <p class="s7-comp-desc">Bridges dev, QA, and client streams. Proactive escalation and immediate action when blockers emerge — no lag in coordination.</p>
+            <div class="s7-comp-level">
+              <div class="s7-level-bar"></div>
+              <div class="s7-level-bar dim"></div>
+              <span class="s7-level-label">Advanced</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="status-bar">
+        <span class="status-tag active-tag"><span class="live-dot"></span>6 Competencies</span>
+        <span class="status-tag">Expert · Advanced</span>
+        <span class="status-tag">Ready Now</span>
+      </footer>
+    </section>
+
+
+    <!-- ========== SLIDE 8: THE ASK ========== -->
+    <section class="slide slide-8" aria-label="The Ask">
+      <div class="aurora" style="background:
+        radial-gradient(ellipse 1200px 800px at 20% 110%, rgba(0,212,180,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 800px 600px at 80% 0%, rgba(0,212,180,0.07) 0%, transparent 70%);"></div>
+      <div class="dot-grid"></div>
+      <div class="left-bar"></div>
+
+      <nav class="nav-strip">
+        <span class="nav-name">Aswini Vadapalli</span>
+        <div class="nav-sep"></div>
+        <span class="nav-ctx">The Ask</span>
+        <span class="nav-date">8 / 8</span>
+      </nav>
+
+      <div class="s8-layout">
+        <div class="s8-left">
+          <div class="s8-eyebrow reveal d1">
+            <div class="s8-eyebrow-line"></div>
+            <span class="s8-eyebrow-text">Promotion Case · Lead Business Analyst</span>
+          </div>
+
+          <div class="reveal d2">
+            <div class="s8-headline">The Role</div>
+            <span class="s8-headline-2">Already Filled.</span>
+            <span class="s8-headline-3">Give it the title.</span>
+          </div>
+
+          <div class="s8-rule"></div>
+
+          <p class="s8-ask reveal d4">
+            Aswini Vadapalli has been <strong>operating at Lead BA scope</strong> — owning complex modules, proactively driving delivery, coordinating cross-team, and demonstrating the analytical credibility that leadership demands. <strong>The promotion recognises what's already happening.</strong>
+          </p>
+        </div>
+
+        <div class="s8-right">
+          <div class="s8-r-title">Why Now · Why Her</div>
+
+          <div class="s8-reason reveal d2">
+            <span class="s8-reason-num">01</span>
+            <p class="s8-reason-text"><strong>Delivery track record:</strong> 6+ modules owned, multi-stream execution, early releases achieved under real sprint pressure.</p>
+          </div>
+          <div class="s8-reason reveal d3">
+            <span class="s8-reason-num">02</span>
+            <p class="s8-reason-text"><strong>Validated instinct:</strong> Client independently confirmed what she flagged first. That's the analytical credibility of a Lead.</p>
+          </div>
+          <div class="s8-reason reveal d4">
+            <span class="s8-reason-num">03</span>
+            <p class="s8-reason-text"><strong>Zero handholding:</strong> Self-assigns before release, acts before being asked, escalates before blockers become incidents.</p>
+          </div>
+          <div class="s8-reason reveal d5">
+            <span class="s8-reason-num">04</span>
+            <p class="s8-reason-text"><strong>Complexity leadership:</strong> Currently leading Merge Batch Rebalancing — the highest-complexity module in the pipeline.</p>
+          </div>
+
+          <div class="s8-final-tag reveal d6">
+            <span class="s8-final-icon">🏆</span>
+            <span class="s8-final-text">Ready for Lead BA — Aswini Vadapalli</span>
+          </div>
+        </div>
+      </div>
+
+      <footer class="status-bar">
+        <span class="status-tag active-tag"><span class="live-dot"></span>Recommendation</span>
+        <span class="status-tag">Lead Business Analyst</span>
+        <span class="status-tag">Aswini Vadapalli · 2026</span>
+      </footer>
+    </section>
+
+  </main>
+</div>
+
+
+<script>
+/* ===========================================
+   SLIDE PRESENTATION CONTROLLER
+   =========================================== */
+class SlidePresentation {
+  constructor() {
+    this.slides = document.querySelectorAll('.slide');
+    this.currentIndex = 0;
+    this.stage = document.getElementById('deckStage');
+    this.counter = document.getElementById('slideCounter');
+    this.totalSlides = this.slides.length;
+
+    this.setupStageScale();
+    this.buildCounter();
+    this.setupKeyboardNav();
+    this.setupTouchNav();
+    this.setupWheelNav();
+    this.showSlide(0);
+  }
+
+  setupStageScale() {
+    const scale = () => {
+      const factor = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      const x = (window.innerWidth - 1920 * factor) / 2;
+      const y = (window.innerHeight - 1080 * factor) / 2;
+      this.stage.style.transform = `translate(${x}px, ${y}px) scale(${factor})`;
+    };
+    scale();
+    window.addEventListener('resize', scale);
+  }
+
+  buildCounter() {
+    this.counter.innerHTML = '';
+    this.slides.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = 'counter-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => this.showSlide(i));
+      this.counter.appendChild(dot);
+    });
+  }
+
+  updateCounter() {
+    this.counter.querySelectorAll('.counter-dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === this.currentIndex);
+    });
+  }
+
+  showSlide(index) {
+    this.currentIndex = Math.max(0, Math.min(index, this.totalSlides - 1));
+    this.slides.forEach((slide, i) => {
+      const isActive = i === this.currentIndex;
+      slide.classList.toggle('active', isActive);
+      // Trigger reveal animations by toggling visible with slight delay
+      if (isActive) {
+        requestAnimationFrame(() => slide.classList.add('active'));
+      }
+    });
+    this.updateCounter();
+  }
+
+  next() { this.showSlide(this.currentIndex + 1); }
+  prev() { this.showSlide(this.currentIndex - 1); }
+
+  setupKeyboardNav() {
+    document.addEventListener('keydown', (e) => {
+      if (e.target.getAttribute && e.target.getAttribute('contenteditable')) return;
+      switch (e.key) {
+        case 'ArrowRight': case 'ArrowDown': case ' ': case 'PageDown':
+          e.preventDefault(); this.next(); break;
+        case 'ArrowLeft': case 'ArrowUp': case 'PageUp':
+          e.preventDefault(); this.prev(); break;
+        case 'Home': e.preventDefault(); this.showSlide(0); break;
+        case 'End': e.preventDefault(); this.showSlide(this.totalSlides - 1); break;
+      }
+    });
+  }
+
+  setupTouchNav() {
+    let startX = 0, startY = 0;
+    this.stage.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    }, { passive: true });
+    this.stage.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - startX;
+      const dy = e.changedTouches[0].clientY - startY;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+        dx < 0 ? this.next() : this.prev();
+      }
+    }, { passive: true });
+  }
+
+  setupWheelNav() {
+    let lastWheel = 0;
+    document.addEventListener('wheel', (e) => {
+      const now = Date.now();
+      if (now - lastWheel < 600) return;
+      lastWheel = now;
+      e.deltaY > 0 ? this.next() : this.prev();
+    }, { passive: true });
+  }
+}
+
+/* ===========================================
+   INLINE EDITOR
+   =========================================== */
+class InlineEditor {
+  constructor() {
+    this.isActive = false;
+    this.toggle = document.getElementById('editToggle');
+    this.hotzone = document.getElementById('editHotzone');
+    this.hideTimeout = null;
+    this.setupHover();
+    this.setupKeyboard();
+    this.setupClick();
+  }
+
+  toggleEditMode() {
+    this.isActive = !this.isActive;
+    document.querySelectorAll('.slide h1, .slide h2, .slide p, .slide .s1-stat-val, .slide .s3-big-num, .slide .s8-headline, .slide .s8-headline-2').forEach(el => {
+      el.contentEditable = this.isActive ? 'true' : 'false';
+    });
+    this.toggle.textContent = this.isActive ? '✓ Done' : '✏ Edit';
+    this.toggle.classList.toggle('active', this.isActive);
+    if (!this.isActive) this.saveToStorage();
+  }
+
+  saveToStorage() {
+    localStorage.setItem('aswini-lead-ba-deck', document.querySelector('.deck-stage').innerHTML);
+  }
+
+  setupHover() {
+    this.hotzone.addEventListener('mouseenter', () => {
+      clearTimeout(this.hideTimeout);
+      this.toggle.classList.add('show');
+    });
+    this.hotzone.addEventListener('mouseleave', () => {
+      this.hideTimeout = setTimeout(() => {
+        if (!this.isActive) this.toggle.classList.remove('show');
+      }, 400);
+    });
+    this.toggle.addEventListener('mouseenter', () => clearTimeout(this.hideTimeout));
+    this.toggle.addEventListener('mouseleave', () => {
+      this.hideTimeout = setTimeout(() => {
+        if (!this.isActive) this.toggle.classList.remove('show');
+      }, 400);
+    });
+  }
+
+  setupClick() {
+    this.toggle.addEventListener('click', () => this.toggleEditMode());
+    this.hotzone.addEventListener('click', () => this.toggleEditMode());
+  }
+
+  setupKeyboard() {
+    document.addEventListener('keydown', (e) => {
+      if ((e.key === 'e' || e.key === 'E') && !e.target.getAttribute('contenteditable')) {
+        this.toggleEditMode();
+      }
+    });
+  }
+}
+
+/* Boot */
+const presentation = new SlidePresentation();
+const editor = new InlineEditor();
+</script>
+</body>
+</html>
