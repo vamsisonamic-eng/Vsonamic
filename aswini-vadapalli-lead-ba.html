@@ -762,6 +762,199 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
 }
 
 /* ============================================================
+   ██████████ SLIDE 4 — ANIMATED FLOW VISUALIZATION ██████████
+   Adapted from robots/crawler animation: packets move along a
+   track, hitting a gate that flips from blocked → confirmed.
+   ============================================================ */
+
+/* Scene wrapper */
+.s4-flow { position: relative; width: 100%; height: 440px; margin-top: 16px; }
+
+/* Dashed horizontal track */
+.s4-track {
+  position: absolute; left: 0; right: 0; top: 218px; height: 2px;
+  background: repeating-linear-gradient(90deg, rgba(245,240,255,0.12) 0 10px, transparent 10px 20px);
+}
+
+/* Left node box — BA Report */
+.s4-fn {
+  position: absolute; top: 100px; width: 220px;
+  background: var(--bg-3); border: 1px solid var(--border);
+  padding: 18px 20px; border-radius: 6px;
+}
+.s4-fn.left  { left: 0; border-top: 2px solid var(--violet); }
+.s4-fn.right { right: 0; border-top: 2px solid var(--cyan); }
+.s4-fn-lbl {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--violet-3); font-weight: 700; margin-bottom: 8px;
+}
+.s4-fn.right .s4-fn-lbl { color: var(--cyan-2); }
+.s4-fn-h {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700; font-size: 16px;
+  color: var(--pearl); line-height: 1.25;
+}
+.s4-fn-sub {
+  font-family: 'Figtree', sans-serif;
+  font-size: 12px; color: var(--pearl-60);
+  margin-top: 6px; line-height: 1.5;
+}
+
+/* Center gate — monospace code block style */
+.s4-gate {
+  position: absolute; left: 50%; top: 58px;
+  transform: translateX(-50%);
+  width: 280px;
+  background: rgba(6,4,18,0.95);
+  border: 1px solid var(--border); border-radius: 6px;
+  padding: 16px 18px;
+  font-family: 'Space Mono', monospace;
+  box-shadow: 0 0 0 1px rgba(236,72,153,0.45), 0 0 28px rgba(236,72,153,0.15);
+  transition: box-shadow 0.6s ease;
+  z-index: 4;
+}
+.s4-gate.confirmed {
+  box-shadow: 0 0 0 1px rgba(34,211,238,0.45), 0 0 28px rgba(34,211,238,0.15);
+}
+.s4-gate-hdr {
+  font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--pearl-30); font-weight: 700; margin-bottom: 10px;
+  display: flex; justify-content: space-between;
+}
+.s4-gate-line {
+  font-size: 12px; line-height: 1.9; color: var(--pearl-60);
+}
+.s4-gate-line .k { color: var(--pearl-30); }
+.s4-gate-rule { position: relative; height: 22px; }
+.s4-gate-rule .rule-block, .s4-gate-rule .rule-pass {
+  position: absolute; left: 0; top: 0;
+  padding: 1px 8px; border-radius: 3px; font-size: 12px;
+}
+.s4-gate-rule .rule-block { color: #ff7a66; background: rgba(255,70,50,0.14); }
+.s4-gate-rule .rule-pass  { color: var(--cyan-2); background: rgba(34,211,238,0.12); }
+
+/* The blocking red wall bar */
+.s4-wall {
+  position: absolute; left: 50%; top: 188px;
+  transform: translateX(-50%);
+  width: 5px; height: 72px; border-radius: 3px;
+  background: #ff4632;
+  box-shadow: 0 0 18px rgba(255,70,50,0.7), 0 0 40px rgba(255,70,50,0.3);
+  z-index: 5;
+}
+
+/* Animated packet/crawler circle */
+.s4-pkt {
+  position: absolute; top: 204px;
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 7px; font-weight: 800;
+  opacity: 0; z-index: 6;
+}
+.s4-pkt.a {
+  background: var(--violet);
+  box-shadow: 0 0 16px var(--violet);
+  color: rgba(6,4,18,0.9);
+  left: 240px;
+}
+.s4-pkt.b {
+  background: var(--cyan);
+  box-shadow: 0 0 16px var(--cyan);
+  color: rgba(6,4,18,0.9);
+  right: 240px;
+}
+
+/* Result badges */
+.s4-badge2 {
+  position: absolute; padding: 9px 16px;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700; font-size: 12px;
+  letter-spacing: 0.06em; border-radius: 4px;
+  opacity: 0; transform: scale(0.6);
+}
+.s4-badge2.reject {
+  top: 330px; left: calc(50% - 200px);
+  color: #ff7a66; background: rgba(255,70,50,0.10);
+  border: 1px solid rgba(255,70,50,0.40);
+}
+.s4-badge2.confirm {
+  top: 330px; right: calc(50% - 220px);
+  color: var(--cyan-2); background: rgba(34,211,238,0.10);
+  border: 1px solid rgba(34,211,238,0.35);
+}
+
+/* Phase caption below track */
+.s4-phase {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  text-align: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px; color: var(--pearl-60);
+}
+.s4-phase b { color: var(--pearl); font-weight: 700; }
+.s4-phase .pA, .s4-phase .pB { transition: opacity 0.4s; }
+
+/* Loop animation keyframes — run only while slide is active */
+.slide.active .s4-pkt.a { animation: pktBA 11s var(--ease) infinite; }
+.slide.active .s4-pkt.b { animation: pktClient 11s var(--ease) infinite; }
+.slide.active .s4-wall  { animation: wallFlipHolo 11s steps(1) infinite; }
+.slide.active .s4-gate  { animation: gateGlowHolo 11s steps(1) infinite; }
+.slide.active .s4-gate-rule .rule-block { animation: ruleBlockHolo 11s steps(1) infinite; }
+.slide.active .s4-gate-rule .rule-pass  { animation: rulePassHolo 11s steps(1) infinite; opacity: 0; }
+.slide.active .s4-badge2.reject  { animation: stampHolo1 11s var(--ease) infinite; }
+.slide.active .s4-badge2.confirm { animation: stampHolo2 11s var(--ease) infinite; }
+.slide.active .s4-phase .pA { animation: phaseHoloA 11s steps(1) infinite; }
+.slide.active .s4-phase .pB { animation: phaseHoloB 11s steps(1) infinite; opacity: 0; }
+
+@keyframes pktBA {
+  0%   { left: 240px; opacity: 0; }
+  4%   { opacity: 1; }
+  20%  { left: calc(50% - 64px); opacity: 1; }
+  24%  { left: calc(50% - 96px); }
+  28%  { left: calc(50% - 64px); }
+  32%  { left: calc(50% - 96px); }
+  40%  { left: 240px; opacity: 1; }
+  46%  { left: 240px; opacity: 0; }
+  100% { opacity: 0; }
+}
+@keyframes pktClient {
+  0%, 50% { right: 240px; opacity: 0; }
+  54%  { opacity: 1; }
+  70%  { right: calc(50% - 10px); }
+  78%  { right: calc(50% + 30px); }
+  90%  { right: calc(100% - 310px); opacity: 1; }
+  96%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+@keyframes wallFlipHolo {
+  0%, 49%  { opacity: 1; }
+  50%, 100%{ opacity: 0; }
+}
+@keyframes gateGlowHolo {
+  0%, 49%  { box-shadow: 0 0 0 1px rgba(236,72,153,0.5), 0 0 28px rgba(236,72,153,0.18); }
+  50%, 100%{ box-shadow: 0 0 0 1px rgba(34,211,238,0.5), 0 0 28px rgba(34,211,238,0.18); }
+}
+@keyframes ruleBlockHolo { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@keyframes rulePassHolo  { 0%, 49% { opacity: 0; } 50%, 100% { opacity: 1; } }
+@keyframes stampHolo1 {
+  0%, 18%  { opacity: 0; transform: scale(0.6); }
+  22%      { opacity: 1; transform: scale(1); }
+  42%      { opacity: 1; }
+  48%      { opacity: 0; transform: scale(0.6); }
+  100%     { opacity: 0; }
+}
+@keyframes stampHolo2 {
+  0%, 68%  { opacity: 0; transform: scale(0.6); }
+  74%      { opacity: 1; transform: scale(1); }
+  94%      { opacity: 1; }
+  99%      { opacity: 0; transform: scale(0.6); }
+  100%     { opacity: 0; }
+}
+@keyframes phaseHoloA { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@keyframes phaseHoloB { 0%, 49% { opacity: 0; } 50%, 100% { opacity: 1; } }
+
+/* ============================================================
    ██████████ SLIDE 5 — MODULE PORTFOLIO ██████████
    ============================================================ */
 .s5 { background: var(--bg); }
@@ -1108,7 +1301,7 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
       <div class="s1-name-role r d1">
         <span class="s1-name-tag">Aswini Vadapalli</span>
         <div class="s1-name-sep"></div>
-        <span class="s1-role-tag">Promotion Review · 2026</span>
+        <span class="s1-role-tag">Majesco · Promotion Review · 2026</span>
       </div>
 
       <div class="r d2">
@@ -1292,45 +1485,63 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
       </p>
     </div>
 
-    <div class="s4-right">
-      <div class="s4-vline" aria-hidden="true"></div>
+    <div class="s4-right" style="padding: 64px 72px 64px 64px; display: flex; flex-direction: column; justify-content: center; position: relative;">
 
-      <!-- Step 1 -->
-      <div class="s4-step r d2">
-        <div class="s4-node v">BA</div>
-        <div class="s4-body">
-          <div class="s4-ts">Sprint · Requirements Cycle</div>
-          <div class="s4-sh">Issue Identified and Raised</div>
-          <p class="s4-txt">Spotted inconsistency in existing requirements during a cycle of change requests. Root cause documented and escalated directly to the development team.</p>
+      <!-- Animated flow visualization — adapted from crawl/robots animation -->
+      <div class="s4-flow" id="s4FlowAnim">
+        <!-- Horizontal dashed track -->
+        <div class="s4-track"></div>
+
+        <!-- Left node: BA Report -->
+        <div class="s4-fn left r d2">
+          <div class="s4-fn-lbl">Originator</div>
+          <div class="s4-fn-h">BA Report</div>
+          <div class="s4-fn-sub">Issue identified &amp; formally raised</div>
         </div>
-      </div>
 
-      <!-- Step 2 -->
-      <div class="s4-step r d4">
-        <div class="s4-node p">✗</div>
-        <div class="s4-body">
-          <div class="s4-ts">Development Team Response</div>
-          <div class="s4-sh">Concern Not Accepted by Dev</div>
-          <p class="s4-txt">The development team did not agree with the assessment. The issue remained open and disputed — Aswini maintained her documented position.</p>
+        <!-- Right node: Client Review -->
+        <div class="s4-fn right r d2">
+          <div class="s4-fn-lbl" style="text-align:right">Validation</div>
+          <div class="s4-fn-h">Client Review</div>
+          <div class="s4-fn-sub" style="text-align:right">Independent confirmation</div>
         </div>
-      </div>
 
-      <!-- Step 3 — animated in late -->
-      <div class="s4-step r d6">
-        <div class="s4-node c">✓</div>
-        <div class="s4-body">
-          <div class="s4-ts">Client Review · Independent Feedback</div>
-          <div class="s4-sh">Client Reported the Same Issue</div>
-          <p class="s4-txt">The client independently identified and reported the identical concern — confirming Aswini's original analysis without any prior coordination.</p>
-          <div class="s4-badge">
-            <span style="font-size:15px">🏆</span>
-            <span class="s4-badge-txt">Analysis Independently Validated</span>
+        <!-- Center gate — requirement decision block -->
+        <div class="s4-gate" id="s4Gate">
+          <div class="s4-gate-hdr">
+            <span>Req. Gate</span><span>majesco.com</span>
+          </div>
+          <div class="s4-gate-line"><span class="k">Agent:</span> AdsBot-Dev</div>
+          <div class="s4-gate-line"><span class="k">Allow:</span> Googlebot</div>
+          <div class="s4-gate-rule">
+            <div class="rule-block">Disallow: BA-concern</div>
+            <div class="rule-pass">Allow: BA-concern ✓</div>
           </div>
         </div>
+
+        <!-- Red blocking wall (flips to invisible in phase 2) -->
+        <div class="s4-wall" id="s4Wall"></div>
+
+        <!-- Packet A — BA Report (violet, bounces off wall) -->
+        <div class="s4-pkt a">BA</div>
+
+        <!-- Packet B — Client Confirmed (cyan, passes through) -->
+        <div class="s4-pkt b">CLI</div>
+
+        <!-- Result stamps -->
+        <div class="s4-badge2 reject">✗ Concern Rejected</div>
+        <div class="s4-badge2 confirm">✓ Issue Confirmed</div>
+
+        <!-- Phase caption -->
+        <div class="s4-phase">
+          <span class="pA"><b>Phase 01</b> · BA flagged — Dev disagreed, concern blocked</span>
+          <span class="pB"><b>Phase 02</b> · Client independently confirmed the same issue</span>
+        </div>
       </div>
 
-      <div class="s4-quote">
-        <p class="s4-quote-txt">"The issue was documented by the BA before the client raised it. That's the requirements instinct of a Lead."</p>
+      <!-- Quote below the animation -->
+      <div class="s4-quote" style="margin-top: 24px;">
+        <p class="s4-quote-txt">"Documented before the client raised it. That's the analytical instinct of a Lead BA."</p>
       </div>
     </div>
   </div>
@@ -1582,7 +1793,7 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
 
       <div class="s8-cta r d6">
         <span style="font-size:18px">🏆</span>
-        <span>Lead Business Analyst · Aswini Vadapalli · 2026</span>
+        <span>Lead Business Analyst · Aswini Vadapalli · Majesco · 2026</span>
       </div>
     </div>
   </div>
