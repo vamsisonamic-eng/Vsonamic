@@ -182,17 +182,9 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
    SHARED LAYOUT UTILITIES
    ============================================================ */
 
-/* Holographic gradient text */
-.grad-text {
-  background: linear-gradient(135deg, var(--violet-3) 0%, var(--pink-2) 50%, var(--cyan-2) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.grad-text-v {
-  background: linear-gradient(135deg, var(--violet-2) 0%, var(--violet-3) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+/* Accent text — solid color with glow (no gradient clip, per design standards) */
+.accent-text { color: var(--violet-2); }
+.accent-text-c { color: var(--cyan-2); }
 
 /* Holographic pill tag */
 .holo-pill {
@@ -227,7 +219,6 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
 .glass-card:hover {
   border-color: var(--border-v);
   background: linear-gradient(135deg, rgba(139,92,246,0.14), rgba(236,72,153,0.09));
-  box-shadow: 0 0 40px rgba(139,92,246,0.12), inset 0 1px 0 rgba(245,240,255,0.06);
   transform: translateY(-3px);
 }
 
@@ -365,15 +356,8 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
   font-family: 'Syne', sans-serif;
   font-weight: 800; font-size: 110px;
   line-height: 0.88; letter-spacing: -0.03em;
-  background: linear-gradient(120deg, var(--violet-2) 0%, var(--pink-2) 45%, var(--cyan-2) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 200% 200%;
-  animation: shimmerName 4s ease infinite;
-}
-@keyframes shimmerName {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  color: var(--violet-2);
+  text-shadow: 0 0 60px rgba(139,92,246,0.45), 0 0 120px rgba(139,92,246,0.18);
 }
 
 .s1-rule {
@@ -427,9 +411,7 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
   font-family: 'Syne', sans-serif;
   font-weight: 800; font-size: 56px;
   line-height: 1; letter-spacing: -0.04em;
-  background: linear-gradient(135deg, var(--pearl) 40%, var(--violet-3) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--pearl);
   display: block; margin-bottom: 6px;
 }
 .s1-stat-unit { font-size: 28px; opacity: 0.5; }
@@ -490,7 +472,7 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
   font-family: 'Figtree', sans-serif;
   font-weight: 300; font-size: 18px;
   line-height: 1.85; color: var(--pearl-60);
-  border-left: 2px solid var(--border-v);
+  border-left: 1px solid var(--border-v);
   padding-left: 22px;
 }
 .s2-bio strong { color: var(--pearl-80); font-weight: 500; }
@@ -517,7 +499,12 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
 }
 .s2-card:hover::before { opacity: 1; }
 
-.s2-card-ico { font-size: 30px; margin-bottom: 18px; display: block; }
+.s2-card-ico {
+  width: 36px; height: 36px; margin-bottom: 18px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border-v); border-radius: 6px;
+  background: var(--v-glow);
+}
 .s2-card-title {
   font-family: 'Syne', sans-serif;
   font-weight: 700; font-size: 19px;
@@ -570,9 +557,7 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
   font-family: 'Syne', sans-serif;
   font-weight: 800; font-size: 72px;
   line-height: 1; letter-spacing: -0.04em;
-  background: linear-gradient(135deg, var(--pearl) 40%, var(--violet-3) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--pearl);
   display: block; margin-bottom: 14px;
 }
 .s3-stat-desc {
@@ -658,7 +643,7 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
   font-family: 'Figtree', sans-serif;
   font-weight: 300; font-size: 17px;
   line-height: 1.85; color: var(--pearl-60);
-  border-left: 2px solid var(--border-p);
+  border-left: 1px solid var(--border-p);
   padding-left: 22px;
 }
 .s4-desc strong { color: var(--pearl-80); font-weight: 500; }
@@ -955,7 +940,8 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
 @keyframes phaseHoloB { 0%, 49% { opacity: 0; } 50%, 100% { opacity: 1; } }
 
 /* ============================================================
-   ██████████ SLIDE 5 — MODULE PORTFOLIO ██████████
+   ██████████ SLIDE 5 — DELIVERY RECORD ██████████
+   Editorial layout: two featured + compact list. Not a card grid.
    ============================================================ */
 .s5 { background: var(--bg); }
 .s5-orb {
@@ -968,54 +954,96 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
 .s5-layout {
   position: absolute;
   top: 0; left: 3px; right: 0; bottom: 0;
-  padding: 52px 96px;
-  display: flex; flex-direction: column; gap: 28px;
+  display: grid; grid-template-columns: 560px 1fr;
+}
+
+/* Left column — header + featured deliverables */
+.s5-left {
+  padding: 64px 56px 64px 96px;
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 0;
 }
 .s5-title {
   font-family: 'Syne', sans-serif;
-  font-weight: 800; font-size: 50px;
+  font-weight: 800; font-size: 52px;
   letter-spacing: -0.03em; color: var(--pearl);
-  margin-top: 14px;
+  margin: 20px 0 36px; line-height: 0.95;
 }
-.s5-grid {
-  display: grid; grid-template-columns: repeat(4,1fr);
-  gap: 18px; flex: 1;
-}
-.s5-card {
-  padding: 28px 22px;
-  display: flex; flex-direction: column; gap: 12px;
-  position: relative; overflow: hidden;
-  transform-style: preserve-3d;
-  cursor: none;
-}
-.s5-card-glow {
-  position: absolute; inset: 0; border-radius: 8px;
-  background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(139,92,246,0.16), transparent 70%);
-  opacity: 0; transition: opacity 0.4s;
-  pointer-events: none;
-}
-.s5-card:hover .s5-card-glow { opacity: 1; }
-.s5-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--violet), var(--pink), transparent);
-  opacity: 0; transition: opacity 0.4s;
-}
-.s5-card:hover::before { opacity: 1; }
 
-.s5-card-id {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px; letter-spacing: 0.18em; color: var(--violet-3);
+/* Two featured deliverables on the left */
+.s5-feat {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 8px;
+  transition: border-color 0.3s;
 }
-.s5-card-name {
+.s5-feat:first-of-type { border-top: 1px solid var(--border); }
+.s5-feat:hover { border-color: var(--border-v); }
+
+.s5-feat-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--violet-3);
+}
+.s5-feat-name {
   font-family: 'Syne', sans-serif;
-  font-weight: 700; font-size: 17px;
+  font-weight: 700; font-size: 20px;
   color: var(--pearl); line-height: 1.2;
 }
-.s5-card-detail {
+.s5-feat-detail {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 300; font-size: 14px;
+  line-height: 1.65; color: var(--pearl-60);
+}
+
+/* Right column — compact delivery list */
+.s5-right {
+  padding: 64px 80px 64px 60px;
+  display: flex; flex-direction: column;
+  justify-content: center;
+}
+.s5-list-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--violet-3); margin-bottom: 28px;
+  display: flex; align-items: center; gap: 14px;
+}
+.s5-list-title::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--border-v), transparent);
+}
+
+/* Each delivery row in the compact list */
+.s5-row {
+  display: flex; gap: 20px; align-items: flex-start;
+  padding: 16px 0; border-bottom: 1px solid var(--border);
+  transition: border-color 0.25s;
+  cursor: default;
+}
+.s5-row:hover { border-color: rgba(139,92,246,0.2); }
+.s5-row-dot {
+  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+  margin-top: 7px;
+  background: var(--violet-2);
+  opacity: 0.7;
+  transition: opacity 0.25s, box-shadow 0.25s;
+}
+.s5-row:hover .s5-row-dot { opacity: 1; box-shadow: 0 0 8px var(--violet); }
+.s5-row-dot.pink { background: var(--pink-2); }
+.s5-row-dot.cyan { background: var(--cyan-2); }
+.s5-row:hover .s5-row-dot.pink { box-shadow: 0 0 8px var(--pink); }
+.s5-row:hover .s5-row-dot.cyan { box-shadow: 0 0 8px var(--cyan); }
+
+.s5-row-body { flex: 1; }
+.s5-row-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600; font-size: 15px;
+  color: var(--pearl-80); margin-bottom: 3px;
+}
+.s5-row-txt {
   font-family: 'Figtree', sans-serif;
   font-weight: 300; font-size: 13px;
-  line-height: 1.7; color: var(--pearl-60);
-  flex: 1;
+  line-height: 1.6; color: var(--pearl-30);
 }
 
 /* ============================================================
@@ -1064,14 +1092,13 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
 }
 .s6-item:first-child { border-top: 1px solid var(--border); }
 .s6-ico {
-  width: 48px; height: 48px; border-radius: 8px; flex-shrink: 0;
-  background: linear-gradient(135deg, var(--v-glow), var(--p-glow));
+  width: 44px; height: 44px; border-radius: 6px; flex-shrink: 0;
+  background: var(--v-glow);
   border: 1px solid var(--border-v);
   display: flex; align-items: center; justify-content: center;
-  font-size: 20px;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition: border-color 0.3s, background 0.3s;
 }
-.s6-item:hover .s6-ico { border-color: var(--violet); box-shadow: 0 0 20px var(--v-glow); }
+.s6-item:hover .s6-ico { border-color: var(--violet); background: rgba(139,92,246,0.22); }
 .s6-body { flex: 1; }
 .s6-bh {
   font-family: 'Syne', sans-serif;
@@ -1126,7 +1153,12 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
   transition-delay: var(--cd, 0.4s);
 }
 .slide.active .s7-comp::after { height: 100%; }
-.s7-ico { font-size: 32px; }
+.s7-ico {
+  width: 40px; height: 40px; border-radius: 6px;
+  background: var(--v-glow); border: 1px solid var(--border-v);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 6px;
+}
 .s7-title-c {
   font-family: 'Syne', sans-serif;
   font-weight: 700; font-size: 18px;
@@ -1194,11 +1226,8 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
 .s8-big-1 { font-size: 120px; color: var(--pearl); }
 .s8-big-2 {
   font-size: 120px;
-  background: linear-gradient(120deg, var(--violet-2) 0%, var(--pink-2) 45%, var(--cyan-2) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 200%;
-  animation: shimmerName 4s ease infinite;
+  color: var(--violet-2);
+  text-shadow: 0 0 60px rgba(139,92,246,0.45), 0 0 120px rgba(139,92,246,0.18);
 }
 .s8-big-3 { font-size: 56px; color: var(--pearl-30); margin-top: 8px; font-weight: 400; }
 
@@ -1260,7 +1289,7 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
   color: var(--violet-3);
   transition: border-color 0.3s, box-shadow 0.3s;
 }
-.s8-cta:hover { border-color: var(--violet); box-shadow: 0 0 30px rgba(139,92,246,0.2); }
+.s8-cta:hover { border-color: var(--violet); background: linear-gradient(135deg, rgba(139,92,246,0.22), rgba(236,72,153,0.14)); }
 </style>
 </head>
 <body>
@@ -1278,7 +1307,7 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
 
 <!-- Inline editor -->
 <div class="edit-hotzone" id="editHotzone"></div>
-<button id="editToggle">✏ Edit</button>
+<button id="editToggle">Edit</button>
 
 <!-- ==========================================
      DECK
@@ -1370,25 +1399,25 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
     <div class="s2-right">
       <div class="s2-card glass-card rs d2">
         <div class="s2-card-shine"></div>
-        <span class="s2-card-ico">🎯</span>
+        <div class="s2-card-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--violet-2)" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
         <div class="s2-card-title">Pre-Release Ownership</div>
         <p class="s2-card-desc">Self-assigned M39 and M10 days before release — not after being tasked. Delivered with zero UI issues on M39 across 3 screens.</p>
       </div>
       <div class="s2-card glass-card rs d3">
         <div class="s2-card-shine"></div>
-        <span class="s2-card-ico">🔍</span>
+        <div class="s2-card-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-2)" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
         <div class="s2-card-title">Requirements Intelligence</div>
         <p class="s2-card-desc">Identified and escalated a requirement discrepancy Dev didn't accept — the same issue the client raised independently, validating the original analysis.</p>
       </div>
       <div class="s2-card glass-card rs d4">
         <div class="s2-card-shine"></div>
-        <span class="s2-card-ico">⚡</span>
+        <div class="s2-card-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--pink-2)" stroke-width="1.8" stroke-linecap="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
         <div class="s2-card-title">Immediate Escalation</div>
         <p class="s2-card-desc">On ME 16 extensions: cross-team outreach initiated the same day — no waiting for someone else to flag the blocker.</p>
       </div>
       <div class="s2-card glass-card rs d5">
         <div class="s2-card-shine"></div>
-        <span class="s2-card-ico">📐</span>
+        <div class="s2-card-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--violet-2)" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg></div>
         <div class="s2-card-title">Documentation Rigour</div>
         <p class="s2-card-desc">View All mapping, M4/M5A/M5B test documentation, and full SE FI traceability — every module release-ready at handover.</p>
       </div>
@@ -1478,10 +1507,10 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
     <div class="s4-left">
       <div class="eyebrow s4-eyebrow r d1"><div class="eyebrow-line"></div>Signature Moment</div>
       <h2 class="s4-title r d2">
-        She Flagged<br>It <span class="holo">First.</span><br>Client Confirmed<br>It Later.
+        BA Raised It.<br><span style="color:var(--pink-2)">Dev Disputed It.</span><br>Client Confirmed It.
       </h2>
       <p class="s4-desc r d3">
-        During a cycle of <strong>repeated back-and-forth on existing requirements</strong>, Aswini identified and formally raised the root cause issue to the development team. When Dev did not accept the concern, she held her position. <strong>The client independently raised and confirmed the identical issue</strong> — validating the original analysis in full.
+        During repeated back-and-forth cycles on existing requirements, Aswini <strong>formally identified and raised a root cause issue</strong> to the development team. Dev did not accept the concern; she maintained her documented position. <strong>The client independently raised the same issue</strong> — confirming the original BA assessment without any prior coordination.
       </p>
     </div>
 
@@ -1548,73 +1577,101 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
 </section>
 
 
-<!-- ===== SLIDE 5: MODULE PORTFOLIO ===== -->
-<section class="slide s5" aria-label="Module Portfolio">
+<!-- ===== SLIDE 5: DELIVERY RECORD ===== -->
+<section class="slide s5" aria-label="Delivery Record">
   <div class="s5-orb"></div>
   <div class="slide-bar"></div>
 
   <div class="s5-layout">
-    <div class="r d1">
-      <div class="eyebrow"><div class="eyebrow-line"></div>Ownership Portfolio</div>
-      <h2 class="s5-title">9 Points. Full Accountability.</h2>
+
+    <!-- Left column: header + 2 featured deliverables -->
+    <div class="s5-left">
+      <div class="eyebrow r d1"><div class="eyebrow-line"></div>Sprint Delivery Record</div>
+      <h2 class="s5-title r d2">9 Documented<br>Delivery Points.</h2>
+
+      <!-- Featured #1: SE FI Distribution — multi-stream early release -->
+      <div class="s5-feat r d3">
+        <div class="s5-feat-label">SE FI Distribution · Points 3 &amp; 4</div>
+        <div class="s5-feat-name">Cash, In Kind &amp; Data Source — Single Sprint</div>
+        <p class="s5-feat-detail">All three distribution streams tested and cleared in one sprint. Made ready for early release with very few open clarifications and minor issues. ME 16 extensions picked up immediately on assignment — cross-team colleague contact initiated same day.</p>
+        <span class="holo-pill pink" style="margin-top:8px">Early Release</span>
+      </div>
+
+      <!-- Featured #2: M39 Pre-Release -->
+      <div class="s5-feat r d4">
+        <div class="s5-feat-label">M39 Pre-Release · Point 6</div>
+        <div class="s5-feat-name">Self-Assigned · 3 Screens · Zero UI Issues</div>
+        <p class="s5-feat-detail">Took ownership of M39 a few days before the release window — not assigned, self-initiated. Submitted all 3 screens for user review. Zero UI issues reported by the user; additional new changes were separately noted as scope items.</p>
+        <span class="holo-pill cyan" style="margin-top:8px">Zero Defects</span>
+      </div>
     </div>
 
-    <div class="s5-grid">
-      <div class="s5-card glass-card rs d2" data-tilt>
-        <div class="s5-card-glow"></div>
-        <div class="s5-card-id">POINT 01</div>
-        <div class="s5-card-name">View All — Issue Identification</div>
-        <p class="s5-card-detail">Identified valuation issues within View All, produced full mapping documentation with complete requirement traceability.</p>
-        <span class="holo-pill">Documentation</span>
+    <!-- Right column: compact list of all 9 points -->
+    <div class="s5-right">
+      <div class="s5-list-title r d2">All Delivery Points</div>
+
+      <div class="s5-row r d2">
+        <div class="s5-row-dot"></div>
+        <div class="s5-row-body">
+          <div class="s5-row-name">View All — Valuation Issue Identification</div>
+          <div class="s5-row-txt">Identified issues within View All valuations; worked on root cause analysis alongside ongoing sprint commitments.</div>
+        </div>
       </div>
-      <div class="s5-card glass-card rs d3" data-tilt>
-        <div class="s5-card-glow"></div>
-        <div class="s5-card-id">POINT 02</div>
-        <div class="s5-card-name">M4 / M5A / M5B Testing</div>
-        <p class="s5-card-detail">Full test coverage across all three module variants — documented, verified, and signed off without outstanding open items.</p>
-        <span class="holo-pill">Testing</span>
+      <div class="s5-row r d3">
+        <div class="s5-row-dot"></div>
+        <div class="s5-row-body">
+          <div class="s5-row-name">View All — Mapping Documentation</div>
+          <div class="s5-row-txt">Documented complete View All mapping; full traceability from requirements to deliverable.</div>
+        </div>
       </div>
-      <div class="s5-card glass-card rs d4" data-tilt>
-        <div class="s5-card-glow"></div>
-        <div class="s5-card-id">POINT 03</div>
-        <div class="s5-card-name">SE FI Distribution</div>
-        <p class="s5-card-detail">Cash, In Kind, and data source streams — all three delivered in a single sprint with very few open clarifications at early release.</p>
-        <span class="holo-pill pink">Early Release</span>
+      <div class="s5-row r d3">
+        <div class="s5-row-dot pink"></div>
+        <div class="s5-row-body">
+          <div class="s5-row-name">M4 / M5A / M5B — Testing</div>
+          <div class="s5-row-txt">Full test coverage across all three module variants; documented, verified, signed off without outstanding open items.</div>
+        </div>
       </div>
-      <div class="s5-card glass-card rs d5" data-tilt>
-        <div class="s5-card-glow"></div>
-        <div class="s5-card-id">POINT 04</div>
-        <div class="s5-card-name">ME 16 — Extensions</div>
-        <p class="s5-card-detail">Immediately picked up ME 16 extensions on assignment. Cross-team outreach initiated the same day rather than waiting for direction.</p>
-        <span class="holo-pill">Proactive</span>
+      <div class="s5-row r d4">
+        <div class="s5-row-dot pink"></div>
+        <div class="s5-row-body">
+          <div class="s5-row-name">SE FI Distribution — Early Release</div>
+          <div class="s5-row-txt">Cash, In Kind, data source — all three in one sprint, ready for early release with very few open items.</div>
+        </div>
       </div>
-      <div class="s5-card glass-card rs d3" data-tilt>
-        <div class="s5-card-glow"></div>
-        <div class="s5-card-id">POINT 05</div>
-        <div class="s5-card-name">Requirements Integrity</div>
-        <p class="s5-card-detail">Held documented position on a requirement discrepancy through extended back-and-forth — client later confirmed the identical concern.</p>
-        <span class="holo-pill pink">Validated</span>
+      <div class="s5-row r d4">
+        <div class="s5-row-dot"></div>
+        <div class="s5-row-body">
+          <div class="s5-row-name">ME 16 — Extensions, Proactive Coordination</div>
+          <div class="s5-row-txt">Immediately picked up extensions on assignment; contacted colleague for assistance the same day rather than waiting.</div>
+        </div>
       </div>
-      <div class="s5-card glass-card rs d4" data-tilt>
-        <div class="s5-card-glow"></div>
-        <div class="s5-card-id">POINT 06</div>
-        <div class="s5-card-name">M39 — Pre-Release</div>
-        <p class="s5-card-detail">Self-assigned before the release window. Submitted 3 screens for user review — zero UI issues reported. Clean handover under pressure.</p>
-        <span class="holo-pill cyan">Zero Issues</span>
+      <div class="s5-row r d5">
+        <div class="s5-row-dot pink"></div>
+        <div class="s5-row-body">
+          <div class="s5-row-name">Requirements Integrity — Client-Validated Position</div>
+          <div class="s5-row-txt">Maintained documented requirement position through multiple Dev disputes; client independently raised the same issue.</div>
+        </div>
       </div>
-      <div class="s5-card glass-card rs d5" data-tilt>
-        <div class="s5-card-glow"></div>
-        <div class="s5-card-id">POINT 07–08</div>
-        <div class="s5-card-name">Newbury Notices + Merge Batch</div>
-        <p class="s5-card-detail">Newbury Notices delivered alongside concurrent module work. Merge Batch Rebalancing — highest-complexity module in current pipeline — actively owned.</p>
-        <span class="holo-pill">Multi-stream</span>
+      <div class="s5-row r d5">
+        <div class="s5-row-dot cyan"></div>
+        <div class="s5-row-body">
+          <div class="s5-row-name">M39 — Pre-Release, Zero UI Issues</div>
+          <div class="s5-row-txt">Self-assigned before the release date; 3 screens submitted, zero UI issues from user. New changes noted separately.</div>
+        </div>
       </div>
-      <div class="s5-card glass-card rs d6" data-tilt>
-        <div class="s5-card-glow"></div>
-        <div class="s5-card-id">POINT 09</div>
-        <div class="s5-card-name">M10 — Ongoing</div>
-        <p class="s5-card-detail">Self-assigned before planned release date while Merge Batch is simultaneously active. Testing in progress — same pre-release ownership pattern.</p>
-        <span class="holo-pill cyan">In Progress</span>
+      <div class="s5-row r d6">
+        <div class="s5-row-dot"></div>
+        <div class="s5-row-body">
+          <div class="s5-row-name">Newbury Notices + Merge Batch Rebalancing</div>
+          <div class="s5-row-txt">Worked on N-project Notices; currently leading Merge Batch Rebalancing — the highest-complexity module in the pipeline.</div>
+        </div>
+      </div>
+      <div class="s5-row r d6">
+        <div class="s5-row-dot cyan"></div>
+        <div class="s5-row-body">
+          <div class="s5-row-name">M10 — Pre-Release, Active Testing</div>
+          <div class="s5-row-txt">Self-assigned before planned release date; ongoing testing in progress while carrying the Merge Batch workstream concurrently.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1630,7 +1687,7 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
     <div class="s6-left">
       <div class="eyebrow r d1"><div class="eyebrow-line"></div>Lead Behaviours</div>
       <h2 class="s6-title r d2">
-        Ownership<br>Before<br><span class="grad-text-v">Assignment.</span>
+        Ownership<br>Before<br><span style="color:var(--violet-2)">Assignment.</span>
       </h2>
       <p class="s6-intro r d3">
         Three specific, documented behaviours that distinguish a Lead BA. <strong>Aswini demonstrates all three — not occasionally, but as the consistent pattern across every sprint in this period.</strong>
@@ -1639,7 +1696,7 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
 
     <div class="s6-right">
       <div class="s6-item r d2">
-        <div class="s6-ico">⚡</div>
+        <div class="s6-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--violet-2)" stroke-width="2" stroke-linecap="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
         <div class="s6-body">
           <div class="s6-bh">ME 16 — Same-Day Cross-Team Action</div>
           <p class="s6-bt">Extensions appeared; cross-team outreach to Vaishnavi initiated the same day — no waiting for escalation, no lag between identification and action.</p>
@@ -1647,7 +1704,7 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
         </div>
       </div>
       <div class="s6-item r d3">
-        <div class="s6-ico">🎯</div>
+        <div class="s6-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--violet-2)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
         <div class="s6-body">
           <div class="s6-bh">M39 — Self-Assigned Before the Window</div>
           <p class="s6-bt">Picked up M39 days before the release date — not because it was assigned, but because the module needed an owner. 3 screens submitted, 0 UI issues.</p>
@@ -1655,7 +1712,7 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
         </div>
       </div>
       <div class="s6-item r d4">
-        <div class="s6-ico">🔬</div>
+        <div class="s6-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-2)" stroke-width="2" stroke-linecap="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v11M3 9h18m-6 0v11m0 0H9m6 0h2a2 2 0 0 0 2-2v-4M3 20h2"/></svg></div>
         <div class="s6-body">
           <div class="s6-bh">M10 — Pre-Release While Carrying Merge Batch</div>
           <p class="s6-bt">Self-assigned M10 before its planned release date while simultaneously leading Merge Batch Rebalancing — the most complex module in the pipeline.</p>
@@ -1663,7 +1720,7 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
         </div>
       </div>
       <div class="s6-item r d5">
-        <div class="s6-ico">📣</div>
+        <div class="s6-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--pink-2)" stroke-width="2" stroke-linecap="round"><path d="M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg></div>
         <div class="s6-body">
           <div class="s6-bh">Requirement Integrity Under Dispute</div>
           <p class="s6-bt">Maintained a formally documented position through extended back-and-forth with Dev. Client independently reported the same issue — no revision needed.</p>
@@ -1688,7 +1745,7 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
 
     <div class="s7-grid">
       <div class="s7-comp glass-card rs d2" style="--cd:0.3s;--bd:0.5s;--bw:100%">
-        <span class="s7-ico">📐</span>
+        <div class="s7-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--violet-2)" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
         <div class="s7-title-c">Requirements Engineering</div>
         <p class="s7-desc">End-to-end ownership of requirements — from discovery and documentation to defending positions under stakeholder challenge, with client-validated outcomes.</p>
         <div class="s7-bar-wrap">
@@ -1697,7 +1754,7 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
         </div>
       </div>
       <div class="s7-comp glass-card rs d3" style="--cd:0.45s;--bd:0.65s;--bw:100%">
-        <span class="s7-ico">🚀</span>
+        <div class="s7-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-2)" stroke-width="1.8" stroke-linecap="round"><path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/><line x1="12" y1="16" x2="12" y2="22"/></svg></div>
         <div class="s7-title-c">Sprint Delivery Leadership</div>
         <p class="s7-desc">Multi-module, multi-stream sprint execution with pre-release self-assignment. 8+ modules delivered; early release achieved on SE FI Distribution.</p>
         <div class="s7-bar-wrap">
@@ -1706,7 +1763,7 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
         </div>
       </div>
       <div class="s7-comp glass-card rs d4" style="--cd:0.6s;--bd:0.8s;--bw:85%">
-        <span class="s7-ico">🤝</span>
+        <div class="s7-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--pink-2)" stroke-width="1.8" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
         <div class="s7-title-c">Stakeholder Management</div>
         <p class="s7-desc">Manages competing Dev and client perspectives. Holds documented positions under pushback. Initiates cross-team escalation same-day when needed.</p>
         <div class="s7-bar-wrap">
@@ -1715,7 +1772,7 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
         </div>
       </div>
       <div class="s7-comp glass-card rs d3" style="--cd:0.75s;--bd:0.95s;--bw:100%">
-        <span class="s7-ico">🔎</span>
+        <div class="s7-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--violet-2)" stroke-width="1.8" stroke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
         <div class="s7-title-c">Quality & Test Coverage</div>
         <p class="s7-desc">Full test documentation across M4/M5A/M5B and SE FI streams. M39 delivered with zero UI issues across 3 screens at handover.</p>
         <div class="s7-bar-wrap">
@@ -1724,7 +1781,7 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
         </div>
       </div>
       <div class="s7-comp glass-card rs d4" style="--cd:0.9s;--bd:1.1s;--bw:100%">
-        <span class="s7-ico">⚙️</span>
+        <div class="s7-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-2)" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M4.93 19.07l1.41-1.41M19.07 19.07l-1.41-1.41M12 2v2M12 20v2M2 12h2M20 12h2"/></svg></div>
         <div class="s7-title-c">Complex Module Ownership</div>
         <p class="s7-desc">Currently leading Merge Batch Rebalancing — the highest-complexity module in the active pipeline — while simultaneously progressing M10 testing.</p>
         <div class="s7-bar-wrap">
@@ -1733,7 +1790,7 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
         </div>
       </div>
       <div class="s7-comp glass-card rs d5" style="--cd:1.05s;--bd:1.25s;--bw:88%">
-        <span class="s7-ico">📡</span>
+        <div class="s7-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--pink-2)" stroke-width="1.8" stroke-linecap="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="var(--pink-2)"/></svg></div>
         <div class="s7-title-c">Cross-functional Coordination</div>
         <p class="s7-desc">Proactive outreach to Dev, QA, and client streams. No lag between identification and action — ME 16 cross-team coordination initiated same day.</p>
         <div class="s7-bar-wrap">
