@@ -10,4 +10,4 @@ emotional-state classification.
 
 | Skill | Purpose |
 | --- | --- |
-| [`indian-fo-trading-framework`](indian-fo-trading-framework/SKILL.md) | Unified NSE/BSE derivatives manual in three parts: (1) market structure & analysis — lot sizes, sessions, expiry cycles, settlement, and the VIX/PCR/basis/OI indicator set; (2) risk guardrails — 1-2% per-trade risk, SL-based sizing, 20% buying ceiling, defined-risk selling, no averaging down; (3) trade review journal — fixed template with process-over-outcome grading and emotional-state classification. |
+| [`indian-fo-trading-framework`](indian-fo-trading-framework/SKILL.md) | Unified NSE/BSE derivatives manual in three parts: (1) market structure & analysis — lot sizes, sessions, expiry cycles, settlement, and the VIX/PCR/basis/OI indicator set; (2) risk guardrails — 1-2% per-trade risk, SL-based sizing, 20% buying ceiling, defined-risk selling, no averaging down; (3) trade review journal — fixed template with process-over-outcome grading and emotional-state classification; (4) chart reading & trade selection — full pattern/indicator/OI reference library and tactics playbook with a fixed chart-verdict format. |

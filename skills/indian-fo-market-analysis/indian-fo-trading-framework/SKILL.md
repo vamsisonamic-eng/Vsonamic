@@ -8,8 +8,12 @@ description: >
   and reviewing a completed trade. Anchors analysis to correct lot sizes,
   session timings, expiry cycles, and settlement rules; enforces hard risk
   caps (1-2% per-trade risk, SL-based sizing, 20% option-buying ceiling,
-  defined-risk-only selling, no averaging down); and requires a fixed
-  trade-review format with honest emotional-state classification.
+  defined-risk-only selling, no averaging down); requires a fixed
+  trade-review format with honest emotional-state classification; and
+  includes a full chart-reading system (candlestick and classical chart
+  patterns, indicators, OI identifiers, and an intraday/expiry tactics
+  playbook) for answering "what pattern is forming and what is the best
+  trade here" from a chart or market data.
 ---
 
 # Indian F&O Trading Framework
@@ -221,6 +225,75 @@ missing field is incomplete; ask rather than guess:
 
 ---
 
+# Part 4 — Chart Reading & Trade Selection
+
+Use this part whenever the user shares a chart (image or data) or asks
+"which pattern is forming" / "what's the best trade here." Load the
+reference files as needed:
+
+- [`references/chart-patterns.md`](references/chart-patterns.md) —
+  candlestick patterns, classical chart patterns (with confirmation,
+  target, invalidation for each), and price-action/market-structure
+  concepts (BOS/CHoCH, supply-demand, order blocks, FVGs, liquidity
+  sweeps, traps).
+- [`references/indicators.md`](references/indicators.md) — trend,
+  momentum, volatility, volume/flow indicators with settings and signals;
+  pivots/CPR; options-chain identifiers; Greeks quick reference.
+- [`references/tactics.md`](references/tactics.md) — the tactics playbook:
+  ORB, VWAP plays, CPR day-typing, breakout-retest, liquidity-sweep
+  reversals, OI-driven tactics, expiry-day tactics, the option strategy
+  selection matrix, positional tactics, and no-trade conditions.
+
+## Chart-Reading Procedure (run in order)
+
+1. **Orient:** instrument, timeframe(s) visible, session context (time of
+   day IST, day of week, distance to expiry). A pattern on a 5-min chart
+   is not a positional signal — always state the timeframe of every claim.
+2. **Structure first:** trend via swing structure (HH/HL vs LH/LL), then
+   the nearest meaningful levels — PDH/PDL, range edges, gap edges, CPR,
+   and OI walls if chain data is available.
+3. **Pattern scan:** identify candlestick and classical patterns *at those
+   levels* (a pattern in the middle of nowhere is low-grade). For each:
+   state whether it is **forming** (no confirmation yet) or **confirmed**
+   (trigger fired), per the reference tables.
+4. **Indicator cross-check:** one per role — trend (EMA/Supertrend/ADX),
+   momentum (RSI/MACD, divergences), volatility regime (BB squeeze/ATR/
+   VIX/IV), volume/flow (VWAP, volume, OI). Note agreements and,
+   crucially, disagreements.
+5. **Options overlay (when chain data available):** OI walls, intraday OI
+   change, PCR, straddle premium behavior, futures basis — per the
+   identifier table.
+6. **Tactic match:** map the confluence to a named tactic from the
+   playbook, or to a **no-trade condition** — "no trade" is a valid and
+   frequently correct answer; never invent a setup to satisfy the request.
+7. **Guardrail pass:** run the Part 2 checklist on the selected trade
+   (entry, SL at the pattern's invalidation, sizing arithmetic, structure
+   choice from the strategy matrix given the IV regime).
+
+## Chart Verdict Format
+
+Every chart read must be delivered in this structure:
+
+- **Context:** instrument, timeframe, session/expiry context.
+- **Structure:** trend state + the 2–3 levels that matter now.
+- **Pattern(s):** name, forming vs confirmed, confirmation trigger to
+  watch if still forming.
+- **Confluence table:** each indicator/OI read → bullish / bearish /
+  neutral, one line each.
+- **Best trade:** the named tactic, instrument/strike/structure, entry
+  trigger, SL (invalidation), target (measured move / next level), and
+  R:R — or **NO TRADE** with the specific condition that disqualifies it.
+- **Risk block:** the Part 2 sizing arithmetic and FITS/RESIZE/REJECT
+  verdict.
+
+Rules for chart reads: never call a pattern confirmed without its trigger;
+never give a trade without SL and R:R; if the image/data is too ambiguous
+to read a level, say what additional data is needed (timeframe, OI chain,
+volume) instead of guessing; conflicting signals are reported as
+conflicts, not averaged into false confidence.
+
+---
+
 ## Output contract
 
 - **Market analysis** must contain: contract identification, regime and
@@ -231,6 +304,10 @@ missing field is incomplete; ask rather than guess:
 - **Trade review** must contain: the fully populated template, the process
   audit, the evidenced emotional-state classification, and exactly one
   lesson.
+- **Chart read** must follow the Part 4 Chart Verdict Format: context,
+  structure, patterns with forming/confirmed status, confluence table,
+  a named-tactic trade (with entry, SL, target, R:R) or NO TRADE, and the
+  risk block.
 
 Output missing its required elements — expiry/settlement handling, sizing
 arithmetic, or emotional state — is incomplete; do not declare the task
