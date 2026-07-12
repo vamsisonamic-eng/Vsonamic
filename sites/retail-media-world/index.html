@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Retail Media World — a scroll flight through the industry</title>
+<meta name="description" content="What retail media networks are, why they're exploding, how the programmatic auction works, and how Publicis, WPP and Dentsu are racing for the shelf — told as a 3D scroll flight.">
+<style>
+/* ============================================================
+   RETAIL MEDIA WORLD — neon-night diorama flight
+   Palette: void #080C1B · coral #FF6A55 · cyan #4FD6EA
+            magenta #C86BFF · gold #FFC24B · violet #8F7CFF
+   Single deliberate dark theme (a night-flight world).
+   ============================================================ */
+:root{
+  --void:#080C1B; --void-2:#0D1329;
+  --ink:#EEF2FF; --muted:#9AA6C8; --faint:#5D6A8F;
+  --coral:#FF6A55; --cyan:#4FD6EA; --magenta:#C86BFF;
+  --gold:#FFC24B; --violet:#8F7CFF; --sunrise:#FF9E6B;
+  --accent:var(--coral);
+  --panel:rgba(13,19,41,.78);
+  --line:rgba(158,178,230,.16);
+  --disp:'Avenir Next','Futura','Segoe UI Variable Display','Segoe UI',system-ui,sans-serif;
+  --body:system-ui,'Segoe UI',Roboto,sans-serif;
+  --mono:ui-monospace,'SF Mono','Cascadia Code',Menlo,Consolas,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:auto}
+body{
+  background:var(--void); color:var(--ink); font-family:var(--body);
+  overflow-x:hidden;
+}
+#spacer{width:1px}
+
+/* ---------- fixed 3D stage ---------- */
+#stage{
+  position:fixed; inset:0; overflow:hidden;
+  perspective:1050px; perspective-origin:50% 46%;
+  background:
+    radial-gradient(120% 90% at 50% 120%, #131B3D 0%, transparent 55%),
+    radial-gradient(90% 70% at 80% -10%, #0E1836 0%, transparent 60%),
+    linear-gradient(180deg,#070A17 0%, #0A0F24 55%, #0B0F26 100%);
+}
+#world{
+  position:absolute; left:50%; top:50%;
+  transform-style:preserve-3d; will-change:transform;
+}
+.scene{position:absolute; transform-style:preserve-3d}
+.grp{position:absolute; transform-style:preserve-3d}
+.f{
+  position:absolute; transform-origin:0 0; left:0; top:0;
+  image-rendering:auto;
+}
+.lbl{
+  position:absolute; transform-origin:0 0;
+  font-family:var(--mono); font-weight:600; letter-spacing:.14em;
+  text-transform:uppercase; white-space:nowrap;
+  display:flex; align-items:center; justify-content:center;
+}
+.halo{
+  position:absolute; transform-origin:0 0; border-radius:50%;
+  pointer-events:none;
+}
+
+/* stars */
+#stars{position:fixed; inset:0; pointer-events:none}
+
+/* cinematic dressing */
+#vignette{
+  position:fixed; inset:0; pointer-events:none;
+  background:radial-gradient(120% 95% at 50% 45%, transparent 55%, rgba(3,5,12,.55) 100%);
+}
+.bar{position:fixed; left:0; right:0; height:4.5vh; z-index:5; pointer-events:none;
+  background:linear-gradient(180deg, rgba(4,6,13,.9), transparent)}
+#bar-t{top:0}
+#bar-b{bottom:0; transform:rotate(180deg)}
+
+/* ---------- brand ---------- */
+#brand{
+  position:fixed; top:3.2vh; left:3.2vw; z-index:20;
+  font-family:var(--mono); font-size:12px; letter-spacing:.32em;
+  color:var(--muted); text-transform:uppercase; display:flex; gap:.9em; align-items:center;
+}
+#brand b{color:var(--ink); font-weight:700}
+#brand .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);
+  box-shadow:0 0 12px var(--accent); transition:background .6s, box-shadow .6s}
+
+/* ---------- intro ---------- */
+#intro{
+  position:fixed; inset:0; z-index:15; display:grid; place-items:center;
+  text-align:center; pointer-events:none; transition:opacity .7s;
+  background:radial-gradient(60% 45% at 50% 52%, rgba(8,12,27,.62), transparent 75%);
+}
+#intro .kicker{
+  font-family:var(--mono); font-size:12px; letter-spacing:.42em; color:var(--cyan);
+  text-transform:uppercase; margin-bottom:2.2vh;
+}
+#intro h1{
+  font-family:var(--disp); font-weight:800; letter-spacing:.015em;
+  font-size:clamp(38px, 7.4vw, 108px); line-height:.98; text-wrap:balance;
+  background:linear-gradient(115deg,#FFF 20%, #BFD3FF 48%, var(--coral) 75%, var(--gold));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter:drop-shadow(0 8px 60px rgba(255,106,85,.28));
+}
+#intro p{margin-top:2.6vh; color:var(--muted); font-size:clamp(14px,1.4vw,18px)}
+#intro .hint{
+  margin-top:6vh; font-family:var(--mono); font-size:11px; letter-spacing:.3em;
+  color:var(--faint); text-transform:uppercase; animation:bob 2.4s ease-in-out infinite;
+}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(9px)}}
+#intro.off{opacity:0}
+
+/* ---------- copy card ---------- */
+#card{
+  position:fixed; left:3.2vw; bottom:6.5vh; z-index:20;
+  width:min(520px, 86vw);
+  background:var(--panel); border:1px solid var(--line); border-radius:14px;
+  padding:26px 30px 24px;
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  box-shadow:0 24px 70px rgba(2,4,10,.55), inset 0 1px 0 rgba(190,210,255,.08);
+  opacity:0; transform:translateY(26px); transition:opacity .5s, transform .5s;
+  pointer-events:none;
+}
+#card.on{opacity:1; transform:none; pointer-events:auto}
+#card .eyebrow{
+  font-family:var(--mono); font-size:11px; letter-spacing:.3em; text-transform:uppercase;
+  color:var(--accent); display:flex; align-items:center; gap:10px; margin-bottom:12px;
+  transition:color .5s;
+}
+#card .eyebrow::before{content:""; width:26px; height:1px; background:var(--accent); transition:background .5s}
+#card h2{
+  font-family:var(--disp); font-weight:800; letter-spacing:.005em;
+  font-size:clamp(26px, 3vw, 40px); line-height:1.04; text-wrap:balance; margin-bottom:12px;
+}
+#card p{color:var(--muted); font-size:15px; line-height:1.55; max-width:60ch}
+#card .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px}
+#card .tag{
+  font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--ink);
+  border:1px solid var(--line); border-radius:999px; padding:5px 12px;
+  background:rgba(158,178,230,.06);
+}
+#card .tag.hot{border-color:color-mix(in srgb, var(--accent) 55%, transparent);
+  color:var(--accent); background:color-mix(in srgb, var(--accent) 10%, transparent)}
+#card .cta{display:none; gap:12px; margin-top:20px}
+#card.finale .cta{display:flex}
+#card .btn{
+  font-family:var(--disp); font-weight:700; font-size:14px; letter-spacing:.02em;
+  border-radius:10px; padding:11px 20px; cursor:pointer; border:1px solid transparent;
+  background:var(--accent); color:#12060B; transition:filter .2s;
+}
+#card .btn:hover{filter:brightness(1.12)}
+#card .btn.ghost{background:transparent; color:var(--ink); border-color:var(--line)}
+#card .btn:focus-visible{outline:2px solid var(--ink); outline-offset:2px}
+
+/* ---------- route rail ---------- */
+#rail{
+  position:fixed; right:2.6vw; top:50%; transform:translateY(-50%); z-index:20;
+  display:flex; flex-direction:column; gap:18px; align-items:flex-end;
+}
+#rail button{
+  display:flex; align-items:center; gap:10px; background:none; border:none; cursor:pointer;
+  color:var(--faint); font-family:var(--mono); font-size:10px; letter-spacing:.26em;
+  text-transform:uppercase; padding:2px;
+}
+#rail button .pip{
+  width:8px; height:8px; border-radius:50%; background:var(--faint);
+  transition:all .4s; flex:none;
+}
+#rail button span{opacity:0; transform:translateX(6px); transition:all .3s}
+#rail button:hover span{opacity:1; transform:none}
+#rail button.on{color:var(--ink)}
+#rail button.on span{opacity:1; transform:none}
+#rail button.on .pip{background:var(--accent); box-shadow:0 0 14px var(--accent); transform:scale(1.35)}
+#rail button:focus-visible{outline:1px solid var(--muted); outline-offset:3px}
+
+/* ---------- progress ---------- */
+#prog{position:fixed; left:0; top:0; height:2px; width:0; z-index:30;
+  background:linear-gradient(90deg,var(--cyan),var(--accent)); transition:background .6s}
+
+/* ---------- scene decorations ---------- */
+.screenface{animation:shimmer 5.5s linear infinite; background-size:250% 250% !important}
+@keyframes shimmer{0%{background-position:0% 40%}50%{background-position:100% 60%}100%{background-position:0% 40%}}
+.pulse{animation:pulse 2.1s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.45}50%{opacity:1}}
+.beam{animation:beam 2.8s ease-in-out infinite}
+@keyframes beam{0%,100%{opacity:.12}45%,60%{opacity:.9}}
+.floaty{animation:floaty 5s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+/* ---------- small screens ---------- */
+@media (max-width:860px){
+  #card{left:4vw; right:4vw; width:auto; bottom:4.5vh; padding:20px 20px 18px}
+  #card p{font-size:13.5px}
+  #rail button span{display:none}
+  #rail{right:3.5vw}
+  #stage{perspective:820px}
+  #brand{font-size:10px}
+}
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  .pulse,.beam,.floaty,.screenface,#intro .hint{animation:none !important}
+}
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="stars"></canvas>
+  <div id="world"></div>
+</div>
+<div id="vignette"></div>
+<div class="bar" id="bar-t"></div>
+<div class="bar" id="bar-b"></div>
+
+<div id="brand"><span class="dot"></span><b>RMN</b>·WORLD</div>
+
+<div id="intro">
+  <div>
+    <div class="kicker">A scroll flight through the industry</div>
+    <h1>RETAIL MEDIA<br>WORLD</h1>
+    <p>What it is · why it's exploding · how the auction works · who's winning</p>
+    <div class="hint">▼ scroll to take off</div>
+  </div>
+</div>
+
+<div id="card" role="region" aria-live="polite">
+  <div class="eyebrow" id="c-eyebrow"></div>
+  <h2 id="c-title"></h2>
+  <p id="c-body"></p>
+  <div class="tags" id="c-tags"></div>
+  <div class="cta">
+    <button class="btn" id="replay">⟲ Replay the flight</button>
+    <button class="btn ghost" id="totop2" onclick="window.scrollTo({top:0,behavior:'smooth'})" hidden></button>
+  </div>
+</div>
+
+<nav id="rail" aria-label="Scenes"></nav>
+<div id="prog"></div>
+<div id="spacer"></div>
+
+<script>
+/* ============================================================
+   Procedural CSS-3D world + scroll-scrubbed camera.
+   Scenes are built from real 3D cuboids, so the camera flight
+   has true parallax. Swappable later for Higgsfield-rendered
+   video clips (scroll-world skill, architecture B) — the
+   journey, copy and pacing below map 1:1 onto that config.
+   ============================================================ */
+const world = document.getElementById('world');
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- tiny color kit ---------- */
+function hexToHsl(hex){
+  const n=parseInt(hex.slice(1),16), r=(n>>16&255)/255, g=(n>>8&255)/255, b=(n&255)/255;
+  const mx=Math.max(r,g,b), mn=Math.min(r,g,b); let h=0,s=0,l=(mx+mn)/2;
+  if(mx!==mn){const d=mx-mn; s=l>.5?d/(2-mx-mn):d/(mx+mn);
+    h=mx===r?((g-b)/d+(g<b?6:0)):mx===g?((b-r)/d+2):((r-g)/d+4); h*=60;}
+  return [h,s*100,l*100];
+}
+function shade(hex,dl,ds=0){const[h,s,l]=hexToHsl(hex);
+  return `hsl(${h.toFixed(1)} ${Math.max(0,Math.min(100,s+ds)).toFixed(1)}% ${Math.max(0,Math.min(100,l+dl)).toFixed(1)}%)`}
+
+/* ---------- geometry kit ---------- */
+function el(parent, cls){const d=document.createElement('div'); d.className=cls; parent.appendChild(d); return d}
+function face(g,w,h,t,bg,extra){
+  const f=el(g,'f'); f.style.width=w+'px'; f.style.height=h+'px';
+  f.style.transform=t; f.style.background=bg;
+  if(extra) Object.assign(f.style,extra);
+  return f;
+}
+/* box: x,z center of footprint; y = ground line (bottom); h up (-y) */
+function box(g,x,y,z,w,d,h,hex,glow){
+  const fr=shade(hex,0), bk=shade(hex,-16), sdL=shade(hex,-10), sdR=shade(hex,-5), tp=shade(hex,12,4);
+  const gl=glow?{boxShadow:`0 0 34px ${glow}`}:null;
+  face(g,w,h,`translate3d(${x-w/2}px,${y-h}px,${z+d/2}px)`,fr,gl);
+  face(g,w,h,`translate3d(${x-w/2}px,${y-h}px,${z-d/2}px)`,bk);
+  face(g,d,h,`translate3d(${x-w/2}px,${y-h}px,${z-d/2}px) rotateY(-90deg)`,sdL);
+  face(g,d,h,`translate3d(${x+w/2}px,${y-h}px,${z-d/2}px) rotateY(-90deg)`,sdR);
+  face(g,w,d,`translate3d(${x-w/2}px,${y-h}px,${z-d/2}px) rotateX(90deg)`,tp);
+  return g;
+}
+/* glowing screen panel standing upright, facing +z */
+function screen(g,x,y,z,w,h,c1,c2,ry=0,anim=true){
+  const f=face(g,w,h,
+    `translate3d(${x-w/2}px,${y-h}px,${z}px) rotateY(${ry}deg)`,
+    `linear-gradient(120deg, ${c1}, ${c2}, ${c1})`,
+    {boxShadow:`0 0 46px ${c1}66, 0 0 110px ${c1}33`, borderRadius:'3px'});
+  if(anim) f.classList.add('screenface');
+  return f;
+}
+function halo(g,x,y,z,r,color,op=.5,flat=false){
+  const h=el(g,'halo');
+  h.style.width=h.style.height=r*2+'px';
+  h.style.background=`radial-gradient(circle, ${color} 0%, transparent 65%)`;
+  h.style.opacity=op;
+  h.style.transform=flat
+    ? `translate3d(${x-r}px,${y}px,${z-r}px) rotateX(90deg)`
+    : `translate3d(${x-r}px,${y-r*2}px,${z}px)`;
+  return h;
+}
+function label(g,x,y,z,text,color,size=15,ry=0,bgpanel=false){
+  const l=el(g,'lbl'); l.textContent=text;
+  l.style.cssText+=`font-size:${size}px;color:${color};transform:translate3d(${x}px,${y}px,${z}px) rotateY(${ry}deg);`;
+  if(bgpanel) l.style.cssText+=`background:rgba(8,12,27,.72);padding:6px 12px;border-radius:6px;border:1px solid rgba(158,178,230,.2);`;
+  l.style.textShadow=`0 0 18px ${color}`;
+  return l;
+}
+function platform(g,w,d,hex,ry=0){
+  box(g,0,0,0,w,d,26,hex);                    // island slab
+  box(g,0,26,0,w*.82,d*.82,18,shade0(hex,-6)); // underside taper
+  halo(g,0,60,0,Math.max(w,d)*.85,'rgba(20,40,110,.5)',.75,true); // ground glow shadow
+}
+function shade0(hex,dl){return hex} /* keep hex passthrough for platform base */
+
+/* ---------- palette ---------- */
+const P={
+  ground:'#141B38', ground2:'#0F1530', dark:'#1A2246',
+  coral:'#FF6A55', cyan:'#4FD6EA', magenta:'#C86BFF',
+  gold:'#FFC24B', violet:'#8F7CFF', sunrise:'#FF9E6B',
+  cream:'#F4E9D8', white:'#EAF0FF'
+};
+
+/* ============================================================
+   SCENES
+   ============================================================ */
+const SCENES=[];
+function scene(def, build){
+  const g=el(world,'scene');
+  g.style.transform=`translate3d(${def.x}px,${def.y}px,${def.z}px) rotateY(${def.ry}deg)`;
+  build(g);
+  def.el=g; SCENES.push(def); return def;
+}
+
+/* ---- S0 · THE SHELF — a store whose shelf is a billboard ---- */
+scene({id:'shelf', x:0, y:0, z:0, ry:0, accent:'var(--coral)', hex:P.coral,
+  label:'Shelf',
+  eyebrow:'01 — What is a retail media network',
+  title:'The store became the medium.',
+  body:'A retail media network is a store selling ad space in its own world — its website, its app, the screens in its aisles. The shelf itself is now a billboard, and brands pay to be seen right where people buy.',
+  tags:['Onsite ads','Offsite ads','In-store screens']
+},(g)=>{
+  platform(g,760,560,P.ground);
+  // store shell: floor + back + sides (open front)
+  box(g,0,-26,-40,600,380,10,P.ground2);
+  box(g,0,-36,-220,600,16,220,P.dark);                 // back wall
+  box(g,-300,-36,-40,16,380,190,P.dark);               // left wall
+  box(g,300,-36,-40,16,380,190,P.dark);                // right wall
+  // aisles of shelves
+  const prod=[P.coral,P.cyan,P.gold,P.violet,P.magenta];
+  for(let r=0;r<3;r++){
+    const zz=-150+r*115;
+    box(g,-60,-36,zz,420,26,86,'#232C56');
+    for(let i=0;i<7;i++){
+      box(g,-232+i*58,-36-86,zz,34,22,26,prod[(i+r)%5]);
+      box(g,-232+i*58,-36-52,zz,34,22,26,prod[(i+r+2)%5]);
+    }
+  }
+  // the SPONSORED endcap — glowing coral shelf
+  box(g,232,-36,-35,54,300,120,'#2A1B2E');
+  screen(g,232,-156,118,60,74,P.coral,'#FF9E6B',0);
+  halo(g,232,-120,130,150,'rgba(255,106,85,.5)',.55);
+  // big billboard on the roof
+  box(g,0,-226,-220,340,14,14,P.dark);
+  screen(g,0,-240,-206,330,120,P.coral,P.magenta);
+  label(g,-105,-330,-200,'YOUR AD HERE',P.cream,17);
+  halo(g,0,-230,-190,260,'rgba(255,106,85,.4)',.5);
+  // little shoppers (carts)
+  [[-160,150],[40,205],[150,120]].forEach(([xx,zz])=>{
+    box(g,xx,-36,zz,26,34,22,P.white); box(g,xx,-58,zz,8,8,16,P.cyan);
+  });
+  label(g,-370,-30,250,'THE STORE',P.coral,13,18,true);
+});
+
+/* ---- S1 · THE DATA ENGINE — receipts become targeting ---- */
+scene({id:'data', x:1500, y:-40, z:-2400, ry:-16, accent:'var(--cyan)', hex:P.cyan,
+  label:'Data',
+  eyebrow:'02 — Why brands love it',
+  title:'The store keeps the receipts.',
+  body:'Stores know what people actually buy — no guessing, no third-party cookies. Every checkout feeds privacy-safe targeting, and every ad can be traced to the exact sales it caused. Advertisers call that the closed loop.',
+  tags:['First-party data','Closed loop','Privacy-safe']
+},(g)=>{
+  platform(g,740,540,P.ground);
+  // checkout counter + conveyor
+  box(g,-210,-26,110,190,90,64,P.ground2);
+  box(g,-210,-90,110,190,60,10,'#26497A');
+  box(g,-300,-26,110,40,90,90,P.dark);
+  screen(g,-300,-116,156,34,26,P.cyan,'#9BEBF7');
+  // receipts / data cubes arcing up to the engine
+  for(let i=0;i<9;i++){
+    const t=i/8, xx=-180+t*330, yy=-120-Math.sin(t*Math.PI)*190-t*40, zz=90-t*220;
+    const c=el(g,'grp'); c.classList.add('floaty'); c.style.animationDelay=(i*.35)+'s';
+    box(c,xx,yy,zz,18,18,18,P.cyan,'rgba(79,214,234,.8)');
+  }
+  // the data engine — tiered server stack
+  box(g,190,-26,-130,240,240,90,P.dark);
+  box(g,190,-116,-130,190,190,90,'#1F2A55');
+  box(g,190,-206,-130,140,140,90,'#26325F');
+  for(let k=0;k<3;k++){
+    screen(g,190,-56-k*90,-129+ (120-k*25) ,110-k*20,18,P.cyan,'#8FF3FF',0,false);
+  }
+  halo(g,190,-190,-10,240,'rgba(79,214,234,.45)',.6);
+  box(g,190,-296,-130,16,16,70,P.cyan,'rgba(79,214,234,.9)');   // antenna
+  halo(g,190,-366,-120,60,'rgba(158,243,255,.9)',.9);
+  label(g,60,-420,-120,'PURCHASE DATA',P.cyan,13,16,true);
+  label(g,-330,-30,240,'CHECKOUT',P.cyan,12,16,true);
+});
+
+/* ---- S2 · THE AUCTION — programmatic, cinematically ---- */
+scene({id:'auction', x:-1250, y:30, z:-4800, ry:20, accent:'var(--magenta)', hex:P.magenta,
+  label:'Auction',
+  eyebrow:'03 — How an ad gets there · in ~200 ms',
+  title:'A blink-speed auction.',
+  body:'You open the store app ① — a signal fires. Brands’ bidding machines compete for that one ad slot ② and the best relevant bid wins. The winning ad appears before the page loads ③, and if you buy, the sale reports straight back ④. All in about 200 milliseconds.',
+  tags:['① Signal','② Bids','③ Ad served','④ Sale looped back']
+},(g)=>{
+  platform(g,820,600,P.ground);
+  // ① the shopper's phone
+  box(g,-300,-26,180,56,16,96,'#0E1330','rgba(200,107,255,.35)');
+  screen(g,-300,-34,190,46,78,P.magenta,'#7FE7FF',0);
+  halo(g,-300,-70,196,90,'rgba(200,107,255,.55)',.6);
+  label(g,-352,-160,196,'① SIGNAL',P.magenta,12,0,true);
+  // the auction dais
+  box(g,0,-26,-40,190,190,26,'#241A44');
+  box(g,0,-52,-40,140,140,18,'#2E2158');
+  halo(g,0,-56,-40,160,'rgba(200,107,255,.6)',.7,true);
+  box(g,0,-70,-40,12,12,120,P.magenta,'rgba(200,107,255,.9)');
+  halo(g,0,-210,-30,80,'rgba(233,190,255,.95)',.9);
+  label(g,-64,-268,-30,'② AUCTION',P.magenta,12,0,true);
+  // bidder pylons (DSP machines) — one winner glows
+  const bidders=[[-190,-190,P.violet,.0],[210,-160,P.cyan,.4],[150,120,P.gold,.8],[-140,150,P.coral,1.2]];
+  bidders.forEach(([xx,zz,c,delay],i)=>{
+    const grp=el(g,'grp');
+    box(grp,xx,-26,zz,64,64,120+ (i===1?40:0),'#1B2248', i===1?'rgba(79,214,234,.7)':null);
+    const s=screen(grp,xx,-146-(i===1?40:0),zz+33,50,34,c,'#FFFFFF',0,false);
+    s.classList.add('pulse'); s.style.animationDelay=delay+'s';
+    // bid beams toward dais
+    const dx=-xx, dz=-40-zz, len=Math.hypot(dx,dz), ang=Math.atan2(dx,dz)*180/Math.PI;
+    const b=face(g,4,len,
+      `translate3d(${xx-2}px,-96px,${zz}px) rotateX(90deg) rotateZ(${-ang}deg)`,
+      `linear-gradient(180deg, ${c}, transparent)`);
+    b.classList.add('beam'); b.style.animationDelay=delay+'s';
+  });
+  label(g,236,-260,-160,'WINNER',P.cyan,11,0,true);
+  // ③ the ad slot screen it wins
+  box(g,320,-26,60,26,150,170,P.dark);
+  screen(g,332,-196,60,120,84,P.cyan,P.magenta,90);
+  label(g,352,-236,140,'③ AD SERVED',P.cyan,12,20,true);
+  // ④ sale loops back — arc of light to register
+  for(let i=0;i<6;i++){
+    const t=i/5, xx=300-260*t, yy=-60-Math.sin(t*Math.PI)*130, zz=170+40*t;
+    const c=el(g,'grp'); c.classList.add('pulse'); c.style.animationDelay=(1+i*.2)+'s';
+    box(c,xx,yy,zz,12,12,12,P.gold,'rgba(255,194,75,.9)');
+  }
+  label(g,-10,-190,290,'④ SALE REPORTED',P.gold,11,0,true);
+  label(g,-430,-40,270,'~200 MILLISECONDS',P.magenta,13,22,true);
+});
+
+/* ---- S3 · THE GROWTH SKYLINE — rank & scale ---- */
+scene({id:'rise', x:950, y:-90, z:-7300, ry:-13, fx:-150, accent:'var(--gold)', hex:P.gold,
+  label:'Rise',
+  eyebrow:'04 — How big is it',
+  title:'Advertising’s third wave.',
+  body:'After search and social, retail media is the fastest-growing ad channel on Earth — roughly $170 billion a year worldwide, about a fifth of all digital ad spending, already passing TV and still climbing.',
+  tags:['≈ $170B global / yr','~1/5 of digital spend','#3 channel & climbing']
+},(g)=>{
+  platform(g,860,600,P.ground);
+  const towers=[
+    {x:-290, h:330, c:'#33406F', name:'SEARCH',  glow:null,  dim:false},
+    {x:-110, h:270, c:'#3A477B', name:'SOCIAL',  glow:null,  dim:false},
+    {x:80,   h:210, c:P.gold,    name:'RETAIL MEDIA', glow:'rgba(255,194,75,.75)', dim:false},
+    {x:260,  h:150, c:'#232B4F', name:'TV',      glow:null,  dim:true},
+  ];
+  towers.forEach(t=>{
+    box(g,t.x,-26,-60,120,120,t.h,t.c,t.glow);
+    // lit windows
+    for(let f=0;f<Math.floor(t.h/46);f++){
+      screen(g,t.x,-64-f*46,2,86,16, t.dim?'#26305A': (t.c===P.gold?'#FFE3A8':'#5E74C9'),
+        t.dim?'#1B2244':(t.c===P.gold?P.gold:'#33406F'),0,false);
+    }
+    label(g,t.x-56,4,110,t.name, t.c===P.gold?P.gold:'#8FA2D6', 11.5,0,true);
+  });
+  // construction crane on the RMN tower — still being built
+  box(g,80,-236,-60,10,10,120,'#FFD98A','rgba(255,194,75,.7)');
+  box(g,80,-356,-60,150,10,10,'#FFD98A');
+  box(g,148,-346,-60,6,6,44,'#FFD98A');
+  box(g,148,-302,-60,20,20,20,P.gold,'rgba(255,194,75,.9)');
+  // rising neon growth ribbon
+  for(let i=0;i<12;i++){
+    const t=i/11, xx=-330+t*560, yy=-40-t*t*330, zz=140-t*40;
+    const c=el(g,'grp'); c.classList.add('pulse'); c.style.animationDelay=(i*.14)+'s';
+    box(c,xx,yy,zz,14,14,14,P.gold,'rgba(255,194,75,.8)');
+  }
+  label(g,270,-460,-40,'≈ $170B',P.gold,26,0,true);
+  halo(g,80,-300,10,220,'rgba(255,194,75,.4)',.55);
+  label(g,-430,-20,260,'THE THIRD WAVE',P.gold,12,14,true);
+});
+
+/* ---- S4 · THE COCKPIT — programmatic experts, multiplatform ---- */
+scene({id:'cockpit', x:-1150, y:10, z:-9800, ry:16, accent:'var(--violet)', hex:P.violet,
+  label:'Cockpit',
+  eyebrow:'05 — The specialists',
+  title:'One brain, every platform.',
+  body:'Amazon, Walmart, Tesco, Instacart — every store’s network speaks its own dialect. Programmatic experts fly them all from one cockpit: bidding engines (DSPs), privacy-safe data clean rooms, and share-of-voice strategies — one plan, played on every board.',
+  tags:['DSP & real-time bidding','Data clean rooms','Share-of-voice']
+},(g)=>{
+  platform(g,800,600,P.ground);
+  // curved wall of screens
+  const wall=[[-260,-40,34],[-140,-120,18],[0,-150,0],[140,-120,-18],[260,-40,-34]];
+  wall.forEach(([xx,zz,ry],i)=>{
+    box(g,xx,-26,zz-160,120,18,160,P.dark);
+    screen(g,xx,-186,zz-150,104,120,
+      [P.violet,P.cyan,P.coral,P.gold,P.magenta][i],'#20295C',ry);
+  });
+  halo(g,0,-190,-120,300,'rgba(143,124,255,.35)',.55);
+  // console desk + operator
+  box(g,0,-26,60,300,90,54,'#1C2450');
+  screen(g,0,-80,106,280,30,P.violet,'#3A2F7A',0,false);
+  box(g,0,-26,170,44,44,64,P.cream);               // the expert
+  box(g,0,-90,170,32,32,30,'#E8C9A8');
+  // holo-globe of platforms
+  halo(g,0,-240,-20,90,'rgba(143,124,255,.9)',.85);
+  const nodes=[[-120,-300],[120,-310],[-60,-380],[80,-390],[0,-260]];
+  nodes.forEach(([xx,yy],i)=>{
+    const c=el(g,'grp'); c.classList.add('floaty'); c.style.animationDelay=(i*.5)+'s';
+    box(c,xx,yy,-20,16,16,16,[P.coral,P.cyan,P.gold,P.magenta,P.white][i],
+      'rgba(200,200,255,.8)');
+  });
+  label(g,-405,-30,260,'MISSION CONTROL',P.violet,12,18,true);
+  label(g,110,-430,-10,'EVERY NETWORK',P.violet,11,0,true);
+});
+
+/* ---- S5 · THE ARENA — Publicis vs WPP vs Dentsu ---- */
+scene({id:'arena', x:450, y:-50, z:-12300, ry:-9, accent:'var(--coral)', hex:P.coral,
+  label:'Arena',
+  eyebrow:'06 — The giants competing',
+  title:'Agencies racing for the shelf.',
+  body:'Publicis bolted Epsilon’s identity data onto CitrusAd’s ad rails. WPP bought InfoSum to master privacy-safe data matching. Dentsu pairs Merkle’s identity spine with a partner network. Different builds — same prize: every retailer’s network, run under one plan.',
+  tags:['Publicis · Epsilon + CitrusAd','WPP · InfoSum + GroupM','Dentsu · Merkle + partners']
+},(g)=>{
+  platform(g,860,640,P.ground);
+  // center podium + glowing shelf trophy
+  box(g,0,-26,0,240,240,22,'#232C56');
+  box(g,0,-48,0,180,180,20,'#2A3462');
+  box(g,0,-68,0,120,120,18,'#33406F');
+  box(g,0,-86,0,70,16,86,P.cream,'rgba(244,233,216,.55)');
+  box(g,0,-120,0,60,14,8,P.gold,'rgba(255,194,75,.9)');
+  box(g,0,-150,0,60,14,8,P.gold,'rgba(255,194,75,.9)');
+  halo(g,0,-160,10,130,'rgba(255,230,170,.75)',.8);
+  // three HQ towers, accent-coded
+  const hq=[
+    {x:-300,z:-120,c:P.coral, n:'PUBLICIS', s:'EPSILON + CITRUSAD'},
+    {x:300, z:-120,c:P.cyan,  n:'WPP',      s:'INFOSUM + GROUPM'},
+    {x:0,   z:-290,c:P.violet,n:'DENTSU',   s:'MERKLE + PARTNERS'},
+  ];
+  hq.forEach(t=>{
+    box(g,t.x,-26,t.z,130,130,240,'#1B2248','rgba(20,28,64,.6)');
+    for(let f=0;f<4;f++) screen(g,t.x,-58-f*52,t.z+66,96,18,t.c,'#141B38',0,false);
+    box(g,t.x,-266,t.z,20,20,50,t.c,`0 0 30px ${t.c}`);
+    halo(g,t.x,-320,t.z+10,70,t.c==='#FF6A55'?'rgba(255,106,85,.85)':(t.c==='#4FD6EA'?'rgba(79,214,234,.85)':'rgba(143,124,255,.85)'),.85);
+    label(g,t.x-56,-368,t.z+10,t.n,t.c,14,0,true);
+    label(g,t.x-70,-30,t.z+140,t.s,'#8FA2D6',9.5,0,true);
+  });
+  label(g,-440,-30,300,'THE HOLDING-CO RACE',P.coral,12,12,true);
+});
+
+/* ---- S6 · THE HORIZON — what's next + CTA ---- */
+scene({id:'horizon', x:-100, y:0, z:-14900, ry:0, accent:'var(--sunrise)', hex:P.sunrise,
+  label:'Horizon', finale:true,
+  eyebrow:'07 — What’s next',
+  title:'Every screen becomes a shelf.',
+  body:'Digital screens in stores, ads on connected TV, AI running the bidding — shopping and media are merging into one continuous loop. The winners of the next decade will be fluent in both.',
+  tags:['In-store digital','CTV commerce','AI-run bidding']
+},(g)=>{
+  platform(g,880,620,P.ground);
+  // sunrise glow on the horizon
+  halo(g,0,-140,-320,520,'rgba(255,158,107,.55)',.8);
+  halo(g,0,-60,-320,900,'rgba(255,106,85,.22)',.8);
+  // mini city
+  const bl=[[-320,-80,140,'#26305A'],[-180,-40,200,'#1E2750'],[240,-90,170,'#26305A'],[330,-30,120,'#1E2750']];
+  bl.forEach(([xx,zz,hh,c])=>{ box(g,xx,-26,zz-80,90,90,hh,c);
+    for(let f=0;f<Math.floor(hh/50);f++) screen(g,xx,-56-f*50,zz-34,60,12,'#41519B','#1B2244',0,false);
+  });
+  // the giant CTV screen
+  box(g,30,-26,-180,360,20,200,P.dark);
+  screen(g,30,-226,-168,340,150,P.sunrise,P.magenta);
+  label(g,-90,-310,-160,'COMMERCE × MEDIA',P.cream,15);
+  // storefront of the future
+  box(g,-40,-26,120,220,140,110,'#1C2450');
+  screen(g,-40,-136,191,190,40,P.sunrise,P.gold,0);
+  screen(g,-40,-96,191,60,70,'#FFE9CF','#FF9E6B',0,false);
+  halo(g,-40,-80,200,130,'rgba(255,158,107,.5)',.6);
+  // road of light to the horizon
+  for(let i=0;i<8;i++){
+    const c=el(g,'grp'); c.classList.add('pulse'); c.style.animationDelay=(i*.18)+'s';
+    box(c,140,-30,60-i*60,20,34,6,P.sunrise,'rgba(255,158,107,.8)');
+  }
+  label(g,-450,-30,280,'THE HORIZON',P.sunrise,13,10,true);
+});
+
+/* ============================================================
+   CAMERA — keyframes derived from scene positions
+   ============================================================ */
+const D2R=Math.PI/180;
+function sceneFocus(s){ return {x:s.x+(s.fx||0), y:s.y-150, z:s.z-40} }
+const KEYS=[]; // {pos:{x,y,z}, tgt:{x,y,z}, w:weightToNext, scene:index|null, near:boolean}
+SCENES.forEach((s,i)=>{
+  const prev = i===0 ? {x:s.x, y:s.y, z:s.z+2600} : SCENES[i-1];
+  let dx=s.x-prev.x, dz=s.z-prev.z; const dl=Math.hypot(dx,dz)||1; dx/=dl; dz/=dl;
+  const focus=sceneFocus(s);
+  const far ={x:s.x-dx*1500, y:s.y-620, z:s.z-dz*1500};
+  const near={x:s.x-dx*820,  y:s.y-300, z:s.z-dz*820};
+  if(i>0){
+    const pn=KEYS[KEYS.length-1];
+    KEYS.push({pos:{x:(pn.pos.x+far.x)/2, y:Math.min(pn.pos.y,far.y)-520, z:(pn.pos.z+far.z)/2},
+               tgt:{x:(pn.tgt.x+focus.x)/2, y:(pn.tgt.y+focus.y)/2-100, z:(pn.tgt.z+focus.z)/2},
+               w:.6, scene:null});
+  }
+  KEYS.push({pos:far,  tgt:focus, w:1.15, scene:i, phase:'far'});
+  KEYS.push({pos:near, tgt:focus, w: i<SCENES.length-1 ? .6 : .0001, scene:i, phase:'near'});
+});
+// cumulative u for each key
+let totalW=0; KEYS.forEach(k=>{k.u0=totalW; totalW+=k.w});
+KEYS.forEach(k=>{k.u0/=totalW});
+
+/* scene active bands (for copy card + rail) */
+const BANDS=SCENES.map((s,i)=>{
+  const far=KEYS.find(k=>k.scene===i&&k.phase==='far');
+  const near=KEYS.find(k=>k.scene===i&&k.phase==='near');
+  const nextIdx=KEYS.indexOf(near)+1;
+  const last=i===SCENES.length-1;
+  // card on once the dive is underway; off ~mid pull-out so copy never
+  // narrates the wrong scene during transit
+  const start=far.u0+(near.u0-far.u0)*(last?.18:.32);
+  const end = last||nextIdx>=KEYS.length ? 1.1
+    : near.u0+(KEYS[nextIdx].u0-near.u0)*.45;
+  return {start, end, near:near.u0};
+});
+
+/* interpolation: Catmull-Rom over key positions/targets */
+function cr(p0,p1,p2,p3,t){
+  const t2=t*t,t3=t2*t;
+  return .5*((2*p1)+(-p0+p2)*t+(2*p0-5*p1+4*p2-p3)*t2+(-p0+3*p1-3*p2+p3)*t3);
+}
+function sampleVec(field,seg,t){
+  const k=i=>KEYS[Math.max(0,Math.min(KEYS.length-1,i))][field];
+  const out={};
+  ['x','y','z'].forEach(a=>{
+    out[a]=cr(k(seg-1)[a],k(seg)[a],k(seg+1)[a],k(seg+2)[a],t);
+  });
+  return out;
+}
+function ease(t){return t*t*(3-2*t)}
+function camAt(u){
+  u=Math.max(0,Math.min(.99999,u));
+  let seg=0;
+  for(let i=0;i<KEYS.length-1;i++){ if(u>=KEYS[i].u0 && u<KEYS[i+1].u0){seg=i;break} if(u>=KEYS[KEYS.length-1].u0) seg=KEYS.length-2 }
+  const span=KEYS[seg+1].u0-KEYS[seg].u0;
+  const t=ease((u-KEYS[seg].u0)/span);
+  const pos=sampleVec('pos',seg,t), tgt=sampleVec('tgt',seg,t);
+  const dx=tgt.x-pos.x, dy=tgt.y-pos.y, dz=tgt.z-pos.z;
+  const len=Math.hypot(dx,dy,dz)||1;
+  const pitch=Math.asin(dy/len);
+  const yaw=Math.atan2(-dx,-dz);
+  return {pos,pitch,yaw};
+}
+
+/* ============================================================
+   UI wiring
+   ============================================================ */
+const card=document.getElementById('card'),
+  cEyebrow=document.getElementById('c-eyebrow'),
+  cTitle=document.getElementById('c-title'),
+  cBody=document.getElementById('c-body'),
+  cTags=document.getElementById('c-tags'),
+  intro=document.getElementById('intro'),
+  prog=document.getElementById('prog'),
+  rail=document.getElementById('rail'),
+  brandDot=document.querySelector('#brand .dot');
+
+SCENES.forEach((s,i)=>{
+  const b=document.createElement('button');
+  b.innerHTML=`<span>${s.label}</span><span class="pip"></span>`;
+  b.setAttribute('aria-label',s.label);
+  b.addEventListener('click',()=>{
+    const y=BANDS[i].near*(document.body.scrollHeight-innerHeight);
+    scrollTo({top:y,behavior:RM?'auto':'smooth'});
+  });
+  rail.appendChild(b);
+});
+const pips=[...rail.children];
+document.getElementById('replay').addEventListener('click',()=>scrollTo({top:0,behavior:RM?'auto':'smooth'}));
+
+let activeScene=-1;
+function setScene(i){
+  if(i===activeScene) return;
+  activeScene=i;
+  if(i<0){card.classList.remove('on'); pips.forEach(p=>p.classList.remove('on')); return}
+  const s=SCENES[i];
+  document.documentElement.style.setProperty('--accent',s.accent);
+  cEyebrow.textContent=s.eyebrow; cTitle.textContent=s.title; cBody.textContent=s.body;
+  cTags.innerHTML=s.tags.map((t,k)=>`<span class="tag${k===0?' hot':''}">${t}</span>`).join('');
+  card.classList.toggle('finale',!!s.finale);
+  card.classList.add('on');
+  pips.forEach((p,k)=>p.classList.toggle('on',k===i));
+}
+
+/* ---------- stars ---------- */
+const cnv=document.getElementById('stars'), ctx=cnv.getContext('2d');
+let stars=[];
+function seedStars(){
+  cnv.width=innerWidth*devicePixelRatio; cnv.height=innerHeight*devicePixelRatio;
+  stars=Array.from({length:innerWidth>860?150:70},()=>({
+    x:Math.random(), y:Math.random(), r:Math.random()*1.4+.3,
+    tw:Math.random()*Math.PI*2, sp:.2+Math.random()*.8
+  }));
+}
+seedStars(); addEventListener('resize',seedStars);
+function drawStars(time,cam){
+  ctx.clearRect(0,0,cnv.width,cnv.height);
+  const ox=(cam.yaw*220)%1, oy=(cam.pos.y*.0001)%1;
+  for(const s of stars){
+    const a=.25+.55*Math.abs(Math.sin(time*.0006*s.sp+s.tw));
+    ctx.fillStyle=`rgba(190,210,255,${a})`;
+    const x=((s.x+ox*.05+10)%1)*cnv.width, y=((s.y+oy+10)%1)*cnv.height;
+    ctx.beginPath(); ctx.arc(x,y,s.r*devicePixelRatio,0,7); ctx.fill();
+  }
+}
+
+/* ---------- main loop ---------- */
+let target=0, smooth=0;
+const spacer=document.getElementById('spacer');
+spacer.style.height=Math.round(totalW*105)+'vh';
+
+function frame(time){
+  const max=document.body.scrollHeight-innerHeight;
+  target=max>0?scrollY/max:0;
+  smooth = RM ? target : smooth+(target-smooth)*.085;
+  if(Math.abs(target-smooth)<.00004) smooth=target;
+
+  const cam=camAt(smooth);
+  const zoom=innerWidth<=860?1.55:1;   // portrait crops the wide frame; magnify
+  world.style.transform=
+    `scale(${zoom}) rotateX(${-cam.pitch}rad) rotateY(${-cam.yaw}rad) `+
+    `translate3d(${-cam.pos.x}px,${-cam.pos.y}px,${-cam.pos.z}px)`;
+
+  // depth fade per scene (fully hide far islands so label plates
+  // never linger as dark streaks at grazing angles)
+  SCENES.forEach(s=>{
+    const d=Math.hypot(s.x-cam.pos.x, s.z-cam.pos.z);
+    const o=Math.max(0,Math.min(1,1.38-d/3900));
+    s.el.style.opacity=o.toFixed(3);
+    s.el.style.visibility=o<.05?'hidden':'visible';
+  });
+
+  // active band
+  let act=-1;
+  BANDS.forEach((b,i)=>{ if(smooth>=b.start&&smooth<b.end) act=i });
+  setScene(act);
+
+  intro.classList.toggle('off', target>.012);
+  prog.style.width=(target*100)+'%';
+  drawStars(time,cam);
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
