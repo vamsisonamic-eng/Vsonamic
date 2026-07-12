@@ -1,0 +1,28 @@
+{
+  "name": "rmn-park",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The Digital Supply Chain Amusement Park — a 3D scroll experience explaining programmatic advertising and retail media networks for absolute laymen.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "preview:bundle": "node scripts/build-single-file.mjs"
+  },
+  "dependencies": {
+    "@gsap/react": "^2.1.1",
+    "@react-three/drei": "^9.114.0",
+    "@react-three/fiber": "^8.17.10",
+    "gsap": "^3.12.5",
+    "next": "^14.2.15",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.169.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "esbuild": "^0.24.0",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13"
+  }
+}

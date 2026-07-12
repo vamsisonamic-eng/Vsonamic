@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: #07091a;
+  color: #eef2ff;
+  /* clip, not hidden: hidden creates a scroll container and silently
+     kills every position:sticky copy card */
+  overflow-x: clip;
+}
+
+/* the 3D canvas sits behind everything and never scrolls */
+.park-canvas {
+  position: fixed !important;
+  inset: 0;
+  z-index: 0;
+}
+
+/* glassy copy card */
+.card {
+  @apply rounded-2xl border border-white/10 bg-panel/80 backdrop-blur-md
+    shadow-[0_24px_70px_rgba(2,4,10,.55)] p-6 md:p-8 max-w-md pointer-events-auto;
+}
+.eyebrow {
+  @apply font-mono text-[11px] tracking-[0.3em] uppercase mb-3 flex items-center gap-2;
+}
+.eyebrow::before {
+  content: '';
+  @apply inline-block w-6 h-px bg-current;
+}
+.headline {
+  @apply font-disp font-extrabold leading-[1.03] text-3xl md:text-5xl
+    [text-wrap:balance] mb-3;
+}
+.blurb {
+  @apply text-slate-300/90 text-[15px] leading-relaxed;
+}
+.chip {
+  @apply font-mono text-[11px] tracking-wide rounded-full border border-white/10
+    bg-white/5 px-3 py-1;
+}
+.btn-big {
+  @apply font-disp font-bold text-base rounded-xl px-6 py-3 cursor-pointer
+    transition-transform duration-150 active:scale-95 pointer-events-auto
+    focus-visible:outline focus-visible:outline-2 focus-visible:outline-white;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
