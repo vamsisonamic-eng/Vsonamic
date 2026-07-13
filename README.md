@@ -40,7 +40,7 @@ npm run dev
 
 ## Deploy to GitHub Pages
 
-1. Ensure `base` in `vite.config.js` matches your repo name (currently `/Vsonamic/`).
+1. Ensure `base` in `vite.config.js` matches your repo name (`/` for this root user site).
 2. In the repo: **Settings → Pages → Source → GitHub Actions**.
 3. Push to `main` — `.github/workflows/deploy.yml` builds and deploys automatically.
 
