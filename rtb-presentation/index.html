@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inside Real-Time Bidding — A Visual Walkthrough</title>
+<style>
+  :root{
+    --bg:#0b0e17; --bg2:#111527; --panel:#161b30;
+    --ink:#e8ecf8; --muted:#93a0c2; --line:#28304f;
+    --accent:#5b8cff; --accent2:#37d0a0; --gold:#f5b942; --pink:#ff6b9d;
+    --radius:18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+    line-height:1.65; overflow-x:hidden;
+  }
+  section{min-height:100vh; display:flex; flex-direction:column; justify-content:center;
+    padding:6rem 8vw; position:relative}
+  h1{font-size:clamp(2.4rem,6vw,4.5rem); line-height:1.1; font-weight:800}
+  h2{font-size:clamp(1.8rem,4vw,2.8rem); margin-bottom:1.2rem; font-weight:750}
+  h3{font-size:1.15rem; margin-bottom:.4rem}
+  p.lead{color:var(--muted); font-size:clamp(1rem,2vw,1.25rem); max-width:46rem}
+  .tag{display:inline-block; font-size:.75rem; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--accent2); border:1px solid var(--accent2); border-radius:999px;
+    padding:.3rem 1rem; margin-bottom:1.4rem}
+  .grad{background:linear-gradient(90deg,var(--accent),var(--accent2),var(--gold));
+    -webkit-background-clip:text; background-clip:text; color:transparent}
+
+  /* progress bar */
+  #progress{position:fixed; top:0; left:0; height:3px; width:0;
+    background:linear-gradient(90deg,var(--accent),var(--accent2)); z-index:99}
+
+  /* nav dots */
+  #dots{position:fixed; right:1.2rem; top:50%; transform:translateY(-50%); z-index:98;
+    display:flex; flex-direction:column; gap:.7rem}
+  #dots a{width:10px; height:10px; border-radius:50%; background:var(--line);
+    display:block; transition:.3s}
+  #dots a.on{background:var(--accent2); transform:scale(1.4)}
+
+  /* reveal on scroll */
+  .reveal{opacity:0; transform:translateY(36px); transition:opacity .8s ease,transform .8s ease}
+  .reveal.show{opacity:1; transform:none}
+  .d1{transition-delay:.12s}.d2{transition-delay:.24s}.d3{transition-delay:.36s}.d4{transition-delay:.48s}
+
+  /* hero */
+  #hero{align-items:flex-start; background:
+    radial-gradient(60vw 60vw at 80% -10%, #1c2650 0%, transparent 60%),
+    radial-gradient(40vw 40vw at 10% 110%, #10321f 0%, transparent 60%), var(--bg)}
+  .blink-ad{position:absolute; border:1px dashed var(--line); border-radius:10px;
+    color:var(--muted); font-size:.7rem; display:flex; align-items:center; justify-content:center;
+    animation:float 7s ease-in-out infinite; opacity:.6}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+  .stat-row{display:flex; gap:1.2rem; flex-wrap:wrap; margin-top:2.5rem}
+  .stat{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:1.2rem 1.6rem; min-width:12rem}
+  .stat b{font-size:2rem; display:block; color:var(--gold)}
+  .stat span{color:var(--muted); font-size:.85rem}
+
+  .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:1.2rem; margin-top:2rem}
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:1.5rem; transition:transform .3s, border-color .3s}
+  .card:hover{transform:translateY(-6px); border-color:var(--accent)}
+  .card .ico{font-size:1.8rem; margin-bottom:.6rem; display:block}
+  .card p{color:var(--muted); font-size:.92rem}
+
+  /* auction timeline */
+  .timeline{position:relative; margin-top:2.5rem; padding-left:2.2rem; max-width:44rem}
+  .timeline::before{content:""; position:absolute; left:9px; top:6px; bottom:6px;
+    width:2px; background:linear-gradient(var(--accent),var(--accent2))}
+  .tstep{position:relative; margin-bottom:1.8rem}
+  .tstep::before{content:""; position:absolute; left:-2.2rem; top:.35rem; width:16px; height:16px;
+    border-radius:50%; background:var(--bg); border:3px solid var(--accent)}
+  .tstep .ms{color:var(--gold); font-family:ui-monospace,monospace; font-size:.8rem}
+  .tstep p{color:var(--muted); font-size:.95rem}
+
+  /* animated flow diagram */
+  .flow-wrap{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:1.5rem; margin-top:2rem; overflow-x:auto}
+  .flow-svg{min-width:760px; width:100%}
+  .node rect{fill:var(--bg2); stroke:var(--line); stroke-width:1.5; rx:12}
+  .node.hot rect{stroke:var(--accent2)}
+  .node text{fill:var(--ink); font-size:13px; font-weight:600}
+  .node .sub{fill:var(--muted); font-size:10px; font-weight:400}
+  .wire{stroke:var(--line); stroke-width:2; fill:none}
+  .pkt{fill:var(--accent2)}
+  .pkt.bid{fill:var(--gold)}
+  .pkt.win{fill:var(--pink)}
+  @keyframes dash{to{stroke-dashoffset:-24}}
+  .wire.live{stroke:var(--accent); stroke-dasharray:6 6; animation:dash 1s linear infinite}
+
+  /* bid race bars */
+  .race{margin-top:2rem; max-width:40rem}
+  .racer{display:flex; align-items:center; gap:1rem; margin-bottom:1rem}
+  .racer label{width:6.5rem; color:var(--muted); font-size:.85rem}
+  .bar{flex:1; height:26px; background:var(--bg2); border-radius:8px; overflow:hidden}
+  .bar i{display:block; height:100%; width:0; border-radius:8px;
+    background:linear-gradient(90deg,var(--accent),var(--accent2))}
+  .racer.win .bar i{background:linear-gradient(90deg,var(--gold),var(--pink))}
+  .show .racer i{transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+  .racer b{width:4.5rem; text-align:right; font-family:ui-monospace,monospace; font-size:.9rem}
+  .crown{opacity:0; transition:opacity .5s 1.6s}
+  .show .crown{opacity:1}
+
+  code,.mono{font-family:ui-monospace,Menlo,monospace}
+  .kv{background:var(--bg2); border:1px solid var(--line); border-radius:12px;
+    padding:1rem 1.2rem; font-size:.85rem; color:var(--accent2); margin-top:1rem;
+    max-width:34rem; overflow-x:auto; white-space:pre}
+
+  .pill{display:inline-block; background:var(--bg2); border:1px solid var(--line);
+    border-radius:999px; padding:.35rem 1rem; margin:.25rem; font-size:.85rem; color:var(--muted)}
+
+  footer{padding:3rem 8vw; color:var(--muted); font-size:.85rem; border-top:1px solid var(--line)}
+  footer a{color:var(--accent)}
+  @media(max-width:700px){#dots{display:none} section{padding:4rem 6vw}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<nav id="dots">
+  <a href="#hero"></a><a href="#players"></a><a href="#auction"></a>
+  <a href="#arch"></a><a href="#race"></a><a href="#lessons"></a>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section id="hero">
+  <div class="blink-ad" style="width:150px;height:60px;top:14%;right:12%">AD · 728×90</div>
+  <div class="blink-ad" style="width:90px;height:90px;top:44%;right:22%;animation-delay:-2s">AD · 300×250</div>
+  <div class="blink-ad" style="width:70px;height:130px;top:64%;right:9%;animation-delay:-4s">AD · 160×600</div>
+  <span class="tag reveal">Programmatic Advertising · 2026</span>
+  <h1 class="reveal d1">Inside <span class="grad">Real-Time Bidding</span><br>a lightweight walkthrough</h1>
+  <p class="lead reveal d2" style="margin-top:1.2rem">
+    Every time a page loads, an invisible auction fires, finishes, and delivers an ad —
+    all before your eye reaches the headline. This page deconstructs how that happens,
+    and how you can prototype the whole pipeline with a message broker, a cache, and a few small services.
+  </p>
+  <div class="stat-row reveal d3">
+    <div class="stat"><b data-count="100">0</b><span>milliseconds — typical budget for the whole auction</span></div>
+    <div class="stat"><b data-count="90">0</b><span>% of global display ad spend is programmatic (2026 est.)</span></div>
+    <div class="stat"><b data-count="2.6">0</b><span>OpenRTB — the IAB spec version most exchanges speak today</span></div>
+  </div>
+</section>
+
+<!-- ============ PLAYERS ============ -->
+<section id="players">
+  <span class="tag reveal">01 · The Cast</span>
+  <h2 class="reveal">Who's in the room when an ad is sold?</h2>
+  <p class="lead reveal d1">RTB is a marketplace. Four roles show up to every single impression.</p>
+  <div class="cards">
+    <div class="card reveal d1"><span class="ico">📰</span><h3>Publisher</h3>
+      <p>Owns the page and the ad slot. Announces: “I have one impression, floor price $0.50 — who wants it?”</p></div>
+    <div class="card reveal d2"><span class="ico">🔀</span><h3>Exchange / Broker</h3>
+      <p>The neutral middle. Broadcasts the opportunity to every connected buyer simultaneously and enforces the deadline.</p></div>
+    <div class="card reveal d3"><span class="ico">🤖</span><h3>Bidders (DSPs)</h3>
+      <p>Automated buyers acting for advertisers. Each scores the impression against its campaigns and answers with a price — or silence.</p></div>
+    <div class="card reveal d4"><span class="ico">📺</span><h3>Ad Server</h3>
+      <p>Once a winner is crowned, it fetches and renders the winning creative into the slot the user is looking at.</p></div>
+  </div>
+</section>
+
+<!-- ============ AUCTION TIMELINE ============ -->
+<section id="auction">
+  <span class="tag reveal">02 · The 100ms Auction</span>
+  <h2 class="reveal">A full auction in the blink of an eye</h2>
+  <p class="lead reveal d1">Literally — a blink takes ~150ms. The auction is usually done first.</p>
+  <div class="timeline">
+    <div class="tstep reveal"><span class="ms">t = 0 ms</span><h3>Page load → impression born</h3>
+      <p>A user opens a page. The ad slot generates an impression with an ID, context, and a floor price.</p></div>
+    <div class="tstep reveal d1"><span class="ms">t ≈ 10 ms</span><h3>Broadcast</h3>
+      <p>The exchange fans the bid request out to all subscribed bidders at once — one message in, N deliveries out.</p></div>
+    <div class="tstep reveal d2"><span class="ms">t ≈ 10–70 ms</span><h3>Bidders think fast</h3>
+      <p>Each bidder evaluates targeting, budget, and predicted value, then fires back a bid. Miss the window and your bid simply doesn't exist.</p></div>
+    <div class="tstep reveal d3"><span class="ms">t ≈ 80 ms</span><h3>Auction closes</h3>
+      <p>The auction engine buffers whatever arrived inside the window and picks the highest bid above the floor.</p></div>
+    <div class="tstep reveal d4"><span class="ms">t ≈ 100 ms</span><h3>Ad served</h3>
+      <p>The winner is persisted to fast storage, and the ad server pulls the winning creative into the page.</p></div>
+  </div>
+</section>
+
+<!-- ============ ARCHITECTURE ============ -->
+<section id="arch">
+  <span class="tag reveal">03 · The Lightweight Build</span>
+  <h2 class="reveal">You can prototype this with five small services</h2>
+  <p class="lead reveal d1">
+    No planet-scale infrastructure needed to learn the mechanics. A broker gives you the fan-out for free:
+    the publisher emits one message, every bidder gets its own copy, and nobody needs to know anyone's address.
+  </p>
+
+  <div class="flow-wrap reveal d2">
+    <svg class="flow-svg" viewBox="0 0 900 320" xmlns="http://www.w3.org/2000/svg" aria-label="RTB pipeline: publisher to exchange to bidders to auction engine to cache to ad server">
+      <!-- wires -->
+      <path id="w1" class="wire live" d="M150 160 H 250"/>
+      <path id="w2" class="wire live" d="M330 140 C 380 100, 420 80, 470 80"/>
+      <path id="w3" class="wire live" d="M330 180 C 380 220, 420 240, 470 240"/>
+      <path id="w4" class="wire live" d="M580 80 C 630 100, 650 130, 680 150"/>
+      <path id="w5" class="wire live" d="M580 240 C 630 220, 650 190, 680 170"/>
+      <path id="w6" class="wire live" d="M770 130 C 790 90, 810 70, 830 60"/>
+      <path id="w7" class="wire live" d="M770 190 C 790 230, 810 250, 830 260"/>
+      <!-- nodes -->
+      <g class="node"><rect x="30" y="130" width="120" height="60" rx="12"/>
+        <text x="90" y="156" text-anchor="middle">Publisher</text>
+        <text x="90" y="174" text-anchor="middle" class="sub">POST /impressions</text></g>
+      <g class="node hot"><rect x="250" y="130" width="80" height="60" rx="12"/>
+        <text x="290" y="156" text-anchor="middle">Broker</text>
+        <text x="290" y="174" text-anchor="middle" class="sub">fan-out</text></g>
+      <g class="node"><rect x="470" y="50" width="110" height="60" rx="12"/>
+        <text x="525" y="76" text-anchor="middle">Bidder A</text>
+        <text x="525" y="94" text-anchor="middle" class="sub">own queue</text></g>
+      <g class="node"><rect x="470" y="210" width="110" height="60" rx="12"/>
+        <text x="525" y="236" text-anchor="middle">Bidder B</text>
+        <text x="525" y="254" text-anchor="middle" class="sub">own queue</text></g>
+      <g class="node hot"><rect x="680" y="130" width="90" height="60" rx="12"/>
+        <text x="725" y="156" text-anchor="middle">Auction</text>
+        <text x="725" y="174" text-anchor="middle" class="sub">time window</text></g>
+      <g class="node"><rect x="830" y="30" width="60" height="60" rx="12"/>
+        <text x="860" y="56" text-anchor="middle">Cache</text>
+        <text x="860" y="74" text-anchor="middle" class="sub">winner</text></g>
+      <g class="node"><rect x="830" y="230" width="60" height="60" rx="12"/>
+        <text x="860" y="256" text-anchor="middle">Ad</text>
+        <text x="860" y="274" text-anchor="middle" class="sub">server</text></g>
+      <!-- moving packets -->
+      <circle class="pkt" r="5"><animateMotion dur="1.6s" repeatCount="indefinite"><mpath href="#w1"/></animateMotion></circle>
+      <circle class="pkt" r="5"><animateMotion dur="1.6s" begin="0.4s" repeatCount="indefinite"><mpath href="#w2"/></animateMotion></circle>
+      <circle class="pkt" r="5"><animateMotion dur="1.6s" begin="0.4s" repeatCount="indefinite"><mpath href="#w3"/></animateMotion></circle>
+      <circle class="pkt bid" r="5"><animateMotion dur="1.6s" begin="0.9s" repeatCount="indefinite"><mpath href="#w4"/></animateMotion></circle>
+      <circle class="pkt bid" r="5"><animateMotion dur="1.6s" begin="1.1s" repeatCount="indefinite"><mpath href="#w5"/></animateMotion></circle>
+      <circle class="pkt win" r="5"><animateMotion dur="1.6s" begin="1.4s" repeatCount="indefinite"><mpath href="#w6"/></animateMotion></circle>
+      <circle class="pkt win" r="5"><animateMotion dur="1.6s" begin="1.4s" repeatCount="indefinite"><mpath href="#w7"/></animateMotion></circle>
+    </svg>
+  </div>
+
+  <div class="cards">
+    <div class="card reveal"><span class="ico">📨</span><h3>Message broker (e.g. RabbitMQ)</h3>
+      <p>An impressions exchange fans each ad opportunity to per-bidder queues; a bids exchange funnels responses back. Publisher and bidders stay fully decoupled.</p></div>
+    <div class="card reveal d1"><span class="ico">⚡</span><h3>In-memory store (e.g. Redis)</h3>
+      <p>The winner lands under a key like <code>winners:{impressionId}</code> — fast enough that the ad server can read it inside the same latency budget.</p></div>
+    <div class="card reveal d2"><span class="ico">⏱️</span><h3>Auction engine</h3>
+      <p>Buffers bids for a fixed window, drops latecomers, picks the highest bid above the floor. Timeouts aren't an error path here — they're the design.</p></div>
+  </div>
+  <div class="kv reveal d3">POST /impressions   { "id": "imp-7431", "floor": 0.50 }
+→ broker fans out → bids collected for the window
+→ SET winners:imp-7431  { "bidder": "B", "price": 2.10 }
+→ GET /winning-ad   → creative rendered 🎉</div>
+</section>
+
+<!-- ============ BID RACE ============ -->
+<section id="race">
+  <span class="tag reveal">04 · The Race</span>
+  <h2 class="reveal">Highest bid inside the window wins</h2>
+  <p class="lead reveal d1">Four bidders answer one impression (floor: $0.50). Watch who takes it.</p>
+  <div class="race reveal d2" id="raceBox">
+    <div class="racer"><label>Bidder A</label><div class="bar"><i data-w="62%"></i></div><b>$1.30</b></div>
+    <div class="racer win"><label>Bidder B</label><div class="bar"><i data-w="100%"></i></div><b>$2.10 <span class="crown">👑</span></b></div>
+    <div class="racer"><label>Bidder C</label><div class="bar"><i data-w="40%"></i></div><b>$0.85</b></div>
+    <div class="racer"><label>Bidder D</label><div class="bar"><i data-w="12%"></i></div><b>⏰ late</b></div>
+  </div>
+  <p class="lead reveal d3" style="margin-top:1.5rem">
+    Bidder D actually bid <em>$3.00</em> — but arrived after the window closed, so it never entered the auction.
+    In RTB, speed is not a feature; it's admission.
+  </p>
+</section>
+
+<!-- ============ LESSONS ============ -->
+<section id="lessons">
+  <span class="tag reveal">05 · Takeaways</span>
+  <h2 class="reveal">What the lightweight build teaches you</h2>
+  <div class="cards">
+    <div class="card reveal"><span class="ico">🧩</span><h3>Decoupling scales</h3>
+      <p>Adding a bidder is just binding a new queue to the exchange. No service redeploys, no address books — the same property that lets real exchanges host thousands of DSPs.</p></div>
+    <div class="card reveal d1"><span class="ico">⏳</span><h3>Deadlines shape design</h3>
+      <p>The hard latency budget forces asynchronous fan-out, bounded buffering, and in-memory state. Every component exists because of the clock.</p></div>
+    <div class="card reveal d2"><span class="ico">📈</span><h3>Same shape at scale</h3>
+      <p>Production systems swap in globally distributed exchanges, OpenRTB 2.6 JSON on the wire, and ML-driven bid pricing — but the request → fan-out → auction → serve skeleton is identical.</p></div>
+  </div>
+  <p class="lead reveal d3" style="margin-top:2rem">Where the real world extends the prototype:</p>
+  <div class="reveal d4">
+    <span class="pill">OpenRTB 2.6 bid request/response spec</span>
+    <span class="pill">First-price auctions (now the industry norm)</span>
+    <span class="pill">Privacy & consent signals in the bid stream</span>
+    <span class="pill">Supply-chain transparency (ads.txt / sellers.json)</span>
+    <span class="pill">CTV & digital out-of-home inventory</span>
+    <span class="pill">ML-predicted bid values</span>
+  </div>
+</section>
+
+<footer>
+  <p>An original visual explainer of real-time bidding concepts. Industry figures reflect public 2026 estimates
+  (programmatic share of display spend; IAB Tech Lab OpenRTB 2.6). Built as a single self-contained HTML page —
+  no dependencies, works straight from GitHub Pages.</p>
+</footer>
+
+<script>
+  // scroll progress
+  const prog=document.getElementById('progress');
+  addEventListener('scroll',()=>{const h=document.documentElement;
+    prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'});
+
+  // reveal on scroll + counters + race bars
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.classList.add('show');
+    e.target.querySelectorAll('[data-count]').forEach(el=>{
+      if(el.dataset.done)return; el.dataset.done=1;
+      const t=parseFloat(el.dataset.count),dec=t%1?1:0,st=performance.now();
+      const tick=n=>{const p=Math.min((n-st)/1400,1);
+        el.textContent=(t*(1-Math.pow(1-p,3))).toFixed(dec);
+        if(p<1)requestAnimationFrame(tick)};
+      requestAnimationFrame(tick);
+    });
+    e.target.querySelectorAll('i[data-w]').forEach(b=>b.style.width=b.dataset.w);
+  }),{threshold:.25});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // nav dots highlight
+  const secs=[...document.querySelectorAll('section')],dots=[...document.querySelectorAll('#dots a')];
+  const io2=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){const i=secs.indexOf(e.target);
+      dots.forEach((d,j)=>d.classList.toggle('on',i===j))}
+  }),{threshold:.5});
+  secs.forEach(s=>io2.observe(s));
+</script>
+</body>
+</html>
