@@ -1,4 +1,12 @@
-# Real-Time Bidding — A 3D Architectural Journey
+# RTB — Live Presentation
+
+**🔴 Live:** https://vamsisonamic-eng.github.io/Vsonamic/
+
+_(served from the `gh-pages` branch via GitHub Pages)_
+
+---
+
+## Real-Time Bidding — A 3D Architectural Journey
 
 An original single-page 3D presentation explaining how real-time bidding (RTB) works,
 told in five modules anyone can follow: Fan-Out Broadcast → Algorithmic Race →
